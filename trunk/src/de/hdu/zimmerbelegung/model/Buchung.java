@@ -5,25 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package model;
+package de.hdu.zimmerbelegung.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
-public class ZimmerKategorie {
-	@Id
-	@GeneratedValue
-	private int id;
-	private String name;
-	public String getName() {
-		return name;
+@DiscriminatorValue("Buchung")
+public class Buchung extends Belegung {
+
+	public Buchung(Datum datumVon, Datum datumBis, Zimmer zimmer, Gast gast,
+			String kommentar) {
+		super(datumVon, datumBis, zimmer, gast, kommentar);
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getId() {
-		return id;
-	}
+	
 }

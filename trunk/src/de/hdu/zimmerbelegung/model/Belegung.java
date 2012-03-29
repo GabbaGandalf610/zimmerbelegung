@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package model;
+package de.hdu.zimmerbelegung.model;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -34,6 +34,15 @@ public abstract class Belegung {
 	private Zimmer zimmer;
 	@ManyToOne(targetEntity=Gast.class)
 	private Gast gast;
+	public Belegung(Datum datumVon, Datum datumBis, Zimmer zimmer, Gast gast,
+			String kommentar) {
+		super();
+		this.datumVon = datumVon;
+		this.datumBis = datumBis;
+		this.zimmer = zimmer;
+		this.gast = gast;
+		this.kommentar = kommentar;
+	}
 	public Gast getGast() {
 		return gast;
 	}

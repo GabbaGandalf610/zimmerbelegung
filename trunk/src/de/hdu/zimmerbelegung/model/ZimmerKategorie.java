@@ -5,28 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package model;
-
-import java.util.Date;
+package de.hdu.zimmerbelegung.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Datum {
+public class ZimmerKategorie {
 	@Id
+	@GeneratedValue
 	private int id;
-	private Date datum;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public Date getDatum() {
-		return datum;
-	}
-	public void setDatum(Date datum) {
-		this.datum = datum;
 	}
 }
