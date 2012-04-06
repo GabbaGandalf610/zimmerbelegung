@@ -3,4 +3,9 @@
 
 <label value="You are using: ${desktop.webApp.version}"/>
 <button label="Say Hello" onClick='Messagebox.show("Hello World!")'/>
+<html>
+<![CDATA[
+<a href="layout.zul">layout</a>  
+]]></html>
+
 </window>

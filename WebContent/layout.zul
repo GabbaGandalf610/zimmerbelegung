@@ -1,0 +1,79 @@
+<tabbox width="600px" height="600px">
+    <tabs>
+            <tab label="Zimmerbelegung" />
+            <tab label="Belegungen bearbeiten" />   
+     </tabs>    
+     <tabpanels>        
+     		<tabpanel style="color:#336699;">
+     		
+     		<label value="Zimmerbelegung"/>
+     		
+     		<grid width="570px">
+     			<columns>
+     				<column width="120px" label="Attribut" />        
+     				<column hflex="1" label="Wert" />
+     			</columns>
+     			<rows>
+     				<row>
+     					Ankunft:
+     					<datebox id="db0" cols="12" format="short" onCreate="self.value = new Date()" mold="rounded"/>
+     				</row>
+     				<row>
+     					bis:
+     					<datebox id="db1" cols="12" format="short" onCreate="self.value = new Date()" mold="rounded"/>
+     				</row>
+     				<row>
+     					Kategorie
+     					<vbox width="100%" align="stretch">
+     						<div height="5px"/>
+     						<radiogroup id="zimmer_kategorie" onCheck="choice1.value = self.selectedItem.label" />
+     						<grid>
+     							<rows>
+     								<row spans="3">Bitte eine Zimmerkategorie wählen!</row>
+     								<row>
+     									<radio id="zk1" label="Kategorie gold" radiogroup="zimmer_kategorie"/>
+     									<radio id="zk2" label="Kategorie silber" radiogroup="zimmer_kategorie"/>
+     									<radio id="zk3" label="Kategorie bronze" radiogroup="zimmer_kategorie"/>
+     								</row>
+     							</rows>
+     						</grid>
+     					</vbox>
+     		     	
+     				</row>
+     				<row>
+     					Stockwerk:
+     					<tabbox id="tb" width="600px" height="360px" mold="accordion">
+     						<tabs>
+     							<tab label="1. Stock"/>
+     							<tab label="Erdgeschoss"/>
+     						</tabs>
+     						<tabpanels>
+     							<tabpanel>
+									
+									
+    							
+
+     							
+     								Text zu 1. Stock
+     							</tabpanel>
+    							<tabpanel>
+     								Text zu Erdgeschoss
+     							</tabpanel>
+     						</tabpanels>
+     					</tabbox>
+     				</row>
+     			</rows>
+     		</grid>
+     			
+     		
+     		</tabpanel>        
+     		<tabpanel style="color:#333399;">
+     		
+     		<label value="Zimmerbelegung"/>
+     		
+     		
+     		
+     		
+     		</tabpanel>
+	</tabpanels>
+</tabbox>
