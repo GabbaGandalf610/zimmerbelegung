@@ -18,12 +18,12 @@
 	<!-- Database            -->
 	<!-- ******************* -->
 	
-    <bean class="de.fhd.pms.Startup" id="init" init-method="initDB">
+    <bean class="de.hdu.zimmerbelegung.Startup" id="init" init-method="initDB">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="user" value="fahrtenbuch" />
-		<property name="password" value="fahrtenbuch" />
+		<property name="user" value="zimmerbelegung" />
+		<property name="password" value="zimmerbelegung" />
 		<property name="defaultDBurl" value="jdbc:mysql://localhost:3306/mysql" />
-		<property name="newDB" value="fahrtenbuch" />
+		<property name="newDB" value="zimmerbelegung" />
     </bean>
 
 	<bean id="dataSource"
@@ -31,9 +31,9 @@
 		destroy-method="close"
 		 depends-on="init">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/fahrtenbuch" />
-		<property name="user" value="root" />
-		<property name="password" value="" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/zimmerbelegung" />
+		<property name="user" value="zimmerbelegung" />
+		<property name="password" value="zimmerbelegung" />
 		<property name="minPoolSize" value="2" />
       	<property name="maxPoolSize" value="4" />
 	</bean>
@@ -48,18 +48,8 @@
 	<!-- Controllers         -->
 	<!-- ******************* -->
 	
-	<bean id="personController" class="de.fhd.pms.ctrl.PersonController">
-		<property name="personDao" ref="personDao" />
-	</bean>
-	
-	<bean id="bootController" class="de.fhd.pms.ctrl.BootController">
-		<property name="bootDao" ref="bootDao" />
-	</bean>
-	
-	<bean id="fahrtController" class="de.fhd.pms.ctrl.FahrtController">
-		<property name="fahrtDao" ref="fahrtDao" />
-		<property name="bootDao" ref="bootDao" />
-		<property name="personDao" ref="personDao" />
+	<bean id="indexCtrl" class="de.hdu.zimmerbelegung.ctrl.IndexCtrl">
+		<property name="zimmerKategorieDao" ref="zimmerKategorieDao" />
 	</bean>
 	
 	<!-- ******************* -->
