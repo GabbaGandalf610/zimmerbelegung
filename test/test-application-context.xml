@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="de.hdu.zimmerbelegung.Startup" id="init" init-method="initDB">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="user" value="zimmerbelegung" />
+		<property name="password" value="zimmerbelegung" />
+		<property name="defaultDBurl" value="jdbc:mysql://localhost:3306/mysql" />
+		<property name="newDB" value="zimmerbelegungtest" />
+    </bean>
+
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/zimmerbelegungtest" />
+		<property name="user" value="zimmerbelegung" />
+		<property name="password" value="zimmerbelegung" />
+		<property name="minPoolSize" value="2" />
+      	<property name="maxPoolSize" value="4" />
+	</bean>
+	
+	<import resource="data-access-context.xml"/>
+	
+	<bean id="zimmerKategorieDaoTest" class="de.hdu.zimmerbelegung.dao.ZimmerKategorieDaoTest">
+		<property name="zimmerKategorieDao" ref="zimmerKategorieDao" />
+	</bean>
+
+</beans>

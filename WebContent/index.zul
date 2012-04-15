@@ -1,8 +1,16 @@
 <?page title="Auto Generated index.zul"?>
-<window title="Dies wird das überragende Zimmerbelegungs-Programm" border="normal" width="200px">
+<window title="Dies wird das überragende Zimmerbelegungs-Programm" border="normal" width="200px"
+	apply="de.hdu.zimmerbelegung.ctrl.IndexCtrl">
+		
+    <div>
+        Input: <textbox id="input" />
+    </div>
+    <div>
+        Output: <label id="output" />
+    </div>
+    <button id="ok" label="Submit" />
+    <button id="cancel" label="Clear" />
 
-<label value="You are using: ${desktop.webApp.version}"/>
-<button label="Say Hello" onClick='Messagebox.show("Hello World!")'/>
 <html>
 <![CDATA[
 <a href="layout.zul">layout</a>  
