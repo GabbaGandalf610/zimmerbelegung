@@ -69,10 +69,28 @@
      		</tabpanel>        
      		<tabpanel style="color:#333399;">
      		
-     		<label value="Zimmerbelegung"/>
+     			<label value="Belegungen (Reservierungen/Buchungen) bearbeiten"/>
      		
-     		
-     		
+     			<grid width="570px">
+     				<columns>
+     					<column width="120px" label="Attribut" />        
+	     				<column hflex="1" label="Wert" />
+    	 			</columns>
+     				<rows>
+     					<row>
+     						Ankunft:
+     						<datebox id="db2" cols="12" format="short" onCreate="self.value = new Date()" mold="rounded"/>
+	     				</row>
+    	 				<row>
+     						bis:
+     						<datebox id="db3" cols="12" format="short" onCreate="self.value = new Date()" mold="rounded"/>
+     					</row>
+     					<row>
+     						Hotelzimmer:
+     						
+     					</row>
+     				</rows>
+	     		</grid>		
      		
      		</tabpanel>
 	</tabpanels>
