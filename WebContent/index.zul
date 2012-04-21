@@ -11,7 +11,8 @@
 
 <html>
 <![CDATA[
-<a href="layout.zul">layout</a>  
+<a href="layout.zul">layout</a> <p />
+<a href="gast-testview.zul">Gast-Testview</a> 
 ]]></html>
 
 	<zscript><![CDATA[

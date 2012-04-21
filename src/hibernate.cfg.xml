@@ -30,5 +30,7 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<mapping class="de.hdu.zimmerbelegung.model.ZimmerKategorie" />
+		<mapping class="de.hdu.zimmerbelegung.model.Gast" />
+		<mapping class="de.hdu.zimmerbelegung.model.GastKategorie" />
 	</session-factory>
 </hibernate-configuration>

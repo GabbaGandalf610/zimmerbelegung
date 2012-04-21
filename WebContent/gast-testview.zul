@@ -1,0 +1,29 @@
+<zk>
+<zscript><![CDATA[
+ 
+    import java.util.Date;
+    import java.text.SimpleDateFormat;
+	import de.hdu.zimmerbelegung.dao.GastDao;
+	import de.hdu.zimmerbelegung.model.Gast;
+ 
+    //fetch all allEvents from database
+    List allEvents = new GastDao().findAll();
+ 
+]]></zscript>
+<listbox id="lbxEvents">                
+    <listhead>
+    	<listheader label="ID" width="50px"/>
+        <listheader label="Name" width="100px"/>
+        <listheader label="Vorname" width="100px"/>
+         <listheader label="kommentar" width="100px"/>
+    </listhead>
+    <listitem forEach="${allEvents}" value="${each}">
+         <listcell label="${each.id}"/>
+         <listcell label="${each.name}"/>  
+         <listcell label="${each.vorname}"/> 
+         <listcell label="${each.kommentar}"/> 
+        <listcell label="${datestr}"/>
+    </listitem>
+</listbox>
+
+</zk>
