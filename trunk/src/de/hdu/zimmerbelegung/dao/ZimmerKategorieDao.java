@@ -2,34 +2,30 @@ package de.hdu.zimmerbelegung.dao;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.hibernate.Session;
+import org.zkoss.zkplus.hibernate.HibernateUtil;
 
 import de.hdu.zimmerbelegung.model.ZimmerKategorie;
 
-public class ZimmerKategorieDao extends HibernateDaoSupport {
-	public void create(String name) {
-		ZimmerKategorie zk = new ZimmerKategorie();
-		zk.setName(name);
-		save(zk);
-	}
+public class ZimmerKategorieDao {
+    Session currentSession() {
+        return HibernateUtil.currentSession();
+    }
 	public ZimmerKategorie findById(int id) {
-		HibernateTemplate template = getHibernateTemplate();
-		return (ZimmerKategorie) template.get(ZimmerKategorie.class, id);
+		Session sess =  currentSession();
+        return (ZimmerKategorie) sess.load(ZimmerKategorie.class, id);
 	}
-
-	public ZimmerKategorie save(ZimmerKategorie zimmerKategorie) {
-		HibernateTemplate template = getHibernateTemplate();
-		template.saveOrUpdate(zimmerKategorie);
-		return zimmerKategorie;
+    public void saveOrUpdate(ZimmerKategorie zimmerKategorie) {
+        Session sess =  currentSession();
+        sess.saveOrUpdate(zimmerKategorie);
+    }
+	public void delete(ZimmerKategorie zimmerKategorie) {
+		Session sess =  currentSession();
+		sess.delete(zimmerKategorie);
 	}
-	public void delete(ZimmerKategorie person) {
-		HibernateTemplate template = getHibernateTemplate();
-		template.delete(person);
-	}
+	@SuppressWarnings("unchecked")
 	public List<ZimmerKategorie> findAll() {
-		HibernateTemplate template = getHibernateTemplate();
-		List results = template.loadAll(ZimmerKategorie.class);
-		return results;
+		Session sess =  currentSession();
+		return sess.createQuery("from ZimmerKategorie").list();
 	}
 }
