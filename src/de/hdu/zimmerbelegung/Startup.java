@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class Startup {
-	private static Logger log = Logger.getLogger(Startup.class);
+//	private static Logger log = Logger.getLogger(Startup.class);
 	private String driverClass;
 	private String user;
 	private String password;
@@ -17,7 +17,7 @@ public class Startup {
 	public void initDB() {
 		// attempt to create the user specified database
 		try {
-			log.info("Try to create database " + newDB);
+//			log.info("Try to create database " + newDB);
 			Class.forName(driverClass);
 			Connection db = DriverManager.getConnection(defaultDBurl, user, password);
 			Statement st = db.createStatement();
@@ -26,13 +26,13 @@ public class Startup {
 			String command = "CREATE DATABASE " + newDB 
 //					+ "\" WITH OWNER = \"" + user + "\" ENCODING = 'UTF-8' TABLESPACE = pg_default"
 					;
-			log.info(command);
+//			log.info(command);
 			st.execute(command);
 			st.close();
 			db.close();
-			log.info("Creating database " + newDB + " successful!");
+//			log.info("Creating database " + newDB + " successful!");
 		} catch (Exception e) {
-			log.info("Create database " + newDB + " failed - it probably already exists.");
+//			log.info("Create database " + newDB + " failed - it probably already exists.");
 		}
 	}
 

@@ -1,5 +1,5 @@
 package de.hdu.zimmerbelegung.ctrl;
-
+/*
 import java.util.List;
 
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -9,11 +9,12 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+//public class IndexCtrl extends SelectorComposer<Window> {
 public class IndexCtrl extends SelectorComposer<Window> {
 /*	private ZimmerKategorieDao zimmerKategorieDao = null;
     public void setZimmerKategorieDao(ZimmerKategorieDao zimmerKategorieDao) {
 		this.zimmerKategorieDao = zimmerKategorieDao;
-    }*/
+    }
 	private static final long serialVersionUID = 8380561958492646209L;
 	@Wire
     Textbox input;
@@ -31,3 +32,4 @@ public class IndexCtrl extends SelectorComposer<Window> {
         output.setValue("");
     }
 }
+*/
