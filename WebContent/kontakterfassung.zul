@@ -1,0 +1,54 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk><window width="600px">
+	<grid>
+		<columns>
+			<column label="Beschreibung" />
+			<column width="80%" label="Daten"/>
+		</columns>
+		<rows>
+			<row>
+				<label value="Name:"/>
+				<textbox width="50%"/>
+			</row>
+			<row>
+				<label value="Straße:"/>
+				<textbox width="98%"/>
+			</row>			
+			<row>
+				<label value="PLZ:"/>
+				<intbox width="98%" />
+			</row>			
+			<row>
+				<label value="ORT:"/>
+				<textbox width="98%"/>
+			</row>			
+			<row>
+				<label value="Land:"/>
+				<textbox width="98%"/>
+			</row>
+			<row>
+				<label value="Telefon:"/>
+				<textbox width="98%"/>
+			</row>
+			<row>
+				<label value="Mobiltelefon:"/>
+				<textbox width="98%"/>
+			</row>
+			<row>
+				<label value="Email :"/>
+				<textbox id="emailtb" width="98%" constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
+			</row>
+			<row>
+				<label value="Kommentar:"/>
+				<textbox rows="4" width="98%"/>
+			</row>
+			<row>
+				<hbox pack="center" width="100%">
+					<button label="Hotelgast anlegen" onClick="doAnlegen()"/>
+				</hbox>
+			</row>
+		</rows>
+	</grid>
+	</window>
+</zk>
+	
