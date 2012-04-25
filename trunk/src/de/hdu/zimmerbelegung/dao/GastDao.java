@@ -1,18 +1,13 @@
 package de.hdu.zimmerbelegung.dao;
 
 //import java.util.Date;
-import java.util.List;
+//import java.util.List;
  
-import org.hibernate.Session;
-import org.zkoss.zkplus.hibernate.HibernateUtil;
-import de.hdu.zimmerbelegung.model.Gast;
+//import org.hibernate.Session;
+//import de.hdu.zimmerbelegung.model.Gast;
 
-	public class GastDao {
-    Session currentSession() {
-        return HibernateUtil.currentSession();
-    }
-    
-    public void saveOrUpdate(Gast anEvent, String name, String vorname, String kommentar) {
+public class GastDao {    
+/*    public void saveOrUpdate(Gast anEvent, String name, String vorname, String kommentar) {
         Session sess =  currentSession();
         anEvent.setName(name);
         anEvent.setVorname(vorname);
@@ -34,5 +29,5 @@ import de.hdu.zimmerbelegung.model.Gast;
         Session sess =  currentSession();
         return sess.createQuery("from Gast").list();
     }    
-    
+*/    
 }

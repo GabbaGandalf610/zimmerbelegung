@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ApplicationContext.xml -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://127.0.0.1:3306/zimmerbelegung</value>
+		</property>
+		<property name="username">
+			<value>zimmerbelegung</value>
+		</property>
+		<property name="password">
+			<value>zimmerbelegung</value>
+		</property>
+	</bean>
+	<bean id="factory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
+		<property name="configLocation" value="hibernate.cfg.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="zimmerKategorieDao" class="de.hdu.zimmerbelegung.dao.ZimmerKategorieDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zimmerKategorieManager" class="de.hdu.zimmerbelegung.service.ZimmerKategorieManager">
+		<property name="zimmerKategorieDao">
+			<ref bean="zimmerKategorieDao" />
+		</property>
+	</bean>	
+</beans>

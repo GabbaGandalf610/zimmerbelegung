@@ -1,35 +1,57 @@
 package de.hdu.zimmerbelegung.ctrl;
-/*
+
 import java.util.List;
 
-import org.zkoss.zk.ui.select.SelectorComposer;
-import org.zkoss.zk.ui.select.annotation.Listen;
-import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Window;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.util.Composer;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
 
-//public class IndexCtrl extends SelectorComposer<Window> {
-public class IndexCtrl extends SelectorComposer<Window> {
-/*	private ZimmerKategorieDao zimmerKategorieDao = null;
-    public void setZimmerKategorieDao(ZimmerKategorieDao zimmerKategorieDao) {
-		this.zimmerKategorieDao = zimmerKategorieDao;
-    }
-	private static final long serialVersionUID = 8380561958492646209L;
-	@Wire
-    Textbox input;
-    @Wire
-    Label output;
-     
-    @Listen("onClick=#ok")
-    public void submit() {
-    	//List<ZimmerKategorie> zk = zimmerKategorieDao.findAll();
-    	//output.setValue(zk.toString());
-    	output.setValue(input.getValue());
-    }
-    @Listen("onClick=#cancel")
-    public void cancel() {
-        output.setValue("");
-    }
+import de.hdu.zimmerbelegung.model.ZimmerKategorie;
+import de.hdu.zimmerbelegung.service.IZimmerKategorieManager;
+import de.hdu.zimmerbelegung.service.ServiceLocator;
+
+@SuppressWarnings("serial")
+public class IndexCtrl extends GenericForwardComposer implements Composer {
+	private ZimmerKategorie current;
+
+	@Override
+	public void doAfterCompose(Component comp) throws Exception {
+		super.doAfterCompose(comp);
+		getAllZimmerKategorien();
+	}
+
+	public ZimmerKategorie getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(ZimmerKategorie zimmerKategorie) {
+		this.current = zimmerKategorie;
+	}
+
+	public List<ZimmerKategorie> getAllZimmerKategorien() {
+		IZimmerKategorieManager manager = ServiceLocator.getZimmerKategorieManager();
+		return manager.getAll();
+	}
+
+	public void onClick$add() {
+		if (null == current) {
+			current = new ZimmerKategorie();
+		}
+		IZimmerKategorieManager manager = ServiceLocator.getZimmerKategorieManager();
+		manager.add(current);
+		current = null;
+
+	}
+
+	public void onClick$update() {
+		IZimmerKategorieManager manager = ServiceLocator.getZimmerKategorieManager();
+		manager.update(current);
+		current = null;
+	}
+
+	public void onClick$delete() {
+		IZimmerKategorieManager manager = ServiceLocator.getZimmerKategorieManager();
+		manager.delete(current);
+		current = null;
+	}
 }
-*/
