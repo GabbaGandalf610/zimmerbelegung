@@ -2,30 +2,22 @@ package de.hdu.zimmerbelegung.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.zkoss.zkplus.hibernate.HibernateUtil;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import de.hdu.zimmerbelegung.model.ZimmerKategorie;
 
-public class ZimmerKategorieDao {
-    Session currentSession() {
-        return HibernateUtil.currentSession();
-    }
-	public ZimmerKategorie findById(int id) {
-		Session sess =  currentSession();
-        return (ZimmerKategorie) sess.load(ZimmerKategorie.class, id);
+public class ZimmerKategorieDao extends HibernateDaoSupport {
+	public ZimmerKategorie get(int id) {
+		return getHibernateTemplate().load(ZimmerKategorie.class, id);
 	}
     public void saveOrUpdate(ZimmerKategorie zimmerKategorie) {
-        Session sess =  currentSession();
-        sess.saveOrUpdate(zimmerKategorie);
+        getHibernateTemplate().saveOrUpdate(zimmerKategorie);
     }
 	public void delete(ZimmerKategorie zimmerKategorie) {
-		Session sess =  currentSession();
-		sess.delete(zimmerKategorie);
+		getHibernateTemplate().delete(zimmerKategorie);
 	}
 	@SuppressWarnings("unchecked")
-	public List<ZimmerKategorie> findAll() {
-		Session sess =  currentSession();
-		return sess.createQuery("from ZimmerKategorie").list();
+	public List<ZimmerKategorie> getAll() {
+		return getHibernateTemplate().find("FROM ZimmerKategorie");
 	}
 }
