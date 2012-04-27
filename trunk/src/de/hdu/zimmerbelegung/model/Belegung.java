@@ -7,6 +7,8 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
+import java.util.Date;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -17,63 +19,59 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-		name="Art",
-		discriminatorType=DiscriminatorType.STRING
-)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Art", discriminatorType = DiscriminatorType.STRING)
 public abstract class Belegung {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne(targetEntity=Datum.class)
-	private Datum datumVon;
-	@ManyToOne(targetEntity=Datum.class)
-	private Datum datumBis;
-	@ManyToOne(targetEntity=Zimmer.class)
+	private Date datumVon;
+	private Date datumBis;
+	@ManyToOne(targetEntity = Zimmer.class)
 	private Zimmer zimmer;
-	@ManyToOne(targetEntity=Gast.class)
+	@ManyToOne(targetEntity = Gast.class)
 	private Gast gast;
-	public Belegung(Datum datumVon, Datum datumBis, Zimmer zimmer, Gast gast,
-			String kommentar) {
+
+	public Belegung(Date datumVon, Date datumBis, Zimmer zimmer, Gast gast) {
 		super();
 		this.datumVon = datumVon;
 		this.datumBis = datumBis;
 		this.zimmer = zimmer;
 		this.gast = gast;
-		this.kommentar = kommentar;
 	}
-	public Gast getGast() {
-		return gast;
+
+	public Date getDatumVon() {
+		return datumVon;
 	}
-	public void setGast(Gast gast) {
-		this.gast = gast;
+
+	public void setDatumVon(Date datumVon) {
+		this.datumVon = datumVon;
 	}
+
+	public Date getDatumBis() {
+		return datumBis;
+	}
+
+	public void setDatumBis(Date datumBis) {
+		this.datumBis = datumBis;
+	}
+
 	public Zimmer getZimmer() {
 		return zimmer;
 	}
+
 	public void setZimmer(Zimmer zimmer) {
 		this.zimmer = zimmer;
 	}
-	private String kommentar;
-	public Datum getDatumVon() {
-		return datumVon;
+
+	public Gast getGast() {
+		return gast;
 	}
-	public void setDatumVon(Datum datumVon) {
-		this.datumVon = datumVon;
+
+	public void setGast(Gast gast) {
+		this.gast = gast;
 	}
-	public Datum getDatumBis() {
-		return datumBis;
-	}
-	public void setDatumBis(Datum datumBis) {
-		this.datumBis = datumBis;
-	}
-	public String getKommentar() {
-		return kommentar;
-	}
-	public void setKommentar(String kommentar) {
-		this.kommentar = kommentar;
-	}
+
 	public int getId() {
 		return id;
 	}

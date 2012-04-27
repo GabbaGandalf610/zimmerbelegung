@@ -7,34 +7,45 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Zimmer {
 	@Id
 	private int id;
-	@ManyToOne(targetEntity=ZimmerKategorie.class)
-	private ZimmerKategorie kategorie;
-	@OneToMany(targetEntity=Belegung.class)
-	private Set<Belegung> belegungen;
-	public Set<Belegung> getBelegung() {
-		return belegungen;
-	}
-	public void setBuchungen(Set<Belegung> belegungen) {
-		this.belegungen = belegungen;
-	}
-	public ZimmerKategorie getKategorie() {
-		return kategorie;
-	}
-	public void setKategorie(ZimmerKategorie kategorie) {
-		this.kategorie = kategorie;
-	}
+	private String name;
+	private String kurzbeschreibung;
+
 	public int getId() {
 		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getKurzbeschreibung() {
+		return kurzbeschreibung;
+	}
+
+	public void setKurzbeschreibung(String kurzbeschreibung) {
+		this.kurzbeschreibung = kurzbeschreibung;
+	}
+
+	public Zimmer(int id, String name, String kurzbeschreibung) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.kurzbeschreibung = kurzbeschreibung;
+	}
+
 }

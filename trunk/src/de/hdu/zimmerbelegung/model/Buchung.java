@@ -7,6 +7,8 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
+import java.util.Date;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -14,9 +16,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Buchung")
 public class Buchung extends Belegung {
 
-	public Buchung(Datum datumVon, Datum datumBis, Zimmer zimmer, Gast gast,
+	public Buchung(Date datumVon, Date datumBis, Zimmer zimmer, Gast gast,
 			String kommentar) {
-		super(datumVon, datumBis, zimmer, gast, kommentar);
+		super(datumVon, datumBis, zimmer, gast);
 	}
 	
 }

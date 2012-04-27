@@ -7,10 +7,12 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Gast {
@@ -23,11 +25,17 @@ public class Gast {
 	public String getKommentar() {
 		return kommentar;
 	}
+	public Gast(String vorname, String name, String kommentar,
+			Set<Belegung> belegungen) {
+		super();
+		this.vorname = vorname;
+		this.name = name;
+		this.kommentar = kommentar;
+		this.belegungen = belegungen;
+	}
 	public void setKommentar(String kommentar) {
 		this.kommentar = kommentar;
 	}
-	@ManyToOne(targetEntity=GastKategorie.class)
-	private GastKategorie kategorie;
 	public String getVorname() {
 		return vorname;
 	}
@@ -40,13 +48,15 @@ public class Gast {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public GastKategorie getKategorie() {
-		return kategorie;
-	}
-	public void setKategorie(GastKategorie kategorie) {
-		this.kategorie = kategorie;
-	}
 	public int getId() {
 		return id;
+	}
+	@OneToMany(targetEntity=Belegung.class)
+	private Set<Belegung> belegungen;
+	public Set<Belegung> getBelegung() {
+		return belegungen;
+	}
+	public void setBuchungen(Set<Belegung> belegungen) {
+		this.belegungen = belegungen;
 	}
 }

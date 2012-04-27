@@ -25,14 +25,47 @@
 		<property name="configLocation" value="hibernate.cfg.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="zimmerKategorieDao" class="de.hdu.zimmerbelegung.dao.ZimmerKategorieDao">
+	<!-- DAOs -->
+	<bean id="belegungDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
 	</bean>
-	<bean id="zimmerKategorieManager" class="de.hdu.zimmerbelegung.service.ZimmerKategorieManager">
-		<property name="zimmerKategorieDao">
-			<ref bean="zimmerKategorieDao" />
+	<bean id="buchungDao" class="de.hdu.zimmerbelegung.dao.BuchungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
 		</property>
-	</bean>	
+	</bean>
+	<bean id="gastDao" class="de.hdu.zimmerbelegung.dao.GastDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="reservierungDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="tagStatusDao" class="de.hdu.zimmerbelegung.dao.TagStatusDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zeitraumStatusDao" class="de.hdu.zimmerbelegung.dao.ZeitraumStatusDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zimmerDao" class="de.hdu.zimmerbelegung.dao.ZimmerDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+
+	<!-- Manager -->
+	<bean id="belegungManager" class="de.hdu.zimmerbelegung.service.BelegungManager">
+		<property name="belegungManager">
+			<ref bean="belegungManager" />
+		</property>
+	</bean>
 </beans>
