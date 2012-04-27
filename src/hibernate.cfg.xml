@@ -29,8 +29,12 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="de.hdu.zimmerbelegung.model.ZimmerKategorie" />
+		<mapping class="de.hdu.zimmerbelegung.model.Belegung" />
+		<mapping class="de.hdu.zimmerbelegung.model.Buchung" />
 		<mapping class="de.hdu.zimmerbelegung.model.Gast" />
-		<mapping class="de.hdu.zimmerbelegung.model.GastKategorie" />
+		<mapping class="de.hdu.zimmerbelegung.model.Reservierung" />
+		<mapping class="de.hdu.zimmerbelegung.model.TagStatus" />
+		<mapping class="de.hdu.zimmerbelegung.model.ZeitraumStatus" />
+		<mapping class="de.hdu.zimmerbelegung.model.Zimmer" />
 	</session-factory>
 </hibernate-configuration>

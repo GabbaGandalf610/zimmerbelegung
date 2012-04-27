@@ -1,6 +1,6 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <window id="win"
-	apply="de.hdu.zimmerbelegung.ctrl.IndexCtrl">
+	apply="de.hdu.zimmerbelegung.ctrl.BelegungCtrl">
  	<listbox id="box" multiple="true"
 		model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}"
 		selectedItem="@{win$composer.current}">
@@ -29,7 +29,7 @@
 		<button id="add" label="Add" />
 		<button id="update" label="Update" />
 		<button id="delete" label="Delete" />
-	</groupbox>
+	</groupbox> -->
 		<html>
 <![CDATA[
 <a href="layout.zul">layout</a> <p />

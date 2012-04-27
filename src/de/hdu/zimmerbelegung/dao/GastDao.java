@@ -1,33 +1,26 @@
 package de.hdu.zimmerbelegung.dao;
 
-//import java.util.Date;
-//import java.util.List;
- 
-//import org.hibernate.Session;
-//import de.hdu.zimmerbelegung.model.Gast;
+import java.util.List;
 
-public class GastDao {    
-/*    public void saveOrUpdate(Gast anEvent, String name, String vorname, String kommentar) {
-        Session sess =  currentSession();
-        anEvent.setName(name);
-        anEvent.setVorname(vorname);
-        anEvent.setKommentar(kommentar);
-        sess.saveOrUpdate(anEvent);
-    }    
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-    public void delete(Gast anEvent) {
-        Session sess =  currentSession();
-        sess.delete(anEvent);
-    }
-    
-    public Gast findById(String name) {
-        Session sess =  currentSession();
-        return (Gast) sess.load(Gast.class, name);
-    } 
-    
-    public List findAll() {
-        Session sess =  currentSession();
-        return sess.createQuery("from Gast").list();
-    }    
-*/    
+import de.hdu.zimmerbelegung.model.Gast;
+
+public class GastDao extends HibernateDaoSupport {
+	public Gast get(int id) {
+		return getHibernateTemplate().load(Gast.class, id);
+	}
+
+	public void saveOrUpdate(Gast gast) {
+		getHibernateTemplate().saveOrUpdate(gast);
+	}
+
+	public void delete(Gast gast) {
+		getHibernateTemplate().delete(gast);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Gast> getAll() {
+		return getHibernateTemplate().find("FROM Gast");
+	}
 }
