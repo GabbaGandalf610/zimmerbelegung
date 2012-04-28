@@ -135,13 +135,13 @@
 						<tabpanel>Roland</tabpanel>
 						<tabpanel id="buchung"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
-							<grid id="adminBuchungGrid" height="350px"
+							<listbox id="adminBuchungList"
 								emptyMessage="Keine Buchungen vorhanden.">
-								<columns>
-									<column label="Id" />
-									<column label="Datum" />
-								</columns>
-							</grid>
+								<listhead sizable="true">
+									<listheader label="Id" />
+									<listheader label="Datum" />
+								</listhead>
+							</listbox>
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
 						<tabpanel>This is panel E</tabpanel>
