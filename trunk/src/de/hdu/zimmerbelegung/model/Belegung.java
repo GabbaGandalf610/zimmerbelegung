@@ -25,35 +25,28 @@ public abstract class Belegung {
 	@Id
 	@GeneratedValue
 	private int id;
-	private Date datumVon;
-	private Date datumBis;
+	private Date datum;
 	@ManyToOne(targetEntity = Zimmer.class)
 	private Zimmer zimmer;
 	@ManyToOne(targetEntity = Gast.class)
 	private Gast gast;
 
-	public Belegung(Date datumVon, Date datumBis, Zimmer zimmer, Gast gast) {
+	public Belegung() {
+	}
+
+	public Belegung(Date datum, Zimmer zimmer, Gast gast) {
 		super();
-		this.datumVon = datumVon;
-		this.datumBis = datumBis;
+		this.datum = datum;
 		this.zimmer = zimmer;
 		this.gast = gast;
 	}
 
-	public Date getDatumVon() {
-		return datumVon;
+	public Date getDatum() {
+		return datum;
 	}
 
-	public void setDatumVon(Date datumVon) {
-		this.datumVon = datumVon;
-	}
-
-	public Date getDatumBis() {
-		return datumBis;
-	}
-
-	public void setDatumBis(Date datumBis) {
-		this.datumBis = datumBis;
+	public void setDatum(Date datum) {
+		this.datum = datum;
 	}
 
 	public Zimmer getZimmer() {
