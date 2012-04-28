@@ -1,16 +1,18 @@
 package de.hdu.zimmerbelegung.ctrl;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.zkoss.zul.Label;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
@@ -20,26 +22,25 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 public class AdminBuchungCtrl extends SelectorComposer<Component> {
 	private static final long serialVersionUID = -8889573485448848014L;
-	
-	private class BuchungRowRenderer implements RowRenderer<Buchung> {
-	    public void render(final Row row, final Buchung data, int index) {
-	    	new Label(String.valueOf(data.getId())).setParent(row);
-	    	new Label(String.valueOf(data.getDatum())).setParent(row);
-	    }		
-	}
-	
+		
 	@Wire
-	private Grid adminBuchungGrid;
+	private Listbox adminBuchungList;
 	
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         AdminBuchungManager manager = ServiceLocator.getAdminBuchungManager();
-        adminBuchungGrid.setModel(new ListModelList<Buchung>(manager.getAll()));
-        adminBuchungGrid.setRowRenderer(new BuchungRowRenderer());
+        adminBuchungList.setModel(new ListModelList<Buchung>(manager.getAll()));
+        adminBuchungList.setItemRenderer(new ListitemRenderer<Buchung>() {
+        	public void render(Listitem item, Buchung buchung, int index)
+    				throws Exception {
+    	    	new Listcell(String.valueOf(buchung.getId())).setParent(item);
+    	    	new Listcell(String.valueOf(buchung.getDatum())).setParent(item);
+    		}	  	
+        });
     }
-	
-	
+    
+
 	private Buchung buchung;
 	private Date datumVon;
 
