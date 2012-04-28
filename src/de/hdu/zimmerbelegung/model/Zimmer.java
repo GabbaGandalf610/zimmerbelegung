@@ -41,6 +41,9 @@ public class Zimmer {
 		this.kurzbeschreibung = kurzbeschreibung;
 	}
 
+	public Zimmer() {
+	}
+	
 	public Zimmer(int id, String name, String kurzbeschreibung) {
 		super();
 		this.id = id;

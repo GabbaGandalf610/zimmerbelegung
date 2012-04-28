@@ -119,7 +119,7 @@
 
 			<tabpanel>Drucken</tabpanel>
 			<tabpanel style="color:#333399;">
-<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
+				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
 				<tabbox id="tb2" orient="vertical" height="300px">
 					<tabs id="tabs" width="150px">
 						<tab id="tab_gast" label="Gäste" />
@@ -131,52 +131,23 @@
 						<tab id="tab_zeitstatus" label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
-						<tabpanel>A</tabpanel>
-						<tabpanel>This is panel B</tabpanel>
-						<tabpanel>This is panel C</tabpanel>
+						<tabpanel>Franz</tabpanel>
+						<tabpanel>Roland</tabpanel>
+						<tabpanel id="buchung"
+							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
+							<grid id="adminBuchungGrid" height="350px"
+								emptyMessage="Keine Buchungen vorhanden.">
+								<columns>
+									<column label="Id" />
+									<column label="Datum" />
+								</columns>
+							</grid>
+						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
 						<tabpanel>This is panel E</tabpanel>
 						<tabpanel>This is panel F</tabpanel>
 					</tabpanels>
 				</tabbox>
-			</tabpanel>
-			<tabpanel>
-				<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-				<!-- 				<window id="win" -->
-				<!-- 					apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
-				<!-- 					<listbox id="box" multiple="true" -->
-				<!-- 						model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}" -->
-				<!-- 						selectedItem="@{win$composer.current}"> -->
-				<!-- 						<listhead> -->
-				<!-- 							<listheader label="ZimmerKategorie" /> -->
-				<!-- 						</listhead> -->
-				<!-- 						<listitem self="@{each='zimmerKategorie'}" -->
-				<!-- 							value="@{zimmerKategorie}"> -->
-				<!-- 							<listcell label="@{zimmerKategorie.name}" /> -->
-				<!-- 						</listitem> -->
-				<!-- 					</listbox> -->
-				<!-- 					<groupbox> -->
-				<!-- 						<caption label="ZimmerKategorie" /> -->
-				<!-- 						<grid> -->
-				<!-- 							<columns sizable="false"> -->
-				<!-- 								<column width="200px" /> -->
-				<!-- 								<column width="590px" /> -->
-				<!-- 							</columns> -->
-				<!-- 							<rows> -->
-				<!-- 								<row> -->
-				<!-- 									<label value="Name: " /> -->
-				<!-- 									<textbox id="name" width="580px" -->
-				<!-- 										value="@{win$composer.current.name}" /> -->
-				<!-- 								</row> -->
-				<!-- 							</rows> -->
-				<!-- 						</grid> -->
-				<!-- 						<button id="add" label="Add" /> -->
-				<!-- 						<button id="update" label="Update" /> -->
-				<!-- 						<button id="delete" label="Delete" /> -->
-				<!-- 					</groupbox> -->
-
-				<!-- 				</window> -->
-
 			</tabpanel>
 			<tabpanel>
 				<tabbox width="600px" height="600px">

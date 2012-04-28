@@ -15,10 +15,11 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Buchung")
 public class Buchung extends Belegung {
-
-	public Buchung(Date datumVon, Date datumBis, Zimmer zimmer, Gast gast,
-			String kommentar) {
-		super(datumVon, datumBis, zimmer, gast);
+	public Buchung() {
+		super();
 	}
-	
+
+	public Buchung(Date datum, Zimmer zimmer, Gast gast) {
+		super(datum, zimmer, gast);
+	}
 }

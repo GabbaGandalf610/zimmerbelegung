@@ -2,16 +2,6 @@ package de.hdu.zimmerbelegung.manager;
 
 public class BelegungManager {
 /*
-	package de.hdu.zimmerbelegung.manager;
-
-	import java.util.List;
-
-	import de.hdu.zimmerbelegung.dao.ZimmerKategorieDao;
-	import de.hdu.zimmerbelegung.model.ZimmerKategorie;
-	import de.hdu.zimmerbelegung.service.IZimmerKategorieManager;
-
-	public class ZimmerKategorieManager implements IZimmerKategorieManager {
-
 		private ZimmerKategorieDao zimmerKategorieDao;
 		public void setZimmerKategorieDao(ZimmerKategorieDao zimmerKategorieDao) {
 			this.zimmerKategorieDao = zimmerKategorieDao;
