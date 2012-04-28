@@ -1,38 +1,342 @@
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-<window id="win"
-	apply="de.hdu.zimmerbelegung.ctrl.BelegungCtrl">
- 	<listbox id="box" multiple="true"
-		model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}"
-		selectedItem="@{win$composer.current}">
-		<listhead>
-			<listheader label="ZimmerKategorie"/>
-		</listhead>
-		<listitem self="@{each='zimmerKategorie'}" value="@{zimmerKategorie}">
-			<listcell label="@{zimmerKategorie.name}" />
-		</listitem>
-	</listbox>
-	<groupbox>
-		<caption label="ZimmerKategorie" />
-		<grid>
-			<columns sizable="false">
-				<column width="200px" />
-				<column width="590px" />
-			</columns>
-			<rows>
-				<row>
-					<label value="Name: " />
-					<textbox id="name" width="580px"
-						value="@{win$composer.current.name}" />
-				</row>
-			</rows>
-		</grid>
-		<button id="add" label="Add" />
-		<button id="update" label="Update" />
-		<button id="delete" label="Delete" />
-	</groupbox> -->
-		<html>
-<![CDATA[
-<a href="layout.zul">layout</a> <p />
-<a href="gast-testview.zul">Gast-Testview</a> 
-]]></html>
-</window>
+<zk>
+	<tabbox width="100%" height="100%">
+		<tabs>
+			<tab label="Verwaltung" />
+			<tab label="Drucken" />
+			<tab label="Administration" />
+			<tab label="Stefan Zimmerkat." />
+			<tab label="Layout Franz" />
+			<tab label="Gast AnlageForm Test" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+
+
+				<borderlayout width="100%" height="100%">
+					<north flex="true">
+						<div>
+							Datum von:
+							<datebox id="von" cols="12" format="medium"
+								onCreate="self.value = new Date()" mold="rounded" />
+							bis:
+							<datebox id="bis" cols="12" format="medium"
+								onCreate="self.value = new Date()" mold="rounded" />
+
+						</div>
+					</north>
+
+					<center flex="true">
+						<borderlayout>
+							<center>Center - Center (Oben)</center>
+							<south flex="true" splittable="true"
+								collapsible="true" height="25%">
+								Center - South (Unten)
+							</south>
+						</borderlayout>
+					</center>
+
+					<east flex="true" splittable="true" width="40%"
+						collapsible="true">
+						<borderlayout>
+							<north flex="true" splittable="true"
+								collapsible="true" height="30%">
+
+								<grid xmlns:c="client">
+									<auxhead sclass="category-center">
+										<auxheader label="Gast suche"
+											colspan="6" />
+									</auxhead>
+
+									<auxhead sclass="category-center">
+										<auxheader colspan="1">
+											<image
+												src="/Images/funnel.png" />
+											<textbox id="filterName"
+												c:onClick="this.select()" width="100px" />
+										</auxheader>
+										<auxheader colspan="1">
+											<image
+												src="/Images/funnel.png" />
+											<textbox id="filterFirma"
+												c:onClick="this.select()" width="100px" />
+										</auxheader>
+										<auxheader colspan="1">
+											<image
+												src="/Images/funnel.png" />
+											<textbox id="filterLand"
+												c:onClick="this.select()" width="100px" />
+										</auxheader>
+									</auxhead>
+
+									<columns>
+										<column>Name</column>
+										<column>Firma</column>
+										<column>Land</column>
+									</columns>
+
+									<rows>
+										<row>
+											<label value="dtest" />
+											<label value="etest" />
+											<label value="ftest" />
+										</row>
+										<row>
+											<label value="atest" />
+											<label value="btest" />
+											<label value="ctest" />
+										</row>
+										<row>
+											<label value="dtest" />
+											<label value="etest" />
+											<label value="ftest" />
+										</row>
+										<row>
+											<label value="atest" />
+											<label value="btest" />
+											<label value="ctest" />
+										</row>
+									</rows>
+
+
+
+								</grid>
+
+
+							</north>
+							<center flex="true">
+								East - Center (Mitte)
+							</center>
+							<south flex="true" splittable="true"
+								collapsible="true" height="30%">
+								East - South (Unten)
+							</south>
+						</borderlayout>
+					</east>
+
+
+				</borderlayout>
+			</tabpanel>
+
+			<tabpanel>Drucken</tabpanel>
+			<tabpanel>Administration</tabpanel>
+			<tabpanel>
+				<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+				<window id="win"
+					apply="de.hdu.zimmerbelegung.ctrl.IndexCtrl">
+					<listbox id="box" multiple="true"
+						model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}"
+						selectedItem="@{win$composer.current}">
+						<listhead>
+							<listheader label="ZimmerKategorie" />
+						</listhead>
+						<listitem self="@{each='zimmerKategorie'}"
+							value="@{zimmerKategorie}">
+							<listcell label="@{zimmerKategorie.name}" />
+						</listitem>
+					</listbox>
+					<groupbox>
+						<caption label="ZimmerKategorie" />
+						<grid>
+							<columns sizable="false">
+								<column width="200px" />
+								<column width="590px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Name: " />
+									<textbox id="name" width="580px"
+										value="@{win$composer.current.name}" />
+								</row>
+							</rows>
+						</grid>
+						<button id="add" label="Add" />
+						<button id="update" label="Update" />
+						<button id="delete" label="Delete" />
+					</groupbox>
+
+				</window>
+
+			</tabpanel>
+			<tabpanel>
+				<tabbox width="600px" height="600px">
+					<tabs>
+						<tab label="Zimmerbelegung" />
+						<tab label="Belegungen bearbeiten" />
+					</tabs>
+					<tabpanels>
+						<tabpanel style="color:#336699;">
+
+							<label value="Zimmerbelegung" />
+
+							<grid width="570px">
+								<columns>
+									<column width="120px"
+										label="Attribut" />
+									<column hflex="1" label="Wert" />
+								</columns>
+								<rows>
+									<row>
+										Ankunft:
+										<datebox id="db0" cols="12"
+											format="short" onCreate="self.value = new Date()"
+											mold="rounded" />
+									</row>
+									<row>
+										bis:
+										<datebox id="db1" cols="12"
+											format="short" onCreate="self.value = new Date()"
+											mold="rounded" />
+									</row>
+									<row>
+										Kategorie
+										<vbox width="100%"
+											align="stretch">
+											<div height="5px" />
+											<radiogroup
+												id="zimmer_kategorie"
+												onCheck="choice1.value = self.selectedItem.label" />
+											<grid>
+												<rows>
+													<row spans="3">
+														Bitte eine
+														Zimmerkategorie
+														wählen!
+													</row>
+													<row>
+														<radio id="zk1"
+															label="Kategorie gold" radiogroup="zimmer_kategorie" />
+														<radio id="zk2"
+															label="Kategorie silber" radiogroup="zimmer_kategorie" />
+														<radio id="zk3"
+															label="Kategorie bronze" radiogroup="zimmer_kategorie" />
+													</row>
+												</rows>
+											</grid>
+										</vbox>
+
+									</row>
+									<row>
+										Stockwerk:
+										<tabbox id="tb" width="600px"
+											height="360px" mold="accordion">
+											<tabs>
+												<tab label="1. Stock" />
+												<tab
+													label="Erdgeschoss" />
+											</tabs>
+											<tabpanels>
+												<tabpanel>
+
+
+
+
+
+													Text zu 1. Stock
+												</tabpanel>
+												<tabpanel>
+													Text zu Erdgeschoss
+												</tabpanel>
+											</tabpanels>
+										</tabbox>
+									</row>
+								</rows>
+							</grid>
+
+
+						</tabpanel>
+						<tabpanel style="color:#333399;">
+
+							<label
+								value="Belegungen (Reservierungen/Buchungen) bearbeiten" />
+
+							<grid width="570px">
+								<columns>
+									<column width="120px"
+										label="Attribut" />
+									<column hflex="1" label="Wert" />
+								</columns>
+								<rows>
+									<row>
+										Ankunft:
+										<datebox id="db2" cols="12"
+											format="short" onCreate="self.value = new Date()"
+											mold="rounded" />
+									</row>
+									<row>
+										bis:
+										<datebox id="db3" cols="12"
+											format="short" onCreate="self.value = new Date()"
+											mold="rounded" />
+									</row>
+									<row>
+										Hotelzimmer:
+
+									</row>
+								</rows>
+							</grid>
+
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+
+			</tabpanel>
+			<tabpanel>
+				<window width="600px">
+					<grid>
+						<columns>
+							<column label="Beschreibung" />
+							<column width="80%" label="Daten" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Name:" />
+								<textbox width="50%" />
+							</row>
+							<row>
+								<label value="Straße:" />
+								<textbox width="98%" />
+							</row>
+							<row>
+								<label value="PLZ:" />
+								<intbox width="98%" />
+							</row>
+							<row>
+								<label value="ORT:" />
+								<textbox width="98%" />
+							</row>
+							<row>
+								<label value="Land:" />
+								<textbox width="98%" />
+							</row>
+							<row>
+								<label value="Telefon:" />
+								<textbox width="98%" />
+							</row>
+							<row>
+								<label value="Mobiltelefon:" />
+								<textbox width="98%" />
+							</row>
+							<row>
+								<label value="Email :" />
+								<textbox id="emailtb" width="98%"
+									constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
+							</row>
+							<row>
+								<label value="Kommentar:" />
+								<textbox rows="4" width="98%" />
+							</row>
+							<row>
+								<hbox pack="center" width="100%">
+									<button label="Hotelgast anlegen"
+										onClick="doAnlegen()" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</window>
+
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</zk>
