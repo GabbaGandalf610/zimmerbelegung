@@ -120,12 +120,13 @@
 			<tabpanel>Drucken</tabpanel>
 			<tabpanel style="color:#333399;">
 				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
-				<tabbox id="tb2" orient="vertical" height="100%">
+				<tabbox id="tb2" orient="vertical" height="300px">
 					<tabs id="tabs" width="150px">
 						<tab id="tab_gast" label="Gäste" />
 						<tab id="tab_zimmer" label="Zimmer" />
 						<tab id="tab_buchung" label="Buchungen" />
-						<tab id="tab_reservierung" label="Reservierungen" />
+						<tab id="tab_reservierung"
+							label="Reservierungen" />
 						<tab id="tab_tagstatus" label="Tagstatus" />
 						<tab id="tab_zeitstatus" label="Zeitraumstatus" />
 					</tabs>
@@ -224,8 +225,55 @@
 
 
 						</tabpanel>
-						<tabpanel>This is panel B</tabpanel>
-												<tabpanel id="buchung"
+						
+						
+						
+						
+						<tabpanel id="zimmer"
+							apply="de.hdu.zimmerbelegung.ctrl.AdminZimmerCtrl">
+							<listbox id="adminZimmerList"
+								emptyMessage="Keine Zimmer vorhanden.">
+								<listhead sizable="true">
+									<listheader label="Id" />
+									<listheader label="Name" />
+									<listheader
+										label="Kurzbeschreibung" />
+								</listhead>
+							</listbox>
+
+							<grid width="830px">
+								<auxhead>
+									<auxheader colspan="5"
+										class="topic">
+										Edit Data
+									</auxheader>
+								</auxhead>
+								<columns>
+									<column label="Id" align="center" />
+									<column label="Name" align="center" />
+									<column label="Kurzbeschreibung"
+										align="center" />
+								</columns>
+								<rows>
+									<row>
+										<combobox id="zimmerdet"
+											model="@load(vm.zimmer)"
+											selectedItem="@bind(vm.zimmer.id)" width="99%" />
+										<textbox
+											value="@bind(vm.zimmer.name)" width="150px" />
+										<textbox
+											value="@bind(vm.zimmer.kurzbeschreibung)" width="150px" />
+
+
+									</row>
+								</rows>
+							</grid>
+						</tabpanel>
+
+
+
+
+						<tabpanel id="buchung"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
 							<listbox id="adminBuchungList"
 								emptyMessage="Keine Buchungen vorhanden.">
@@ -261,10 +309,6 @@
 						<tabpanel>This is panel F</tabpanel>
 					</tabpanels>
 				</tabbox>
-			</tabpanel>
-			<tabpanel>
-
-
 			</tabpanel>
 			<tabpanel>
 				<tabbox width="600px" height="600px">
