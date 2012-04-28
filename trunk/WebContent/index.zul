@@ -120,7 +120,7 @@
 			<tabpanel>Drucken</tabpanel>
 			<tabpanel style="color:#333399;">
 				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
-				<tabbox id="tb2" orient="vertical" height="300px">
+				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="tab_gast" label="Gäste" />
 						<tab id="tab_zimmer" label="Zimmer" />
@@ -128,21 +128,27 @@
 						<tab id="tab_reservierung"
 							label="Reservierungen" />
 						<tab id="tab_tagstatus" label="Tagstatus" />
-						<tab id="tab_zeitstatus" label="Zeitraumstatus" />
+						<tab id="tab_zeitraumstatus"
+							label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
 						<tabpanel id="gast"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminGastCtrl">
-							<listbox id="box" multiple="true"
-								model="@{win$composer.allGast, load-after='add.onClick, delete.onClick, update.onClick'}"
-								selectedItem="@{win$composer.current}">
-								<listhead>
-									<listheader label="Gast" />
+							<listbox id="adminGastList"
+								emptyMessage="Keine Gäste vorhanden.">
+								<listhead sizable="true">
+									<listheader label="Name" />
+									<listheader label="Vorname" />
+									<listheader label="Strasse" />
+									<listheader label="PLZ" />
+									<listheader label="Ort" />
+									<listheader label="Land" />
+									<listheader label="Telefon" />
+									<listheader label="Mobil" />
+									<listheader label="Fax" />
+									<listheader label="E-Mail" />
+									<listheader label="Kommentar" />
 								</listhead>
-								<listitem self="@{each='gast'}"
-									value="@{gast}">
-									<listcell label="@{gast.name}" />
-								</listitem>
 							</listbox>
 							<groupbox>
 								<caption label="Gast" />
@@ -156,9 +162,6 @@
 											<label value="Name: " />
 											<textbox id="name"
 												width="580px" value="@{win$composer.gast.name}" />
-
-
-
 										</row>
 										<row>
 											<label value="Vorname: " />
@@ -225,11 +228,7 @@
 
 
 						</tabpanel>
-						
-						
-						
-						
-						<tabpanel id="zimmer"
+<tabpanel id="zimmer"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminZimmerCtrl">
 							<listbox id="adminZimmerList"
 								emptyMessage="Keine Zimmer vorhanden.">
@@ -269,10 +268,6 @@
 								</rows>
 							</grid>
 						</tabpanel>
-
-
-
-
 						<tabpanel id="buchung"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
 							<listbox id="adminBuchungList"
@@ -305,10 +300,31 @@
 							</groupbox>
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
-						<tabpanel>This is panel E</tabpanel>
-						<tabpanel>This is panel F</tabpanel>
+						<tabpanel apply="de.hdu.zimmerbelegung.ctrl.AdminTagStatusCtrl">
+							
+							<listbox id="adminTagStatusList"
+								emptyMessage="Kein TagStatus vorhanden.">
+								<listhead sizable="true">
+									<listheader label="ID" />
+									<listheader label="Name" />
+								</listhead>
+							</listbox>
+						</tabpanel>
+						<tabpanel apply="de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl">
+							<listbox id="adminZeitraumStatusList"
+								emptyMessage="Kein ZeitraumStatus vorhanden.">
+								<listhead sizable="true">
+									<listheader label="ID" />
+									<listheader label="Name" />
+								</listhead>
+							</listbox>
+						</tabpanel>
 					</tabpanels>
 				</tabbox>
+			</tabpanel>
+			<tabpanel>
+
+
 			</tabpanel>
 			<tabpanel>
 				<tabbox width="600px" height="600px">

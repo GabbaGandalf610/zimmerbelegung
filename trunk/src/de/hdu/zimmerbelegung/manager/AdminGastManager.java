@@ -33,5 +33,4 @@ public class AdminGastManager {
 		gastDao.delete(gast);
 	}
 	
-	
 }

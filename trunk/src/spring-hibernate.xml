@@ -79,10 +79,24 @@
 			<ref bean="buchungDao" />
 		</property>
 	</bean>
-	<bean id="adminZimmerManager" class="de.hdu.zimmerbelegung.manager.AdminZimmerManager">
+
+	<bean id="adminTagStatusManager" class="de.hdu.zimmerbelegung.manager.AdminTagStatusManager">
+		<property name="tagStatusDao">
+			<ref bean="tagStatusDao" />
+		</property>
+	</bean>
+
+	<bean id="adminZeitraumStatusManager"
+		class="de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager">
+		<property name="zeitraumStatusDao">
+			<ref bean="zeitraumStatusDao" />
+		</property>
+	</bean>
+	
+		<bean id="adminZimmerManager" class="de.hdu.zimmerbelegung.manager.AdminZimmerManager">
 		<property name="zimmerDao">
 			<ref bean="zimmerDao" />
 		</property>
 	</bean>
-	
+
 </beans>
