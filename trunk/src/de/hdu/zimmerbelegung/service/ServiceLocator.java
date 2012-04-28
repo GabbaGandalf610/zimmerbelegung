@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import de.hdu.zimmerbelegung.manager.AdminManager;
 import de.hdu.zimmerbelegung.manager.BelegungManager;
 
 public class ServiceLocator {
@@ -19,8 +20,12 @@ public class ServiceLocator {
     public static SessionFactory getSessionFactory() {
         return (SessionFactory) ctx.getBean("factory",SessionFactory.class);
     }
-
+    
     public static BelegungManager getBuchungManager() {
         return (BelegungManager) ctx.getBean("buchungManager",BelegungManager.class);
     }
+
+    public static AdminManager getAdminManager() {
+		return (AdminManager) ctx.getBean("AdminManager",AdminManager.class);
+	}
 }
