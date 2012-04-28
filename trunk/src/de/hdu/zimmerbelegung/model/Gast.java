@@ -29,6 +29,7 @@ public class Gast {
 	private String mobil;
 	private String fax;
 	private String email;
+	private String kommentar;
 	
 	
 	public String getStrasse() {
@@ -79,18 +80,25 @@ public class Gast {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+//	public Set<Belegung> getBelegungen() {
+//		return belegungen;
+//	}
+//	public void setBelegungen(Set<Belegung> belegungen) {
+//		this.belegungen = belegungen;
+//	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	private String kommentar;
+
 	
 	public String getKommentar() {
 		return kommentar;
 	}
-
-	public Gast() {
-	}
 	
+	public Gast(){
+		
+	}
+
 	public Gast(int id, String vorname, String name, String strasse,
 			String plz, String ort, String land, String telefon, String mobil,
 			String fax, String email, String kommentar) {

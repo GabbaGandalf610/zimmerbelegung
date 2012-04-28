@@ -25,7 +25,6 @@
 		<property name="configLocation" value="hibernate.cfg.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
 	<!-- DAOs -->
 	<bean id="belegungDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
 		<property name="sessionFactory">
@@ -64,6 +63,17 @@
 	</bean>
 
 	<!-- Manager -->
+	<!-- <bean id="belegungManager" class="de.hdu.zimmerbelegung.manager.BelegungManager"> -->
+	<!-- <property name="belegungManager"> -->
+	<!-- <ref bean="belegungManager" /> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	<bean id="adminGastManager" class="de.hdu.zimmerbelegung.manager.AdminGastManager">
+		<property name="gastDao">
+			<ref bean="gastDao" />
+		</property>
+	</bean>
+
 	<bean id="adminBuchungManager" class="de.hdu.zimmerbelegung.manager.AdminBuchungManager">
 		<property name="buchungDao">
 			<ref bean="buchungDao" />

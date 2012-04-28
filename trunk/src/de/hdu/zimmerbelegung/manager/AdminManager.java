@@ -16,28 +16,14 @@ import de.hdu.zimmerbelegung.model.ZeitraumStatus;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class AdminManager {
-	private GastDao gastDao;
+	
 	private ZimmerDao zimmerDao;
 	private BuchungDao buchungDao;
 	private ReservierungDao reservierungDao;
-	private TagStatusDao tagStatusDao;
-	private ZeitraumStatusDao zeitraumStatusDao;
+	
+	
 
-	public List<Gast> getAllGast() {
-		return gastDao.getAll();
-	}
 	
-	public void add(Gast gast) {
-		gastDao.saveOrUpdate(gast);
-	}
-	
-	public void update(Gast gast) {
-		gastDao.saveOrUpdate(gast);
-	}
-	
-	public void delete(Gast gast) {
-		gastDao.delete(gast);
-	}
 		
 
 	public List<Zimmer> getAllZimmer() {
@@ -91,37 +77,9 @@ public class AdminManager {
 	}
 	
 	
-	public List<TagStatus> getAllTagStatus() {
-		return tagStatusDao.getAll();
-	}
 	
-	public void add(TagStatus tagStatus) {
-		tagStatusDao.saveOrUpdate(tagStatus);
-	}
-
-	public void update(TagStatus tagStatus) {
-		tagStatusDao.saveOrUpdate(tagStatus);
-	}
-	
-	public void delete(TagStatus tagStatus) {
-		tagStatusDao.delete(tagStatus);
-	}
 	
 
-	public List<ZeitraumStatus> getAllZeitraumStatus() {
-		return zeitraumStatusDao.getAll();
-	}
-	
-	public void add(ZeitraumStatus zeitraumStatus) {
-		zeitraumStatusDao.saveOrUpdate(zeitraumStatus);
-	}
 
-	public void update(ZeitraumStatus zeitraumStatus) {
-		zeitraumStatusDao.saveOrUpdate(zeitraumStatus);
-	}
-	
-	public void delete(ZeitraumStatus zeitraumStatus) {
-		zeitraumStatusDao.delete(zeitraumStatus);
-	}
 	
 }
