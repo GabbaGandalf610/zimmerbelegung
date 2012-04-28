@@ -19,20 +19,14 @@ public class AdminCtrl {
 
 	@SuppressWarnings("serial")
 	public class IndexCtrl extends GenericForwardComposer implements Composer {
-		private Gast gast;
+		
 		private Zimmer zimmer;
 		private Buchung buchung;
 		private Reservierung reservierung;
-		private TagStatus tagstatus;
-		private ZeitraumStatus zeitraumstatus;
 		
-		public Gast getGast() {
-			return gast;
-		}
+	
+		
 
-		public void setGast(Gast gast) {
-			this.gast = gast;
-		}
 		
 		public Zimmer getZimmer() {
 			return zimmer;
@@ -76,10 +70,7 @@ public class AdminCtrl {
 		}
 		
 		
-		public List<Gast> getAllGast(){
-			AdminManager manager = ServiceLocator.getAdminManager();
-			return manager.getAllGast();
-		}
+		
 		
 		public List<Zimmer> getAllZimmer(){
 			AdminManager manager = ServiceLocator.getAdminManager();
@@ -116,26 +107,7 @@ public class AdminCtrl {
 		}
 
 
-		public void onClick$addGast() {
-			if (null == gast) {
-				gast = new Gast();
-			}
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.add(gast);
-			gast = null;
-		}
-
-		public void onClick$updateGast() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.update(gast);
-			gast = null;
-		}
-
-		public void onClick$deleteGast() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.delete(gast);
-			gast = null;
-		}
+	
 	
 		
 		public void onClick$addZimmer() {
@@ -204,47 +176,9 @@ public class AdminCtrl {
 		}
 		
 		
-		public void onClick$addTagStatus() {
-			if (null == tagstatus) {
-				reservierung = new TagStatus();
-			}
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.add(tagstatus);
-			tagstatus = null;
-		}
-
-		public void onClick$updateTagStatus() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.update(tagstatus);
-			tagstatus = null;
-		}
-
-		public void onClick$deleteTagStatus() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.delete(tagstatus);
-			tagstatus = null;
-		}
 		
 		
-		public void onClick$addZeitraumStatus() {
-			if (null == buchung) {
-				reservierung = new ZeitraumStatus();
-			}
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.add(zeitraumstatus);
-			zeitraumstatus = null;
-		}
+		
 
-		public void onClick$updateZeitraumStatus() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.update(zeitraumstatus);
-			zeitraumstatus = null;
-		}
-
-		public void onClick$deleteZeitraumStatus() {
-			AdminManager manager = ServiceLocator.getAdminManager();
-			manager.delete(zeitraumstatus);
-			zeitraumstatus = null;
-		}
 	
 }

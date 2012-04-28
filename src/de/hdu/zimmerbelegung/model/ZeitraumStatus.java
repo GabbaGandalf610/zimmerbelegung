@@ -6,6 +6,11 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Zeitraum")
 public class ZeitraumStatus extends TagStatus {
+	
+	public ZeitraumStatus() {
+		
+	}
+	
 	public ZeitraumStatus(int id, String name) {
 		super(id, name);
 	}

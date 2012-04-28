@@ -14,6 +14,11 @@ public class TagStatus {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public TagStatus() {
+		
+	}
+	
 	public TagStatus(int id, String name) {
 		super();
 		this.id = id;

@@ -120,20 +120,112 @@
 			<tabpanel>Drucken</tabpanel>
 			<tabpanel style="color:#333399;">
 				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
-				<tabbox id="tb2" orient="vertical" height="300px">
+				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="tab_gast" label="Gäste" />
 						<tab id="tab_zimmer" label="Zimmer" />
 						<tab id="tab_buchung" label="Buchungen" />
-						<tab id="tab_reservierung"
-							label="Reservierungen" />
+						<tab id="tab_reservierung" label="Reservierungen" />
 						<tab id="tab_tagstatus" label="Tagstatus" />
 						<tab id="tab_zeitstatus" label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
-						<tabpanel>Franz</tabpanel>
-						<tabpanel>Roland</tabpanel>
-						<tabpanel id="buchung"
+						<tabpanel id="gast"
+							apply="de.hdu.zimmerbelegung.ctrl.AdminGastCtrl">
+							<listbox id="box" multiple="true"
+								model="@{win$composer.allGast, load-after='add.onClick, delete.onClick, update.onClick'}"
+								selectedItem="@{win$composer.current}">
+								<listhead>
+									<listheader label="Gast" />
+								</listhead>
+								<listitem self="@{each='gast'}"
+									value="@{gast}">
+									<listcell label="@{gast.name}" />
+								</listitem>
+							</listbox>
+							<groupbox>
+								<caption label="Gast" />
+								<grid>
+									<columns sizable="false">
+										<column width="200px" />
+										<column width="590px" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Name: " />
+											<textbox id="name"
+												width="580px" value="@{win$composer.gast.name}" />
+
+
+
+										</row>
+										<row>
+											<label value="Vorname: " />
+											<textbox id="vorname"
+												width="580px" value="@{win$composer.gast.vorname}" />
+										</row>
+										<row>
+											<label value="Strasse: " />
+											<textbox id="strasse"
+												width="580px" value="@{win$composer.gast.strasse}" />
+										</row>
+										<row>
+											<label value="PLZ: " />
+											<textbox id="plz"
+												width="580px" value="@{win$composer.gast.plz}" />
+										</row>
+										<row>
+											<label value="Ort: " />
+											<textbox id="ort"
+												width="580px" value="@{win$composer.gast.ort}" />
+
+										</row>
+										<row>
+											<label value="Land: " />
+											<textbox id="land"
+												width="580px" value="@{win$composer.gast.land}" />
+
+										</row>
+										<row>
+											<label value="Telefon: " />
+											<textbox id="telefon"
+												width="580px" value="@{win$composer.gast.telefon}" />
+
+										</row>
+										<row>
+											<label value="Mobil: " />
+											<textbox id="mobil"
+												width="580px" value="@{win$composer.gast.mobil}" />
+
+										</row>
+										<row>
+											<label value="Fax: " />
+											<textbox id="fax"
+												width="580px" value="@{win$composer.gast.fax}" />
+
+										</row>
+										<row>
+											<label value="E-Mail: " />
+											<textbox id="email"
+												width="580px" value="@{win$composer.gast.email}" />
+										</row>
+										<row>
+											<label value="Kommentar: " />
+											<textbox id="kommentar"
+												width="580px" value="@{win$composer.gast.kommentar}" />
+										</row>
+									</rows>
+								</grid>
+								<button id="add" label="Add" />
+								<button id="update" label="Update" />
+								<button id="delete" label="Delete" />
+							</groupbox>
+
+
+
+						</tabpanel>
+						<tabpanel>This is panel B</tabpanel>
+												<tabpanel id="buchung"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
 							<listbox id="adminBuchungList"
 								emptyMessage="Keine Buchungen vorhanden.">
@@ -148,6 +240,10 @@
 						<tabpanel>This is panel F</tabpanel>
 					</tabpanels>
 				</tabbox>
+			</tabpanel>
+			<tabpanel>
+
+
 			</tabpanel>
 			<tabpanel>
 				<tabbox width="600px" height="600px">
