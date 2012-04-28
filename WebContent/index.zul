@@ -118,157 +118,157 @@
 			</tabpanel>
 
 			<tabpanel>Drucken</tabpanel>
-			<tabpanel style="color:#333399;"
-			apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl">
+<!-- 			<tabpanel style="color:#333399;" -->
+<!-- 			apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
 
 
 
-			<tabbox id="tb" orient="vertical" height="300px">
-				<tabs id="tabs" width="150px">
-					<tab id="tab_gast" label="Gäste" />
-					<tab id="tab_zimmer" label="Zimmer" />
-					<tab id="tab_buchung" label="Buchungen" />
-					<tab id="tab_reservierung" label="Reservierungen" />
-					<tab id="tab_tagstatus" label="Tagstatus" />
-					<tab id="tab_zeitstatus" label="Zeitraumstatus" />
-				</tabs>
-				<tabpanels>
-					<tabpanel>
-						<borderlayout height="100%"
-							sclass="mainLayout">
-							<center title="Gästeliste">
-								<listbox sclass="lst_gaeste"
-									model="@load(vm.contributorList)"
-									selectedItem="@bind(vm.selectedContributor)" vflex="true"
-									hflex="true" onSelect="@command('select')">
-									<listhead>
-										<listheader label="Name"
-											width="80px" align="center" />
-										<listheader label="Vorname"
-											align="center" />
-										<listheader label="Straße"
-											width="80px" align="center" />
-										<listheader label="PLZ"
-											width="80px" align="center" />
-										<listheader label="Ort"
-											width="80px" align="center" />
-									</listhead>
-									<template name="model"
-										var="contributor">
-										<listitem>
-											<listcell
-												label="@load(contributor.title)" />
-											<listcell
-												label="@load(contributor.fullName)" />
-											<listcell
-												label="@load(contributor.extension)" />
-										</listitem>
-									</template>
-								</listbox>
-							</center>
-							<south>
-								<grid sclass="editGrid"
-									form="@id('editor') @load(vm.previewContributor)                      @load(vm.previewContributor, after={'create','preview'})                      @save(vm.previewContributor, before={'save','preview','update','delete'})">
-									<auxhead>
-										<auxheader colspan="5"
-											class="topic">
-											Edit Data
-										</auxheader>
-									</auxhead>
-									<columns>
-										<column label="Title"
-											align="center" />
-										<column label="First Name"
-											align="center" />
-										<column label="Last Name"
-											align="center" />
-										<column label="Extension"
-											align="center" />
-										<column label="Full Name"
-											align="center" />
-									</columns>
-									<rows>
-										<row>
-											<combobox id="field_title"
-												model="@load(vm.contributorTitles)" width="99%"
-												selectedItem="@bind(editor.title)"
-												onChange='@command("preview")' />
-											<textbox
-												id="field_firstName" value="@bind(editor.firstName)"
-												width="150px" onChange='@command("preview")' />
-											<textbox id="field_lastName"
-												value="@bind(editor.lastName)" width="150px"
-												onChange='@command("preview")' />
-											<intbox id="field_ext"
-												value="@bind(editor.extension)" width="150px"
-												onChange='@command("preview")' />
-											<label
-												value="@load(editor.fullName)" />
-										</row>
-										<row>
-											<cell colspan="5"><!-- Use vm.addingNewItemMode as status -->
-												<button
-													label="CreateNew" onClick="@command('create')"
-													width="150px" height="30px" />
-												<button label="Save"
-													onClick="@command('save')" width="150px" height="30px"
-													disabled='@bind(!vm.addingNewItemMode)' />
-												<button label="Update"
-													onClick="@command('update')" width="150px" height="30px"
-													disabled='@bind(vm.addingNewItemMode)' />
-												<button label="Delete"
-													onClick="@command('delete')" width="150px" height="30px"
-													disabled='@bind(vm.addingNewItemMode)' />
-											</cell>
-										</row>
-									</rows>
-								</grid>
-							</south>
-						</borderlayout>
-					</tabpanel>
-					<tabpanel>This is panel B</tabpanel>
-					<tabpanel>This is panel C</tabpanel>
-					<tabpanel>This is panel D</tabpanel>
-					<tabpanel>This is panel E</tabpanel>
-				</tabpanels>
-			</tabbox>
-		</tabpanel>
+<!-- 			<tabbox id="tb" orient="vertical" height="300px"> -->
+<!-- 				<tabs id="tabs" width="150px"> -->
+<!-- 					<tab id="tab_gast" label="Gäste" /> -->
+<!-- 					<tab id="tab_zimmer" label="Zimmer" /> -->
+<!-- 					<tab id="tab_buchung" label="Buchungen" /> -->
+<!-- 					<tab id="tab_reservierung" label="Reservierungen" /> -->
+<!-- 					<tab id="tab_tagstatus" label="Tagstatus" /> -->
+<!-- 					<tab id="tab_zeitstatus" label="Zeitraumstatus" /> -->
+<!-- 				</tabs> -->
+<!-- 				<tabpanels> -->
+<!-- 					<tabpanel> -->
+<!-- 						<borderlayout height="100%" -->
+<!-- 							sclass="mainLayout"> -->
+<!-- 							<center title="Gästeliste"> -->
+<!-- 								<listbox sclass="lst_gaeste" -->
+<!-- 									model="@load(vm.contributorList)" -->
+<!-- 									selectedItem="@bind(vm.selectedContributor)" vflex="true" -->
+<!-- 									hflex="true" onSelect="@command('select')"> -->
+<!-- 									<listhead> -->
+<!-- 										<listheader label="Name" -->
+<!-- 											width="80px" align="center" /> -->
+<!-- 										<listheader label="Vorname" -->
+<!-- 											align="center" /> -->
+<!-- 										<listheader label="Straße" -->
+<!-- 											width="80px" align="center" /> -->
+<!-- 										<listheader label="PLZ" -->
+<!-- 											width="80px" align="center" /> -->
+<!-- 										<listheader label="Ort" -->
+<!-- 											width="80px" align="center" /> -->
+<!-- 									</listhead> -->
+<!-- 									<template name="model" -->
+<!-- 										var="contributor"> -->
+<!-- 										<listitem> -->
+<!-- 											<listcell -->
+<!-- 												label="@load(contributor.title)" /> -->
+<!-- 											<listcell -->
+<!-- 												label="@load(contributor.fullName)" /> -->
+<!-- 											<listcell -->
+<!-- 												label="@load(contributor.extension)" /> -->
+<!-- 										</listitem> -->
+<!-- 									</template> -->
+<!-- 								</listbox> -->
+<!-- 							</center> -->
+<!-- 							<south> -->
+<!-- 								<grid sclass="editGrid" -->
+<!-- 									form="@id('editor') @load(vm.previewContributor)                      @load(vm.previewContributor, after={'create','preview'})                      @save(vm.previewContributor, before={'save','preview','update','delete'})"> -->
+<!-- 									<auxhead> -->
+<!-- 										<auxheader colspan="5" -->
+<!-- 											class="topic"> -->
+<!-- 											Edit Data -->
+<!-- 										</auxheader> -->
+<!-- 									</auxhead> -->
+<!-- 									<columns> -->
+<!-- 										<column label="Title" -->
+<!-- 											align="center" /> -->
+<!-- 										<column label="First Name" -->
+<!-- 											align="center" /> -->
+<!-- 										<column label="Last Name" -->
+<!-- 											align="center" /> -->
+<!-- 										<column label="Extension" -->
+<!-- 											align="center" /> -->
+<!-- 										<column label="Full Name" -->
+<!-- 											align="center" /> -->
+<!-- 									</columns> -->
+<!-- 									<rows> -->
+<!-- 										<row> -->
+<!-- 											<combobox id="field_title" -->
+<!-- 												model="@load(vm.contributorTitles)" width="99%" -->
+<!-- 												selectedItem="@bind(editor.title)" -->
+<!-- 												onChange='@command("preview")' /> -->
+<!-- 											<textbox -->
+<!-- 												id="field_firstName" value="@bind(editor.firstName)" -->
+<!-- 												width="150px" onChange='@command("preview")' /> -->
+<!-- 											<textbox id="field_lastName" -->
+<!-- 												value="@bind(editor.lastName)" width="150px" -->
+<!-- 												onChange='@command("preview")' /> -->
+<!-- 											<intbox id="field_ext" -->
+<!-- 												value="@bind(editor.extension)" width="150px" -->
+<!-- 												onChange='@command("preview")' /> -->
+<!-- 											<label -->
+<!-- 												value="@load(editor.fullName)" /> -->
+<!-- 										</row> -->
+<!-- 										<row> -->
+<!-- 											<cell colspan="5">Use vm.addingNewItemMode as status -->
+<!-- 												<button -->
+<!-- 													label="CreateNew" onClick="@command('create')" -->
+<!-- 													width="150px" height="30px" /> -->
+<!-- 												<button label="Save" -->
+<!-- 													onClick="@command('save')" width="150px" height="30px" -->
+<!-- 													disabled='@bind(!vm.addingNewItemMode)' /> -->
+<!-- 												<button label="Update" -->
+<!-- 													onClick="@command('update')" width="150px" height="30px" -->
+<!-- 													disabled='@bind(vm.addingNewItemMode)' /> -->
+<!-- 												<button label="Delete" -->
+<!-- 													onClick="@command('delete')" width="150px" height="30px" -->
+<!-- 													disabled='@bind(vm.addingNewItemMode)' /> -->
+<!-- 											</cell> -->
+<!-- 										</row> -->
+<!-- 									</rows> -->
+<!-- 								</grid> -->
+<!-- 							</south> -->
+<!-- 						</borderlayout> -->
+<!-- 					</tabpanel> -->
+<!-- 					<tabpanel>This is panel B</tabpanel> -->
+<!-- 					<tabpanel>This is panel C</tabpanel> -->
+<!-- 					<tabpanel>This is panel D</tabpanel> -->
+<!-- 					<tabpanel>This is panel E</tabpanel> -->
+<!-- 				</tabpanels> -->
+<!-- 			</tabbox> -->
+<!-- 		</tabpanel> -->
 			<tabpanel>
 				<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-				<window id="win"
-					apply="de.hdu.zimmerbelegung.ctrl.IndexCtrl">
-					<listbox id="box" multiple="true"
-						model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}"
-						selectedItem="@{win$composer.current}">
-						<listhead>
-							<listheader label="ZimmerKategorie" />
-						</listhead>
-						<listitem self="@{each='zimmerKategorie'}"
-							value="@{zimmerKategorie}">
-							<listcell label="@{zimmerKategorie.name}" />
-						</listitem>
-					</listbox>
-					<groupbox>
-						<caption label="ZimmerKategorie" />
-						<grid>
-							<columns sizable="false">
-								<column width="200px" />
-								<column width="590px" />
-							</columns>
-							<rows>
-								<row>
-									<label value="Name: " />
-									<textbox id="name" width="580px"
-										value="@{win$composer.current.name}" />
-								</row>
-							</rows>
-						</grid>
-						<button id="add" label="Add" />
-						<button id="update" label="Update" />
-						<button id="delete" label="Delete" />
-					</groupbox>
+<!-- 				<window id="win" -->
+<!-- 					apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
+<!-- 					<listbox id="box" multiple="true" -->
+<!-- 						model="@{win$composer.allZimmerKategorien, load-after='add.onClick, delete.onClick, update.onClick'}" -->
+<!-- 						selectedItem="@{win$composer.current}"> -->
+<!-- 						<listhead> -->
+<!-- 							<listheader label="ZimmerKategorie" /> -->
+<!-- 						</listhead> -->
+<!-- 						<listitem self="@{each='zimmerKategorie'}" -->
+<!-- 							value="@{zimmerKategorie}"> -->
+<!-- 							<listcell label="@{zimmerKategorie.name}" /> -->
+<!-- 						</listitem> -->
+<!-- 					</listbox> -->
+<!-- 					<groupbox> -->
+<!-- 						<caption label="ZimmerKategorie" /> -->
+<!-- 						<grid> -->
+<!-- 							<columns sizable="false"> -->
+<!-- 								<column width="200px" /> -->
+<!-- 								<column width="590px" /> -->
+<!-- 							</columns> -->
+<!-- 							<rows> -->
+<!-- 								<row> -->
+<!-- 									<label value="Name: " /> -->
+<!-- 									<textbox id="name" width="580px" -->
+<!-- 										value="@{win$composer.current.name}" /> -->
+<!-- 								</row> -->
+<!-- 							</rows> -->
+<!-- 						</grid> -->
+<!-- 						<button id="add" label="Add" /> -->
+<!-- 						<button id="update" label="Update" /> -->
+<!-- 						<button id="delete" label="Delete" /> -->
+<!-- 					</groupbox> -->
 
-				</window>
+<!-- 				</window> -->
 
 			</tabpanel>
 			<tabpanel>
