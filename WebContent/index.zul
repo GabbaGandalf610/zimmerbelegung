@@ -234,6 +234,27 @@
 									<listheader label="Datum" />
 								</listhead>
 							</listbox>
+							<groupbox>
+								<caption label="Aktuelle Buchung" />
+								<grid>
+									<columns sizable="false">
+										<column width="200px" />
+										<column width="590px" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Id: "/>
+											<label id="id"/>
+										</row>
+										<row>
+											<label value="Datum: "/>
+											<textbox id="datum"/>
+										</row>
+									</rows>
+								</grid>
+								<button id="adminBuchungUpdate" label="Update" />
+								<button id="adminBuchungDelete" label="Delete" />
+							</groupbox>
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
 						<tabpanel>This is panel E</tabpanel>
