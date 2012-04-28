@@ -79,4 +79,10 @@
 			<ref bean="buchungDao" />
 		</property>
 	</bean>
+	<bean id="adminZimmerManager" class="de.hdu.zimmerbelegung.manager.AdminZimmerManager">
+		<property name="zimmerDao">
+			<ref bean="zimmerDao" />
+		</property>
+	</bean>
+	
 </beans>

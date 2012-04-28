@@ -12,6 +12,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Zimmer {
+
+
+
 	@Id
 	private int id;
 	private String name;
@@ -41,8 +44,6 @@ public class Zimmer {
 		this.kurzbeschreibung = kurzbeschreibung;
 	}
 
-	public Zimmer() {
-	}
 	
 	public Zimmer(int id, String name, String kurzbeschreibung) {
 		super();
@@ -50,5 +51,11 @@ public class Zimmer {
 		this.name = name;
 		this.kurzbeschreibung = kurzbeschreibung;
 	}
+
+	public Zimmer() {
+
+	}
+
+
 
 }
