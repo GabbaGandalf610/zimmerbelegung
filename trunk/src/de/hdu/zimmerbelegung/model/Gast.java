@@ -7,12 +7,9 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Gast {
@@ -134,6 +131,10 @@ public class Gast {
 	}
 	public int getId() {
 		return id;
+	}
+	
+	public String toString() {
+		return this.vorname + " " + this.name;
 	}
 /*	@OneToMany(targetEntity=Belegung.class)
 	private Set<Belegung> belegungen;
