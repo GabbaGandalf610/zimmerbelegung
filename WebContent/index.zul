@@ -228,7 +228,7 @@
 
 
 						</tabpanel>
-<tabpanel id="zimmer"
+						<tabpanel id="zimmer"
 							apply="de.hdu.zimmerbelegung.ctrl.AdminZimmerCtrl">
 							<listbox id="adminZimmerList"
 								emptyMessage="Keine Zimmer vorhanden.">
@@ -256,8 +256,8 @@
 								<rows>
 									<row>
 										<combobox id="zimmerdet"
-											model="@load(vm.zimmer)"
-											selectedItem="@bind(vm.zimmer.id)" width="99%" />
+											model="@load(vm.zimmer)" selectedItem="@bind(vm.zimmer.id)"
+											width="99%" />
 										<textbox
 											value="@bind(vm.zimmer.name)" width="150px" />
 										<textbox
@@ -268,40 +268,15 @@
 								</rows>
 							</grid>
 						</tabpanel>
-						<tabpanel id="buchung"
-							apply="de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl">
-							<listbox id="adminBuchungList"
-								emptyMessage="Keine Buchungen vorhanden.">
-								<listhead sizable="true">
-									<listheader label="Id" />
-									<listheader label="Datum" />
-								</listhead>
-							</listbox>
-							<groupbox>
-								<caption label="Aktuelle Buchung" />
-								<grid>
-									<columns sizable="false">
-										<column width="200px" />
-										<column width="590px" />
-									</columns>
-									<rows>
-										<row>
-											<label value="Id: "/>
-											<label id="id"/>
-										</row>
-										<row>
-											<label value="Datum: "/>
-											<textbox id="datum"/>
-										</row>
-									</rows>
-								</grid>
-								<button id="adminBuchungUpdate" label="Update" />
-								<button id="adminBuchungDelete" label="Delete" />
-							</groupbox>
+						<tabpanel id="buchung">
+							<html>
+							<![CDATA[ <a href="adminBuchung.zul">weiter...</a>]]>
+							</html>
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
-						<tabpanel apply="de.hdu.zimmerbelegung.ctrl.AdminTagStatusCtrl">
-							
+						<tabpanel
+							apply="de.hdu.zimmerbelegung.ctrl.AdminTagStatusCtrl">
+
 							<listbox id="adminTagStatusList"
 								emptyMessage="Kein TagStatus vorhanden.">
 								<listhead sizable="true">
@@ -310,7 +285,8 @@
 								</listhead>
 							</listbox>
 						</tabpanel>
-						<tabpanel apply="de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl">
+						<tabpanel
+							apply="de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl">
 							<listbox id="adminZeitraumStatusList"
 								emptyMessage="Kein ZeitraumStatus vorhanden.">
 								<listhead sizable="true">

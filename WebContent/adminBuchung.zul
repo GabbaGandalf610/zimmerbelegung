@@ -1,0 +1,44 @@
+<window id="searchWin" title="Administration: Buchungen" border="normal" width="600px"
+	apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl')" >
+	<vbox hflex="true">
+<!-- 	So könnte eine Suche funktionieren: -->
+<!-- 		<hbox> -->
+<!-- 			Filter :  -->
+<!-- 			<textbox id="filterBox" value="@bind(vm.filter)" instant="true"/>  -->
+<!-- 			<button id="searchButton" label="Search" disabled="@bind(empty vm.filter)" onClick="@command('doSearch')"/> -->
+<!-- 		</hbox> -->
+		<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="200px" emptyMessage="Keine Buchungen vorhanden.">
+			<listhead>
+				<listheader label="Id"/>
+				<listheader label="Datum"/>
+				<listheader label="Zimmer"/>
+				<listheader label="Gast"/>
+			</listhead>
+			<template name="model" var="item">
+				<listitem>
+					<listcell label="@bind(item.id)"/>
+					<listcell label="@bind(item.datum) @converter('formatedDate', format='dd.MM.yyyy')"/>
+					<listcell label="@bind(item.zimmer)"/>
+					<listcell label="@bind(item.gast)"/>
+				</listitem>
+			</template>
+		</listbox>
+		<groupbox id="detailBox" visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
+			<caption label="Details zur Buchung:"/>
+			<grid hflex="true" >
+				<columns>
+					<column width="120px"/>
+					<column/>
+				</columns>
+				<rows>
+					<row>Id <label value="@bind(vm.selected.id)"/></row>
+					<row>Datum <textbox value="@bind(vm.selected.datum) @converter('formatedDate', format='dd.MM.yyyy')"/></row>
+					<row>Zimmer <label value="@bind(vm.selected.zimmer)"/></row>
+					<row>Gast <label value="@bind(vm.selected.gast)"/></row>
+					<row><button id="updateButton" label="Ändern" onClick="@command('doUpdate')" /><button id="deleteButton" label="Löschen" onClick="@command('doDelete')" /></row>
+				</rows>
+			</grid>
+			
+		</groupbox>
+	</vbox>
+</window>

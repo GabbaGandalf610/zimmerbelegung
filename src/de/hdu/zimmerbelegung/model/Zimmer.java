@@ -56,6 +56,9 @@ public class Zimmer {
 
 	}
 
+	public String toString() {
+		return this.name + " (" + this.kurzbeschreibung + ")";
+	}
 
 
 }
