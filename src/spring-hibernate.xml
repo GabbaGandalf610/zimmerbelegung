@@ -19,14 +19,19 @@
 			<value>zimmerbelegung</value>
 		</property>
 	</bean>
+
+	<!-- SessionFactory -->
 	<bean id="factory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
 		<property name="configLocation" value="hibernate.cfg.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+
+
 	<!-- DAOs -->
-	<bean id="belegungDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
+	<bean id="
+		belegungDao " class="de.hdu.zimmerbelegung.dao.BelegungDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
@@ -92,8 +97,8 @@
 			<ref bean="zeitraumStatusDao" />
 		</property>
 	</bean>
-	
-		<bean id="adminZimmerManager" class="de.hdu.zimmerbelegung.manager.AdminZimmerManager">
+
+	<bean id="ZimmerManager" class="de.hdu.zimmerbelegung.manager.ZimmerManager">
 		<property name="zimmerDao">
 			<ref bean="zimmerDao" />
 		</property>

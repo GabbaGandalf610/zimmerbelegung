@@ -1,0 +1,100 @@
+<!-- 						Zimmer -->
+
+							<window id="ZimmerWindow"
+								title="Administration: Zimmer" border="normal"
+								apply="org.zkoss.bind.BindComposer"
+								viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.ZimmerViewCtrl')"
+								width="100%" height="100%">
+								<borderlayout width="100%" height="100%"
+									sclass="mainLayout">
+									<center title="Übersicht"
+										flex="true">
+										<listbox sclass="zimmer-list"
+											model="@load(vm.zimmerList)"
+											selectedItem="@bind(vm.selectedZimmer)" vflex="true"
+											hflex="true" onSelect="@command('select')"
+											emptyMessage="Keine Zimmer vorhanden.">
+											<listhead>
+												<listheader
+													label="ZimmerID" />
+												<listheader
+													label="Zimmernummer" />
+												<listheader
+													label="Zimmerbeschreibung" />
+												<listheader
+													label="Zimmerpreis" />
+											</listhead>
+											<template name="model"
+												var="zimmer">
+												<listitem>
+													<listcell
+														label="@load(zimmer.id)" />
+													<listcell
+														label="@load(zimmer.zimmernummer)" />
+													<listcell
+														label="@load(zimmer.zimmerbeschreibung)" />
+													<listcell
+														label="@load(zimmer.zimmerpreis)" />
+												</listitem>
+											</template>
+										</listbox>
+									</center>
+									<south height="40%"
+										splittable="true" collapsible="true">
+										<grid sclass="editGrid"
+											form="@id('editor') @load(vm.previewZimmer) 
+ 				   @load(vm.previewZimmer, after={'create','preview'})   
+				   @save(vm.previewZimmer, before={'save','preview','update','delete'})">
+											<auxhead>
+												<auxheader colspan="5"
+													class="topic">
+													Administration
+												</auxheader>
+											</auxhead>
+											<columns>
+												<column label="ZimmerID"
+													align="center" />
+												<column
+													label="Zimmernummer" align="center" />
+												<column
+													label="Zimmerbeschreibung" align="center" />
+												<column
+													label="Zimmerpreis" align="center" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="@load(editor.id)" />
+
+													<textbox
+														id="field_zimmernummer" value="@bind(editor.zimmernummer)"
+														width="150px" onChange='@command("preview")' />
+													<textbox
+														id="field_zimmerbeschreibung"
+														value="@bind(editor.zimmerbeschreibung)" width="150px"
+														onChange='@command("preview")' />
+													<doublebox
+														id="field_zimmerpreis" value="@bind(editor.zimmerpreis)"
+														width="150px" onChange='@command("preview")' />
+												</row>
+												<row>
+													<cell colspan="5">
+														<button
+															label="CreateNew" onClick="@command('create')"
+															width="150px" height="30px" />
+														<button
+															label="Save" onClick="@command('save')" width="150px"
+															height="30px" disabled='@bind(!vm.addingNewItemMode)' />
+														<button
+															label="Update" onClick="@command('update')" width="150px"
+															height="30px" disabled='@bind(vm.addingNewItemMode)' />
+														<button
+															label="Delete" onClick="@command('delete')" width="150px"
+															height="30px" disabled='@bind(vm.addingNewItemMode)' />
+													</cell>
+												</row>
+											</rows>
+										</grid>
+									</south>
+								</borderlayout>
+							</window>
