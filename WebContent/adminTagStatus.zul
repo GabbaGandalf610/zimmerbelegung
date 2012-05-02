@@ -1,0 +1,39 @@
+<?page title="Administration: TagStatus" contentType="text/html;charset=UTF-8"?>
+<window id="adminTagStatus" title="Administration: TagStatus" border="normal" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminTagStatusCtrl')">
+	<vbox hflex="true">
+<!-- 	So könnte eine Suche funktionieren: -->
+<!-- 		<hbox> -->
+<!-- 			Filter :  -->
+<!-- 			<textbox id="filterBox" value="@bind(vm.filter)" instant="true"/>  -->
+<!-- 			<button id="searchButton" label="Search" disabled="@bind(empty vm.filter)" onClick="@command('doSearch')"/> -->
+<!-- 		</hbox> -->
+		<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="200px" emptyMessage="Keine TagStatus vorhanden.">
+			<listhead>
+				<listheader label="Id"/>
+				<listheader label="Name"/>
+			</listhead>
+			<template name="model" var="item">
+				<listitem>
+					<listcell label="@bind(item.id)"/>
+					<listcell label="@bind(item.name)"/>
+				</listitem>
+			</template>
+		</listbox>
+		<groupbox id="detailBox" visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
+			<caption label="Details zum TagStatusBuchung:"/>
+			<grid hflex="true" >
+				<columns>
+					<column width="120px"/>
+					<column/>
+				</columns>
+				<rows>
+					<row>Id <label value="@bind(vm.selected.id)"/></row>
+					<row>Name <textbox value="@bind(vm.selected.name)"/></row>
+					<row><button id="insertButton" label="Hinzufügen" onClick="@command('doInsert')" /></row>
+					<row><button id="updateButton" label="Ändern" onClick="@command('doUpdate')" /><button id="deleteButton" label="Löschen" onClick="@command('doDelete')" /></row>
+				</rows>
+			</grid>
+			
+		</groupbox>
+	</vbox>
+</window>

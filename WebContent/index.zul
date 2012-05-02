@@ -132,8 +132,14 @@
 							label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
-						<tabpanel id="gast"
-							apply="de.hdu.zimmerbelegung.ctrl.AdminGastCtrl">
+						<tabpanel id="gast">
+
+							<iframe id="iframeGast"
+								src="adminGast.zul" width="100%" height="100%"
+								style="border: 1px solid gray" />
+
+				
+
 							<listbox id="adminGastList"
 								emptyMessage="Keine Gäste vorhanden.">
 								<listhead sizable="true">
@@ -270,20 +276,19 @@
 						</tabpanel>
 						<tabpanel id="buchung">
 							<html>
-							<![CDATA[ <a href="adminBuchung.zul">weiter...</a>]]>
+								
+								<![CDATA[ <a
+								href="adminBuchung.zul">weiter...</a>]]>
+								
 							</html>
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
-						<tabpanel
-							apply="de.hdu.zimmerbelegung.ctrl.AdminTagStatusCtrl">
+						<tabpanel>
 
-							<listbox id="adminTagStatusList"
-								emptyMessage="Kein TagStatus vorhanden.">
-								<listhead sizable="true">
-									<listheader label="ID" />
-									<listheader label="Name" />
-								</listhead>
-							</listbox>
+					<iframe id="iframeTagStauts"
+								src="adminTagStatus.zul" width="100%" height="100%"
+								style="border: 1px solid gray" />
+
 						</tabpanel>
 						<tabpanel
 							apply="de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl">
