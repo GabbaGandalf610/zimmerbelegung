@@ -9,8 +9,8 @@ import de.hdu.zimmerbelegung.manager.AdminTagStatusManager;
 import de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager;
 import de.hdu.zimmerbelegung.manager.AdminBuchungManager;
 import de.hdu.zimmerbelegung.manager.AdminManager;
-import de.hdu.zimmerbelegung.manager.AdminZimmerManager;
 import de.hdu.zimmerbelegung.manager.BelegungManager;
+import de.hdu.zimmerbelegung.manager.ZimmerManager;
 
 public class ServiceLocator {
   private static ApplicationContext ctx;
@@ -34,8 +34,8 @@ public class ServiceLocator {
 		return (AdminManager) ctx.getBean("AdminManager",AdminManager.class);
 	}
     
-    public static AdminZimmerManager getAdminZimmerManager() {
-		return (AdminZimmerManager) ctx.getBean("adminZimmerManager",AdminZimmerManager.class);
+    public static ZimmerManager getZimmerManager() {
+		return (ZimmerManager) ctx.getBean("ZimmerManager",ZimmerManager.class);
 	}
 	    
     public static AdminBuchungManager getAdminBuchungManager() {

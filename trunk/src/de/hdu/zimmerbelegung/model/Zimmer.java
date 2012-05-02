@@ -8,57 +8,79 @@
 package de.hdu.zimmerbelegung.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Zimmer {
 
-
-
 	@Id
+	@GeneratedValue
 	private int id;
-	private String name;
-	private String kurzbeschreibung;
+	private int zimmernummer;
+	private String zimmerbeschreibung;
+	private float zimmerpreis;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getKurzbeschreibung() {
-		return kurzbeschreibung;
-	}
-
-	public void setKurzbeschreibung(String kurzbeschreibung) {
-		this.kurzbeschreibung = kurzbeschreibung;
-	}
-
-	
-	public Zimmer(int id, String name, String kurzbeschreibung) {
+	public Zimmer(int id, int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.kurzbeschreibung = kurzbeschreibung;
+		this.zimmernummer = zimmernummer;
+		this.zimmerbeschreibung = zimmerbeschreibung;
+		this.zimmerpreis = zimmerpreis;
 	}
+	
+	public Zimmer(int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
+		super();
+		this.zimmernummer = zimmernummer;
+		this.zimmerbeschreibung = zimmerbeschreibung;
+		this.zimmerpreis = zimmerpreis;
+	}
+	
+	
 
 	public Zimmer() {
 
 	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	public int getZimmernummer() {
+		return zimmernummer;
+	}
+
+	public void setZimmernummer(int zimmernummer) {
+		this.zimmernummer = zimmernummer;
+	}
+	
+	public String getZimmerbeschreibung() {
+		return zimmerbeschreibung;
+	}
+
+	public void setZimmerbeschreibung(String zimmerbeschreibung) {
+		this.zimmerbeschreibung = zimmerbeschreibung;
+	}
+
+	public float getZimmerpreis() {
+		return zimmerpreis;
+	}
+
+	public void setZimmerpreis(float zimmerpreis) {
+		this.zimmerpreis = zimmerpreis;
+	}
 
 	public String toString() {
-		return this.name + " (" + this.kurzbeschreibung + ")";
+		return this.id + this.zimmernummer + " (" + this.zimmerbeschreibung + ") " + this.zimmerpreis;
 	}
+
+
+
+
 
 
 }

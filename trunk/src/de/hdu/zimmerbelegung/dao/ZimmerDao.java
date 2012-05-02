@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class ZimmerDao extends HibernateDaoSupport {
-	public Zimmer get(int id) {
+	public Zimmer getId(int id) {
 		return getHibernateTemplate().load(Zimmer.class, id);
 	}
 
@@ -15,12 +15,16 @@ public class ZimmerDao extends HibernateDaoSupport {
 		getHibernateTemplate().saveOrUpdate(zimmer);
 	}
 
+	public void save(Zimmer zimmer){
+		getHibernateTemplate().save(zimmer);
+	}
+	
 	public void delete(Zimmer zimmer) {
 		getHibernateTemplate().delete(zimmer);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Zimmer> getAll() {
-		return getHibernateTemplate().find("FROM Zimmer");
+		return getHibernateTemplate().find("from Zimmer");
 	}
 }
