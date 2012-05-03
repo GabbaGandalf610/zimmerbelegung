@@ -3,7 +3,7 @@
 		<tabs>
 			<tab label="Verwaltung" />
 			<tab label="Drucken" />
-			<tab label="Administration" />
+			<tab id="adminTab" label="Administration" />
 			<tab label="Stefan Zimmerkat." />
 			<tab label="Layout Franz" />
 			<tab label="Gast AnlageForm Test" />
@@ -118,13 +118,14 @@
 			</tabpanel>
 
 			<tabpanel>Drucken</tabpanel>
-			<tabpanel style="color:#333399;">
+			<tabpanel style="color:#333399;"
+				fulfill="adminTab.onSelect">
 				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
 				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="tab_gast" label="Gäste" />
 						<tab id="tab_zimmer" label="Zimmer" />
-						<tab id="tab_buchung" label="Buchungen" />
+						<tab id="adminBuchungTab" label="Buchungen" />
 						<tab id="tab_reservierung"
 							label="Reservierungen" />
 						<tab id="tab_tagstatus" label="Tagstatus" />
@@ -339,22 +340,8 @@
 
 
 						</tabpanel>
-						<tabpanel id="buchung">
-							<html>
-
-
-
-
-
-								
-								<![CDATA[ <a
-								href="adminBuchung.zul">weiter...</a>]]>
-								
-								
-								
-
-								
-							</html>
+						<tabpanel fulfill="adminBuchungTab.onSelect">
+							<include src="adminBuchung.zul" />
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
 						<tabpanel>
