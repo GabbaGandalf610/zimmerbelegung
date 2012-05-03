@@ -1,55 +1,98 @@
 <?page title="Administration: Gäste" contentType="text/html;charset=UTF-8"?>
-<window id="adminGaeste" title="Administration: Gäste" border="normal" width="100%" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')" >>
+<window id="adminGaeste" title="Administration: Gäste" border="normal"
+	width="100%" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')">
 	<vbox hflex="true">
-<!-- 	So könnte eine Suche funktionieren: -->
-<!-- 		<hbox> -->
-<!-- 			Filter :  -->
-<!-- 			<textbox id="filterBox" value="@bind(vm.filter)" instant="true"/>  -->
-<!-- 			<button id="searchButton" label="Search" disabled="@bind(empty vm.filter)" onClick="@command('doSearch')"/> -->
-<!-- 		</hbox> -->
-		<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="200px" emptyMessage="Keine Gäste vorhanden.">
+		<listbox model="@load(vm.items)"
+			selectedItem="@bind(vm.gastSelected)" hflex="true" height="200px"
+			emptyMessage="Keine Gäste vorhanden.">
 			<listhead>
-				<listheader label="Name"/>
-				<listheader label="Vorname"/>
-				<listheader label="Straße"/>
-				<listheader label="PLZ"/>
-				<listheader label="Ort"/>
+				<listheader label="Name" />
+				<listheader label="Vorname" />
+				<listheader label="Straße" />
+				<listheader label="PLZ" />
+				<listheader label="Ort" />
 			</listhead>
 			<template name="model" var="item">
 				<listitem>
-					<listcell label="@bind(item.name)"/>
-					<listcell label="@bind(item.vorname)"/>
-					<listcell label="@bind(item.strasse)"/>
-					<listcell label="@bind(item.plz)"/>
-					<listcell label="@bind(item.ort)"/>
+					<listcell label="@bind(item.name)" />
+					<listcell label="@bind(item.vorname)" />
+					<listcell label="@bind(item.strasse)" />
+					<listcell label="@bind(item.plz)" />
+					<listcell label="@bind(item.ort)" />
 				</listitem>
 			</template>
 		</listbox>
-		<groupbox id="detailBox" visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
-			<caption label="Details zum Gast:"/>
-			<grid hflex="true" >
+		<hlayout>
+			<button id="newButton" label="Neu"
+				onClick="@command('doNew')" />
+			<button id="saveButton" label="Speichern"
+				onClick="@command('doSave')"
+				disabled="@bind(empty vm.gastSelected)" />
+			<button id="deleteButton" label="Löschen"
+				onClick="@command('doDelete')"
+				disabled="@bind(empty vm.gastSelected)" />
+		</hlayout>
+		<groupbox id="detailBox" visible="@bind(not empty vm.gastSelected)"
+			hflex="true" mold="3d">
+			<caption label="Details zum Gast:" />
+			<grid hflex="true">
 				<columns>
-					<column width="120px"/>
-					<column/>
+					<column width="120px" />
+					<column />
 				</columns>
 				<rows>
-				<row>ID <label value="@bind(vm.selected.id)"/></row>
-					<row>Name <textbox value="@bind(vm.selected.name)"/></row>
-					<row>Vorname <textbox value="@bind(vm.selected.vorname)"/></row>
-					<row>Strasse <textbox value="@bind(vm.selected.strasse)"/></row>
-					<row>PLZ <textbox value="@bind(vm.selected.plz)"/></row>
-					<row>Ort <textbox value="@bind(vm.selected.ort)"/></row>
-					<row>Land <textbox value="@bind(vm.selected.land)"/></row>
-					<row>Telefon <textbox value="@bind(vm.selected.telefon)"/></row>
-					<row>Mobil <textbox value="@bind(vm.selected.mobil)"/></row>
-					<row>Fax <textbox value="@bind(vm.selected.fax)"/></row>
-					<row>E-Mail <textbox value="@bind(vm.selected.email)"/></row>
-					<row>Kommentar <textbox value="@bind(vm.selected.kommentar)"/></row>
-					<row><button id="insertButton" label="Hinzufügen" onClick="@command('doInsert')" /></row>
-					<row><button id="updateButton" label="Ändern" onClick="@command('doUpdate')" /><button id="deleteButton" label="Löschen" onClick="@command('doDelete')" /></row>
+					<row>
+						ID
+						<label value="@bind(vm.gastSelected.id)" />
+					</row>
+					<row>
+						Name
+						<textbox value="@bind(vm.gastSelected.name)" />
+					</row>
+					<row>
+						Vorname
+						<textbox value="@bind(vm.gastSelected.vorname)" />
+					</row>
+					<row>
+						Strasse
+						<textbox value="@bind(vm.gastSelected.strasse)" />
+					</row>
+					<row>
+						PLZ
+						<textbox value="@bind(vm.gastSelected.plz)" />
+					</row>
+					<row>
+						Ort
+						<textbox value="@bind(vm.gastSelected.ort)" />
+					</row>
+					<row>
+						Land
+						<textbox value="@bind(vm.gastSelected.land)" />
+					</row>
+					<row>
+						Telefon
+						<textbox value="@bind(vm.gastSelected.telefon)" />
+					</row>
+					<row>
+						Mobil
+						<textbox value="@bind(vm.gastSelected.mobil)" />
+					</row>
+					<row>
+						Fax
+						<textbox value="@bind(vm.gastSelected.fax)" />
+					</row>
+					<row>
+						E-Mail
+						<textbox value="@bind(vm.gastSelected.email)" />
+					</row>
+					<row>
+						Kommentar
+						<textbox value="@bind(vm.gastSelected.kommentar)" />
+					</row>
 				</rows>
 			</grid>
-			
+
 		</groupbox>
 	</vbox>
 </window>

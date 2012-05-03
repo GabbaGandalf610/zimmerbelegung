@@ -7,9 +7,9 @@ import org.zkoss.bind.annotation.NotifyChangeDisabled;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
+import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
-import de.hdu.zimmerbelegung.manager.AdminBuchungManager;
 import de.hdu.zimmerbelegung.model.Buchung;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.model.Zimmer;
@@ -31,8 +31,8 @@ public class AdminBuchungCtrl {
 		if (buchungList == null) {
 			// Liste initialisieren
 			buchungList = new ListModelList<Buchung>();
-			AdminBuchungManager manager = ServiceLocator.getAdminBuchungManager();
-			buchungList.addAll(manager.getAll());
+			BuchungDao buchungDao = ServiceLocator.getBuchungDao();
+			buchungList.addAll(buchungDao.getAll());
 		}
 		return buchungList;
 	}
@@ -66,8 +66,8 @@ public class AdminBuchungCtrl {
 	@Command
 	@NotifyChange({ "buchungSelected", "buchungList" })
 	public void doSave() {
-		AdminBuchungManager manager = ServiceLocator.getAdminBuchungManager();
-		manager.update(buchungSelected);
+		BuchungDao buchungDao = ServiceLocator.getBuchungDao();
+		buchungDao.saveOrUpdate(buchungSelected);
 		if (!buchungList.contains(buchungSelected))
 			buchungList.add(buchungSelected);
 	}
@@ -75,8 +75,8 @@ public class AdminBuchungCtrl {
 	@Command
 	@NotifyChange({ "buchungSelected", "buchungList" })
 	public void doDelete() {
-		AdminBuchungManager manager = ServiceLocator.getAdminBuchungManager();
-		manager.delete(buchungSelected);
+		BuchungDao buchungDao = ServiceLocator.getBuchungDao();
+		buchungDao.delete(buchungSelected);
 		buchungList.remove(buchungSelected);
 		buchungSelected = null;
 	}
