@@ -29,14 +29,14 @@ public class AdminZimmerCtrl extends SelectorComposer<Component> {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		AdminZimmerManager manager = ServiceLocator.getAdminZimmerManager();
-		adminZimmerList.setModel(new ListModelList<Zimmer>(manager.getAllZimmer()));
+//		AdminZimmerManager manager = ServiceLocator.getAdminZimmerManager();
+//		adminZimmerList.setModel(new ListModelList<Zimmer>(manager.getAllZimmer()));
 		adminZimmerList.setItemRenderer(new ListitemRenderer<Zimmer>() {
         	public void render(Listitem item, Zimmer zimmer, int index)
     				throws Exception {
     	    	new Listcell(String.valueOf(zimmer.getId())).setParent(item);
-    	    	new Listcell(String.valueOf(zimmer.getName())).setParent(item);
-    	    	new Listcell(String.valueOf(zimmer.getKurzbeschreibung())).setParent(item);
+//    	    	new Listcell(String.valueOf(zimmer.getName())).setParent(item);
+//    	    	new Listcell(String.valueOf(zimmer.getKurzbeschreibung())).setParent(item);
     		}
 		});
 	}

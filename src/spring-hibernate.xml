@@ -73,18 +73,6 @@
 	<!-- <ref bean="belegungManager" /> -->
 	<!-- </property> -->
 	<!-- </bean> -->
-	<bean id="adminGastManager" class="de.hdu.zimmerbelegung.manager.AdminGastManager">
-		<property name="gastDao">
-			<ref bean="gastDao" />
-		</property>
-	</bean>
-
-	<bean id="adminBuchungManager" class="de.hdu.zimmerbelegung.manager.AdminBuchungManager">
-		<property name="buchungDao">
-			<ref bean="buchungDao" />
-		</property>
-	</bean>
-
 	<bean id="adminTagStatusManager" class="de.hdu.zimmerbelegung.manager.AdminTagStatusManager">
 		<property name="tagStatusDao">
 			<ref bean="tagStatusDao" />

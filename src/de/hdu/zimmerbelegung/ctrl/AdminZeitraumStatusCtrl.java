@@ -10,7 +10,6 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 
-import de.hdu.zimmerbelegung.manager.AdminGastManager;
 import de.hdu.zimmerbelegung.manager.AdminManager;
 import de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager;
 import de.hdu.zimmerbelegung.model.Gast;
