@@ -4,6 +4,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import de.hdu.zimmerbelegung.dao.BuchungDao;
+import de.hdu.zimmerbelegung.dao.GastDao;
+import de.hdu.zimmerbelegung.dao.ZimmerDao;
 import de.hdu.zimmerbelegung.manager.AdminGastManager;
 import de.hdu.zimmerbelegung.manager.AdminTagStatusManager;
 import de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager;
@@ -24,6 +27,18 @@ public class ServiceLocator {
 
     public static SessionFactory getSessionFactory() {
         return (SessionFactory) ctx.getBean("factory",SessionFactory.class);
+    }
+    
+    public static BuchungDao getBuchungDao() {
+        return (BuchungDao) ctx.getBean("buchungDao",BuchungDao.class);
+    }
+
+    public static GastDao getGastDao() {
+        return (GastDao) ctx.getBean("gastDao",GastDao.class);
+    }
+    
+    public static ZimmerDao getZimmerDao() {
+        return (ZimmerDao) ctx.getBean("zimmerDao",ZimmerDao.class);
     }
     
     public static BelegungManager getBuchungManager() {
