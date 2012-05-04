@@ -6,9 +6,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
+import de.hdu.zimmerbelegung.dao.TagStatusDao;
+import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
-import de.hdu.zimmerbelegung.manager.AdminTagStatusManager;
-import de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager;
 import de.hdu.zimmerbelegung.manager.AdminManager;
 import de.hdu.zimmerbelegung.manager.BelegungManager;
 
@@ -48,13 +48,12 @@ public class ServiceLocator {
 	}
 
 
-	public static AdminTagStatusManager getAdminTagStatusManager() {
-		return (AdminTagStatusManager) ctx.getBean("adminTagStatusManager",
-				AdminTagStatusManager.class);
+	public static TagStatusDao getTagStatusDao() {
+		return (TagStatusDao) ctx.getBean("tagStatusDao", TagStatusDao.class);
 	}
 
-	public static AdminZeitraumStatusManager getAdminZeitraumStatusManager() {
-		return (AdminZeitraumStatusManager) ctx.getBean(
-				"adminZeitraumStatusManager", AdminZeitraumStatusManager.class);
+	public static ZeitraumStatusDao getZeitraumStatusDao() {
+		return (ZeitraumStatusDao) ctx.getBean("zeitraumStatusDao", ZeitraumStatusDao.class);
+
 	}
 }

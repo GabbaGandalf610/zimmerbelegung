@@ -4,9 +4,6 @@
 			<tab label="Verwaltung" />
 			<tab label="Drucken" />
 			<tab id="adminTab" label="Administration" />
-			<tab label="Stefan Zimmerkat." />
-			<tab label="Layout Franz" />
-			<tab label="Gast AnlageForm Test" />
 		</tabs>
 		<tabpanels>
 			<tabpanel>
@@ -126,11 +123,9 @@
 						<tab id="adminGastTab" label="Gäste" />
 						<tab id="adminZimmerTab" label="Zimmer" />
 						<tab id="adminBuchungTab" label="Buchungen" />
-						<tab id="tab_reservierung"
-							label="Reservierungen" />
-						<tab id="tab_tagstatus" label="Tagstatus" />
-						<tab id="tab_zeitraumstatus"
-							label="Zeitraumstatus" />
+						<tab id="adminReservierungTab" label="Reservierungen" />
+						<tab id="adminTagStatusTab" label="Tagstatus" />
+						<tab id="adminZeitraumStatusTab" label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -145,204 +140,16 @@
 							<include src="adminBuchung.zul" />
 						</tabpanel>
 						<tabpanel>This is panel D</tabpanel>
-						<tabpanel>
-
-							<iframe id="iframeTagStauts"
-								src="adminTagStatus.zul" width="100%" height="100%"
-								style="border: 1px solid gray" />
-
+						<tabpanel fulfill="adminTagStatusTab.onSelect">
+							<include src="adminTagStatus.zul" />
 						</tabpanel>
-						<tabpanel>
-							<iframe id="iframeZeitraumStatus"
-								src="adminZeitraumStatus.zul" width="100%" height="100%"
-								style="border: 1px solid gray" />
+						<tabpanel fulfill="adminZeitraumStatusTab.onSelect">
+						<include src="adminZeitraumStatus.zul" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>
 			</tabpanel>
-			<tabpanel>
 
-
-			</tabpanel>
-			<tabpanel>
-				<tabbox width="600px" height="600px">
-					<tabs>
-						<tab label="Zimmerbelegung" />
-						<tab label="Belegungen bearbeiten" />
-					</tabs>
-					<tabpanels>
-						<tabpanel style="color:#336699;">
-
-							<label value="Zimmerbelegung" />
-
-							<grid width="570px">
-								<columns>
-									<column width="120px"
-										label="Attribut" />
-									<column hflex="1" label="Wert" />
-								</columns>
-								<rows>
-									<row>
-										Ankunft:
-										<datebox id="db0" cols="12"
-											format="short" onCreate="self.value = new Date()"
-											mold="rounded" />
-									</row>
-									<row>
-										bis:
-										<datebox id="db1" cols="12"
-											format="short" onCreate="self.value = new Date()"
-											mold="rounded" />
-									</row>
-									<row>
-										Kategorie
-										<vbox width="100%"
-											align="stretch">
-											<div height="5px" />
-											<radiogroup
-												id="zimmer_kategorie"
-												onCheck="choice1.value = self.selectedItem.label" />
-											<grid>
-												<rows>
-													<row spans="3">
-														Bitte eine
-														Zimmerkategorie
-														wählen!
-													</row>
-													<row>
-														<radio id="zk1"
-															label="Kategorie gold" radiogroup="zimmer_kategorie" />
-														<radio id="zk2"
-															label="Kategorie silber" radiogroup="zimmer_kategorie" />
-														<radio id="zk3"
-															label="Kategorie bronze" radiogroup="zimmer_kategorie" />
-													</row>
-												</rows>
-											</grid>
-										</vbox>
-
-									</row>
-									<row>
-										Stockwerk:
-										<tabbox id="tb" width="600px"
-											height="360px" mold="accordion">
-											<tabs>
-												<tab label="1. Stock" />
-												<tab
-													label="Erdgeschoss" />
-											</tabs>
-											<tabpanels>
-												<tabpanel>
-
-
-
-
-
-													Text zu 1. Stock
-												</tabpanel>
-												<tabpanel>
-													Text zu Erdgeschoss
-												</tabpanel>
-											</tabpanels>
-										</tabbox>
-									</row>
-								</rows>
-							</grid>
-
-
-						</tabpanel>
-						<tabpanel style="color:#333399;">
-
-							<label
-								value="Belegungen (Reservierungen/Buchungen) bearbeiten" />
-
-							<grid width="570px">
-								<columns>
-									<column width="120px"
-										label="Attribut" />
-									<column hflex="1" label="Wert" />
-								</columns>
-								<rows>
-									<row>
-										Ankunft:
-										<datebox id="db2" cols="12"
-											format="short" onCreate="self.value = new Date()"
-											mold="rounded" />
-									</row>
-									<row>
-										bis:
-										<datebox id="db3" cols="12"
-											format="short" onCreate="self.value = new Date()"
-											mold="rounded" />
-									</row>
-									<row>
-										Hotelzimmer:
-
-									</row>
-								</rows>
-							</grid>
-
-						</tabpanel>
-					</tabpanels>
-				</tabbox>
-
-			</tabpanel>
-			<tabpanel>
-				<window width="600px">
-					<grid>
-						<columns>
-							<column label="Beschreibung" />
-							<column width="80%" label="Daten" />
-						</columns>
-						<rows>
-							<row>
-								<label value="Name:" />
-								<textbox width="50%" />
-							</row>
-							<row>
-								<label value="Straße:" />
-								<textbox width="98%" />
-							</row>
-							<row>
-								<label value="PLZ:" />
-								<intbox width="98%" />
-							</row>
-							<row>
-								<label value="ORT:" />
-								<textbox width="98%" />
-							</row>
-							<row>
-								<label value="Land:" />
-								<textbox width="98%" />
-							</row>
-							<row>
-								<label value="Telefon:" />
-								<textbox width="98%" />
-							</row>
-							<row>
-								<label value="Mobiltelefon:" />
-								<textbox width="98%" />
-							</row>
-							<row>
-								<label value="Email :" />
-								<textbox id="emailtb" width="98%"
-									constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
-							</row>
-							<row>
-								<label value="Kommentar:" />
-								<textbox rows="4" width="98%" />
-							</row>
-							<row>
-								<hbox pack="center" width="100%">
-									<button label="Hotelgast anlegen"
-										onClick="doAnlegen()" />
-								</hbox>
-							</row>
-						</rows>
-					</grid>
-				</window>
-
-			</tabpanel>
 		</tabpanels>
 	</tabbox>
 

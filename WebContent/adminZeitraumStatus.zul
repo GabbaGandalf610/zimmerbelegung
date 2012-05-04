@@ -1,6 +1,6 @@
 <?page title="Administration: ZeitraumStatus" contentType="text/html;charset=UTF-8"?>
 <window id="adminZeitraumStatus" title="Administration: ZeitraumStatus"
-	border="normal" width="600px" apply="org.zkoss.bind.BindComposer"
+	border="normal" width="100%" apply="org.zkoss.bind.BindComposer"
 	viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl')">
 	<vbox hflex="true">
 		<!-- 	So könnte eine Suche funktionieren: -->
@@ -35,7 +35,7 @@
 		</hlayout>
 		<groupbox id="detailBox" visible="@bind(not empty vm.zeitraumStatusSelected)"
 			hflex="false" mold="3d">
-			<caption label="Details zum ZeitraumStatusBuchung:" />
+			<caption label="Details zum ZeitraumStatus:" />
 			<grid hflex="true">
 				<columns>
 					<column width="120px" />
