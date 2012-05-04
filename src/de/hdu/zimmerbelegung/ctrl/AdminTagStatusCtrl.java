@@ -11,56 +11,51 @@ import de.hdu.zimmerbelegung.manager.AdminTagStatusManager;
 import de.hdu.zimmerbelegung.model.TagStatus;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
-@SuppressWarnings("serial")
-public class AdminTagStatusCtrl extends GenericForwardComposer implements Composer  {
+//@SuppressWarnings("serial")
+public class AdminTagStatusCtrl {
 
-	
-	// the search condition
-	String filter;
-	// the search result
-	ListModelList<TagStatus> items;
+	ListModelList<TagStatus> tagStatusList;
 	// the selected item
-	TagStatus selected;
+	TagStatus tagStatusSelected;
 
-	public void setSelected(TagStatus selected) {
-		this.selected = selected;
+	public void setSelected(TagStatus tagStatusSelected) {
+		this.tagStatusSelected = tagStatusSelected;
 	}
 
-	public TagStatus getSelected() {
-		return selected;
+	public TagStatus getTagStatusSelected() {
+		return tagStatusSelected;
 	}
 
 	public ListModel<TagStatus> getItems() {
-		if (items == null) {
+		if (tagStatusList == null) {
 			// Liste initialisieren
-			items = new ListModelList<TagStatus>();
+			tagStatusList = new ListModelList<TagStatus>();
 			AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-			items.addAll(manager.getAllTagStatus());
+			tagStatusList.addAll(manager.getAllTagStatus());
 		}
-		return items;
+		return tagStatusList;
 	}
 
 	@Command
-	public void doInsert() {
-		TagStatus neuerTagStatus = new TagStatus();
-		items.add(neuerTagStatus);
-		selected = neuerTagStatus;
+	@NotifyChange({ "tagStatusSelected", "tagStatusList" })
+	public void doNew() {
+		tagStatusSelected = new TagStatus();
 	}
 
 	@Command
-	@NotifyChange({ "selected", "items" })
-	public void doUpdate() {
+	@NotifyChange({ "tagStatusSelected", "tagStatusList" })
+	public void doSave() {
 		AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-		manager.update(selected);
+		manager.update(tagStatusSelected);
 	}
 
 	@Command
-	@NotifyChange({ "selected", "items" })
+	@NotifyChange({ "tagStatusSelected", "tagStatusList" })
 	public void doDelete() {
 		AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-		manager.delete(selected);
-		items.remove(selected);
-		selected = null;
+		manager.delete(tagStatusSelected);
+		tagStatusList.remove(tagStatusSelected);
+		tagStatusSelected = null;
 	}
 	
 }
