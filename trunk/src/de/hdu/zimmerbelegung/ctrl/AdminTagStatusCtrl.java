@@ -2,12 +2,10 @@ package de.hdu.zimmerbelegung.ctrl;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.util.Composer;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
-import de.hdu.zimmerbelegung.manager.AdminTagStatusManager;
+import de.hdu.zimmerbelegung.dao.TagStatusDao;
 import de.hdu.zimmerbelegung.model.TagStatus;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
@@ -30,8 +28,8 @@ public class AdminTagStatusCtrl {
 		if (tagStatusList == null) {
 			// Liste initialisieren
 			tagStatusList = new ListModelList<TagStatus>();
-			AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-			tagStatusList.addAll(manager.getAllTagStatus());
+			TagStatusDao tagStatusDao = ServiceLocator.getTagStatusDao();
+			tagStatusList.addAll(tagStatusDao.getAll());
 		}
 		return tagStatusList;
 	}
@@ -45,15 +43,17 @@ public class AdminTagStatusCtrl {
 	@Command
 	@NotifyChange({ "tagStatusSelected", "tagStatusList" })
 	public void doSave() {
-		AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-		manager.update(tagStatusSelected);
+		TagStatusDao tagStatusDao = ServiceLocator.getTagStatusDao();
+		tagStatusDao.saveOrUpdate(tagStatusSelected);
+		if(!tagStatusList.contains(tagStatusSelected))
+			tagStatusList.add(tagStatusSelected);
 	}
 
 	@Command
 	@NotifyChange({ "tagStatusSelected", "tagStatusList" })
 	public void doDelete() {
-		AdminTagStatusManager manager = ServiceLocator.getAdminTagStatusManager();
-		manager.delete(tagStatusSelected);
+		TagStatusDao tagStatusDao = ServiceLocator.getTagStatusDao();
+		tagStatusDao.saveOrUpdate(tagStatusSelected);
 		tagStatusList.remove(tagStatusSelected);
 		tagStatusSelected = null;
 	}

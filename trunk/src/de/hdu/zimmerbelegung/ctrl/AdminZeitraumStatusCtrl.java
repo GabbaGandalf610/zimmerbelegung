@@ -2,19 +2,14 @@ package de.hdu.zimmerbelegung.ctrl;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
-
-import org.zkoss.zk.ui.util.Composer;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
-import de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager;
-import de.hdu.zimmerbelegung.model.TagStatus;
+import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.model.ZeitraumStatus;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 public class AdminZeitraumStatusCtrl{
-
 	
 	// the search condition
 	String filter;
@@ -35,8 +30,8 @@ public class AdminZeitraumStatusCtrl{
 		if (zeitraumStatusList == null) {
 			// Liste initialisieren
 			zeitraumStatusList = new ListModelList<ZeitraumStatus>();
-			AdminZeitraumStatusManager manager = ServiceLocator.getAdminZeitraumStatusManager();
-			zeitraumStatusList.addAll(manager.getAllZeitraumStatus());
+			ZeitraumStatusDao zeitraumStatusDao = ServiceLocator.getZeitraumStatusDao();
+			zeitraumStatusList.addAll(zeitraumStatusDao.getAll());
 		}
 		return zeitraumStatusList;
 	}
@@ -50,79 +45,19 @@ public class AdminZeitraumStatusCtrl{
 	@Command
 	@NotifyChange({ "zeitraumStatusSelected", "zeitraumStatusList" })
 	public void doSave() {
-		AdminZeitraumStatusManager manager = ServiceLocator.getAdminZeitraumStatusManager();
-		manager.update(zeitraumStatusSelected);
+		ZeitraumStatusDao zeitraumStatusDao = ServiceLocator.getZeitraumStatusDao();
+		zeitraumStatusDao.saveOrUpdate(zeitraumStatusSelected);
+		if (!zeitraumStatusList.contains(zeitraumStatusSelected))
+			zeitraumStatusList.add(zeitraumStatusSelected);
 	}
 
 	@Command
 	@NotifyChange({ "zeitraumStatusSelected", "zeitraumStatusList" })
 	public void doDelete() {
-		AdminZeitraumStatusManager manager = ServiceLocator.getAdminZeitraumStatusManager();
-		manager.delete(zeitraumStatusSelected);
+		ZeitraumStatusDao zeitraumStatusDao = ServiceLocator.getZeitraumStatusDao();
+		zeitraumStatusDao.delete(zeitraumStatusSelected);
 		zeitraumStatusList.remove(zeitraumStatusSelected);
 		zeitraumStatusSelected = null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Wire
-//	private Listbox adminZeitraumStatusList;
-//	
-//    @Override
-//    public void doAfterCompose(Component comp) throws Exception {
-//        super.doAfterCompose(comp);
-//        AdminZeitraumStatusManager manager = ServiceLocator.getAdminZeitraumStatusManager();
-//        adminZeitraumStatusList.setModel(new ListModelList<ZeitraumStatus>(manager.getAllZeitraumStatus()));
-//        adminZeitraumStatusList.setItemRenderer(new ListitemRenderer<ZeitraumStatus>() {
-//        	public void render(Listitem item, ZeitraumStatus zeitraumStatus, int index)
-//    				throws Exception {
-//    	    	new Listcell(String.valueOf(zeitraumStatus.getId())).setParent(item);
-//    	    	new Listcell(String.valueOf(zeitraumStatus.getName())).setParent(item);
-//    		}	  	
-//        });
-//    }
-	
-	
-	
-	
-//	private ZeitraumStatus zeitraumStatus;
-//	
-//	public ZeitraumStatus getZeitraumStatus() {
-//		return zeitraumStatus;
-//	}
-//
-//	public void setZeitraumStatus(ZeitraumStatus zeitraumStatus) {
-//		this.zeitraumStatus = zeitraumStatus;
-//	}
-//
-//	public void onClick$addZeitraumStatus() {
-//		if (null == zeitraumStatus) {
-//			zeitraumStatus = new ZeitraumStatus();
-//		}
-//		AdminManager manager = ServiceLocator.getAdminManager();
-//		manager.add(zeitraumStatus);
-//		zeitraumStatus = null;
-//	}
-//
-//	public void onClick$updateZeitraumStatus() {
-//		AdminManager manager = ServiceLocator.getAdminManager();
-//		manager.update(zeitraumStatus);
-//		zeitraumStatus = null;
-//	}
-//
-//	public void onClick$deleteZeitraumStatus() {
-//		AdminManager manager = ServiceLocator.getAdminManager();
-//		manager.delete(zeitraumStatus);
-//		zeitraumStatus = null;
-//	}
 	
 }
