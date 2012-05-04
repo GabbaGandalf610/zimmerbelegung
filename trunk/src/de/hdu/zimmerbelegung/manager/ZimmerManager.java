@@ -15,10 +15,6 @@ public class ZimmerManager {
 	public List<Zimmer> getAllZimmer() {
 		return zimmerDao.getAll();
 	}
-	
-	public void add(Zimmer zimmer) {
-		zimmerDao.save(zimmer);
-	}
 
 	public void update(Zimmer zimmer) {
 		zimmerDao.saveOrUpdate(zimmer);

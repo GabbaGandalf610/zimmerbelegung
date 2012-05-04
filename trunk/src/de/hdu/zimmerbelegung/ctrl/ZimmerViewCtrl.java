@@ -1,11 +1,10 @@
 package de.hdu.zimmerbelegung.ctrl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zul.ListModel;
+import org.zkoss.zul.ListModelList;
 
 import de.hdu.zimmerbelegung.manager.ZimmerManager;
 import de.hdu.zimmerbelegung.model.Zimmer;
@@ -13,93 +12,70 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 public class ZimmerViewCtrl {
 
-	private List<Zimmer> allZimmer;
-	private Zimmer selectedZimmer;
-	private Zimmer previewZimmer;
+	ListModelList<Zimmer> items;
+	Zimmer selected;
 	private boolean addingNewItemMode = false;
+	private boolean showSpecialButtons = true;
 
 	@Init
-	public void init() {
-		// Preparing data
-		ZimmerManager manager = ServiceLocator.getZimmerManager();
-		allZimmer = new ArrayList<Zimmer>(manager.getAllZimmer());
-		// Erstes Element wird beim Start ausgewählt
-		if (allZimmer.isEmpty() != true){
-			setSelectedZimmer(allZimmer.get(0));
-			copyToTemp(selectedZimmer);
+	public ListModel<Zimmer> getItems() {
+		if (items == null) {
+			items = new ListModelList<Zimmer>();
+			ZimmerManager manager = ServiceLocator.getZimmerManager();
+			items.addAll(manager.getAllZimmer());
 		}
-		
-	}
-
-	@Command("select")
-	@NotifyChange({ "previewZimmer", "addingNewItemMode" })
-	public void selectZimmer() {
-		copyToTemp(selectedZimmer);
-		setAddingNewItemMode(false);
+		return items;
 	}
 
 	@Command("create")
-	@NotifyChange({ "previewZimmer", "addingNewItemMode" })
+	@NotifyChange({ "selected", "addingNewItemMode", "showSpecialButtons" })
 	public void createNewZimmer() {
-		setPreviewZimmer(getInitializedZimmer());
+		setSelected(getInitializedZimmer());
 		setAddingNewItemMode(true);
+		setShowSpecialButtons(false);
 	}
 
-	@Command("preview")
-	@NotifyChange("previewZimmer")
-	public void previewEditingZimmer() {
+	@Command("selected")
+	@NotifyChange("selected")
+	public void selectedEditingZimmer() {
 	}
 
 	@Command("save")
-	@NotifyChange({ "zimmerList", "addingNewItemMode" })
+	@NotifyChange({ "items", "addingNewItemMode", "showSpecialButtons" })
 	public void addNewZimmer() {
-		getZimmerList().add(previewZimmer);
 		ZimmerManager manager = ServiceLocator.getZimmerManager();
-		manager.add(previewZimmer);
-		setSelectedZimmer(previewZimmer);
-		setAddingNewItemMode(false);
-	}
-
-	@Command("update")
-	@NotifyChange({ "selectedZimmer", "zimmerList", "previewZimmer",
-			"addingNewItemMode" })
-	public void updateSelectedZimmer() {
-		saveToSelected(previewZimmer);
-		ZimmerManager manager = ServiceLocator.getZimmerManager();
-		manager.update(previewZimmer);
-		setSelectedZimmer(previewZimmer);
+		manager.update(selected);
+		if (addingNewItemMode == true) {
+			items.add(selected);
+			setAddingNewItemMode(false);
+			setShowSpecialButtons(true);
+		}
 	}
 
 	@Command("delete")
-	@NotifyChange({ "selectedZimmer", "zimmerList", "previewZimmer",
-			"addingNewItemMode" })
-	public void removeSelectedZimmer() {
-		getZimmerList().remove(selectedZimmer);
+	@NotifyChange({ "selected", "items", "showSpecialButtons"  })
+	public void removeSelected() {
 		ZimmerManager manager = ServiceLocator.getZimmerManager();
-		manager.delete(selectedZimmer);
-		setSelectedZimmer(null);
-		setPreviewZimmer(getInitializedZimmer());
-		setAddingNewItemMode(true);
+		manager.delete(selected);
+		items.remove(selected);
+		selected = null;
 	}
 
-	public List<Zimmer> getZimmerList() {
-		return allZimmer;
+	@Command("cancel")
+	@NotifyChange({ "selected", "items", "addingNewItemMode",
+			"showSpecialButtons" })
+	public void cancelSelected() {
+		setAddingNewItemMode(false);
+		setShowSpecialButtons(true);
+		selected = null;
 	}
 
-	public void setSelectedZimmer(Zimmer selected) {
-		this.selectedZimmer = selected;
+	public void setSelected(Zimmer selected) {
+		this.selected = selected;
 	}
 
-	public Zimmer getSelectedZimmer() {
-		return selectedZimmer;
-	}
-
-	public Zimmer getPreviewZimmer() {
-		return previewZimmer;
-	}
-
-	public void setPreviewZimmer(Zimmer previewZimmer) {
-		this.previewZimmer = previewZimmer;
+	public Zimmer getSelected() {
+		return selected;
 	}
 
 	public boolean isAddingNewItemMode() {
@@ -110,20 +86,16 @@ public class ZimmerViewCtrl {
 		this.addingNewItemMode = addingNewItemMode;
 	}
 
+	public boolean isShowSpecialButtons() {
+		return showSpecialButtons;
+	}
+
+	public void setShowSpecialButtons(boolean showSpecialButtons) {
+		this.showSpecialButtons = showSpecialButtons;
+	}
+
 	private Zimmer getInitializedZimmer() {
-		return new Zimmer(9999, "Muster", 9999);
-	}
-
-	private void saveToSelected(Zimmer zimmer) {
-		selectedZimmer.setId(zimmer.getId());
-		selectedZimmer.setZimmernummer(zimmer.getZimmernummer());
-		selectedZimmer.setZimmerbeschreibung(zimmer.getZimmerbeschreibung());
-		selectedZimmer.setZimmerpreis(zimmer.getZimmerpreis());
-	}
-
-	private void copyToTemp(Zimmer zimmer) {
-		previewZimmer = new Zimmer(zimmer.getId(), zimmer.getZimmernummer(),
-				zimmer.getZimmerbeschreibung(), zimmer.getZimmerpreis());
+		return new Zimmer(0, "", 0);
 	}
 
 }
