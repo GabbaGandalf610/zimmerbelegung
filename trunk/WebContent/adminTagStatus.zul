@@ -7,7 +7,7 @@
 <!-- 			<textbox id="filterBox" value="@bind(vm.filter)" instant="true"/>  -->
 <!-- 			<button id="searchButton" label="Search" disabled="@bind(empty vm.filter)" onClick="@command('doSearch')"/> -->
 <!-- 		</hbox> -->
-		<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="200px" emptyMessage="Keine TagStatus vorhanden.">
+		<listbox model="@load(vm.items)" selectedItem="@bind(vm.tagStatusSelected)" hflex="false" height="200px" emptyMessage="Keine TagStatus vorhanden.">
 			<listhead>
 				<listheader label="Id"/>
 				<listheader label="Name"/>
@@ -19,7 +19,17 @@
 				</listitem>
 			</template>
 		</listbox>
-		<groupbox id="detailBox" visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
+				<hlayout>
+			<button id="newButton" label="Neu"
+				onClick="@command('doNew')" />
+			<button id="saveButton" label="Speichern"
+				onClick="@command('doSave')"
+				disabled="@bind(empty vm.tagStatusSelected)" />
+			<button id="deleteButton" label="Löschen"
+				onClick="@command('doDelete')"
+				disabled="@bind(empty vm.tagStatusSelected)" />
+		</hlayout>
+		<groupbox id="detailBox" visible="@bind(not empty vm.tagStatusSelected)" hflex="false" mold="3d">
 			<caption label="Details zum TagStatusBuchung:"/>
 			<grid hflex="true" >
 				<columns>
@@ -27,10 +37,8 @@
 					<column/>
 				</columns>
 				<rows>
-					<row>Id <label value="@bind(vm.selected.id)"/></row>
-					<row>Name <textbox value="@bind(vm.selected.name)"/></row>
-					<row><button id="insertButton" label="Hinzufügen" onClick="@command('doInsert')" /></row>
-					<row><button id="updateButton" label="Ändern" onClick="@command('doUpdate')" /><button id="deleteButton" label="Löschen" onClick="@command('doDelete')" /></row>
+					<row>Id <label value="@bind(vm.tagStatusSelected.id)"/></row>
+					<row>Name <textbox value="@bind(vm.tagStatusSelected.name)"/></row>
 				</rows>
 			</grid>
 			

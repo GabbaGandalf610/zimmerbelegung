@@ -253,15 +253,10 @@
 								style="border: 1px solid gray" />
 
 						</tabpanel>
-						<tabpanel
-							apply="de.hdu.zimmerbelegung.ctrl.AdminZeitraumStatusCtrl">
-							<listbox id="adminZeitraumStatusList"
-								emptyMessage="Kein ZeitraumStatus vorhanden.">
-								<listhead sizable="true">
-									<listheader label="ID" />
-									<listheader label="Name" />
-								</listhead>
-							</listbox>
+						<tabpanel>
+					<iframe id="iframeZeitraumStatus"
+								src="adminZeitraumStatus.zul" width="100%" height="100%"
+								style="border: 1px solid gray" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>
