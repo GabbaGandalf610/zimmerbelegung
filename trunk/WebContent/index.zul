@@ -124,7 +124,7 @@
 				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="adminGastTab" label="Gäste" />
-						<tab id="tab_zimmer" label="Zimmer" />
+						<tab id="adminZimmerTab" label="Zimmer" />
 						<tab id="adminBuchungTab" label="Buchungen" />
 						<tab id="tab_reservierung"
 							label="Reservierungen" />
@@ -137,114 +137,10 @@
 							<include src="adminGast.zul" />
 						</tabpanel>
 
-						<tabpanel id="ZimmerAdministration">
-
-							<!-- 						Zimmer -->
-
-							<window id="ZimmerWindow"
-								title="Administration: Zimmer" border="normal"
-								apply="org.zkoss.bind.BindComposer"
-								viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.ZimmerViewCtrl')"
-								width="100%" height="100%">
-								<borderlayout width="100%" height="100%"
-									sclass="mainLayout">
-									<center title="Übersicht"
-										flex="true">
-										<listbox sclass="zimmer-list"
-											model="@load(vm.items)" selectedItem="@bind(vm.selected)"
-											vflex="true" hflex="true"
-											emptyMessage="Keine Zimmer vorhanden.">
-
-											<listhead>
-												<listheader
-													label="ZimmerID" />
-												<listheader
-													label="Zimmernummer" />
-												<listheader
-													label="Zimmerbeschreibung" />
-												<listheader
-													label="Zimmerpreis" />
-											</listhead>
-											<template name="model"
-												var="item">
-												<listitem>
-													<listcell
-														label="@load(item.id)" />
-													<listcell
-														label="@load(item.zimmernummer)" />
-													<listcell
-														label="@load(item.zimmerbeschreibung)" />
-													<listcell
-														label="@load(item.zimmerpreis)" />
-												</listitem>
-											</template>
-										</listbox>
-									</center>
-									<south height="40%"
-										splittable="true" collapsible="true">
-										<grid sclass="editGrid"
-											form="@id('editor') @load(vm.selected) 
- 				   @load(vm.selected, after={'create', 'selected'})   
-				   @save(vm.selected, before={'save','update','delete'})">
-											<auxhead>
-												<auxheader colspan="5"
-													class="topic">
-													Administration
-												</auxheader>
-											</auxhead>
-											<columns>
-												<column label="ZimmerID"
-													align="center" />
-												<column
-													label="Zimmernummer" align="center" />
-												<column
-													label="Zimmerbeschreibung" align="center" />
-												<column
-													label="Zimmerpreis" align="center" />
-											</columns>
-											<rows>
-												<row>
-													<label
-														value="@bind(editor.id)" />
-
-													<textbox
-														value="@bind(editor.zimmernummer)" width="150px" />
-
-													<textbox
-														value="@bind(editor.zimmerbeschreibung)" width="150px" />
-
-													<doublebox
-														value="@bind(editor.zimmerpreis)" width="150px" />
-
-												</row>
-												<row>
-													<cell colspan="5">
-														<button
-															label="Neu" onClick="@command('create')" width="150px"
-															height="30px" />
-														<button
-															label="Speichern" onClick="@command('save')"
-															width="150px" height="30px" />
-														<button
-															label="Löschen" onClick="@command('delete')"
-															width="150px" height="30px"
-															visible='@bind(vm.showSpecialButtons)'
-															disabled='@bind(vm.addingNewItemMode)' />
-														<button
-															label="Abbrechen" onClick="@command('cancel')"
-															width="150px" height="30px"
-															visible='@bind(vm.addingNewItemMode)'
-															disabled='@bind(vm.showSpecialButtons)' />
-													</cell>
-												</row>
-											</rows>
-										</grid>
-									</south>
-								</borderlayout>
-							</window>
-
-
+						<tabpanel fulfill="adminZimmerTab.onSelect">
+							<include src="adminZimmer.zul" />
 						</tabpanel>
+
 						<tabpanel fulfill="adminBuchungTab.onSelect">
 							<include src="adminBuchung.zul" />
 						</tabpanel>

@@ -1,8 +1,7 @@
-<!-- 						Zimmer -->
 <zk>
 	<window id="ZimmerWindow" title="Administration: Zimmer"
 		border="normal" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.ZimmerViewCtrl')"
+		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminZimmerCtrl')"
 		width="100%" height="100%">
 		<borderlayout width="100%" height="100%" sclass="mainLayout">
 			<center title="Übersicht" flex="true">
