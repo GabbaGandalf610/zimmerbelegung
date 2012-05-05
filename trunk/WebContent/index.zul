@@ -10,21 +10,25 @@
 
 
 				<borderlayout width="100%" height="100%">
-					<north flex="true">
-						<div>
-							Datum von:
-							<datebox id="von" cols="12" format="medium"
-								onCreate="self.value = new Date()" mold="rounded" />
-							bis:
-							<datebox id="bis" cols="12" format="medium"
-								onCreate="self.value = new Date()" mold="rounded" />
+					<!-- 					<north flex="true"> -->
+					<!-- 						<div> -->
 
-						</div>
-					</north>
+					<!-- 						</div> -->
+					<!-- 					</north> -->
 
 					<center flex="true">
 						<borderlayout>
-							<center>Center - Center (Oben)</center>
+							<center><div>
+								Datum von:
+								<datebox id="von" cols="12"
+									format="medium" onCreate="self.value = new Date()"
+									mold="rounded" />
+								bis:
+								<datebox id="bis" cols="12"
+									format="medium" onCreate="self.value = new Date()"
+									mold="rounded" />
+									</div>
+							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="25%">
 								Center - South (Unten)
