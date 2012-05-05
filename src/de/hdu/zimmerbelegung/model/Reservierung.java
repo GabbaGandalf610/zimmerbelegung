@@ -15,6 +15,11 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Reservierung")
 public class Reservierung extends Belegung {
+	
+	public Reservierung(){
+		super();
+	}
+	
 	public Reservierung(Date datum, Zimmer zimmer, Gast gast) {
 		super(datum, zimmer, gast);
 	}

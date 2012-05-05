@@ -1,9 +1,7 @@
 package de.hdu.zimmerbelegung.dao;
 
 import java.util.List;
-
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import de.hdu.zimmerbelegung.model.Reservierung;
 
 public class ReservierungDao extends HibernateDaoSupport {

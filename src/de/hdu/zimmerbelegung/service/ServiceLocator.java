@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
+import de.hdu.zimmerbelegung.dao.ReservierungDao;
 import de.hdu.zimmerbelegung.dao.TagStatusDao;
 import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
@@ -39,8 +40,11 @@ public class ServiceLocator {
 	}
 
 	public static BelegungManager getBuchungManager() {
-		return (BelegungManager) ctx.getBean("buchungManager",
-				BelegungManager.class);
+		return (BelegungManager) ctx.getBean("buchungManager", BelegungManager.class);
+	}
+	
+	public static ReservierungDao getReservierungDao() {
+		return (ReservierungDao) ctx.getBean("reservierungDao", ReservierungDao.class);
 	}
 
 	public static AdminManager getAdminManager() {

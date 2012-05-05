@@ -1,0 +1,87 @@
+<?page title="Administration: Reservierungen" contentType="text/html;charset=UTF-8"?>
+<window id="adminReservierungen" title="Administration: Reservierungen"
+	border="normal" width="100%" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminReservierungCtrl')">
+	<vbox hflex="true">
+		<listbox model="@load(vm.reservierungList)"
+			selectedItem="@save(vm.reservierungSelected)" hflex="true"
+			height="200px" emptyMessage="Keine Reservierungen vorhanden.">
+			<listhead>
+				<listheader label="Id" />
+				<listheader label="Datum" />
+				<listheader label="Zimmer" />
+				<listheader label="Gast" />
+			</listhead>
+			<template name="model" var="item">
+				<listitem>
+					<listcell label="@bind(item.id)" />
+					<listcell
+						label="@bind(item.datum) @converter('formatedDate', format='dd.MM.yyyy')" />
+					<listcell label="@bind(item.zimmer)" />
+					<listcell label="@bind(item.gast)" />
+				</listitem>
+			</template>
+		</listbox>
+		<hlayout>
+			<button id="newButton" label="Neu"
+				onClick="@command('doNew')" />
+			<button id="saveButton" label="Speichern"
+				onClick="@command('doSave')"
+				disabled="@bind(empty vm.reservierungSelected)" />
+			<button id="deleteButton" label="Löschen"
+				onClick="@command('doDelete')"
+				disabled="@bind(empty vm.reservierungSelected)" />
+		</hlayout>
+		<groupbox id="detailBox"
+			visible="@bind(not empty vm.reservierungSelected)" hflex="true"
+			mold="3d">
+			<caption label="Details zur Reservierung:" />
+			<grid hflex="true">
+				<columns>
+					<column width="120px" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						Id
+						<label
+							value="@bind(vm.reservierungSelected.id)" />
+					</row>
+					<row>
+						Datum
+						<textbox
+							value="@bind(vm.reservierungSelected.datum) @converter('formatedDate', format='dd.MM.yyyy')" />
+					</row>
+					<row>
+						Zimmer
+						<combobox model="@load(vm.zimmerList)"
+							width="150px" mold="rounded"
+							value="@load(vm.reservierungSelected.zimmer)"
+							selectedItem="@bind(vm.reservierungSelected.zimmer)"
+							autodrop="true">
+							<template name="model" var="item">
+								<comboitem label="@load(item)"
+									description="@load(item.id)" />
+							</template>
+						</combobox>
+					</row>
+					<row>
+						Gast
+						<combobox model="@load(vm.gastList)"
+							width="150px" mold="rounded"
+							value="@load(vm.reservierungSelected.gast)"
+							selectedItem="@bind(vm.reservierungSelected.gast)"
+							autodrop="true">
+							<template name="model" var="item">
+								<comboitem label="@load(item)"
+									description="@load(item.id)" />
+							</template>
+						</combobox>
+					</row>
+					<row></row>
+				</rows>
+			</grid>
+
+		</groupbox>
+	</vbox>
+</window>
