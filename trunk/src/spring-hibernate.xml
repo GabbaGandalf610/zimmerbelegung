@@ -28,7 +28,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-
 	<!-- DAOs -->
 	<bean id="
 		belegungDao " class="de.hdu.zimmerbelegung.dao.BelegungDao">
@@ -66,25 +65,5 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
-
-	<!-- Manager -->
-	<!-- <bean id="belegungManager" class="de.hdu.zimmerbelegung.manager.BelegungManager"> -->
-	<!-- <property name="belegungManager"> -->
-	<!-- <ref bean="belegungManager" /> -->
-	<!-- </property> -->
-	<!-- </bean> -->
-<!-- 	<bean id="adminTagStatusManager" class="de.hdu.zimmerbelegung.manager.AdminTagStatusManager"> -->
-<!-- 		<property name="tagStatusDao"> -->
-<!-- 			<ref bean="tagStatusDao" /> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
-
-<!-- 	<bean id="adminZeitraumStatusManager" -->
-<!-- 		class="de.hdu.zimmerbelegung.manager.AdminZeitraumStatusManager"> -->
-<!-- 		<property name="zeitraumStatusDao"> -->
-<!-- 			<ref bean="zeitraumStatusDao" /> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
-
 
 </beans>

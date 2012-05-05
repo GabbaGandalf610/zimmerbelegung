@@ -123,9 +123,11 @@
 						<tab id="adminGastTab" label="Gäste" />
 						<tab id="adminZimmerTab" label="Zimmer" />
 						<tab id="adminBuchungTab" label="Buchungen" />
-						<tab id="adminReservierungTab" label="Reservierungen" />
+						<tab id="adminReservierungTab"
+							label="Reservierungen" />
 						<tab id="adminTagStatusTab" label="Tagstatus" />
-						<tab id="adminZeitraumStatusTab" label="Zeitraumstatus" />
+						<tab id="adminZeitraumStatusTab"
+							label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -139,12 +141,17 @@
 						<tabpanel fulfill="adminBuchungTab.onSelect">
 							<include src="adminBuchung.zul" />
 						</tabpanel>
-						<tabpanel>This is panel D</tabpanel>
-						<tabpanel fulfill="adminTagStatusTab.onSelect">
+						<tabpanel
+							fulfill="adminReservierungTab.onSelect">
+							<include src="adminReservierung.zul" />
+						</tabpanel>
+						<tabpanel
+							fulfill="adminTagStatusTab.onSelect">
 							<include src="adminTagStatus.zul" />
 						</tabpanel>
-						<tabpanel fulfill="adminZeitraumStatusTab.onSelect">
-						<include src="adminZeitraumStatus.zul" />
+						<tabpanel
+							fulfill="adminZeitraumStatusTab.onSelect">
+							<include src="adminZeitraumStatus.zul" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>
