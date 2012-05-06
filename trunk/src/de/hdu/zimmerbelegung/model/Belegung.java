@@ -18,6 +18,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Art", discriminatorType = DiscriminatorType.STRING)
@@ -25,6 +29,7 @@ public abstract class Belegung {
 	@Id
 	@GeneratedValue
 	private int id;
+	@DateTimeFormat(pattern="MM/dd/yyyy") 
 	private Date datum;
 	@ManyToOne(targetEntity = Zimmer.class)
 	private Zimmer zimmer;

@@ -1,82 +1,100 @@
-<window id="searchWin" title="Administration: Buchungen" border="normal"
-	width="100%" apply="org.zkoss.bind.BindComposer"
-	viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl')">
-	<vbox hflex="true">
-		<listbox model="@load(vm.buchungList)"
-			selectedItem="@save(vm.buchungSelected)" hflex="true" height="200px"
-			emptyMessage="Keine Buchungen vorhanden.">
-			<listhead>
-				<listheader label="Id" />
-				<listheader label="Datum" />
-				<listheader label="Zimmer" />
-				<listheader label="Gast" />
-			</listhead>
-			<template name="model" var="item">
-				<listitem>
-					<listcell label="@bind(item.id)" />
-					<listcell
-						label="@bind(item.datum) @converter('formatedDate', format='dd.MM.yyyy')" />
-					<listcell label="@bind(item.zimmer)" />
-					<listcell label="@bind(item.gast)" />
-				</listitem>
-			</template>
-		</listbox>
-		<hlayout>
-			<button id="newButton" label="Neu"
-				onClick="@command('doNew')" />
-			<button id="saveButton" label="Speichern"
-				onClick="@command('doSave')"
-				disabled="@bind(empty vm.buchungSelected)" />
-			<button id="deleteButton" label="Löschen"
-				onClick="@command('doDelete')"
-				disabled="@bind(empty vm.buchungSelected)" />
-		</hlayout>
-		<groupbox id="detailBox"
-			visible="@bind(not empty vm.buchungSelected)" hflex="true"
-			mold="3d">
-			<caption label="Details zur Buchung:" />
-			<grid hflex="true">
+<zk>
+	<borderlayout width="100%" height="100%" sclass="mainLayout"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminBuchungCtrl')">
+		<center title="Übersicht" border="normal">
+			<listbox model="@load(vm.buchungList)"
+				selectedItem="@save(vm.buchungSelected)" vflex="true" hflex="true"
+				emptyMessage="Keine Buchungen vorhanden.">
+				<listhead>
+					<listheader label="Id" />
+					<listheader label="Datum" />
+					<listheader label="Zimmer" />
+					<listheader label="Gast" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem>
+						<listcell label="@bind(item.id)" />
+						<listcell
+							label="@bind(item.datum) @converter('formatedDate', format='dd.MM.yyyy')" />
+						<listcell label="@bind(item.zimmer)" />
+						<listcell label="@bind(item.gast)" />
+					</listitem>
+				</template>
+			</listbox>
+		</center>
+
+		<south height="50%" flex="true" collapsible="true"
+			title="Übersicht" open="@load(not empty vm.buchungSelected)">
+			<grid>
 				<columns>
-					<column width="120px" />
-					<column />
+					<column width="140px" />
+					<column width="360px" />
 				</columns>
 				<rows>
 					<row>
-						Id
+						<label value="BuchungID" />
 						<label value="@bind(vm.buchungSelected.id)" />
 					</row>
 					<row>
-						Datum
-						<textbox
-							value="@bind(vm.buchungSelected.datum) @converter('formatedDate', format='dd.MM.yyyy')" />
+						<label value="Datum (von - bis)" />
+						<cell>
+							<datebox cols="12" format="medium"
+								value="@bind(vm.buchungSelected.datum)"
+								onCreate="self.value = new Date()" mold="rounded"
+								disabled="@load(empty vm.buchungSelected)" tooltiptext="von" />
+							<space />
+							<datebox cols="12" format="medium"
+								value="@bind(vm.buchungSelected.datum)"
+								onCreate="self.value = new Date()" mold="rounded"
+								disabled="@load(empty vm.buchungSelected)" tooltiptext="bis " />
+						</cell>
 					</row>
 					<row>
-						Zimmer
+						<label value="Zimmer" />
 						<combobox model="@load(vm.zimmerList)"
-							width="150px" mold="rounded" value="@load(vm.buchungSelected.zimmer)"
-							selectedItem="@bind(vm.buchungSelected.zimmer)"
-							autodrop="true">
+							width="150px" mold="rounded"
+							value="@load(vm.buchungSelected.zimmer)"
+							selectedItem="@bind(vm.buchungSelected.zimmer)" autodrop="true"
+							disabled="@load(empty vm.buchungSelected)">
 							<template name="model" var="item">
-								<comboitem label="@load(item)"
-									description="@load(item.id)" />
+								<comboitem
+									label="@load(item.zimmernummer)" description="@load(item)" />
 							</template>
 						</combobox>
 					</row>
 					<row>
-						Gast
+						<label value="Gast" />
 						<combobox model="@load(vm.gastList)"
-							width="150px" mold="rounded" value="@load(vm.buchungSelected.gast)"
-							selectedItem="@bind(vm.buchungSelected.gast)" autodrop="true">
+							width="250px" mold="rounded"
+							value="@load(vm.buchungSelected.gast)"
+							selectedItem="@bind(vm.buchungSelected.gast)" autodrop="true"
+							disabled="@load(empty vm.buchungSelected)">
 							<template name="model" var="item">
-								<comboitem label="@load(item)"
-									description="@load(item.id)" />
+								<comboitem label="@load(item.id)"
+									 description="@load(item)" />
 							</template>
 						</combobox>
 					</row>
-					<row></row>
-				</rows>
-			</grid>
 
-		</groupbox>
-	</vbox>
-</window>
+					<row>
+						<cell colspan="2">
+							<button id="newButton" label="Neu"
+								onClick="@command('doNew')" />
+							<button id="saveButton" label="Speichern"
+								onClick="@command('doSave')"
+								disabled="@bind(empty vm.buchungSelected)" />
+							<button id="deleteButton" label="Löschen"
+								onClick="@command('doDelete')"
+								disabled="@bind(empty vm.buchungSelected)" />
+						</cell>
+					</row>
+				</rows>
+
+
+
+			</grid>
+		</south>
+	</borderlayout>
+
+</zk>

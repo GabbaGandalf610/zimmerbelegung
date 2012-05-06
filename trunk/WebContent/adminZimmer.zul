@@ -39,17 +39,20 @@
 					<row>
 						<label value="Zimmernr" />
 						<textbox
-							value="@bind(vm.zimmerSelected.zimmernummer)" />
+							value="@bind(vm.zimmerSelected.zimmernummer)"
+							disabled="@load(empty vm.zimmerSelected)" />
 					</row>
 					<row>
 						<label value="Zimmerbeschreibung" />
 						<textbox
-							value="@bind(vm.zimmerSelected.zimmerbeschreibung)" />
+							value="@bind(vm.zimmerSelected.zimmerbeschreibung)"
+							disabled="@load(empty vm.zimmerSelected)" />
 					</row>
 					<row>
 						<label value="Zimmerpreis" />
 						<doublebox format="#.##"
-							value="@bind(vm.zimmerSelected.zimmerpreis)" />
+							value="@bind(vm.zimmerSelected.zimmerpreis)"
+							disabled="@load(empty vm.zimmerSelected)" />
 					</row>
 
 					<row>
