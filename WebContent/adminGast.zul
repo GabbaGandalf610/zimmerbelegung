@@ -24,8 +24,8 @@
 				</template>
 			</listbox>
 		</center>
-		
-		<south height="50%" flex="true" collapsible="true"
+
+		<south height="60%" flex="true" collapsible="true"
 			title="Details zum Gast:" open="@load(not empty vm.gastSelected)">
 			<grid>
 				<columns>
@@ -43,16 +43,17 @@
 						</cell>
 						<cell>
 							<textbox value="@bind(vm.gastSelected.name)"
-								tooltiptext="Name" />
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Name" />
 							<space />
 							<textbox
-								value="@bind(vm.gastSelected.vorname)" tooltiptext="Vorname" />
+								value="@bind(vm.gastSelected.vorname)"
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Vorname" />
 						</cell>
 					</row>
 					<row>
 						<label width="100%" value="Strasse" />
 						<textbox value="@bind(vm.gastSelected.strasse)"
-							tooltiptext="Strasse" />
+							disabled="@load(empty vm.gastSelected)" tooltiptext="Strasse" />
 					</row>
 					<row>
 						<cell>
@@ -60,15 +61,18 @@
 						</cell>
 						<cell>
 							<textbox value="@bind(vm.gastSelected.plz)"
-								width="60px" tooltiptext="PLZ" />
+								disabled="@load(empty vm.gastSelected)" width="60px"
+								tooltiptext="PLZ" />
 							<space />
 							<textbox value="@bind(vm.gastSelected.ort)"
-								width="140px" tooltiptext="Ort" />
+								disabled="@load(empty vm.gastSelected)" width="140px"
+								tooltiptext="Ort" />
 						</cell>
 					</row>
 					<row>
 						<label value="Land" />
-						<textbox value="@bind(vm.gastSelected.land)" />
+						<textbox value="@bind(vm.gastSelected.land)"
+							disabled="@load(empty vm.gastSelected)" />
 					</row>
 					<row>
 						<cell>
@@ -76,25 +80,30 @@
 						</cell>
 						<cell>
 							<textbox
-								value="@bind(vm.gastSelected.telefon)" />
+								value="@bind(vm.gastSelected.telefon)"
+								disabled="@load(empty vm.gastSelected)" />
 							<space />
 							<textbox
-								value="@bind(vm.gastSelected.mobil)" />
+								value="@bind(vm.gastSelected.mobil)"
+								disabled="@load(empty vm.gastSelected)" />
 						</cell>
 					</row>
 					<row>
 						<label value="Fax" />
-						<textbox value="@bind(vm.gastSelected.fax)" />
+						<textbox value="@bind(vm.gastSelected.fax)"
+							disabled="@load(empty vm.gastSelected)" />
 					</row>
 					<row>
 						<label value="E-Mail" />
 						<textbox value="@bind(vm.gastSelected.email)"
+							disabled="@load(empty vm.gastSelected)"
 							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
 					</row>
 					<row>
 						<label value="Kommentar" />
 						<textbox
-							value="@bind(vm.gastSelected.kommentar)" />
+							value="@bind(vm.gastSelected.kommentar)"
+							disabled="@load(empty vm.gastSelected)" rows="4" width="100%" />
 					</row>
 
 					<row>
