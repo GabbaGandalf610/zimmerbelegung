@@ -1,98 +1,116 @@
-<?page title="Administration: Gäste" contentType="text/html;charset=UTF-8"?>
-<window id="adminGaeste" title="Administration: Gäste" border="normal"
-	width="100%" apply="org.zkoss.bind.BindComposer"
-	viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')">
-	<vbox hflex="true">
-		<listbox model="@load(vm.items)"
-			selectedItem="@bind(vm.gastSelected)" hflex="true" height="200px"
-			emptyMessage="Keine Gäste vorhanden.">
-			<listhead>
-				<listheader label="Name" />
-				<listheader label="Vorname" />
-				<listheader label="Straße" />
-				<listheader label="PLZ" />
-				<listheader label="Ort" />
-			</listhead>
-			<template name="model" var="item">
-				<listitem>
-					<listcell label="@bind(item.name)" />
-					<listcell label="@bind(item.vorname)" />
-					<listcell label="@bind(item.strasse)" />
-					<listcell label="@bind(item.plz)" />
-					<listcell label="@bind(item.ort)" />
-				</listitem>
-			</template>
-		</listbox>
-		<hlayout>
-			<button id="newButton" label="Neu"
-				onClick="@command('doNew')" />
-			<button id="saveButton" label="Speichern"
-				onClick="@command('doSave')"
-				disabled="@bind(empty vm.gastSelected)" />
-			<button id="deleteButton" label="Löschen"
-				onClick="@command('doDelete')"
-				disabled="@bind(empty vm.gastSelected)" />
-		</hlayout>
-		<groupbox id="detailBox" visible="@bind(not empty vm.gastSelected)"
-			hflex="true" mold="3d">
-			<caption label="Details zum Gast:" />
-			<grid hflex="true">
+<zk>
+	<borderlayout width="100%" height="100%" sclass="mainLayout"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')">
+		<center title="Übersicht" border="normal">
+			<listbox model="@load(vm.items)"
+				selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
+				emptyMessage="Keine Gäste vorhanden.">
+				<listhead>
+					<listheader label="Name" />
+					<listheader label="Vorname" />
+					<listheader label="Straße" />
+					<listheader label="PLZ" />
+					<listheader label="Ort" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem>
+						<listcell label="@bind(item.name)" />
+						<listcell label="@bind(item.vorname)" />
+						<listcell label="@bind(item.strasse)" />
+						<listcell label="@bind(item.plz)" />
+						<listcell label="@bind(item.ort)" />
+					</listitem>
+				</template>
+			</listbox>
+		</center>
+		
+		<south height="50%" flex="true" collapsible="true"
+			title="Details zum Gast:" open="@load(not empty vm.gastSelected)">
+			<grid>
 				<columns>
 					<column width="120px" />
-					<column />
+					<column width="360px" />
 				</columns>
 				<rows>
 					<row>
-						ID
+						<label value="Gastnr" />
 						<label value="@bind(vm.gastSelected.id)" />
 					</row>
 					<row>
-						Name
-						<textbox value="@bind(vm.gastSelected.name)" />
+						<cell>
+							<label value="Name / Vorname" width="60px" />
+						</cell>
+						<cell>
+							<textbox value="@bind(vm.gastSelected.name)"
+								tooltiptext="Name" />
+							<space />
+							<textbox
+								value="@bind(vm.gastSelected.vorname)" tooltiptext="Vorname" />
+						</cell>
 					</row>
 					<row>
-						Vorname
-						<textbox value="@bind(vm.gastSelected.vorname)" />
+						<label width="100%" value="Strasse" />
+						<textbox value="@bind(vm.gastSelected.strasse)"
+							tooltiptext="Strasse" />
 					</row>
 					<row>
-						Strasse
-						<textbox value="@bind(vm.gastSelected.strasse)" />
+						<cell>
+							<label value="PLZ / Ort" width="60px" />
+						</cell>
+						<cell>
+							<textbox value="@bind(vm.gastSelected.plz)"
+								width="60px" tooltiptext="PLZ" />
+							<space />
+							<textbox value="@bind(vm.gastSelected.ort)"
+								width="140px" tooltiptext="Ort" />
+						</cell>
 					</row>
 					<row>
-						PLZ
-						<textbox value="@bind(vm.gastSelected.plz)" />
-					</row>
-					<row>
-						Ort
-						<textbox value="@bind(vm.gastSelected.ort)" />
-					</row>
-					<row>
-						Land
+						<label value="Land" />
 						<textbox value="@bind(vm.gastSelected.land)" />
 					</row>
 					<row>
-						Telefon
-						<textbox value="@bind(vm.gastSelected.telefon)" />
+						<cell>
+							<label value="Telefon / Mobiltel." />
+						</cell>
+						<cell>
+							<textbox
+								value="@bind(vm.gastSelected.telefon)" />
+							<space />
+							<textbox
+								value="@bind(vm.gastSelected.mobil)" />
+						</cell>
 					</row>
 					<row>
-						Mobil
-						<textbox value="@bind(vm.gastSelected.mobil)" />
-					</row>
-					<row>
-						Fax
+						<label value="Fax" />
 						<textbox value="@bind(vm.gastSelected.fax)" />
 					</row>
 					<row>
-						E-Mail
-						<textbox value="@bind(vm.gastSelected.email)" />
+						<label value="E-Mail" />
+						<textbox value="@bind(vm.gastSelected.email)"
+							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
 					</row>
 					<row>
-						Kommentar
-						<textbox value="@bind(vm.gastSelected.kommentar)" />
+						<label value="Kommentar" />
+						<textbox
+							value="@bind(vm.gastSelected.kommentar)" />
+					</row>
+
+					<row>
+						<cell colspan="2">
+							<button id="newButton" label="Neu"
+								onClick="@command('doNew')" />
+							<button id="saveButton" label="Speichern"
+								onClick="@command('doSave')"
+								disabled="@bind(empty vm.gastSelected)" />
+							<button id="deleteButton" label="Löschen"
+								onClick="@command('doDelete')"
+								disabled="@bind(empty vm.gastSelected)" />
+						</cell>
 					</row>
 				</rows>
 			</grid>
-
-		</groupbox>
-	</vbox>
-</window>
+		</south>
+	</borderlayout>
+</zk>
