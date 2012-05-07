@@ -4,12 +4,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import de.hdu.zimmerbelegung.dao.BelegungDao;
 import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ReservierungDao;
 import de.hdu.zimmerbelegung.dao.TagStatusDao;
 import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
+import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
 import de.hdu.zimmerbelegung.manager.AdminManager;
 import de.hdu.zimmerbelegung.manager.BelegungManager;
 
@@ -27,6 +29,10 @@ public class ServiceLocator {
 		return (SessionFactory) ctx.getBean("factory", SessionFactory.class);
 	}
 
+	public static BelegungDao getBelegungDao() {
+		return (BelegungDao) ctx.getBean("belegungDao", BelegungDao.class);
+	}
+	
 	public static BuchungDao getBuchungDao() {
 		return (BuchungDao) ctx.getBean("buchungDao", BuchungDao.class);
 	}
@@ -58,6 +64,9 @@ public class ServiceLocator {
 
 	public static ZeitraumStatusDao getZeitraumStatusDao() {
 		return (ZeitraumStatusDao) ctx.getBean("zeitraumStatusDao", ZeitraumStatusDao.class);
-
+	}
+	
+	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
+		return (ZimmerZeitraumBelegungDto) ctx.getBean("zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
 	}
 }

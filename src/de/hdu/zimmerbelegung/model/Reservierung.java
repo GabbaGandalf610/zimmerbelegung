@@ -12,6 +12,8 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.joda.time.LocalDate;
+
 @Entity
 @DiscriminatorValue("Reservierung")
 public class Reservierung extends Belegung {
@@ -20,7 +22,7 @@ public class Reservierung extends Belegung {
 		super();
 	}
 	
-	public Reservierung(Date datum, Zimmer zimmer, Gast gast) {
+	public Reservierung(LocalDate datum, Zimmer zimmer, Gast gast) {
 		super(datum, zimmer, gast);
 	}
 }

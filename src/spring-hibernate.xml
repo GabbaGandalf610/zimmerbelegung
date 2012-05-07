@@ -65,5 +65,10 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
+	<bean id="zimmerZeitraumBelegungDto" class="de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
 
 </beans>

@@ -21,6 +21,6 @@ public class ZimmerDao extends HibernateDaoSupport {
 
 	@SuppressWarnings("unchecked")
 	public List<Zimmer> getAll() {
-		return getHibernateTemplate().find("from Zimmer");
+		return getHibernateTemplate().find("from Zimmer order by zimmernummer");
 	}
 }
