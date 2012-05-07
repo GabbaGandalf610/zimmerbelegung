@@ -37,10 +37,10 @@
 						<label value="@bind(vm.reservierungSelected.id)" />
 					</row>
 					<row>
-						<label value="Datum (von - bis)" />
+						<label value="Datum" />
 						<cell>
 							<datebox cols="12" format="medium"
-								value="@bind(vm.reservierungSelected.datum)"
+								value="@bind(vm.reservierungSelected.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								onCreate="self.value = new Date()" mold="rounded"
 								disabled="@load(empty vm.reservierungSelected)" tooltiptext="Datum" />
 						</cell>

@@ -16,7 +16,7 @@
 					<listitem>
 						<listcell label="@bind(item.id)" />
 						<listcell
-							label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter'" />
+							label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" />
 						<listcell label="@bind(item.zimmer)" />
 						<listcell label="@bind(item.gast)" />
 					</listitem>
@@ -37,10 +37,10 @@
 						<label value="@bind(vm.buchungSelected.id)" />
 					</row>
 					<row>
-						<label value="Datum (von - bis)" />
+						<label value="Datum" />
 						<cell>
 							<datebox cols="12" format="medium"
-								value="@bind(vm.buchungSelected.datum)"
+								value="@bind(vm.buchungSelected.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								onCreate="self.value = new Date()" mold="rounded"
 								disabled="@load(empty vm.buchungSelected)" tooltiptext="Datum" />
 						</cell>
