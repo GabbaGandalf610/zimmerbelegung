@@ -6,28 +6,43 @@
 			<tab id="adminTab" label="Administration" />
 		</tabs>
 		<tabpanels>
-			<tabpanel>
-
+			<tabpanel id="verwaltungTab"
+				apply="org.zkoss.bind.BindComposer"
+				viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.IndexCtrl')">
 
 				<borderlayout width="100%" height="100%">
-					<!-- 					<north flex="true"> -->
-					<!-- 						<div> -->
-
-					<!-- 						</div> -->
-					<!-- 					</north> -->
-
+					<north flex="true">
+						<div>
+							Datum von:
+							<datebox id="von" cols="12" format="medium"
+								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+								mold="rounded" />
+							bis:
+							<datebox id="bis" cols="12" format="medium"
+								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+								mold="rounded" />
+						</div>
+					</north>
 					<center flex="true">
 						<borderlayout>
-							<center><div>
-								Datum von:
-								<datebox id="von" cols="12"
-									format="medium" onCreate="self.value = new Date()"
-									mold="rounded" />
-								bis:
-								<datebox id="bis" cols="12"
-									format="medium" onCreate="self.value = new Date()"
-									mold="rounded" />
-									</div>
+							<center>
+								<listbox
+									model="@load(vm.zimmerZeitraumBelegungList)"
+									selectedItem="@save(vm.zimmerZeitraumBelegungSelected)"
+									vflex="true" hflex="true">
+									<listhead>
+										<listheader label="Zimmer" />
+										<listheader label="Status" />
+									</listhead>
+									<template name="model" var="item">
+										<listitem>
+											<listcell
+												label="@bind(item.zimmer)" />
+											<listcell
+												label="@bind(item.status)" />
+										</listitem>
+									</template>
+								</listbox>
 							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="25%">
@@ -121,7 +136,6 @@
 			<tabpanel>Drucken</tabpanel>
 			<tabpanel style="color:#333399;"
 				fulfill="adminTab.onSelect">
-				<!-- 				apply="de.hdu.zimmerbelegung.ctrl.AdminCtrl"> -->
 				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="adminGastTab" label="Gäste" />

@@ -17,20 +17,23 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
-
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Art", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "Belegung", uniqueConstraints = { @UniqueConstraint(columnNames = {"datum", "zimmer_id"}) })
 public abstract class Belegung {
 	@Id
 	@GeneratedValue
 	private int id;
-	@DateTimeFormat(pattern="MM/dd/yyyy") 
-	private Date datum;
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+	private LocalDate datum;
 	@ManyToOne(targetEntity = Zimmer.class)
 	private Zimmer zimmer;
 	@ManyToOne(targetEntity = Gast.class)
@@ -39,18 +42,18 @@ public abstract class Belegung {
 	public Belegung() {
 	}
 
-	public Belegung(Date datum, Zimmer zimmer, Gast gast) {
+	public Belegung(LocalDate datum, Zimmer zimmer, Gast gast) {
 		super();
 		this.datum = datum;
 		this.zimmer = zimmer;
 		this.gast = gast;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 
