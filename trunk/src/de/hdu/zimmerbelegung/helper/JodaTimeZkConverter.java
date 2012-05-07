@@ -35,6 +35,7 @@ public class JodaTimeZkConverter implements Converter {
      */	
 	@Override
 	public Object coerceToUi(Object val, Component comp, BindContext ctx) {
+		//TODO: Hier muss noch das Datum angemessen formatiert werden
 		if (val == null)
 			return val;
 		if (val instanceof LocalDate) {

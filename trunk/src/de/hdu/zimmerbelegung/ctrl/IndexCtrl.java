@@ -1,8 +1,5 @@
 package de.hdu.zimmerbelegung.ctrl;
 
-import java.util.Date;
-
-import org.jfree.data.DataUtilities;
 import org.joda.time.LocalDate;
 import org.zkoss.bind.annotation.NotifyChangeDisabled;
 import org.zkoss.zul.ListModel;
@@ -33,14 +30,15 @@ public class IndexCtrl {
 
 	@NotifyChangeDisabled
 	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
-		if (zimmerZeitraumBelegungList == null) {
-			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
-			ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
-					.getZimmerZeitraumBelegungDto();
-			zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
-					datumVon, datumBis));
-		}
-		return zimmerZeitraumBelegungList;
+//		if (zimmerZeitraumBelegungList == null) {
+//			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
+//			ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
+//					.getZimmerZeitraumBelegungDto();
+//			zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
+//					datumVon, datumBis));
+//		}
+//		return zimmerZeitraumBelegungList;
+		return new ListModelList<ZimmerZeitraumBelegung>();
 	}
 
 	// @Command
