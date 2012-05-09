@@ -77,10 +77,12 @@ public class Zimmer {
 	public String toString() {
 		return this.id + this.zimmernummer + " (" + this.zimmerbeschreibung + ") " + this.zimmerpreis;
 	}
-
-
-
-
-
-
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Zimmer) {
+			return this.id == ((Zimmer)obj).id;
+		} else {
+			return super.equals(obj);
+		}
+	}
 }

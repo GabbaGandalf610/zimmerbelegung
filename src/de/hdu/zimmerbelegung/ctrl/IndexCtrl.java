@@ -1,7 +1,7 @@
 package de.hdu.zimmerbelegung.ctrl;
 
 import org.joda.time.LocalDate;
-import org.zkoss.bind.annotation.NotifyChangeDisabled;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
@@ -18,27 +18,45 @@ public class IndexCtrl {
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
+
+	@NotifyChange("zimmerZeitraumBelegungList")
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
+
 	public LocalDate getDatumBis() {
 		return datumBis;
 	}
+
+	@NotifyChange("zimmerZeitraumBelegungList")
 	public void setDatumBis(LocalDate datumBis) {
 		this.datumBis = datumBis;
 	}
 
-	@NotifyChangeDisabled
+	public ZimmerZeitraumBelegung getZimmerZeitraumBelegungSelected() {
+		return zimmerZeitraumBelegungSelected;
+	}
+
+	public void setZimmerZeitraumBelegungSelected(
+			ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected) {
+		this.zimmerZeitraumBelegungSelected = zimmerZeitraumBelegungSelected;
+		System.out.println(zimmerZeitraumBelegungSelected.getZimmer());
+	}
+
 	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
-//		if (zimmerZeitraumBelegungList == null) {
-//			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
-//			ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
-//					.getZimmerZeitraumBelegungDto();
-//			zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
-//					datumVon, datumBis));
-//		}
-//		return zimmerZeitraumBelegungList;
-		return new ListModelList<ZimmerZeitraumBelegung>();
+		if (zimmerZeitraumBelegungList == null) {
+			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
+		} else {
+			zimmerZeitraumBelegungList.clear();
+		}
+		ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
+				.getZimmerZeitraumBelegungDto();
+		zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
+				datumVon, datumBis));
+		for (ZimmerZeitraumBelegung element : zimmerZeitraumBelegungList) {
+			System.out.println(element.getZimmer());
+		}
+		return zimmerZeitraumBelegungList;
 	}
 
 	// @Command

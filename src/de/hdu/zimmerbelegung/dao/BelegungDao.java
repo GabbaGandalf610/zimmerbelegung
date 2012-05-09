@@ -27,10 +27,14 @@ public class BelegungDao extends HibernateDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Belegung> getAllInZeitraum(LocalDate vonDatum, LocalDate bisDatum) {
+	public List<Belegung> getAllInZeitraum(LocalDate vonDatum,
+			LocalDate bisDatum) {
 		Object[] params = new Object[] { vonDatum, bisDatum };
-		return getHibernateTemplate()
-				.find("from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
-						params);
+		// TODO
+		// return getHibernateTemplate()
+		// .find("from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
+		// params);
+		return getHibernateTemplate().find(
+				"from Belegung where datum between ? and ?", params);
 	}
 }
