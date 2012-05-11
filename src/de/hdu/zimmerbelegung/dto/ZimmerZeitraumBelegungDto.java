@@ -64,8 +64,8 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 					zimmerZeitraumBelegung.addDatumStats(new DatumStatus(
 							tmpDatum, Status.FREI));
 				}
-				zimmerZeitraumBelegungList.add(zimmerZeitraumBelegung);
 			}
+			zimmerZeitraumBelegungList.add(zimmerZeitraumBelegung);
 		}
 		return zimmerZeitraumBelegungList;
 	}

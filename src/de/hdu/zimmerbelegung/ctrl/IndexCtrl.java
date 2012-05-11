@@ -41,14 +41,16 @@ public class IndexCtrl {
 	public ZimmerZeitraumBelegung getZimmerZeitraumBelegungSelected() {
 		return zimmerZeitraumBelegungSelected;
 	}
-
+	
 	public void setZimmerZeitraumBelegungSelected(
 			ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected) {
 		this.zimmerZeitraumBelegungSelected = zimmerZeitraumBelegungSelected;
 		System.out.println(zimmerZeitraumBelegungSelected.getZimmer());
 	}
 
+	@NotifyChange("zimmerZeitraumBelegungSelected")
 	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
+		zimmerZeitraumBelegungSelected = null;
 		if (zimmerZeitraumBelegungList == null) {
 			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
 		} else {
