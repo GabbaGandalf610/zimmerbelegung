@@ -1,6 +1,5 @@
 package de.hdu.zimmerbelegung.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -30,11 +29,8 @@ public class BelegungDao extends HibernateDaoSupport {
 	public List<Belegung> getAllInZeitraum(LocalDate vonDatum,
 			LocalDate bisDatum) {
 		Object[] params = new Object[] { vonDatum, bisDatum };
-		// TODO
-		// return getHibernateTemplate()
-		// .find("from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
-		// params);
-		return getHibernateTemplate().find(
-				"from Belegung where datum between ? and ?", params);
+		return getHibernateTemplate()
+				.find("select b from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
+						params);
 	}
 }

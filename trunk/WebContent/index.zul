@@ -46,7 +46,22 @@
 							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="25%">
-								Center - South (Unten)
+								<listbox
+									model="@load(vm.zimmerZeitraumBelegungSelected.datumStatusList)"
+									vflex="true" hflex="true">
+									<listhead>
+										<listheader label="Datum" />
+										<listheader label="Status" />
+									</listhead>
+									<template name="model" var="item">
+										<listitem>
+											<listcell
+												label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
+											<listcell
+												label="@bind(item.status.name)" />
+										</listitem>
+									</template>
+								</listbox>
 							</south>
 						</borderlayout>
 					</center>
