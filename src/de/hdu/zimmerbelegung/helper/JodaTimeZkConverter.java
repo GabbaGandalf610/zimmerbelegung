@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.UiException;
 
 import java.util.Date;
 
+
 public class JodaTimeZkConverter implements Converter {
     /**
      * Convert Date to LocalDate.
@@ -37,7 +38,7 @@ public class JodaTimeZkConverter implements Converter {
 	public Object coerceToUi(Object val, Component comp, BindContext ctx) {
 		//TODO: Hier muss noch das Datum angemessen formatiert werden
 		if (val == null)
-			return val;
+			return null;
 		if (val instanceof LocalDate) {
 			return ((LocalDate) val).toDate();
 		}
