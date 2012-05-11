@@ -51,76 +51,187 @@
 						</borderlayout>
 					</center>
 
-					<east flex="true" splittable="true" width="40%"
+					<east flex="true" splittable="true" width="60%"
 						collapsible="true">
 						<borderlayout>
 							<north flex="true" splittable="true"
 								collapsible="true" height="30%">
 
-								<grid xmlns:c="client">
-									<auxhead sclass="category-center">
-										<auxheader label="Gast suche"
-											colspan="6" />
-									</auxhead>
+								<!-- 								<grid xmlns:c="client"> -->
+								<!-- 									<auxhead sclass="category-center"> -->
+								<!-- 										<auxheader label="Gast suche" -->
+								<!-- 											colspan="6" /> -->
+								<!-- 									</auxhead> -->
 
-									<auxhead sclass="category-center">
-										<auxheader colspan="1">
-											<image
-												src="/Images/funnel.png" />
-											<textbox id="filterName"
-												c:onClick="this.select()" width="100px" />
-										</auxheader>
-										<auxheader colspan="1">
-											<image
-												src="/Images/funnel.png" />
-											<textbox id="filterFirma"
-												c:onClick="this.select()" width="100px" />
-										</auxheader>
-										<auxheader colspan="1">
-											<image
-												src="/Images/funnel.png" />
-											<textbox id="filterLand"
-												c:onClick="this.select()" width="100px" />
-										</auxheader>
-									</auxhead>
+								<!-- 									<auxhead sclass="category-center"> -->
+								<!-- 										<auxheader colspan="1"> -->
+								<!-- 											<image -->
+								<!-- 												src="/Images/funnel.png" /> -->
+								<!-- 											<textbox id="filterName" -->
+								<!-- 												c:onClick="this.select()" width="100px" /> -->
+								<!-- 										</auxheader> -->
+								<!-- 										<auxheader colspan="1"> -->
+								<!-- 											<image -->
+								<!-- 												src="/Images/funnel.png" /> -->
+								<!-- 											<textbox id="filterFirma" -->
+								<!-- 												c:onClick="this.select()" width="100px" /> -->
+								<!-- 										</auxheader> -->
+								<!-- 										<auxheader colspan="1"> -->
+								<!-- 											<image -->
+								<!-- 												src="/Images/funnel.png" /> -->
+								<!-- 											<textbox id="filterLand" -->
+								<!-- 												c:onClick="this.select()" width="100px" /> -->
+								<!-- 										</auxheader> -->
+								<!-- 									</auxhead> -->
 
-									<columns>
-										<column>Name</column>
-										<column>Firma</column>
-										<column>Land</column>
-									</columns>
 
-									<rows>
-										<row>
-											<label value="dtest" />
-											<label value="etest" />
-											<label value="ftest" />
-										</row>
-										<row>
-											<label value="atest" />
-											<label value="btest" />
-											<label value="ctest" />
-										</row>
-										<row>
-											<label value="dtest" />
-											<label value="etest" />
-											<label value="ftest" />
-										</row>
-										<row>
-											<label value="atest" />
-											<label value="btest" />
-											<label value="ctest" />
-										</row>
-									</rows>
+								<listbox model="@load(vm.items)"
+									selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
+									emptyMessage="Keine Gäste vorhanden.">
+									<listhead>
+										<listheader label="Name" />
+										<listheader label="Vorname" />
+										<listheader label="Straße" />
+										<listheader label="PLZ" />
+										<listheader label="Ort" />
+									</listhead>
+									<template name="model" var="item">
+										<listitem>
+											<listcell
+												label="@bind(item.name)" />
+											<listcell
+												label="@bind(item.vorname)" />
+											<listcell
+												label="@bind(item.strasse)" />
+											<listcell
+												label="@bind(item.plz)" />
+											<listcell
+												label="@bind(item.ort)" />
+										</listitem>
+									</template>
+								</listbox>
 
 
 
-								</grid>
+								<!-- 								</grid> -->
 
 
 							</north>
 							<center flex="true">
-								East - Center (Mitte)
+
+
+								<grid>
+									<columns>
+										<column width="120px" />
+										<column width="360px" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Gastnr" />
+											<label
+												value="@bind(vm.gastSelected.id)" />
+										</row>
+										<row>
+											<cell>
+												<label
+													value="Name / Vorname" width="60px" />
+											</cell>
+											<cell>
+												<textbox
+													value="@bind(vm.gastSelected.name)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Name" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.vorname)"
+													disabled="@load(empty vm.gastSelected)"
+													tooltiptext="Vorname" />
+											</cell>
+										</row>
+										<row>
+											<label width="100%"
+												value="Strasse" />
+											<textbox
+												value="@bind(vm.gastSelected.strasse)"
+												disabled="@load(empty vm.gastSelected)"
+												tooltiptext="Strasse" />
+										</row>
+										<row>
+											<cell>
+												<label value="PLZ / Ort"
+													width="60px" />
+											</cell>
+											<cell>
+												<textbox
+													value="@bind(vm.gastSelected.plz)"
+													disabled="@load(empty vm.gastSelected)" width="60px"
+													tooltiptext="PLZ" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.ort)"
+													disabled="@load(empty vm.gastSelected)" width="140px"
+													tooltiptext="Ort" />
+											</cell>
+										</row>
+										<row>
+											<label value="Land" />
+											<textbox
+												value="@bind(vm.gastSelected.land)"
+												disabled="@load(empty vm.gastSelected)" />
+										</row>
+										<row>
+											<cell>
+												<label
+													value="Telefon / Mobiltel." />
+											</cell>
+											<cell>
+												<textbox
+													value="@bind(vm.gastSelected.telefon)"
+													disabled="@load(empty vm.gastSelected)" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.mobil)"
+													disabled="@load(empty vm.gastSelected)" />
+											</cell>
+										</row>
+										<row>
+											<label value="Fax" />
+											<textbox
+												value="@bind(vm.gastSelected.fax)"
+												disabled="@load(empty vm.gastSelected)" />
+										</row>
+										<row>
+											<label value="E-Mail" />
+											<textbox
+												value="@bind(vm.gastSelected.email)"
+												disabled="@load(empty vm.gastSelected)"
+												constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
+										</row>
+										<row>
+											<label value="Kommentar" />
+											<textbox
+												value="@bind(vm.gastSelected.kommentar)"
+												disabled="@load(empty vm.gastSelected)" rows="4"
+												width="100%" />
+										</row>
+
+										<row>
+											<cell colspan="2">
+												<button id="newButton"
+													label="Neu" onClick="@command('doNew')" />
+												<button id="saveButton"
+													label="Speichern" onClick="@command('doSave')"
+													disabled="@bind(empty vm.gastSelected)" />
+												<button
+													id="deleteButton" label="Löschen"
+													onClick="@command('doDelete')"
+													disabled="@bind(empty vm.gastSelected)" />
+											</cell>
+										</row>
+									</rows>
+								</grid>
+
+
+
 							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="30%">

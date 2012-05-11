@@ -5,9 +5,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
-import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
-import de.hdu.zimmerbelegung.model.Buchung;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
