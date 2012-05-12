@@ -5,6 +5,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.SimpleDateConstraint;
 
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
@@ -19,17 +20,25 @@ public class IndexCtrl {
 	Gast gastSelected;
 	LocalDate datumVon = new LocalDate();
 	LocalDate datumBis = new LocalDate();
+	private final int MAX_BUCHUNGSLAENGE = 1;
+
+	public SimpleDateConstraint getDatumBisConstraint() {
+		return new SimpleDateConstraint("between " + datumVon.toString("yyyMMdd") + " and " + datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
+	}
 
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
 
-	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected"})
+	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected", "datumBis", "datumBisConstraint"})
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
 
 	public LocalDate getDatumBis() {
+		if (datumBis.isBefore(datumVon) || datumBis.isAfter(datumVon.plusMonths(MAX_BUCHUNGSLAENGE))) {
+			datumBis = datumVon;
+		}
 		return datumBis;
 	}
 

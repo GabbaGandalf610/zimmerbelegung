@@ -16,11 +16,11 @@
 							Datum von:
 							<datebox id="von" cols="12" format="medium"
 								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" />
+								mold="rounded" constraint="no past,no empty" />
 							bis:
 							<datebox id="bis" cols="12" format="medium"
 								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" />
+								mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
 						</div>
 					</north>
 					<center flex="true">
