@@ -2,7 +2,7 @@ package de.hdu.zimmerbelegung.helper;
 
 import org.joda.time.LocalDate;
 
-public class DatumStatus {
+public class DatumStatus implements Comparable<DatumStatus> {
 	private LocalDate datum;
 	private Status status;
 	public LocalDate getDatum() {
@@ -21,5 +21,9 @@ public class DatumStatus {
 		super();
 		this.datum = datum;
 		this.status = status;
+	}
+	@Override
+	public int compareTo(DatumStatus andererDatumStatus) {
+		return this.datum.compareTo(andererDatumStatus.getDatum());
 	}
 }

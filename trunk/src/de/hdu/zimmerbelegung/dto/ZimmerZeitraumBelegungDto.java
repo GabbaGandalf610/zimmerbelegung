@@ -40,10 +40,10 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 			for (Belegung belegung : belegungList) {
 				if (belegung.getZimmer().equals(zimmer)) {
 					if (belegung instanceof Reservierung) {
-						zimmerZeitraumBelegung.addDatumStats(new DatumStatus(
+						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
 								belegung.getDatum(), Status.RESERVIERT));
 					} else if (belegung instanceof Buchung) {
-						zimmerZeitraumBelegung.addDatumStats(new DatumStatus(
+						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
 								belegung.getDatum(), Status.GEBUCHT));
 					}
 				}
@@ -61,7 +61,7 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 					}
 				}
 				if (!datumGefunden) {
-					zimmerZeitraumBelegung.addDatumStats(new DatumStatus(
+					zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
 							tmpDatum, Status.FREI));
 				}
 			}

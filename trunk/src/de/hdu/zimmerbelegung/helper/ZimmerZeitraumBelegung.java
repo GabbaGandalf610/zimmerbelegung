@@ -1,6 +1,8 @@
 package de.hdu.zimmerbelegung.helper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdu.zimmerbelegung.model.Zimmer;
@@ -58,7 +60,8 @@ public class ZimmerZeitraumBelegung {
 	public void setDatumStatusList(List<DatumStatus> datumStatusList) {
 		this.datumStatusList = datumStatusList;
 	}
-	public void addDatumStats(DatumStatus datumStatus) {
+	public void addDatumStatus(DatumStatus datumStatus) {
 		this.datumStatusList.add(datumStatus);
+		Collections.sort(datumStatusList);
 	}
 }
