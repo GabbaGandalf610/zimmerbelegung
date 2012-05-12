@@ -16,7 +16,7 @@
 					<listitem>
 						<listcell label="@bind(item.id)" />
 						<listcell
-							label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" />
+							label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
 						<listcell label="@bind(item.zimmer)" />
 						<listcell label="@bind(item.gast)" />
 					</listitem>

@@ -13,7 +13,7 @@ public class JodaTimeZkConverterToString extends JodaTimeZkConverter {
 		if (val == null)
 			return null;
 		if (val instanceof LocalDate) {
-			return ((LocalDate) val).toString(DateTimeFormat.mediumDate());
+			return ((LocalDate) val).toString(DateTimeFormat.fullDate());
 		}
 		throw new UiException("Converter expects a Date/DateTime object");
 	}
