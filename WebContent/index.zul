@@ -269,9 +269,6 @@
 						<tab id="adminBuchungTab" label="Buchungen" />
 						<tab id="adminReservierungTab"
 							label="Reservierungen" />
-						<tab id="adminTagStatusTab" label="Tagstatus" />
-						<tab id="adminZeitraumStatusTab"
-							label="Zeitraumstatus" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -288,14 +285,6 @@
 						<tabpanel
 							fulfill="adminReservierungTab.onSelect">
 							<include src="adminReservierung.zul" />
-						</tabpanel>
-						<tabpanel
-							fulfill="adminTagStatusTab.onSelect">
-							<include src="adminTagStatus.zul" />
-						</tabpanel>
-						<tabpanel
-							fulfill="adminZeitraumStatusTab.onSelect">
-							<include src="adminZeitraumStatus.zul" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>
