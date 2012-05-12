@@ -24,7 +24,7 @@ public class IndexCtrl {
 		return datumVon;
 	}
 
-	@NotifyChange("zimmerZeitraumBelegungList")
+	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected"})
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
@@ -33,7 +33,7 @@ public class IndexCtrl {
 		return datumBis;
 	}
 
-	@NotifyChange("zimmerZeitraumBelegungList")
+	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected"})
 	public void setDatumBis(LocalDate datumBis) {
 		this.datumBis = datumBis;
 	}
