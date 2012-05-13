@@ -1,5 +1,5 @@
 <zk>
-	<borderlayout width="100%" height="100%" sclass="mainLayout"
+	<borderlayout width="100%" height="100%" 
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')">
 		<center title="Übersicht" border="normal">
@@ -12,6 +12,7 @@
 					<listheader label="Straße" />
 					<listheader label="PLZ" />
 					<listheader label="Ort" />
+					<listheader label="Land" />
 				</listhead>
 				<template name="model" var="item">
 					<listitem>
@@ -20,6 +21,7 @@
 						<listcell label="@bind(item.strasse)" />
 						<listcell label="@bind(item.plz)" />
 						<listcell label="@bind(item.ort)" />
+						<listcell label="@bind(item.land)" />
 					</listitem>
 				</template>
 			</listbox>
@@ -29,8 +31,8 @@
 			title="Details zum Gast:" open="@load(not empty vm.gastSelected)">
 			<grid>
 				<columns>
-					<column width="120px" />
-					<column width="360px" />
+					<column width="140px" />
+					<column />
 				</columns>
 				<rows>
 					<row>
@@ -57,7 +59,8 @@
 					</row>
 					<row>
 						<cell>
-							<label value="PLZ / Ort" width="60px" />
+							<label value="PLZ / Ort / Land"
+								width="60px" />
 						</cell>
 						<cell>
 							<textbox value="@bind(vm.gastSelected.plz)"
@@ -67,43 +70,39 @@
 							<textbox value="@bind(vm.gastSelected.ort)"
 								disabled="@load(empty vm.gastSelected)" width="140px"
 								tooltiptext="Ort" />
+							<space />
+							<textbox value="@bind(vm.gastSelected.land)"
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Land" />
 						</cell>
 					</row>
 					<row>
-						<label value="Land" />
-						<textbox value="@bind(vm.gastSelected.land)"
-							disabled="@load(empty vm.gastSelected)" />
-					</row>
-					<row>
 						<cell>
-							<label value="Telefon / Mobiltel." />
+							<label value="Telefon / Mobiltel / Fax" />
 						</cell>
 						<cell>
 							<textbox
 								value="@bind(vm.gastSelected.telefon)"
-								disabled="@load(empty vm.gastSelected)" />
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Telefon" />
 							<space />
 							<textbox
 								value="@bind(vm.gastSelected.mobil)"
-								disabled="@load(empty vm.gastSelected)" />
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Mobiltelefon"/>
+							<space />
+							<textbox value="@bind(vm.gastSelected.fax)"
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Fax"/>
 						</cell>
-					</row>
-					<row>
-						<label value="Fax" />
-						<textbox value="@bind(vm.gastSelected.fax)"
-							disabled="@load(empty vm.gastSelected)" />
 					</row>
 					<row>
 						<label value="E-Mail" />
 						<textbox value="@bind(vm.gastSelected.email)"
 							disabled="@load(empty vm.gastSelected)"
-							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
+							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" tooltiptext="E-Mail"/>
 					</row>
 					<row>
 						<label value="Kommentar" />
 						<textbox
 							value="@bind(vm.gastSelected.kommentar)"
-							disabled="@load(empty vm.gastSelected)" rows="4" width="100%" />
+							disabled="@load(empty vm.gastSelected)" rows="3" width="30%" tooltiptext="Kommentar"/>
 					</row>
 
 					<row>

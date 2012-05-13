@@ -12,16 +12,37 @@
 
 				<borderlayout width="100%" height="100%">
 					<north flex="true">
-						<div>
-							Datum von:
-							<datebox id="von" cols="12" format="medium"
-								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" constraint="no past,no empty" />
-							bis:
-							<datebox id="bis" cols="12" format="medium"
-								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
-						</div>
+						<grid>
+							<columns>
+								<column></column>
+								<column></column>
+
+
+							</columns>
+							<rows>
+								<row>
+									<cell>
+										<label value="Datum von: " />
+										<datebox id="von" cols="12"
+											format="medium"
+											value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+											mold="rounded" constraint="no past,no empty" />
+
+										<label value=" bis: " />
+										<datebox id="bis " cols="12"
+											format="medium"
+											value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+											mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
+									</cell>
+									<cell align="right">
+										<label value="Suche: " />
+										<textbox
+											tooltiptext="Gast Suche" value="@bind(vm.gastSuche)"
+											onChange="@command('doGuestSearch')" instant="true" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
 					</north>
 					<center flex="true">
 						<borderlayout>
@@ -72,34 +93,6 @@
 							<north flex="true" splittable="true"
 								collapsible="true" height="30%">
 
-								<!-- 								<grid xmlns:c="client"> -->
-								<!-- 									<auxhead sclass="category-center"> -->
-								<!-- 										<auxheader label="Gast suche" -->
-								<!-- 											colspan="6" /> -->
-								<!-- 									</auxhead> -->
-
-								<!-- 									<auxhead sclass="category-center"> -->
-								<!-- 										<auxheader colspan="1"> -->
-								<!-- 											<image -->
-								<!-- 												src="/Images/funnel.png" /> -->
-								<!-- 											<textbox id="filterName" -->
-								<!-- 												c:onClick="this.select()" width="100px" /> -->
-								<!-- 										</auxheader> -->
-								<!-- 										<auxheader colspan="1"> -->
-								<!-- 											<image -->
-								<!-- 												src="/Images/funnel.png" /> -->
-								<!-- 											<textbox id="filterFirma" -->
-								<!-- 												c:onClick="this.select()" width="100px" /> -->
-								<!-- 										</auxheader> -->
-								<!-- 										<auxheader colspan="1"> -->
-								<!-- 											<image -->
-								<!-- 												src="/Images/funnel.png" /> -->
-								<!-- 											<textbox id="filterLand" -->
-								<!-- 												c:onClick="this.select()" width="100px" /> -->
-								<!-- 										</auxheader> -->
-								<!-- 									</auxhead> -->
-
-
 								<listbox model="@load(vm.items)"
 									selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
 									emptyMessage="Keine Gäste vorhanden.">
@@ -109,6 +102,7 @@
 										<listheader label="Straße" />
 										<listheader label="PLZ" />
 										<listheader label="Ort" />
+										<listheader label="Land" />
 									</listhead>
 									<template name="model" var="item">
 										<listitem>
@@ -122,23 +116,18 @@
 												label="@bind(item.plz)" />
 											<listcell
 												label="@bind(item.ort)" />
+											<listcell
+												label="@bind(item.land)" />
 										</listitem>
 									</template>
 								</listbox>
 
-
-
-								<!-- 								</grid> -->
-
-
 							</north>
 							<center flex="true">
-
-
 								<grid>
 									<columns>
-										<column width="120px" />
-										<column width="360px" />
+										<column width="140px" />
+										<column />
 									</columns>
 									<rows>
 										<row>
@@ -172,8 +161,8 @@
 										</row>
 										<row>
 											<cell>
-												<label value="PLZ / Ort"
-													width="60px" />
+												<label
+													value="PLZ / Ort / Land" width="60px" />
 											</cell>
 											<cell>
 												<textbox
@@ -185,48 +174,47 @@
 													value="@bind(vm.gastSelected.ort)"
 													disabled="@load(empty vm.gastSelected)" width="140px"
 													tooltiptext="Ort" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.land)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Land" />
 											</cell>
-										</row>
-										<row>
-											<label value="Land" />
-											<textbox
-												value="@bind(vm.gastSelected.land)"
-												disabled="@load(empty vm.gastSelected)" />
 										</row>
 										<row>
 											<cell>
 												<label
-													value="Telefon / Mobiltel." />
+													value="Telefon / Mobiltel / Fax" />
 											</cell>
 											<cell>
 												<textbox
 													value="@bind(vm.gastSelected.telefon)"
-													disabled="@load(empty vm.gastSelected)" />
+													disabled="@load(empty vm.gastSelected)"
+													tooltiptext="Telefon" />
 												<space />
 												<textbox
 													value="@bind(vm.gastSelected.mobil)"
-													disabled="@load(empty vm.gastSelected)" />
+													disabled="@load(empty vm.gastSelected)"
+													tooltiptext="Mobiltelefon" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.fax)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Fax" />
 											</cell>
-										</row>
-										<row>
-											<label value="Fax" />
-											<textbox
-												value="@bind(vm.gastSelected.fax)"
-												disabled="@load(empty vm.gastSelected)" />
 										</row>
 										<row>
 											<label value="E-Mail" />
 											<textbox
 												value="@bind(vm.gastSelected.email)"
 												disabled="@load(empty vm.gastSelected)"
-												constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" />
+												constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
+												tooltiptext="E-Mail" />
 										</row>
 										<row>
 											<label value="Kommentar" />
 											<textbox
 												value="@bind(vm.gastSelected.kommentar)"
-												disabled="@load(empty vm.gastSelected)" rows="4"
-												width="100%" />
+												disabled="@load(empty vm.gastSelected)" rows="3" width="30%"
+												tooltiptext="Kommentar" />
 										</row>
 
 										<row>
@@ -244,9 +232,6 @@
 										</row>
 									</rows>
 								</grid>
-
-
-
 							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="30%">
