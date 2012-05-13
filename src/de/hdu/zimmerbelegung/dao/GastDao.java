@@ -23,4 +23,18 @@ public class GastDao extends HibernateDaoSupport {
 	public List<Gast> getAll() {
 		return getHibernateTemplate().find("FROM Gast");
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Gast> getAllFilteredUser(String gastSuche) {
+		// Object[] params = new Object[] { gastSuche };
+		if (gastSuche == "" || gastSuche == null) {
+			return getHibernateTemplate().find("FROM Gast");
+		} else {
+			return getHibernateTemplate()
+					.find("select g from Gast g where g.name like ? or g.vorname like ? or g.ort like ? or g.land like ?",
+							gastSuche + "%", gastSuche + "%", gastSuche + "%",
+							gastSuche + "%");
+		}
+	}
+
 }

@@ -18,6 +18,16 @@ public class IndexCtrl {
 	ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected;
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
+	String gastSuche;
+	
+	public String getGastSuche() {
+		return gastSuche;
+	}
+
+	public void setGastSuche(String gastSuche) {
+		this.gastSuche = gastSuche;
+	}
+
 	LocalDate datumVon = new LocalDate();
 	LocalDate datumBis = new LocalDate();
 	private final int MAX_BUCHUNGSLAENGE = 1;
@@ -75,16 +85,6 @@ public class IndexCtrl {
 		return zimmerZeitraumBelegungList;
 	}
 
-	
-	
-	// ROLAND
-	public void setGastSelected(Gast gastSelected) {
-		this.gastSelected = gastSelected;
-	}
-
-	public Gast getGastSelected() {
-		return gastSelected;
-	}
 
 	public ListModel<Gast> getItems() {
 		if (gastList == null) {
@@ -92,10 +92,28 @@ public class IndexCtrl {
 			gastList = new ListModelList<Gast>();
 			GastDao gastDao = ServiceLocator.getGastDao();
 			gastList.addAll(gastDao.getAll());
-		}
+		} 
 		return gastList;
 	}
+	
+	@Command
+	@NotifyChange({ "gastSuche", "gastSelected", "gastList" })
+	public void doGuestSearch() {
+		gastList.clear();
+		GastDao gastDao = ServiceLocator.getGastDao();
+		System.out.println(gastSuche);
+		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
+		gastSelected = null;
+	}
+	
+	public void setGastSelected(Gast gastSelected) {
+		this.gastSelected = gastSelected;
+	}
 
+	public Gast getGastSelected() {
+		return gastSelected;
+	}
+	
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
@@ -120,23 +138,5 @@ public class IndexCtrl {
 		gastSelected = null;
 	}
 	
-	
-	
-	// @Command
-	// @NotifyChange({ "buchungSelected", "buchungList" })
-	// public void doSave() {
-	// BuchungDao buchungDao = ServiceLocator.getBuchungDao();
-	// buchungDao.saveOrUpdate(buchungSelected);
-	// if (!buchungList.contains(buchungSelected))
-	// buchungList.add(buchungSelected);
-	// }
-	//
-	// @Command
-	// @NotifyChange({ "buchungSelected", "buchungList" })
-	// public void doDelete() {
-	// BuchungDao buchungDao = ServiceLocator.getBuchungDao();
-	// buchungDao.delete(buchungSelected);
-	// buchungList.remove(buchungSelected);
-	// buchungSelected = null;
-	// }
+
 }
