@@ -16,8 +16,6 @@
 							<columns>
 								<column></column>
 								<column></column>
-
-
 							</columns>
 							<rows>
 								<row>
@@ -44,7 +42,8 @@
 							</rows>
 						</grid>
 					</north>
-					<center flex="true">
+					<west flex="true" splittable="true" width="25%"
+						collapsible="true">
 						<borderlayout>
 							<center>
 								<listbox
@@ -76,7 +75,9 @@
 								</listbox>
 							</center>
 							<south flex="true" splittable="true"
-								collapsible="true" height="25%">
+								collapsible="true" height="60%"
+								open="@load(not empty vm.zimmerZeitraumBelegungSelected)">
+
 								<listbox
 									model="@load(vm.zimmerZeitraumBelegungSelected.datumStatusList)"
 									vflex="true" hflex="true">
@@ -95,10 +96,9 @@
 								</listbox>
 							</south>
 						</borderlayout>
-					</center>
+					</west>
 
-					<east flex="true" splittable="true" width="60%"
-						collapsible="true">
+					<center>
 						<borderlayout>
 							<north flex="true" splittable="true"
 								collapsible="true" height="30%">
@@ -243,14 +243,11 @@
 									</rows>
 								</grid>
 							</center>
-							<south flex="true" splittable="true"
-								collapsible="true" height="30%">
-								East - South (Unten)
-							</south>
+							<south height="30%">test</south>
+
 						</borderlayout>
-					</east>
-
-
+					</center>
+					<south border="normal">Status</south>
 				</borderlayout>
 			</tabpanel>
 
