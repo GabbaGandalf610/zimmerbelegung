@@ -7,8 +7,6 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
-import java.util.Date;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -22,7 +20,6 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -3,16 +3,10 @@ package de.hdu.zimmerbelegung.manager;
 import java.util.List;
 
 import de.hdu.zimmerbelegung.dao.BuchungDao;
-import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ReservierungDao;
-import de.hdu.zimmerbelegung.dao.TagStatusDao;
-import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
 import de.hdu.zimmerbelegung.model.Buchung;
-import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.model.Reservierung;
-import de.hdu.zimmerbelegung.model.TagStatus;
-import de.hdu.zimmerbelegung.model.ZeitraumStatus;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class AdminManager {
@@ -20,11 +14,6 @@ public class AdminManager {
 	private ZimmerDao zimmerDao;
 	private BuchungDao buchungDao;
 	private ReservierungDao reservierungDao;
-	
-	
-
-	
-		
 
 	public List<Zimmer> getAllZimmer() {
 		return zimmerDao.getAll();

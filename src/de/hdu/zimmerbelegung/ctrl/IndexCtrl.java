@@ -19,7 +19,7 @@ public class IndexCtrl {
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
 	String gastSuche;
-	
+
 	public String getGastSuche() {
 		return gastSuche;
 	}
@@ -33,26 +33,31 @@ public class IndexCtrl {
 	private final int MAX_BUCHUNGSLAENGE = 1;
 
 	public SimpleDateConstraint getDatumBisConstraint() {
-		return new SimpleDateConstraint("between " + datumVon.toString("yyyMMdd") + " and " + datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
+		return new SimpleDateConstraint("between "
+				+ datumVon.toString("yyyMMdd") + " and "
+				+ datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
 	}
 
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
 
-	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected", "datumBis", "datumBisConstraint"})
+	@NotifyChange({ "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected", "datumBis", "datumBisConstraint" })
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
 
 	public LocalDate getDatumBis() {
-		if (datumBis.isBefore(datumVon) || datumBis.isAfter(datumVon.plusMonths(MAX_BUCHUNGSLAENGE))) {
+		if (datumBis.isBefore(datumVon)
+				|| datumBis.isAfter(datumVon.plusMonths(MAX_BUCHUNGSLAENGE))) {
 			datumBis = datumVon;
 		}
 		return datumBis;
 	}
 
-	@NotifyChange({"zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected"})
+	@NotifyChange({ "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected" })
 	public void setDatumBis(LocalDate datumBis) {
 		this.datumBis = datumBis;
 	}
@@ -60,7 +65,7 @@ public class IndexCtrl {
 	public ZimmerZeitraumBelegung getZimmerZeitraumBelegungSelected() {
 		return zimmerZeitraumBelegungSelected;
 	}
-	
+
 	public void setZimmerZeitraumBelegungSelected(
 			ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected) {
 		this.zimmerZeitraumBelegungSelected = zimmerZeitraumBelegungSelected;
@@ -85,17 +90,15 @@ public class IndexCtrl {
 		return zimmerZeitraumBelegungList;
 	}
 
-
 	public ListModel<Gast> getItems() {
 		if (gastList == null) {
-			// Liste initialisieren
 			gastList = new ListModelList<Gast>();
 			GastDao gastDao = ServiceLocator.getGastDao();
 			gastList.addAll(gastDao.getAll());
-		} 
+		}
 		return gastList;
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSuche", "gastSelected", "gastList" })
 	public void doGuestSearch() {
@@ -105,7 +108,7 @@ public class IndexCtrl {
 		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
 		gastSelected = null;
 	}
-	
+
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
 	}
@@ -113,13 +116,13 @@ public class IndexCtrl {
 	public Gast getGastSelected() {
 		return gastSelected;
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
@@ -128,7 +131,7 @@ public class IndexCtrl {
 		if (!gastList.contains(gastSelected))
 			gastList.add(gastSelected);
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
@@ -137,6 +140,5 @@ public class IndexCtrl {
 		gastList.remove(gastSelected);
 		gastSelected = null;
 	}
-	
 
 }
