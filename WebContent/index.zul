@@ -48,14 +48,24 @@
 						<borderlayout>
 							<center>
 								<listbox
-									model="@load(vm.zimmerZeitraumBelegungList)"
+									model="@load(vm.zimmerZeitraumBelegungList) @template((each.status == 'FREI') ? 'tempFrei' : 'tempBelegt')"
 									selectedItem="@save(vm.zimmerZeitraumBelegungSelected)"
 									vflex="true" hflex="true">
 									<listhead>
 										<listheader label="Zimmer" />
 										<listheader label="Status" />
+										<listheader label="Aktion" />
 									</listhead>
-									<template name="model" var="item">
+									<template name="tempFrei" var="item">
+										<listitem>
+											<listcell
+												label="@bind(item.zimmer)" />
+											<listcell
+												label="@bind(item.status.name)" />
+											<listcell><button label="reservieren" /><button label="buchen" /></listcell>
+										</listitem>
+									</template>
+									<template name="tempBelegt" var="item">
 										<listitem>
 											<listcell
 												label="@bind(item.zimmer)" />
