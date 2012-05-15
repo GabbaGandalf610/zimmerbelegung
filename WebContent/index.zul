@@ -47,24 +47,14 @@
 						<borderlayout>
 							<center>
 								<listbox
-									model="@load(vm.zimmerZeitraumBelegungList) @template((each.status == 'FREI') ? 'tempFrei' : 'tempBelegt')"
+									model="@load(vm.zimmerZeitraumBelegungList)"
 									selectedItem="@save(vm.zimmerZeitraumBelegungSelected)"
 									vflex="true" hflex="true">
 									<listhead>
 										<listheader label="Zimmer" />
 										<listheader label="Status" />
-										<listheader label="Aktion" />
 									</listhead>
-									<template name="tempFrei" var="item">
-										<listitem>
-											<listcell
-												label="@bind(item.zimmer)" />
-											<listcell
-												label="@bind(item.status.name)" />
-											<listcell><button label="reservieren" /><button label="buchen" /></listcell>
-										</listitem>
-									</template>
-									<template name="tempBelegt" var="item">
+									<template name="model" var="item">
 										<listitem>
 											<listcell
 												label="@bind(item.zimmer)" />
@@ -76,7 +66,7 @@
 							</center>
 							<south flex="true" splittable="true"
 								collapsible="true" height="60%"
-								open="@load(not empty vm.zimmerZeitraumBelegungSelected)">
+								open="@load((not empty vm.zimmerZeitraumBelegungSelected) and (vm.zimmerZeitraumBelegungSelected.status != 'FREI'))">
 
 								<listbox
 									model="@load(vm.zimmerZeitraumBelegungSelected.datumStatusList)"
@@ -243,11 +233,32 @@
 									</rows>
 								</grid>
 							</center>
-							<south height="30%">test</south>
-
 						</borderlayout>
 					</center>
-					<south border="normal">Status</south>
+					<south border="normal"
+						style="background-color: orange;"
+						visible="@bind(vm.zusammenfassungAnzeigen)">
+						<div
+							style="text-align:right; margin-right:20px;">
+							Zimmer
+							<label
+								value="@bind(vm.zimmerZeitraumBelegungSelected.zimmer)"
+								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+							im Zeitraum von
+							<label
+								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
+								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+							bis
+							<label
+								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
+								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+							für
+							<label value="@bind(vm.gastSelected)"
+								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+							<button label="reservieren" />
+							<button label="buchen" />
+						</div>
+					</south>
 				</borderlayout>
 			</tabpanel>
 
