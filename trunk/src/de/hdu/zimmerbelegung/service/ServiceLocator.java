@@ -9,8 +9,6 @@ import de.hdu.zimmerbelegung.dao.BelegungDao;
 import de.hdu.zimmerbelegung.dao.BuchungDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ReservierungDao;
-import de.hdu.zimmerbelegung.dao.TagStatusDao;
-import de.hdu.zimmerbelegung.dao.ZeitraumStatusDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
 import de.hdu.zimmerbelegung.manager.AdminManager;
@@ -69,15 +67,6 @@ public class ServiceLocator {
 
 	public static AdminManager getAdminManager() {
 		return (AdminManager) ctx.getBean("AdminManager", AdminManager.class);
-	}
-
-	public static TagStatusDao getTagStatusDao() {
-		return (TagStatusDao) ctx.getBean("tagStatusDao", TagStatusDao.class);
-	}
-
-	public static ZeitraumStatusDao getZeitraumStatusDao() {
-		return (ZeitraumStatusDao) ctx.getBean("zeitraumStatusDao",
-				ZeitraumStatusDao.class);
 	}
 
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {

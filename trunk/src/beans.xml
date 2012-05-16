@@ -14,8 +14,6 @@
 				<value>de.hdu.zimmerbelegung.model.Buchung</value>
 				<value>de.hdu.zimmerbelegung.model.Gast</value>
 				<value>de.hdu.zimmerbelegung.model.Reservierung</value>
-				<value>de.hdu.zimmerbelegung.model.TagStatus</value>
-				<value>de.hdu.zimmerbelegung.model.ZeitraumStatus</value>
 				<value>de.hdu.zimmerbelegung.model.Zimmer</value>
 			</list>
 		</property>
@@ -50,16 +48,6 @@
 		</property>
 	</bean>
 	<bean id="reservierungDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="tagStatusDao" class="de.hdu.zimmerbelegung.dao.TagStatusDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="zeitraumStatusDao" class="de.hdu.zimmerbelegung.dao.ZeitraumStatusDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
