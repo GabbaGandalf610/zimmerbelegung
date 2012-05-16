@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ApplicationContext.xml -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://127.0.0.1:3306/zimmerbelegungtest</value>
+		</property>
+		<property name="username">
+			<value>zimmertest</value>
+		</property>
+		<property name="password">
+			<value>zimmertest</value>
+		</property>
+	</bean>
+
+	<!-- SessionFactory -->
+	<bean id="factory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
+		<property name="configLocation" value="hibernate.cfg.test.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- DAOs -->
+	<bean id="
+		belegungDao " class="de.hdu.zimmerbelegung.dao.BelegungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="buchungDao" class="de.hdu.zimmerbelegung.dao.BuchungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="gastDao" class="de.hdu.zimmerbelegung.dao.GastDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="reservierungDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="tagStatusDao" class="de.hdu.zimmerbelegung.dao.TagStatusDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zeitraumStatusDao" class="de.hdu.zimmerbelegung.dao.ZeitraumStatusDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zimmerDao" class="de.hdu.zimmerbelegung.dao.ZimmerDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zimmerZeitraumBelegungDto" class="de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+
+</beans>
