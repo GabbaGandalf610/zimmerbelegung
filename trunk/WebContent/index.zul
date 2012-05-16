@@ -255,8 +255,8 @@
 							für
 							<label value="@bind(vm.gastSelected)"
 								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
-							<button label="reservieren" />
-							<button label="buchen" />
+							<button label="reservieren" onClick="@command('doReservieren')" />
+							<button label="buchen" onClick="@command('doBuchen')" />
 						</div>
 					</south>
 				</borderlayout>

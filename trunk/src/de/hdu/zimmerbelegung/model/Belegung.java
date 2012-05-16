@@ -35,15 +35,22 @@ public abstract class Belegung {
 	private Zimmer zimmer;
 	@ManyToOne(targetEntity = Gast.class)
 	private Gast gast;
+	@ManyToOne(targetEntity = BelegungKopf.class)
+	private BelegungKopf belegungKopf;
+
+	public BelegungKopf getBelegungKopf() {
+		return belegungKopf;
+	}
 
 	public Belegung() {
 	}
 
-	public Belegung(LocalDate datum, Zimmer zimmer, Gast gast) {
+	public Belegung(LocalDate datum, Zimmer zimmer, Gast gast, BelegungKopf belegungKopf) {
 		super();
 		this.datum = datum;
 		this.zimmer = zimmer;
 		this.gast = gast;
+		this.belegungKopf = belegungKopf;
 	}
 
 	public LocalDate getDatum() {

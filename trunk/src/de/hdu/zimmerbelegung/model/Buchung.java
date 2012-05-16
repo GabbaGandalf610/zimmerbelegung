@@ -19,7 +19,7 @@ public class Buchung extends Belegung {
 		super();
 	}
 
-	public Buchung(LocalDate datum, Zimmer zimmer, Gast gast) {
-		super(datum, zimmer, gast);
+	public Buchung(LocalDate datum, Zimmer zimmer, Gast gast, BuchungKopf buchungKopf) {
+		super(datum, zimmer, gast, buchungKopf);
 	}
 }
