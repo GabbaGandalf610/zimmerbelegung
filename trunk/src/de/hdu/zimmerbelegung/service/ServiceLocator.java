@@ -1,6 +1,7 @@
 package de.hdu.zimmerbelegung.service;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,7 +20,18 @@ public class ServiceLocator {
 	private static ApplicationContext ctx;
 
 	static {
-		ctx = new ClassPathXmlApplicationContext("spring-hibernate.xml");
+		try {
+			// Versuche Verbindung zur MySQL-Datenbank
+			ctx = new ClassPathXmlApplicationContext(
+					"datenbank-entwicklung.xml");
+		} catch (BeanCreationException e) {
+			if (e.getBeanName() == "factory") {
+				// Verbindung konnte nicht hergestellt werden
+				// => Versuche produktiven MSSQL-Server
+				ctx = new ClassPathXmlApplicationContext(
+						"datenbank-produktiv.xml");
+			}
+		}
 	}
 
 	private ServiceLocator() {
@@ -32,7 +44,7 @@ public class ServiceLocator {
 	public static BelegungDao getBelegungDao() {
 		return (BelegungDao) ctx.getBean("belegungDao", BelegungDao.class);
 	}
-	
+
 	public static BuchungDao getBuchungDao() {
 		return (BuchungDao) ctx.getBean("buchungDao", BuchungDao.class);
 	}
@@ -46,27 +58,30 @@ public class ServiceLocator {
 	}
 
 	public static BelegungManager getBuchungManager() {
-		return (BelegungManager) ctx.getBean("buchungManager", BelegungManager.class);
+		return (BelegungManager) ctx.getBean("buchungManager",
+				BelegungManager.class);
 	}
-	
+
 	public static ReservierungDao getReservierungDao() {
-		return (ReservierungDao) ctx.getBean("reservierungDao", ReservierungDao.class);
+		return (ReservierungDao) ctx.getBean("reservierungDao",
+				ReservierungDao.class);
 	}
 
 	public static AdminManager getAdminManager() {
 		return (AdminManager) ctx.getBean("AdminManager", AdminManager.class);
 	}
 
-
 	public static TagStatusDao getTagStatusDao() {
 		return (TagStatusDao) ctx.getBean("tagStatusDao", TagStatusDao.class);
 	}
 
 	public static ZeitraumStatusDao getZeitraumStatusDao() {
-		return (ZeitraumStatusDao) ctx.getBean("zeitraumStatusDao", ZeitraumStatusDao.class);
+		return (ZeitraumStatusDao) ctx.getBean("zeitraumStatusDao",
+				ZeitraumStatusDao.class);
 	}
-	
+
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
-		return (ZimmerZeitraumBelegungDto) ctx.getBean("zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
+		return (ZimmerZeitraumBelegungDto) ctx.getBean(
+				"zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
 	}
 }

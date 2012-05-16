@@ -6,13 +6,15 @@ import org.springframework.test.AbstractTransactionalDataSourceSpringContextTest
 @SuppressWarnings("deprecation")
 public class AbstractDataAccessTest extends
 		AbstractTransactionalDataSourceSpringContextTests {
+	//TODO: Umstellung auf "TestContext":
+	// http://static.springsource.org/spring/docs/3.0.0.RC1/reference/html/ch09s03.html#testcontext-framework
 	protected SessionFactory sessionFactory;
 
 	/**
 	 * Reference the Spring configuration file for the test case.
 	 */
 	protected String[] getConfigLocations() {
-		return new String[] { "test-application-context.xml" };
+		return new String[] { "datenbank-test.xml" };
 	}
 
 	/**
