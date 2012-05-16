@@ -7,12 +7,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.hdu.zimmerbelegung.dao.BelegungDao;
 import de.hdu.zimmerbelegung.dao.BuchungDao;
+import de.hdu.zimmerbelegung.dao.BuchungKopfDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ReservierungDao;
+import de.hdu.zimmerbelegung.dao.ReservierungKopfDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
+import de.hdu.zimmerbelegung.dto.BuchungDto;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
-import de.hdu.zimmerbelegung.manager.AdminManager;
-import de.hdu.zimmerbelegung.manager.BelegungManager;
 
 public class ServiceLocator {
 	private static ApplicationContext ctx;
@@ -47,6 +48,10 @@ public class ServiceLocator {
 		return (BuchungDao) ctx.getBean("buchungDao", BuchungDao.class);
 	}
 
+	public static BuchungKopfDao getBuchungKopfDao() {
+		return (BuchungKopfDao) ctx.getBean("buchungKopfDao", BuchungKopfDao.class);
+	}
+	
 	public static GastDao getGastDao() {
 		return (GastDao) ctx.getBean("gastDao", GastDao.class);
 	}
@@ -55,22 +60,23 @@ public class ServiceLocator {
 		return (ZimmerDao) ctx.getBean("zimmerDao", ZimmerDao.class);
 	}
 
-	public static BelegungManager getBuchungManager() {
-		return (BelegungManager) ctx.getBean("buchungManager",
-				BelegungManager.class);
-	}
-
 	public static ReservierungDao getReservierungDao() {
 		return (ReservierungDao) ctx.getBean("reservierungDao",
 				ReservierungDao.class);
 	}
-
-	public static AdminManager getAdminManager() {
-		return (AdminManager) ctx.getBean("AdminManager", AdminManager.class);
+	
+	public static ReservierungKopfDao getReservierungKopfDao() {
+		return (ReservierungKopfDao) ctx.getBean("reservierungKopfDao",
+				ReservierungKopfDao.class);
 	}
 
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
 		return (ZimmerZeitraumBelegungDto) ctx.getBean(
 				"zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
+	}
+	
+	public static BuchungDto getBuchungDto() {
+		return (BuchungDto) ctx.getBean(
+				"buchungDto", BuchungDto.class);
 	}
 }

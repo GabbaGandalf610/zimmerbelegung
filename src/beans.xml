@@ -11,9 +11,12 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>de.hdu.zimmerbelegung.model.Belegung</value>
+				<value>de.hdu.zimmerbelegung.model.BelegungKopf</value>
 				<value>de.hdu.zimmerbelegung.model.Buchung</value>
+				<value>de.hdu.zimmerbelegung.model.BuchungKopf</value>
 				<value>de.hdu.zimmerbelegung.model.Gast</value>
 				<value>de.hdu.zimmerbelegung.model.Reservierung</value>
+				<value>de.hdu.zimmerbelegung.model.ReservierungKopf</value>
 				<value>de.hdu.zimmerbelegung.model.Zimmer</value>
 			</list>
 		</property>
@@ -27,7 +30,8 @@
 		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="factory" />
 	</bean>
 
@@ -37,7 +41,17 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
+	<bean id="belegungKopfDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
 	<bean id="buchungDao" class="de.hdu.zimmerbelegung.dao.BuchungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="buchungKopfDao" class="de.hdu.zimmerbelegung.dao.BuchungKopfDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
@@ -52,14 +66,26 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
+	<bean id="reservierungKopfDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
 	<bean id="zimmerDao" class="de.hdu.zimmerbelegung.dao.ZimmerDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
 	</bean>
+	
+	<!-- DTOs -->	
 	<bean id="zimmerZeitraumBelegungDto" class="de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
 	</bean>
+	<bean id="buchungDto" class="de.hdu.zimmerbelegung.dto.BuchungDto">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>	
 </beans>
