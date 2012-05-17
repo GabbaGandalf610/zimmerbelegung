@@ -3,6 +3,7 @@ package de.hdu.zimmerbelegung.ctrl;
 import org.joda.time.LocalDate;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.SimpleDateConstraint;
@@ -36,6 +37,7 @@ public class IndexCtrl {
 	}
 	
 	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
 		GastDao gastDao = ServiceLocator.getGastDao();
 		gastDao.delete(gastSelected);
@@ -53,11 +55,13 @@ public class IndexCtrl {
 	}
 
 	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
 	}
 
 	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
 		GastDao gastDao = ServiceLocator.getGastDao();
 		gastDao.saveOrUpdate(gastSelected);

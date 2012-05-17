@@ -42,7 +42,7 @@
 							</rows>
 						</grid>
 					</north>
-					<west flex="true" splittable="true" width="25%"
+					<west flex="true" splittable="true" width="23%"
 						collapsible="true">
 						<borderlayout>
 							<center>
@@ -99,8 +99,7 @@
 									<listhead>
 										<listheader label="Name" />
 										<listheader label="Vorname" />
-										<listheader label="Straße" />
-										<listheader label="PLZ" />
+										<listheader label="Firma" />
 										<listheader label="Ort" />
 										<listheader label="Land" />
 									</listhead>
@@ -111,9 +110,7 @@
 											<listcell
 												label="@bind(item.vorname)" />
 											<listcell
-												label="@bind(item.strasse)" />
-											<listcell
-												label="@bind(item.plz)" />
+												label="@bind(item.firma)" />
 											<listcell
 												label="@bind(item.ort)" />
 											<listcell
@@ -126,7 +123,7 @@
 							<center flex="true">
 								<grid>
 									<columns>
-										<column width="140px" />
+										<column width="160px" />
 										<column />
 									</columns>
 									<rows>
@@ -138,7 +135,7 @@
 										<row>
 											<cell>
 												<label
-													value="Name / Vorname" width="60px" />
+													value="Name / Vorname / Firma" width="140px" />
 											</cell>
 											<cell>
 												<textbox
@@ -149,6 +146,11 @@
 													value="@bind(vm.gastSelected.vorname)"
 													disabled="@load(empty vm.gastSelected)"
 													tooltiptext="Vorname" />
+												<space />
+												<textbox
+													value="@bind(vm.gastSelected.firma)"
+													disabled="@load(empty vm.gastSelected)"
+													tooltiptext="Firma" />
 											</cell>
 										</row>
 										<row>
@@ -255,8 +257,10 @@
 							für
 							<label value="@bind(vm.gastSelected)"
 								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
-							<button label="reservieren" onClick="@command('doReservieren')" />
-							<button label="buchen" onClick="@command('doBuchen')" />
+							<button label="reservieren"
+								onClick="@command('doReservieren')" />
+							<button label="buchen"
+								onClick="@command('doBuchen')" />
 						</div>
 					</south>
 				</borderlayout>
