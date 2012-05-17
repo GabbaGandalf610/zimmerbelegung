@@ -76,7 +76,7 @@ public class AdminReservierungCtrl {
 	@NotifyChange({ "reservierungSelected", "reservierungList" })
 	public void doDelete() {
 		ReservierungDao reservierungDao = ServiceLocator.getReservierungDao();
-		reservierungDao.saveOrUpdate(reservierungSelected);
+		reservierungDao.delete(reservierungSelected);
 		reservierungList.remove(reservierungSelected);
 		reservierungSelected = null;
 	}

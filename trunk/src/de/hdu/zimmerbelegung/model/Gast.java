@@ -18,6 +18,7 @@ public class Gast {
 	private int id;
 	private String vorname;
 	private String name;
+	private String firma;
 	private String strasse;
 	private String plz;
 	private String ort;
@@ -131,6 +132,13 @@ public class Gast {
 	}
 	public int getId() {
 		return id;
+	}
+	
+	public String getFirma() {
+		return firma;
+	}
+	public void setFirma(String firma) {
+		this.firma = firma;
 	}
 	
 	public String toString() {

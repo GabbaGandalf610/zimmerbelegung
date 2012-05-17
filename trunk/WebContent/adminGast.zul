@@ -9,6 +9,7 @@
 				<listhead>
 					<listheader label="Name" />
 					<listheader label="Vorname" />
+					<listheader label="Firma" />
 					<listheader label="Straße" />
 					<listheader label="PLZ" />
 					<listheader label="Ort" />
@@ -18,6 +19,7 @@
 					<listitem>
 						<listcell label="@bind(item.name)" />
 						<listcell label="@bind(item.vorname)" />
+						<listcell label="@bind(item.firma)" />
 						<listcell label="@bind(item.strasse)" />
 						<listcell label="@bind(item.plz)" />
 						<listcell label="@bind(item.ort)" />
@@ -31,7 +33,7 @@
 			title="Details zum Gast:" open="@load(not empty vm.gastSelected)">
 			<grid>
 				<columns>
-					<column width="140px" />
+					<column width="160px" />
 					<column />
 				</columns>
 				<rows>
@@ -41,7 +43,7 @@
 					</row>
 					<row>
 						<cell>
-							<label value="Name / Vorname" width="60px" />
+							<label value="Name / Vorname / Firma" width="140px" />
 						</cell>
 						<cell>
 							<textbox value="@bind(vm.gastSelected.name)"
@@ -50,6 +52,10 @@
 							<textbox
 								value="@bind(vm.gastSelected.vorname)"
 								disabled="@load(empty vm.gastSelected)" tooltiptext="Vorname" />
+								<space />
+							<textbox
+								value="@bind(vm.gastSelected.firma)"
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Firma" />
 						</cell>
 					</row>
 					<row>
