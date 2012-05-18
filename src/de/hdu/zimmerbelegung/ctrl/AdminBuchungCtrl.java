@@ -19,8 +19,13 @@ public class AdminBuchungCtrl {
 	ListModelList<Gast> gastList;
 	ListModelList<Zimmer> zimmerList;
 	Buchung buchungSelected;
+	boolean neueBuchung = false;
 
+	public boolean isNeueBuchung() {
+		return neueBuchung;
+	}
 	public void setBuchungSelected(Buchung selected) {
+		neueBuchung = false;
 		this.buchungSelected = selected;
 	}
 	public Buchung getBuchungSelected() {
@@ -57,26 +62,19 @@ public class AdminBuchungCtrl {
 	}
 	
 	@Command
-	@NotifyChange({ "buchungSelected", "buchungList" })
+	@NotifyChange({ "buchungSelected", "buchungList", "neueBuchung" })
 	public void doNew() {
 		buchungSelected = new Buchung();
+		neueBuchung = true;
 	}
 	
 	@Command
-	@NotifyChange({ "buchungSelected", "buchungList" })
+	@NotifyChange({ "buchungSelected", "buchungList", "neueBuchung" })
 	public void doSave() {
 		BuchungDao buchungDao = ServiceLocator.getBuchungDao();
-		buchungDao.saveOrUpdate(buchungSelected);
+		buchungDao.save(buchungSelected);
 		if (!buchungList.contains(buchungSelected))
 			buchungList.add(buchungSelected);
-	}
-	
-	@Command
-	@NotifyChange({ "buchungSelected", "buchungList" })
-	public void doDelete() {
-		BuchungDao buchungDao = ServiceLocator.getBuchungDao();
-		buchungDao.delete(buchungSelected);
-		buchungList.remove(buchungSelected);
-		buchungSelected = null;
+		neueBuchung = false;
 	}
 }

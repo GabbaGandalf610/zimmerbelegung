@@ -19,11 +19,16 @@ public class AdminReservierungCtrl {
 	ListModelList<Gast> gastList;
 	ListModelList<Zimmer> zimmerList;
 	Reservierung reservierungSelected;
+	boolean neueReservierung = false; 
 	
+	public boolean isNeueReservierung() {
+		return neueReservierung;
+	}
 	public Reservierung getReservierungSelected() {
 		return reservierungSelected;
 	}
 	public void setReservierungSelected(Reservierung reservierungSelected) {
+		neueReservierung = false;
 		this.reservierungSelected = reservierungSelected;
 	}
 	
@@ -58,26 +63,19 @@ public class AdminReservierungCtrl {
 	}
 	
 	@Command
-	@NotifyChange({ "reservierungSelected", "reservierungList" })
+	@NotifyChange({ "reservierungSelected", "reservierungList", "neueReservierung" })
 	public void doNew() {
 		reservierungSelected = new Reservierung();
+		neueReservierung = true;
 	}
 	
 	@Command
-	@NotifyChange({ "reservierungSelected", "reservierungList" })
+	@NotifyChange({ "reservierungSelected", "reservierungList", "neueReservierung" })
 	public void doSave() {
 		ReservierungDao reservierungDao = ServiceLocator.getReservierungDao();
-		reservierungDao.saveOrUpdate(reservierungSelected);
+		reservierungDao.save(reservierungSelected);
 		if (!reservierungList.contains(reservierungSelected))
 			reservierungList.add(reservierungSelected);
-	}
-	
-	@Command
-	@NotifyChange({ "reservierungSelected", "reservierungList" })
-	public void doDelete() {
-		ReservierungDao reservierungDao = ServiceLocator.getReservierungDao();
-		reservierungDao.delete(reservierungSelected);
-		reservierungList.remove(reservierungSelected);
-		reservierungSelected = null;
+		neueReservierung = false;
 	}
 }
