@@ -23,7 +23,7 @@ public class BuchungDto extends HibernateDaoSupport {
 				|| tmpDatum.equals(bisDatum); tmpDatum = tmpDatum
 				.plusDays(1)) {
 			Buchung buchung = new Buchung(tmpDatum, zimmer, gast, buchungKopf);
-			buchungDao.saveOrUpdate(buchung);
+			buchungDao.save(buchung);
 		}	
 	}
 }

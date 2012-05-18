@@ -9,12 +9,8 @@ public class BuchungDao extends HibernateDaoSupport {
 		return getHibernateTemplate().load(Buchung.class, id);
 	}
 
-	public void saveOrUpdate(Buchung buchung) {
-		getHibernateTemplate().saveOrUpdate(buchung);
-	}
-
-	public void delete(Buchung buchung) {
-		getHibernateTemplate().delete(buchung);
+	public void save(Buchung buchung) {
+		getHibernateTemplate().save(buchung);
 	}
 
 	@SuppressWarnings("unchecked")

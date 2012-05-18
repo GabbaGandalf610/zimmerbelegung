@@ -9,12 +9,8 @@ public class ReservierungDao extends HibernateDaoSupport {
 		return getHibernateTemplate().load(Reservierung.class, id);
 	}
 
-	public void saveOrUpdate(Reservierung reservierung) {
-		getHibernateTemplate().saveOrUpdate(reservierung);
-	}
-
-	public void delete(Reservierung reservierung) {
-		getHibernateTemplate().delete(reservierung);
+	public void save(Reservierung reservierung) {
+		getHibernateTemplate().save(reservierung);
 	}
 
 	@SuppressWarnings("unchecked")

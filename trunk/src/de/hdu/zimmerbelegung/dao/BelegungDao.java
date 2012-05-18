@@ -12,12 +12,8 @@ public class BelegungDao extends HibernateDaoSupport {
 		return getHibernateTemplate().load(Belegung.class, id);
 	}
 
-	public void saveOrUpdate(Belegung belegung) {
-		getHibernateTemplate().saveOrUpdate(belegung);
-	}
-
-	public void delete(Belegung belegung) {
-		getHibernateTemplate().delete(belegung);
+	public void save(Belegung belegung) {
+		getHibernateTemplate().save(belegung);
 	}
 
 	@SuppressWarnings("unchecked")

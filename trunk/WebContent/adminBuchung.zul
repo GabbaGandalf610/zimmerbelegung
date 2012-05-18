@@ -78,10 +78,7 @@
 								onClick="@command('doNew')" />
 							<button id="saveButton" label="Speichern"
 								onClick="@command('doSave')"
-								disabled="@bind(empty vm.buchungSelected)" />
-							<button id="deleteButton" label="Löschen"
-								onClick="@command('doDelete')"
-								disabled="@bind(empty vm.buchungSelected)" />
+								disabled="@bind((empty vm.buchungSelected) || (not vm.neueBuchung))" />
 						</cell>
 					</row>
 				</rows>
