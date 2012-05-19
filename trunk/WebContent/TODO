@@ -1,6 +1,7 @@
 TODO bis zum Abschluss des Projektes am 15. Juni
 - JUnit-Tests für DAOs und DTOs
 - javadoc Dokumentation
+- Temporäre Variablen in Formularen: http://books.zkoss.org/wiki/Small_Talks/2012/February/MVVM_in_ZK6:_Form_Binding
 - Projektpräsentation vorbereiten (Live!)
 - Durchgehender Copyright-Header
 - Befüllen der Datenbank mit Standard-Daten beim Init

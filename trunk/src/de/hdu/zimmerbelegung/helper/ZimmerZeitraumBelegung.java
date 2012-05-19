@@ -6,7 +6,6 @@ import java.util.List;
 
 import de.hdu.zimmerbelegung.model.Zimmer;
 
-//public class ZimmerZeitraumBelegung extends HashMap<LocalDate, Status> {
 public class ZimmerZeitraumBelegung {
 	private Zimmer zimmer;
 	private List<DatumStatus> datumStatusList = new ArrayList<DatumStatus>();
