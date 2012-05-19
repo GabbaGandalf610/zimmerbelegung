@@ -1,0 +1,190 @@
+<zk>
+	<borderlayout width="100%" height="100%" sclass="mainLayout"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminBelegungCtrl')">
+		<north title="Buchungen">
+			<listbox model="@load(vm.belegungKopfList)"
+				selectedItem="@save(vm.belegungKopfSelected)" vflex="true"
+				hflex="true" emptyMessage="Keine Buchungen vorhanden.">
+				<listhead>
+					<listheader label="Id" />
+					<listheader label="Gast" />
+					<listheader label="Zimmer" />
+					<listheader label="Von" />
+					<listheader label="Bis" />
+					<listheader label="Art" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem>
+						<listcell label="@bind(item.id)" />
+						<listcell label="@bind(item.gast)" />
+						<listcell label="@bind(item.zimmer)" />
+						<listcell label="@bind(item.datumVon)" />
+						<listcell label="@bind(item.datumBis)" />
+						<listcell label="@bind(item.art)" />
+					</listitem>
+				</template>
+			</listbox>
+		</north>
+		<center border="normal">
+			<grid>
+				<columns>
+					<column width="140px" />
+					<column width="360px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Gast" />
+						<combobox model="@load(vm.gastList)"
+							width="250px" mold="rounded"
+							selectedItem="@bind(vm.belegungKopfDummy.gast)"
+							disabled="@load(empty vm.belegungKopfDummy)">
+							<template name="model" var="item">
+								<comboitem label="@load(item.id)"
+									description="@load(item)" />
+							</template>
+						</combobox>
+					</row>
+					<row>
+						<label value="Zimmer" />
+						<combobox model="@load(vm.zimmerList)"
+							width="150px" mold="rounded"
+							selectedItem="@bind(vm.belegungKopfDummy.zimmer)"
+							autodrop="true"
+							disabled="@load(empty vm.belegungKopfDummy)">
+							<template name="model" var="item">
+								<comboitem
+									label="@load(item.zimmernummer)" description="@load(item)" />
+							</template>
+						</combobox>
+					</row>
+					<row>
+						<label value="Von" />
+						<datebox cols="12" format="medium"
+								value="@bind(vm.belegungKopfDummy.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+								mold="rounded" disabled="@load(empty vm.belegungKopfDummy)" tooltiptext="Datum" />
+					</row>
+					<row>
+						<label value="Bis" />
+						<datebox cols="12" format="medium"
+								value="@bind(vm.belegungKopfDummy.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+								mold="rounded" disabled="@load(empty vm.belegungKopfDummy)" tooltiptext="Datum" />
+					</row>
+					<row>
+						<label value="Art" />
+						<combobox model="@load(vm.allBelegungArt)"
+							width="150px" mold="rounded"
+							value="@load(vm.belegungKopfDummy.art)"
+							autodrop="true"
+							disabled="@load(empty vm.belegungKopfDummy)">
+							<template name="model" var="item">
+								<comboitem
+									label="@load(item.name)" description="@load(item)" />
+							</template>
+						</combobox>
+					</row>
+					<row>
+						<cell colspan="2">
+							<button id="newButton" label="Neu"
+								onClick="@command('doNew')" />
+							<button id="saveButton" label="Speichern"
+								onClick="@command('doSave')"
+								disabled="@bind(empty vm.belegungKopfDummy)" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</center>
+<!-- 		<center border="normal"> -->
+<!-- 			<grid> -->
+<!-- 				<columns> -->
+<!-- 					<column width="140px" /> -->
+<!-- 					<column width="360px" /> -->
+<!-- 				</columns> -->
+<!-- 				<rows> -->
+<!-- 					<row> -->
+<!-- 						<label value="Gast" /> -->
+<!-- 						<combobox model="@load(vm.gastList)" -->
+<!-- 							width="250px" mold="rounded" -->
+<!-- 							selected="@bind(vm.belegungKopfDummy.gast)" -->
+<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
+<!-- 							<template name="model" var="item"> -->
+<!-- 								<comboitem label="@load(item.id)" -->
+<!-- 									description="@load(item)" /> -->
+<!-- 							</template> -->
+<!-- 						</combobox> -->
+<!-- 					</row> -->
+<!-- 					<row> -->
+<!-- 						<label value="Zimmer" /> -->
+<!-- 						<combobox model="@load(vm.zimmerList)" -->
+<!-- 							width="150px" mold="rounded" -->
+<!-- 							selected="@save(vm.belegungKopfSelected.zimmer)" -->
+<!-- 							autodrop="true" -->
+<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
+<!-- 							<template name="model" var="item"> -->
+<!-- 								<comboitem -->
+<!-- 									label="@load(item.zimmernummer)" description="@load(item)" /> -->
+<!-- 							</template> -->
+<!-- 						</combobox> -->
+<!-- 					</row> -->
+<!-- 					<row> -->
+<!-- 						<label value="Von" /> -->
+<!-- 						<datebox cols="12" format="medium" -->
+<!-- 								value="@save(vm.belegungKopfSelected.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" -->
+<!-- 								mold="rounded" disabled="@load(empty vm.belegungKopfSelected)" tooltiptext="Datum" /> -->
+<!-- 					</row> -->
+<!-- 					<row> -->
+<!-- 						<label value="Bis" /> -->
+<!-- 						<datebox cols="12" format="medium" -->
+<!-- 								value="@save(vm.belegungKopfSelected.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" -->
+<!-- 								mold="rounded" disabled="@load(empty vm.belegungKopfSelected)" tooltiptext="Datum" /> -->
+<!-- 					</row> -->
+<!-- 					<row> -->
+<!-- 						<label value="Art" /> -->
+<!-- 						<combobox model="@load(BelegungArt.all)" -->
+<!-- 							width="150px" mold="rounded" -->
+<!-- 							value="@load(vm.belegungKopfSelected.art)" -->
+<!-- 							autodrop="true" -->
+<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
+<!-- 							<template name="model" var="item"> -->
+<!-- 								<comboitem -->
+<!-- 									label="@load(item.art)" description="@load(item)" /> -->
+<!-- 							</template> -->
+<!-- 						</combobox> -->
+<!-- 					</row> -->
+<!-- 					<row> -->
+<!-- 						<cell colspan="2"> -->
+<!-- 							<button id="newButton" label="Neu" -->
+<!-- 								onClick="@command('doNew')" /> -->
+<!-- 							<button id="saveButton" label="Speichern" -->
+<!-- 								onClick="@command('doSave')" -->
+<!-- 								disabled="@bind(empty vm.belegungKopfSelected)" /> -->
+<!-- 						</cell> -->
+<!-- 					</row> -->
+<!-- 				</rows> -->
+<!-- 			</grid> -->
+<!-- 		</center> -->
+		<south height="20%" flex="true" title="Übersicht">
+			<listbox model="@bind(vm.belegungList)"
+				selectedItem="@bind(vm.belegungSelected)" vflex="true" hflex="true"
+				emptyMessage="Keine Belegungen vorhanden.">
+				<listhead>
+					<listheader label="Id" />
+					<listheader label="Datum" />
+					<listheader label="Zimmer" />
+					<listheader label="Gast" />
+				</listhead>
+				<template name="model" var="item">
+					<listitem>
+						<listcell label="@bind(item.id)" />
+						<listcell
+							label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
+						<listcell label="@bind(item.zimmer)" />
+						<listcell label="@bind(item.gast)" />
+					</listitem>
+				</template>
+			</listbox>
+		</south>
+	</borderlayout>
+
+</zk>

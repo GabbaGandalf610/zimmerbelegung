@@ -9,7 +9,6 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.SimpleDateConstraint;
 
 import de.hdu.zimmerbelegung.dao.GastDao;
-import de.hdu.zimmerbelegung.dto.BuchungDto;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
 import de.hdu.zimmerbelegung.helper.Status;
 import de.hdu.zimmerbelegung.helper.ZimmerZeitraumBelegung;
@@ -32,8 +31,8 @@ public class IndexCtrl {
 	@Command
 	public void doBuchen() {
 		if (!isZusammenfassungAnzeigen()) return; 
-		BuchungDto buchungDto = ServiceLocator.getBuchungDto();
-		buchungDto.create(datumVon, datumBis, zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+//		BuchungDto buchungDto = ServiceLocator.getBuchungDto();
+//		buchungDto.create(datumVon, datumBis, zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
 	}
 	
 	@Command

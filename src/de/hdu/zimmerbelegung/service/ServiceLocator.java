@@ -6,13 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.hdu.zimmerbelegung.dao.BelegungDao;
-import de.hdu.zimmerbelegung.dao.BuchungDao;
-import de.hdu.zimmerbelegung.dao.BuchungKopfDao;
+import de.hdu.zimmerbelegung.dao.BelegungKopfDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
-import de.hdu.zimmerbelegung.dao.ReservierungDao;
-import de.hdu.zimmerbelegung.dao.ReservierungKopfDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
-import de.hdu.zimmerbelegung.dto.BuchungDto;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
 
 public class ServiceLocator {
@@ -28,7 +24,6 @@ public class ServiceLocator {
 				// => Versuche produktiven MSSQL-Server
 				ctx = new ClassPathXmlApplicationContext(
 						"datenbank-entwicklung.xml");
-			
 		}
 	}
 
@@ -43,12 +38,8 @@ public class ServiceLocator {
 		return (BelegungDao) ctx.getBean("belegungDao", BelegungDao.class);
 	}
 
-	public static BuchungDao getBuchungDao() {
-		return (BuchungDao) ctx.getBean("buchungDao", BuchungDao.class);
-	}
-
-	public static BuchungKopfDao getBuchungKopfDao() {
-		return (BuchungKopfDao) ctx.getBean("buchungKopfDao", BuchungKopfDao.class);
+	public static BelegungKopfDao getBelegungKopfDao() {
+		return (BelegungKopfDao) ctx.getBean("belegungKopfDao", BelegungKopfDao.class);
 	}
 	
 	public static GastDao getGastDao() {
@@ -58,24 +49,8 @@ public class ServiceLocator {
 	public static ZimmerDao getZimmerDao() {
 		return (ZimmerDao) ctx.getBean("zimmerDao", ZimmerDao.class);
 	}
-
-	public static ReservierungDao getReservierungDao() {
-		return (ReservierungDao) ctx.getBean("reservierungDao",
-				ReservierungDao.class);
-	}
-	
-	public static ReservierungKopfDao getReservierungKopfDao() {
-		return (ReservierungKopfDao) ctx.getBean("reservierungKopfDao",
-				ReservierungKopfDao.class);
-	}
-
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
 		return (ZimmerZeitraumBelegungDto) ctx.getBean(
 				"zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
-	}
-	
-	public static BuchungDto getBuchungDto() {
-		return (BuchungDto) ctx.getBean(
-				"buchungDto", BuchungDto.class);
 	}
 }

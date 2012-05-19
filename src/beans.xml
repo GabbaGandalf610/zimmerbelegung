@@ -12,11 +12,7 @@
 			<list>
 				<value>de.hdu.zimmerbelegung.model.Belegung</value>
 				<value>de.hdu.zimmerbelegung.model.BelegungKopf</value>
-				<value>de.hdu.zimmerbelegung.model.Buchung</value>
-				<value>de.hdu.zimmerbelegung.model.BuchungKopf</value>
 				<value>de.hdu.zimmerbelegung.model.Gast</value>
-				<value>de.hdu.zimmerbelegung.model.Reservierung</value>
-				<value>de.hdu.zimmerbelegung.model.ReservierungKopf</value>
 				<value>de.hdu.zimmerbelegung.model.Zimmer</value>
 			</list>
 		</property>
@@ -41,32 +37,12 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
-	<bean id="belegungKopfDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="buchungDao" class="de.hdu.zimmerbelegung.dao.BuchungDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="buchungKopfDao" class="de.hdu.zimmerbelegung.dao.BuchungKopfDao">
+	<bean id="belegungKopfDao" class="de.hdu.zimmerbelegung.dao.BelegungKopfDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
 	</bean>
 	<bean id="gastDao" class="de.hdu.zimmerbelegung.dao.GastDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="reservierungDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>
-	<bean id="reservierungKopfDao" class="de.hdu.zimmerbelegung.dao.ReservierungDao">
 		<property name="sessionFactory">
 			<ref bean="factory" />
 		</property>
@@ -83,9 +59,4 @@
 			<ref bean="factory" />
 		</property>
 	</bean>
-	<bean id="buchungDto" class="de.hdu.zimmerbelegung.dto.BuchungDto">
-		<property name="sessionFactory">
-			<ref bean="factory" />
-		</property>
-	</bean>	
 </beans>

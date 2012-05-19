@@ -8,22 +8,21 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import de.hdu.zimmerbelegung.dao.BelegungDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
+import de.hdu.zimmerbelegung.helper.BelegungArt;
 import de.hdu.zimmerbelegung.helper.DatumStatus;
 import de.hdu.zimmerbelegung.helper.Status;
 import de.hdu.zimmerbelegung.helper.ZimmerZeitraumBelegung;
 import de.hdu.zimmerbelegung.model.Belegung;
-import de.hdu.zimmerbelegung.model.Buchung;
-import de.hdu.zimmerbelegung.model.Reservierung;
 import de.hdu.zimmerbelegung.model.Zimmer;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
-	public List<ZimmerZeitraumBelegung> getAll(LocalDate vonDatum,
-			LocalDate bisDatum) {
+	public List<ZimmerZeitraumBelegung> getAll(LocalDate datumVon,
+			LocalDate datumBis) {
 		// Belegungen im Zeitraum holen
 		BelegungDao belegungDao = ServiceLocator.getBelegungDao();
-		List<Belegung> belegungList = belegungDao.getAllInZeitraum(vonDatum,
-				bisDatum);
+		List<Belegung> belegungList = belegungDao.getAllInZeitraum(datumVon,
+				datumBis);
 
 		// Anzahl der Zimmer auslesen
 		ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
@@ -39,30 +38,30 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 			// Belegungen ("RESERVIERT" oder "GEBUCHT" herausfinden)
 			for (Belegung belegung : belegungList) {
 				if (belegung.getZimmer().equals(zimmer)) {
-					if (belegung instanceof Reservierung) {
+					if (belegung.getArt() == BelegungArt.RESERVIERUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
 								belegung.getDatum(), Status.RESERVIERT));
-					} else if (belegung instanceof Buchung) {
+					} else if (belegung.getArt() == BelegungArt.BUCHUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
 								belegung.getDatum(), Status.GEBUCHT));
 					}
 				}
 			}
 			// Restliche Tage mit Status "FREI" auffüllen
-			for (LocalDate tmpDatum = vonDatum; tmpDatum.isBefore(bisDatum)
-					|| tmpDatum.equals(bisDatum); tmpDatum = tmpDatum
+			for (LocalDate datumTmp = datumVon; datumTmp.isBefore(datumBis)
+					|| datumTmp.equals(datumBis); datumTmp = datumTmp
 					.plusDays(1)) {
 				boolean datumGefunden = false;
 				for (DatumStatus datumStatus : zimmerZeitraumBelegung
 						.getDatumStatusList()) {
-					if (datumStatus.getDatum().equals(tmpDatum)) {
+					if (datumStatus.getDatum().equals(datumTmp)) {
 						datumGefunden = true;
 						break;
 					}
 				}
 				if (!datumGefunden) {
 					zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
-							tmpDatum, Status.FREI));
+							datumTmp, Status.FREI));
 				}
 			}
 			zimmerZeitraumBelegungList.add(zimmerZeitraumBelegung);
