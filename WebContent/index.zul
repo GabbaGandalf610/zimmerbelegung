@@ -235,6 +235,41 @@
 									</rows>
 								</grid>
 							</center>
+							<south height="20%">
+
+								<listbox
+									model="@load(vm.belegungKopfList)"
+									selectedItem="@load((vm.gastSelected))" vflex="true"
+									hflex="true" emptyMessage="Keine Buchungen vorhanden.">
+									<listhead>
+										<listheader label="Id" />
+										<listheader label="Gast" />
+										<listheader label="Zimmer" />
+										<listheader label="Von" />
+										<listheader label="Bis" />
+										<listheader label="Art" />
+									</listhead>
+									<template name="model" var="item">
+										<listitem>
+											<listcell
+												label="@bind(item.id)" />
+											<listcell
+												label="@bind(item.gast)" />
+											<listcell
+												label="@bind(item.zimmer)" />
+											<listcell
+												label="@bind(item.datumVon)" />
+											<listcell
+												label="@bind(item.datumBis)" />
+											<listcell
+												label="@bind(item.art)" />
+										</listitem>
+									</template>
+								</listbox>
+
+
+
+							</south>
 						</borderlayout>
 					</center>
 					<south border="normal"
@@ -257,12 +292,13 @@
 							für
 							<label value="@bind(vm.gastSelected)"
 								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
-							<button label="reservieren"
+							<button label="reservieren" 
 								onClick="@command('doReservieren')" />
 							<button label="buchen"
 								onClick="@command('doBuchen')" />
 						</div>
 					</south>
+
 				</borderlayout>
 			</tabpanel>
 
@@ -273,9 +309,7 @@
 					<tabs id="tabs" width="150px">
 						<tab id="adminGastTab" label="Gäste" />
 						<tab id="adminZimmerTab" label="Zimmer" />
-						<tab id="adminBuchungTab" label="Buchungen" />
-						<tab id="adminReservierungTab"
-							label="Reservierungen" />
+						<tab id="adminBelegungTab" label="Belegungen" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -286,12 +320,8 @@
 							<include src="adminZimmer.zul" />
 						</tabpanel>
 
-						<tabpanel fulfill="adminBuchungTab.onSelect">
-							<include src="adminBuchung.zul" />
-						</tabpanel>
-						<tabpanel
-							fulfill="adminReservierungTab.onSelect">
-							<include src="adminReservierung.zul" />
+						<tabpanel fulfill="adminBelegungTab.onSelect">
+							<include src="adminBelegung.zul" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>

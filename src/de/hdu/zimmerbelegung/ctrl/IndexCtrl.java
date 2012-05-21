@@ -8,10 +8,14 @@ import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.SimpleDateConstraint;
 
+import de.hdu.zimmerbelegung.dao.BelegungKopfDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
+import de.hdu.zimmerbelegung.helper.BelegungArt;
 import de.hdu.zimmerbelegung.helper.Status;
 import de.hdu.zimmerbelegung.helper.ZimmerZeitraumBelegung;
+import de.hdu.zimmerbelegung.model.Belegung;
+import de.hdu.zimmerbelegung.model.BelegungKopf;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
@@ -21,6 +25,12 @@ public class IndexCtrl {
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
 	String gastSuche;
+	ListModelList<Belegung> belegungList;
+	ListModelList<BelegungKopf> belegungKopfList;
+
+	public BelegungArt[] getAllBelegungArt() {
+		return BelegungArt.getAll();
+	}
 
 	private final int MAX_BUCHUNGSLAENGE = 1;
 
@@ -28,13 +38,41 @@ public class IndexCtrl {
 
 	ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected;
 
+	// Roland
+
+	@DependsOn({ "gastSelected" })
+	@NotifyChange({ "datumVon", "datumBis", "zimmerZeitraumBelegungSelected" })
+	public ListModel<BelegungKopf> getBelegungKopfList() {
+		if (gastSelected == null)
+			return null;
+		// Liste initialisieren
+		belegungKopfList = new ListModelList<BelegungKopf>();
+		for (BelegungKopf belegungsKopf : this.gastSelected.getBelegungKopf()) {
+			belegungKopfList.add((BelegungKopf) belegungsKopf);
+		}
+		return belegungKopfList;
+	}
+
 	@Command
 	public void doBuchen() {
-		if (!isZusammenfassungAnzeigen()) return; 
-//		BuchungDto buchungDto = ServiceLocator.getBuchungDto();
-//		buchungDto.create(datumVon, datumBis, zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+		if (!isZusammenfassungAnzeigen())
+			return;
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.create(BelegungArt.BUCHUNG, datumVon, datumBis,
+				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+		// System.out.println(gastSelected.getBelegung());
+		System.out.println(gastSelected.getBelegungKopf());
 	}
-	
+
+	@Command
+	public void doReservieren() {
+		if (!isZusammenfassungAnzeigen())
+			return;
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
+				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+	}
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
@@ -125,9 +163,12 @@ public class IndexCtrl {
 		return zimmerZeitraumBelegungSelected;
 	}
 
-	@DependsOn({ "datumVon", "datumBis", "zimmerZeitraumBelegungSelected", "gastSelected" })
+	@DependsOn({ "datumVon", "datumBis", "zimmerZeitraumBelegungSelected",
+			"gastSelected" })
 	public boolean isZusammenfassungAnzeigen() {
-		if (datumVon == null || datumBis == null || zimmerZeitraumBelegungSelected == null || gastSelected == null) {
+		if (datumVon == null || datumBis == null
+				|| zimmerZeitraumBelegungSelected == null
+				|| gastSelected == null) {
 			return false;
 		}
 		if (zimmerZeitraumBelegungSelected.getStatus() != Status.FREI) {

@@ -95,75 +95,7 @@
 				</rows>
 			</grid>
 		</center>
-<!-- 		<center border="normal"> -->
-<!-- 			<grid> -->
-<!-- 				<columns> -->
-<!-- 					<column width="140px" /> -->
-<!-- 					<column width="360px" /> -->
-<!-- 				</columns> -->
-<!-- 				<rows> -->
-<!-- 					<row> -->
-<!-- 						<label value="Gast" /> -->
-<!-- 						<combobox model="@load(vm.gastList)" -->
-<!-- 							width="250px" mold="rounded" -->
-<!-- 							selected="@bind(vm.belegungKopfDummy.gast)" -->
-<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
-<!-- 							<template name="model" var="item"> -->
-<!-- 								<comboitem label="@load(item.id)" -->
-<!-- 									description="@load(item)" /> -->
-<!-- 							</template> -->
-<!-- 						</combobox> -->
-<!-- 					</row> -->
-<!-- 					<row> -->
-<!-- 						<label value="Zimmer" /> -->
-<!-- 						<combobox model="@load(vm.zimmerList)" -->
-<!-- 							width="150px" mold="rounded" -->
-<!-- 							selected="@save(vm.belegungKopfSelected.zimmer)" -->
-<!-- 							autodrop="true" -->
-<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
-<!-- 							<template name="model" var="item"> -->
-<!-- 								<comboitem -->
-<!-- 									label="@load(item.zimmernummer)" description="@load(item)" /> -->
-<!-- 							</template> -->
-<!-- 						</combobox> -->
-<!-- 					</row> -->
-<!-- 					<row> -->
-<!-- 						<label value="Von" /> -->
-<!-- 						<datebox cols="12" format="medium" -->
-<!-- 								value="@save(vm.belegungKopfSelected.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" -->
-<!-- 								mold="rounded" disabled="@load(empty vm.belegungKopfSelected)" tooltiptext="Datum" /> -->
-<!-- 					</row> -->
-<!-- 					<row> -->
-<!-- 						<label value="Bis" /> -->
-<!-- 						<datebox cols="12" format="medium" -->
-<!-- 								value="@save(vm.belegungKopfSelected.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')" -->
-<!-- 								mold="rounded" disabled="@load(empty vm.belegungKopfSelected)" tooltiptext="Datum" /> -->
-<!-- 					</row> -->
-<!-- 					<row> -->
-<!-- 						<label value="Art" /> -->
-<!-- 						<combobox model="@load(BelegungArt.all)" -->
-<!-- 							width="150px" mold="rounded" -->
-<!-- 							value="@load(vm.belegungKopfSelected.art)" -->
-<!-- 							autodrop="true" -->
-<!-- 							disabled="@load(empty vm.belegungKopfSelected)"> -->
-<!-- 							<template name="model" var="item"> -->
-<!-- 								<comboitem -->
-<!-- 									label="@load(item.art)" description="@load(item)" /> -->
-<!-- 							</template> -->
-<!-- 						</combobox> -->
-<!-- 					</row> -->
-<!-- 					<row> -->
-<!-- 						<cell colspan="2"> -->
-<!-- 							<button id="newButton" label="Neu" -->
-<!-- 								onClick="@command('doNew')" /> -->
-<!-- 							<button id="saveButton" label="Speichern" -->
-<!-- 								onClick="@command('doSave')" -->
-<!-- 								disabled="@bind(empty vm.belegungKopfSelected)" /> -->
-<!-- 						</cell> -->
-<!-- 					</row> -->
-<!-- 				</rows> -->
-<!-- 			</grid> -->
-<!-- 		</center> -->
+
 		<south height="20%" flex="true" title="Übersicht">
 			<listbox model="@bind(vm.belegungList)"
 				selectedItem="@bind(vm.belegungSelected)" vflex="true" hflex="true"

@@ -1,7 +1,15 @@
 <zk>
-	<borderlayout width="100%" height="100%" 
+	<borderlayout width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.AdminGastCtrl')">
+		<north flex="false">
+			<div>
+				<label value="Gast Suche: " />
+				<textbox tooltiptext="Gast Suche"
+					value="@bind(vm.gastSuche)" onChange="@command('doGuestSearch')"
+					instant="true" />
+			</div>
+		</north>
 		<center title="Übersicht" border="normal">
 			<listbox model="@load(vm.items)"
 				selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
@@ -43,7 +51,8 @@
 					</row>
 					<row>
 						<cell>
-							<label value="Name / Vorname / Firma" width="140px" />
+							<label value="Name / Vorname / Firma"
+								width="140px" />
 						</cell>
 						<cell>
 							<textbox value="@bind(vm.gastSelected.name)"
@@ -52,7 +61,7 @@
 							<textbox
 								value="@bind(vm.gastSelected.vorname)"
 								disabled="@load(empty vm.gastSelected)" tooltiptext="Vorname" />
-								<space />
+							<space />
 							<textbox
 								value="@bind(vm.gastSelected.firma)"
 								disabled="@load(empty vm.gastSelected)" tooltiptext="Firma" />
@@ -92,23 +101,26 @@
 							<space />
 							<textbox
 								value="@bind(vm.gastSelected.mobil)"
-								disabled="@load(empty vm.gastSelected)" tooltiptext="Mobiltelefon"/>
+								disabled="@load(empty vm.gastSelected)"
+								tooltiptext="Mobiltelefon" />
 							<space />
 							<textbox value="@bind(vm.gastSelected.fax)"
-								disabled="@load(empty vm.gastSelected)" tooltiptext="Fax"/>
+								disabled="@load(empty vm.gastSelected)" tooltiptext="Fax" />
 						</cell>
 					</row>
 					<row>
 						<label value="E-Mail" />
 						<textbox value="@bind(vm.gastSelected.email)"
 							disabled="@load(empty vm.gastSelected)"
-							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!" tooltiptext="E-Mail"/>
+							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
+							tooltiptext="E-Mail" />
 					</row>
 					<row>
 						<label value="Kommentar" />
 						<textbox
 							value="@bind(vm.gastSelected.kommentar)"
-							disabled="@load(empty vm.gastSelected)" rows="3" width="30%" tooltiptext="Kommentar"/>
+							disabled="@load(empty vm.gastSelected)" rows="3" width="30%"
+							tooltiptext="Kommentar" />
 					</row>
 
 					<row>

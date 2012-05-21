@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.joda.time.LocalDate;
+
+import com.sun.istack.internal.NotNull;
 
 import de.hdu.zimmerbelegung.helper.BelegungArt;
 
@@ -27,6 +30,10 @@ public class BelegungKopf {
 	@OrderBy("datum")
 	private List<Belegung> belegungen = new ArrayList<Belegung>();
 	
+	@ManyToOne(targetEntity=Gast.class,optional=false)
+	@NotNull
+	private Gast gastid;
+	
 	public List<Belegung> getBelegungen() throws Exception {
 		pruefeKonsistenz();
 		return belegungen;
@@ -35,6 +42,10 @@ public class BelegungKopf {
 	public BelegungKopf() {
 		super();
 	}
+	public BelegungKopf(Gast gast) {
+		gastid = gast;
+	}
+
 	public void setBelegungen(List<Belegung> belegungen) {
 		this.belegungen = belegungen;
 	}
@@ -137,4 +148,14 @@ public class BelegungKopf {
 			datum = datum.plusDays(1);
 		}
 	}
+
+	public Gast getGastid() {
+		return gastid;
+	}
+
+	public void setGastid(Gast gastid) {
+		this.gastid = gastid;
+	}
+
+
 }
