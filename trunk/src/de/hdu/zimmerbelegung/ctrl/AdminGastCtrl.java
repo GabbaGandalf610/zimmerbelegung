@@ -12,6 +12,7 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 public class AdminGastCtrl {
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
+	String gastSuche;
 
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
@@ -36,7 +37,7 @@ public class AdminGastCtrl {
 	public void doNew() {
 		gastSelected = new Gast();
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
@@ -45,7 +46,7 @@ public class AdminGastCtrl {
 		if (!gastList.contains(gastSelected))
 			gastList.add(gastSelected);
 	}
-	
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
@@ -53,5 +54,22 @@ public class AdminGastCtrl {
 		gastDao.delete(gastSelected);
 		gastList.remove(gastSelected);
 		gastSelected = null;
+	}
+
+	@Command
+	public void doGuestSearch() {
+		gastList.clear();
+		GastDao gastDao = ServiceLocator.getGastDao();
+		System.out.println(gastSuche);
+		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
+		gastSelected = null;
+	}
+
+	public void setGastSuche(String gastSuche) {
+		this.gastSuche = gastSuche;
+	}
+
+	public String getGastSuche() {
+		return gastSuche;
 	}
 }

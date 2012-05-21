@@ -9,7 +9,6 @@ import org.zkoss.zk.ui.UiException;
 import java.util.Date;
 
 
-@SuppressWarnings("rawtypes")
 public class JodaTimeZkConverter implements Converter {
     /**
      * Convert Date to LocalDate.

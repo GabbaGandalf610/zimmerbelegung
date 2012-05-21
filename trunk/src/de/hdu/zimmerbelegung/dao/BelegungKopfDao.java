@@ -32,7 +32,7 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 	}
 	
 	public void create(BelegungArt art, LocalDate datumVon, LocalDate datumBis, Zimmer zimmer, Gast gast) {
-		BelegungKopf belegungKopf = new BelegungKopf();
+		BelegungKopf belegungKopf = new BelegungKopf(gast);
 		List<Belegung> belegungen = new ArrayList<Belegung>();
 		for (LocalDate datumTmp = datumVon; datumTmp.isBefore(datumBis)
 				|| datumTmp.equals(datumBis); datumTmp = datumTmp

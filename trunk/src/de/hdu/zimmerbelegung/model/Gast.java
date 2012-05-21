@@ -7,9 +7,14 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Gast {
@@ -28,73 +33,94 @@ public class Gast {
 	private String fax;
 	private String email;
 	private String kommentar;
-	
-	
+	@OneToMany(mappedBy = "gastid", fetch = FetchType.EAGER)
+	@OrderBy("id DESC")
+	private Set<BelegungKopf> belegungKopf;
+	@OneToMany(mappedBy="gast", fetch= FetchType.EAGER)
+	private Set<Belegung> belegung;
+
+	public Set<BelegungKopf> getBelegungKopf() {
+		return belegungKopf;
+	}
+
+	public void setBelegungKopf(Set<BelegungKopf> belegungKopf) {
+		this.belegungKopf = belegungKopf;
+	}
+
 	public String getStrasse() {
 		return strasse;
 	}
+
 	public void setStrasse(String strasse) {
 		this.strasse = strasse;
 	}
+
 	public String getPlz() {
 		return plz;
 	}
+
 	public void setPlz(String plz) {
 		this.plz = plz;
 	}
+
 	public String getOrt() {
 		return ort;
 	}
+
 	public void setOrt(String ort) {
 		this.ort = ort;
 	}
+
 	public String getLand() {
 		return land;
 	}
+
 	public void setLand(String land) {
 		this.land = land;
 	}
+
 	public String getTelefon() {
 		return telefon;
 	}
+
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
+
 	public String getMobil() {
 		return mobil;
 	}
+
 	public void setMobil(String mobil) {
 		this.mobil = mobil;
 	}
+
 	public String getFax() {
 		return fax;
 	}
+
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-//	public Set<Belegung> getBelegungen() {
-//		return belegungen;
-//	}
-//	public void setBelegungen(Set<Belegung> belegungen) {
-//		this.belegungen = belegungen;
-//	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	
 	public String getKommentar() {
 		return kommentar;
 	}
-	
-	public Gast(){
-		
+
+	public Gast() {
+
 	}
 
 	public Gast(int id, String vorname, String name, String strasse,
@@ -113,43 +139,50 @@ public class Gast {
 		this.fax = fax;
 		this.email = email;
 		this.kommentar = kommentar;
-		//this.belegungen = belegungen;
 	}
+
 	public void setKommentar(String kommentar) {
 		this.kommentar = kommentar;
 	}
+
 	public String getVorname() {
 		return vorname;
 	}
+
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public String getFirma() {
 		return firma;
 	}
+
 	public void setFirma(String firma) {
 		this.firma = firma;
 	}
-	
+
 	public String toString() {
 		return this.vorname + " " + this.name;
 	}
-/*	@OneToMany(targetEntity=Belegung.class)
-	private Set<Belegung> belegungen;
+
 	public Set<Belegung> getBelegung() {
-		return belegungen;
+		return belegung;
 	}
-	public void setBuchungen(Set<Belegung> belegungen) {
-		this.belegungen = belegungen;
-	}*/
+
+	public void setBelegung(Set<Belegung> belegung) {
+		this.belegung = belegung;
+	}
+
 }
