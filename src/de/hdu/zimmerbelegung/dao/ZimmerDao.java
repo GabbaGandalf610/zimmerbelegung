@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class ZimmerDao extends HibernateDaoSupport {
-	public Zimmer getId(int id) {
+	public Zimmer getbyId(int id) {
 		return getHibernateTemplate().load(Zimmer.class, id);
 	}
 
@@ -22,5 +22,12 @@ public class ZimmerDao extends HibernateDaoSupport {
 	@SuppressWarnings("unchecked")
 	public List<Zimmer> getAll() {
 		return getHibernateTemplate().find("from Zimmer order by zimmernummer");
+	}
+	
+	public void deleteAll() {
+		List<Zimmer> myZimmerList = this.getAll();
+		for (Zimmer tempZimmer : myZimmerList) {
+			getHibernateTemplate().delete(tempZimmer);	
+		}
 	}
 }

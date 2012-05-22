@@ -26,7 +26,7 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 		List<Zimmer> alleZimmer = zimmerDao.getAll();
 		for (Zimmer z : alleZimmer) {
 			int id = z.getId();
-			Zimmer found = zimmerDao.getId(id);
+			Zimmer found = zimmerDao.getbyId(id);
 			assertEquals(z.getZimmerbeschreibung(),
 					found.getZimmerbeschreibung());
 		}

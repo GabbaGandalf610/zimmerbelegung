@@ -10,4 +10,10 @@
 			<ref bean="zimmerDao" />
 		</property>
 	</bean>
+
+	<bean id="gastDaoTest" class="de.hdu.zimmerbelegung.dao.GastDaoTest">
+		<property name="GastDao">
+			<ref bean="GastDao" />
+		</property>
+	</bean>
 </beans>
