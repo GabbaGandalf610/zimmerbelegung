@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import de.hdu.zimmerbelegung.model.Gast;
 
 public class GastDao extends HibernateDaoSupport {
-	public Gast get(int id) {
+	public Gast getbyId(int id) {
 		return getHibernateTemplate().load(Gast.class, id);
 	}
 
@@ -35,6 +35,21 @@ public class GastDao extends HibernateDaoSupport {
 							gastSuche + "%", gastSuche + "%", "%" + gastSuche + "%",
 							gastSuche + "%", gastSuche + "%");
 		}
+	}
+	
+	public void deleteAll() {
+		List<Gast> myGastList = this.getAll();
+		for (Gast tempGast : myGastList) {
+			getHibernateTemplate().delete(tempGast);	
+		}
+	}
+	
+	public void save(Gast gast) {
+		getHibernateTemplate().save(gast);
+	} 
+	
+	public void update(Gast gast) {
+		getHibernateTemplate().update(gast);
 	}
 
 }

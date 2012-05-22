@@ -6,6 +6,7 @@ import org.joda.time.LocalDate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import de.hdu.zimmerbelegung.model.Belegung;
+import de.hdu.zimmerbelegung.model.Gast;
 
 public class BelegungDao extends HibernateDaoSupport {
 	public Belegung get(int id) {
@@ -28,5 +29,12 @@ public class BelegungDao extends HibernateDaoSupport {
 		return getHibernateTemplate()
 				.find("select b from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
 						params);
+	}
+	
+	public void deleteAll() {
+		List<Belegung> myBelegungList = this.getAll();
+		for (Belegung tempBelegung : myBelegungList) {
+			getHibernateTemplate().delete(tempBelegung);	
+		}
 	}
 }

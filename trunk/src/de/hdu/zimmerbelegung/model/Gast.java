@@ -140,6 +140,23 @@ public class Gast {
 		this.email = email;
 		this.kommentar = kommentar;
 	}
+	
+	public Gast(String vorname, String name, String strasse,
+			String plz, String ort, String land, String telefon, String mobil,
+			String fax, String email, String kommentar) {
+		super();
+		this.vorname = vorname;
+		this.name = name;
+		this.strasse = strasse;
+		this.plz = plz;
+		this.ort = ort;
+		this.land = land;
+		this.telefon = telefon;
+		this.mobil = mobil;
+		this.fax = fax;
+		this.email = email;
+		this.kommentar = kommentar;
+	}
 
 	public void setKommentar(String kommentar) {
 		this.kommentar = kommentar;
