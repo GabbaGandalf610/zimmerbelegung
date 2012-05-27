@@ -33,10 +33,10 @@ public class Gast {
 	private String fax;
 	private String email;
 	private String kommentar;
-	@OneToMany(mappedBy = "gastid", fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = BelegungKopf.class, mappedBy = "gastid", fetch = FetchType.EAGER)
 	@OrderBy("id DESC")
 	private Set<BelegungKopf> belegungKopf;
-	@OneToMany(mappedBy="gast", fetch= FetchType.EAGER)
+	@OneToMany(targetEntity = Belegung.class, mappedBy = "gast", fetch = FetchType.EAGER)
 	private Set<Belegung> belegung;
 
 	public Set<BelegungKopf> getBelegungKopf() {
@@ -140,10 +140,10 @@ public class Gast {
 		this.email = email;
 		this.kommentar = kommentar;
 	}
-	
-	public Gast(String vorname, String name, String strasse,
-			String plz, String ort, String land, String telefon, String mobil,
-			String fax, String email, String kommentar) {
+
+	public Gast(String vorname, String name, String strasse, String plz,
+			String ort, String land, String telefon, String mobil, String fax,
+			String email, String kommentar) {
 		super();
 		this.vorname = vorname;
 		this.name = name;

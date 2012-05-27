@@ -6,7 +6,6 @@ import org.joda.time.LocalDate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import de.hdu.zimmerbelegung.model.Belegung;
-import de.hdu.zimmerbelegung.model.Gast;
 
 public class BelegungDao extends HibernateDaoSupport {
 	public Belegung get(int id) {
@@ -14,7 +13,9 @@ public class BelegungDao extends HibernateDaoSupport {
 	}
 
 	public void save(Belegung belegung) {
-		getHibernateTemplate().save(belegung);
+		getHibernateTemplate().saveOrUpdate(belegung);
+		getHibernateTemplate().flush();
+		getHibernateTemplate().refresh(belegung);
 	}
 
 	@SuppressWarnings("unchecked")

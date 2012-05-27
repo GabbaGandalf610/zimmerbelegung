@@ -35,7 +35,7 @@ public class Belegung {
 	@ManyToOne(targetEntity=Zimmer.class)
 	@NotNull
 	private Zimmer zimmer;
-	@ManyToOne(targetEntity=Gast.class)
+	@ManyToOne(targetEntity=Gast.class, optional=false)
 	@NotNull
 	private Gast gast;
 	@ManyToOne(targetEntity=BelegungKopf.class, optional=false)

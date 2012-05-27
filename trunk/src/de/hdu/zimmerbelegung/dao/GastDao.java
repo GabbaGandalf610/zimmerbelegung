@@ -13,6 +13,7 @@ public class GastDao extends HibernateDaoSupport {
 
 	public void saveOrUpdate(Gast gast) {
 		getHibernateTemplate().saveOrUpdate(gast);
+		getHibernateTemplate().refresh(gast);
 	}
 
 	public void delete(Gast gast) {

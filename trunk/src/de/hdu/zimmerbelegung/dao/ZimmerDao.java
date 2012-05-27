@@ -13,6 +13,7 @@ public class ZimmerDao extends HibernateDaoSupport {
 
 	public void saveOrUpdate(Zimmer zimmer) {
 		getHibernateTemplate().saveOrUpdate(zimmer);
+		getHibernateTemplate().refresh(zimmer);
 	}
 
 	public void delete(Zimmer zimmer) {
