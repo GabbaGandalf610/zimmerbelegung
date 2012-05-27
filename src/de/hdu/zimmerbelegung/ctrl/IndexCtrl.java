@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.UiException;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.SimpleDateConstraint;
@@ -27,6 +28,15 @@ public class IndexCtrl {
 	String gastSuche;
 	ListModelList<Belegung> belegungList;
 	ListModelList<BelegungKopf> belegungKopfList;
+	BelegungKopf gastZimmerZeitSelected;
+
+	public BelegungKopf getGastZimmerZeitSelected() {
+		return gastZimmerZeitSelected;
+	}
+
+	public void setGastZimmerZeitSelected(BelegungKopf gastZimmerZeitSelected) {
+		this.gastZimmerZeitSelected = gastZimmerZeitSelected;
+	}
 
 	public BelegungArt[] getAllBelegungArt() {
 		return BelegungArt.getAll();
@@ -38,21 +48,24 @@ public class IndexCtrl {
 
 	ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected;
 
-	// Roland
-
-	@DependsOn({ "gastSelected" })
-	@NotifyChange({ "datumVon", "datumBis", "zimmerZeitraumBelegungSelected" })
+	@DependsOn({ "gastSelected", "datumVon" })
+	@NotifyChange({ "zimmerZeitraumBelegungSelected" })
 	public ListModel<BelegungKopf> getBelegungKopfList() {
-		if (gastSelected == null)
+		if ((gastSelected == null) || (gastSelected.getId() == 0)) {
 			return null;
-		// Liste initialisieren
-		belegungKopfList = new ListModelList<BelegungKopf>();
-		for (BelegungKopf belegungsKopf : this.gastSelected.getBelegungKopf()) {
-			belegungKopfList.add((BelegungKopf) belegungsKopf);
+		}
+		{
+			// Liste initialisieren
+			belegungKopfList = new ListModelList<BelegungKopf>();
+			for (BelegungKopf belegungsKopf : this.gastSelected
+					.getBelegungKopf()) {
+				belegungKopfList.add((BelegungKopf) belegungsKopf);
+			}
 		}
 		return belegungKopfList;
 	}
 
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
 	public void doBuchen() {
 		if (!isZusammenfassungAnzeigen())
@@ -60,10 +73,12 @@ public class IndexCtrl {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.create(BelegungArt.BUCHUNG, datumVon, datumBis,
 				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
-		// System.out.println(gastSelected.getBelegung());
-		System.out.println(gastSelected.getBelegungKopf());
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.saveOrUpdate(gastSelected);
+		zimmerZeitraumBelegungSelected = null;
 	}
-
+	
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
 	public void doReservieren() {
 		if (!isZusammenfassungAnzeigen())
@@ -71,6 +86,36 @@ public class IndexCtrl {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
 				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.saveOrUpdate(gastSelected);
+		zimmerZeitraumBelegungSelected = null;
+	}
+
+//	@NotifyChange({ "gastSelected", "gastList", "gastZimmerZeitSelected",
+//			"zimmerZeitraumBelegungSelected", "belegungKopfList",
+//			"belegungList", "zimmerZeitraumBelegungList" })
+//	@Command
+//	public void doReservieren() {
+//		if (!isZusammenfassungAnzeigen())
+//			return;
+//		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+//		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
+//				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+//		zimmerZeitraumBelegungSelected = null;
+//	}
+
+	@NotifyChange({ "gastSelected", "gastList", "gastZimmerZeitSelected" })
+	@Command
+	public void doStorno() {
+		if (gastZimmerZeitSelected != null) {
+			System.out.println(gastZimmerZeitSelected);
+			System.out.println(gastZimmerZeitSelected.getId());
+			System.out.println(gastZimmerZeitSelected.getGast());
+			gastZimmerZeitSelected = null;
+
+		} else {
+			throw new UiException("Keine Belegung ausgewählt!");
+		}
 	}
 
 	@Command
@@ -95,15 +140,17 @@ public class IndexCtrl {
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
+		System.out.println(gastSelected.getId());
 	}
 
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
+		if (gastSelected.getId() == 0)
+			gastList.add(gastSelected);
 		GastDao gastDao = ServiceLocator.getGastDao();
 		gastDao.saveOrUpdate(gastSelected);
-		if (!gastList.contains(gastSelected))
-			gastList.add(gastSelected);
+
 	}
 
 	@DependsOn("datumVon")
@@ -120,27 +167,6 @@ public class IndexCtrl {
 		return new SimpleDateConstraint("between "
 				+ datumVon.toString("yyyMMdd") + " and "
 				+ datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
-	}
-
-	public LocalDate getDatumVon() {
-		return datumVon;
-	}
-
-	public Gast getGastSelected() {
-		return gastSelected;
-	}
-
-	public String getGastSuche() {
-		return gastSuche;
-	}
-
-	public ListModel<Gast> getItems() {
-		if (gastList == null) {
-			gastList = new ListModelList<Gast>();
-			GastDao gastDao = ServiceLocator.getGastDao();
-			gastList.addAll(gastDao.getAll());
-		}
-		return gastList;
 	}
 
 	@DependsOn({ "datumVon", "datumBis" })
@@ -168,13 +194,22 @@ public class IndexCtrl {
 	public boolean isZusammenfassungAnzeigen() {
 		if (datumVon == null || datumBis == null
 				|| zimmerZeitraumBelegungSelected == null
-				|| gastSelected == null) {
+				|| gastSelected == null || gastSelected.getId() == 0) {
 			return false;
 		}
 		if (zimmerZeitraumBelegungSelected.getStatus() != Status.FREI) {
 			return false;
 		}
 		return true;
+	}
+
+	public ListModel<Gast> getItems() {
+		if (gastList == null) {
+			gastList = new ListModelList<Gast>();
+			GastDao gastDao = ServiceLocator.getGastDao();
+			gastList.addAll(gastDao.getAll());
+		}
+		return gastList;
 	}
 
 	public void setDatumBis(LocalDate datumBis) {
@@ -187,6 +222,18 @@ public class IndexCtrl {
 
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
+	}
+
+	public Gast getGastSelected() {
+		return gastSelected;
+	}
+
+	public LocalDate getDatumVon() {
+		return datumVon;
+	}
+
+	public String getGastSuche() {
+		return gastSuche;
 	}
 
 	public void setGastSuche(String gastSuche) {

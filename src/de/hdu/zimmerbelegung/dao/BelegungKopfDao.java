@@ -20,6 +20,7 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 	
 	public void saveOrUpdate(BelegungKopf belegungKopf) {
 		getHibernateTemplate().saveOrUpdate(belegungKopf);
+		getHibernateTemplate().refresh(belegungKopf);
 	}
 
 	public void delete(BelegungKopf belegungKopf) {

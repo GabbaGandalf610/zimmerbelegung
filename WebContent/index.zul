@@ -9,7 +9,6 @@
 			<tabpanel id="verwaltungTab"
 				apply="org.zkoss.bind.BindComposer"
 				viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.IndexCtrl')">
-
 				<borderlayout width="100%" height="100%">
 					<north flex="true">
 						<grid>
@@ -239,18 +238,27 @@
 
 								<listbox
 									model="@load(vm.belegungKopfList)"
-									selectedItem="@load((vm.gastSelected))" vflex="true"
+									selectedItem="@save(vm.gastZimmerZeitSelected)" vflex="true"
 									hflex="true" emptyMessage="Keine Buchungen vorhanden.">
 									<listhead>
-										<listheader label="Id" />
-										<listheader label="Gast" />
-										<listheader label="Zimmer" />
-										<listheader label="Von" />
-										<listheader label="Bis" />
-										<listheader label="Art" />
+										<listheader label="Id"
+											width="10%" />
+										<listheader label="Gast"
+											width="20%" />
+										<listheader label="Zimmer"
+											width="20%" />
+										<listheader label="Von"
+											width="75px" />
+										<listheader label="Bis"
+											width="75px" />
+										<listheader label="Art"
+											width="110px" />
+										<listheader label="Aktion"
+											width="100px" visible="true" />
 									</listhead>
 									<template name="model" var="item">
-										<listitem>
+										<listitem
+											disabled="@load((empty vm.belegungKopfList) or ( vm.datumVon > item.datumVon))">
 											<listcell
 												label="@bind(item.id)" />
 											<listcell
@@ -263,6 +271,22 @@
 												label="@bind(item.datumBis)" />
 											<listcell
 												label="@bind(item.art)" />
+											<listcell>
+												<button width="80px"
+													label="reservieren"
+													disabled="@load(empty vm.gastZimmerZeitSelected)"
+													onClick="@command('doStorno')"
+													visible="@load((not empty vm.belegungKopfList) and (item.art != 'RESERVIERUNG'))" />
+												<button width="80px"
+													label="buchen"
+													disabled="@load(empty vm.gastZimmerZeitSelected)"
+													onClick="@command('doStorno')"
+													visible="@load((not empty vm.belegungKopfList) and (item.art != 'BUCHUNG'))" />
+												<button width="80px"
+													label="stornieren"
+													disabled="@load(empty vm.gastZimmerZeitSelected)"
+													onClick="@command('doStorno')" visible="true" />
+											</listcell>
 										</listitem>
 									</template>
 								</listbox>
@@ -272,29 +296,29 @@
 							</south>
 						</borderlayout>
 					</center>
-					<south border="normal"
+					<south height="6%" flex="true" splittable="true"
 						style="background-color: orange;"
 						visible="@bind(vm.zusammenfassungAnzeigen)">
-						<div
-							style="text-align:right; margin-right:20px;">
+						<div align="left"
+							style="text-align:center; margin-right:20px; color:green;">
 							Zimmer
 							<label
 								value="@bind(vm.zimmerZeitraumBelegungSelected.zimmer)"
-								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
 							im Zeitraum von
 							<label
 								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
-								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
 							bis
 							<label
 								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
-								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
+								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
 							für
 							<label value="@bind(vm.gastSelected)"
-								style="font-weight:bold; font-size:1.2em; margin-left:10px; margin-right:10px;" />
-							<button label="reservieren" 
+								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
+							<button label="reservieren" width="80px"
 								onClick="@command('doReservieren')" />
-							<button label="buchen"
+							<button label="buchen" width="80px"
 								onClick="@command('doBuchen')" />
 						</div>
 					</south>
@@ -329,5 +353,4 @@
 
 		</tabpanels>
 	</tabbox>
-
 </zk>
