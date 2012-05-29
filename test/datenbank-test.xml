@@ -19,8 +19,9 @@
 			<value>zimmertest</value>
 		</property>
 	</bean>
+	
 	<import resource="beans-test.xml" />
-	<import resource="beans.xml" />
+<!-- 	<import resource="beans.xml" /> -->
 	
 
 </beans>

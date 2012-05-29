@@ -12,8 +12,80 @@
 	</bean>
 
 	<bean id="gastDaoTest" class="de.hdu.zimmerbelegung.dao.GastDaoTest">
-		<property name="GastDao">
-			<ref bean="GastDao" />
+		<property name="gastDao">
+			<ref bean="gastDao" />
 		</property>
 	</bean>
+
+	<bean id="belegungKopfDaoTest" class="de.hdu.zimmerbelegung.dao.BelegungKopfDao">
+		<property name="belegungKopfDao" ref="belegungKopfDao" />
+		<property name="gastDao" ref="gastDao"/>
+	</bean>
+
+	<bean id="belegungDaoTest" class="de.hdu.zimmerbelegung.dao.BelegungDaoTest">
+		<property name="belegungDao" ref="belegungDao" />
+		<property name="gastDaoTest" ref="gastDaoTest" />
+		<!-- <property name="zimmerDao" ref="zimmerDao" /> -->
+		<!-- <property name="belegungKopfDao" ref="belegungKopfDao" /> -->
+		<!-- <property name="belegungDao"> -->
+		<!-- <ref bean="belegungDao" /> -->
+		<!-- </property> -->
+		<!-- <property name="gastDao"> -->
+		<!-- <ref bean="gastDao " /> -->
+		<!-- </property> -->
+		<!-- <property name="zimmerDao" ref="zimmerDao" /> -->
+		<!-- <property name="belegungKopfDao" ref="belegungKopfDao" /> -->
+		<!-- <property name="sessionFactory" ref="hibernateSessionFactory" /> -->
+	</bean>
+	
+		<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="factory" />
+	</bean>
+
+	<!-- DAOs -->
+	<bean id="belegungDao" class="de.hdu.zimmerbelegung.dao.BelegungDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="belegungKopfDao" class="de.hdu.zimmerbelegung.dao.BelegungKopfDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="gastDao" class="de.hdu.zimmerbelegung.dao.GastDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	<bean id="zimmerDao" class="de.hdu.zimmerbelegung.dao.ZimmerDao">
+		<property name="sessionFactory">
+			<ref bean="factory" />
+		</property>
+	</bean>
+	
+		<!-- SessionFactory -->
+	<bean id="factory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>de.hdu.zimmerbelegung.model.Belegung</value>
+				<value>de.hdu.zimmerbelegung.model.BelegungKopf</value>
+				<value>de.hdu.zimmerbelegung.model.Gast</value>
+				<value>de.hdu.zimmerbelegung.model.Zimmer</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+			</props>
+		</property>
+		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
+	</bean>
+	
+	
 </beans>
