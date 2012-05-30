@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  ******************************************************************************* -->
+<!--  * Copyright (c) 2012 Stefan Feilmeier, Roland Kühnel, Franz Wagner. -->
+<!--  * All rights reserved. This program and the accompanying materials -->
+<!--  * are made available under the terms of the GNU Public License v3.0 -->
+<!--  * which accompanies this distribution, and is available at -->
+<!--  * http://www.gnu.org/licenses/gpl.html -->
+<!--  ******************************************************************************  -->
+
 <!-- ApplicationContext.xml -->
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
 "http://www.springframework.org/dtd/spring-beans.dtd">
@@ -13,10 +21,10 @@
 			<value>jdbc:mysql://127.0.0.1:3306/zimmertest</value>
 		</property>
 		<property name="username">
-			<value>zimmertest</value>
+			<value>root</value>
 		</property>
 		<property name="password">
-			<value>zimmertest</value>
+			<value></value>
 		</property>
 	</bean>
 	
