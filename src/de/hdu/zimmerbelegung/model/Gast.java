@@ -16,6 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+/**
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 @Entity
 public class Gast {
 	@Id

@@ -23,6 +23,9 @@ import com.sun.istack.internal.NotNull;
 
 import de.hdu.zimmerbelegung.helper.BelegungArt;
 
+/**
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 @Entity
 @Table(name = "Belegung", uniqueConstraints = { @UniqueConstraint(columnNames = {"datum", "zimmer_id"}) })
 public class Belegung {

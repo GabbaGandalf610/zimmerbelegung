@@ -26,6 +26,9 @@ import com.sun.istack.internal.NotNull;
 
 import de.hdu.zimmerbelegung.helper.BelegungArt;
 
+/**
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 @Entity
 public class BelegungKopf {
 	@Id
