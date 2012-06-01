@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 @Entity
 public class Zimmer {
 

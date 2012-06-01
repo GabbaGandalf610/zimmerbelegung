@@ -21,15 +21,15 @@
 			<value>jdbc:mysql://127.0.0.1:3306/zimmertest</value>
 		</property>
 		<property name="username">
-			<value>zimmertest</value>
+			<value>root</value>
 		</property>
 		<property name="password">
-			<value>zimmertest</value>
+			<value></value>
 		</property>
 	</bean>
 	
 	<import resource="beans-test.xml" />
-<!-- 	<import resource="beans.xml" /> -->
+	<import resource="beans.xml" />
 	
 
 </beans>
