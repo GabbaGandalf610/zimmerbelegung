@@ -17,10 +17,17 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 	private ZimmerDao zimmerDao;
 	private String tableName = "Zimmer";
 
+	/**
+	 * Gets the {@link ZimmerDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link ZimmerDao} object that injects the corresponding bean.
+	 */
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
 	}
 
+	/**
+	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testFindById() {
@@ -41,12 +48,18 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 		deleteFromTables(tables);
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testFindAll() {
 		// already tested by testFindById()
 		testFindById();
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testCreate() {
 		// already tested by testFindById()

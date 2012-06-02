@@ -17,10 +17,17 @@ public class GastDaoTest extends AbstractDataAccessTest{
 	private GastDao gastDao;
 	private String tableName = "Gast";
 	
+	/**
+	 * Gets the {@link GastDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link GastDao} object that injects the corresponding bean.
+	 */
 	public void setGastDao(GastDao gastDao) {
 		this.gastDao = gastDao;
 	}
 
+	/**
+	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testFindById() {
@@ -28,8 +35,8 @@ public class GastDaoTest extends AbstractDataAccessTest{
 		// delete all rows from db table
 		deleteFromTables(tables);
 		// create new line in table
-		gastDao.saveOrUpdate(new Gast("Franz", "Wagner", "Kapellenstraße 66", "94527", "Aholming/Neutiefenweg", "Deutschland", "09931 5555555", "0175", "09931", "a.b@c.de", "kurzer Kommentar"));
-		gastDao.saveOrUpdate(new Gast("Katharina", "Ecker", "Musterstraße", "94555", "Künzing", "Deutschland", "08541", "0160", "08541", "f.g@h.ij", "etwas längerer Kommentar"));
+		gastDao.saveOrUpdate(new Gast("Hans", "Dampf", "Straße 1", "99997", "Testdorf", "Deutschland", "0 5555555", "0175", "01", "a.b@c.de", "kurzer Kommentar"));
+		gastDao.saveOrUpdate(new Gast("Katharina", "Deckel", "Musterstraße", "98588", "Bayern", "Deutschland", "088834", "0160", "08888", "f.g@h.ij", "etwas längerer Kommentar"));
 		List<Gast> alleGast = gastDao.getAll();
 		for (Gast z : alleGast) {
 			int id = z.getId();
@@ -41,12 +48,18 @@ public class GastDaoTest extends AbstractDataAccessTest{
 		deleteFromTables(tables);
 	}
 	
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testFindAll() {
 		// already tested by testFindById()
 		testFindById();
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testCreate() {
 		// already tested by testFindById()

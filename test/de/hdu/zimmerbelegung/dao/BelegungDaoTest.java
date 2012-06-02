@@ -19,39 +19,61 @@ import de.hdu.zimmerbelegung.model.BelegungKopf;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
+/**
+ * The test class for BelegungDao.
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 public class BelegungDaoTest extends AbstractDataAccessTest {
 
 	private BelegungDao belegungDao;
-	private GastDao gastDaoTest;
+	private GastDao gastDao;
 	private ZimmerDao zimmerDao;
 	private BelegungKopfDao belegungKopfDao;
 	private String tableName = "Belegung";
 
+	/**
+	 * Gets the {@link BelegungDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link BelegungDao} object that injects the corresponding bean.
+	 */
 	public void setBelegungDao(BelegungDao belegungDao) {
 		this.belegungDao = belegungDao;
 	}
 
-	public void setGastDaoTest(GastDao gastDao) {
-		this.gastDaoTest = gastDao;
+	/**
+	 * Gets the {@link GastDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link GastDao} object that injects the corresponding bean.
+	 */
+	public void setGastDao(GastDao gastDao) {
+		this.gastDao = gastDao;
 	}
 
+	/**
+	 * Gets the {@link ZimmerDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link ZimmerDao} object that injects the corresponding bean.
+	 */
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
 	}
 
-	public void setGastDao(BelegungDao belegungDao) {
-		this.belegungDao = belegungDao;
-	}
-
+	/**
+	 * Gets the {@link BelegungKopfDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link BelegungKopfDao} object that injects the corresponding bean.
+	 */
 	public void setBelegungKopfDao(BelegungKopfDao belegungKopfDao) {
 		this.belegungKopfDao = belegungKopfDao;
 	}
 
+	/**
+	 * Simple test that checks if the test class is up and running
+	 */
 	@Test
 	public void tests(){
 		System.out.println("Hallo");
 	}
 	
+	/**
+	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testFindById() {
@@ -59,10 +81,10 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 		// delete all rows from db table
 //		deleteFromTables(tables);
 		// create new line in table
-		Gast gastTest = new Gast("Katharina", "Ecker", "Musterstraße", "94555",
-				"Künzing", "Deutschland", "08541", "0160", "08541", "f.g@h.ij",
+		Gast gastTest = new Gast("Hans", "Dampf", "Musterstraße", "94555",
+				"Musterstadt", "Deutschland", "08541", "0160", "08541", "f.g@h.ij",
 				"etwas längerer Kommentar");
-		gastDaoTest.saveOrUpdate(gastTest);
+		gastDao.saveOrUpdate(gastTest);
 		Zimmer zimmerTest = new Zimmer(1, "Beschreibung", 12.23f);
 		zimmerDao.saveOrUpdate(zimmerTest);
 		BelegungKopf belegungKopfTest = new BelegungKopf(gastTest);
@@ -81,12 +103,18 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 		deleteFromTables(tables);
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testFindAll() {
 		// already tested by testFindById()
 		testFindById();
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
 	@Test
 	public void testCreate() {
 		// already tested by testFindById()
