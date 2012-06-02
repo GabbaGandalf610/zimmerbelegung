@@ -35,8 +35,8 @@ public class BelegungDao extends HibernateDaoSupport {
 	 */
 	public void save(Belegung belegung) {
 		getHibernateTemplate().saveOrUpdate(belegung);
-		getHibernateTemplate().flush();
-		getHibernateTemplate().refresh(belegung);
+//		getHibernateTemplate().flush();
+//		getHibernateTemplate().refresh(belegung);
 	}
 
 	/**
@@ -72,4 +72,12 @@ public class BelegungDao extends HibernateDaoSupport {
 			getHibernateTemplate().delete(tempBelegung);	
 		}
 	}
+	
+	public void delete(Belegung belegung) {
+		getHibernateTemplate().delete(belegung);
+		getHibernateTemplate().flush();
+		getHibernateTemplate().clear();
+	}
+	
+	
 }

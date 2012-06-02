@@ -54,7 +54,7 @@ public class Belegung {
 
 	public Belegung() {
 	}
-
+	
 	public Belegung(BelegungArt art, LocalDate datum, Zimmer zimmer, Gast gast, BelegungKopf belegungKopf) {
 		this.art = art;
 		this.datum = datum;

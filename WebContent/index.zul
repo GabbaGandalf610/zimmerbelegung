@@ -54,7 +54,7 @@
 							<center>
 								<listbox
 									model="@load(vm.zimmerZeitraumBelegungList)"
-									selectedItem="@save(vm.zimmerZeitraumBelegungSelected)"
+									selectedItem="@bind(vm.zimmerZeitraumBelegungSelected)"
 									vflex="true" hflex="true">
 									<listhead>
 										<listheader label="Zimmer" />
@@ -244,7 +244,7 @@
 							<south height="20%">
 
 								<listbox
-									model="@load(vm.belegungKopfList)"
+									model="@bind(vm.belegungKopfList)"
 									selectedItem="@save(vm.gastZimmerZeitSelected)" vflex="true"
 									hflex="true" emptyMessage="Keine Buchungen vorhanden.">
 									<listhead>
@@ -282,12 +282,12 @@
 												<button width="80px"
 													label="reservieren"
 													disabled="@load(empty vm.gastZimmerZeitSelected)"
-													onClick="@command('doStorno')"
+													onClick="@command('doReservieren')"
 													visible="@load((not empty vm.belegungKopfList) and (item.art != 'RESERVIERUNG'))" />
 												<button width="80px"
 													label="buchen"
 													disabled="@load(empty vm.gastZimmerZeitSelected)"
-													onClick="@command('doStorno')"
+													onClick="@command('doBuchen')"
 													visible="@load((not empty vm.belegungKopfList) and (item.art != 'BUCHUNG'))" />
 												<button width="80px"
 													label="stornieren"
@@ -340,7 +340,6 @@
 					<tabs id="tabs" width="150px">
 						<tab id="adminGastTab" label="Gäste" />
 						<tab id="adminZimmerTab" label="Zimmer" />
-						<tab id="adminBelegungTab" label="Belegungen" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -349,10 +348,6 @@
 
 						<tabpanel fulfill="adminZimmerTab.onSelect">
 							<include src="adminZimmer.zul" />
-						</tabpanel>
-
-						<tabpanel fulfill="adminBelegungTab.onSelect">
-							<include src="adminBelegung.zul" />
 						</tabpanel>
 					</tabpanels>
 				</tabbox>
