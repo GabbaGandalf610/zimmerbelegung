@@ -23,22 +23,28 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 /**
  * The Data access class for BelegungKopf. All Interaction with the database
  * regarding the entity bean BelegungKopf should be handled by this class!
+ * 
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class BelegungKopfDao extends HibernateDaoSupport {
-	
+
 	/**
 	 * Returns a single BelegungKopf by its primary db key
-	 * @param id the primary key of a {@link BelegungKopf}
+	 * 
+	 * @param id
+	 *            the primary key of a {@link BelegungKopf}
 	 * @return a single BelegungKopf
 	 */
 	public BelegungKopf get(int id) {
 		return getHibernateTemplate().load(BelegungKopf.class, id);
 	}
-	
+
 	/**
-	 * Saves the {@link BelegungKopf} specified by the parameter in the database.
-	 * @param zimmer a {@link BelegungKopf} object that should be saved in the db.
+	 * Saves the {@link BelegungKopf} specified by the parameter in the
+	 * database.
+	 * 
+	 * @param zimmer
+	 *            a {@link BelegungKopf} object that should be saved in the db.
 	 */
 	public void saveOrUpdate(BelegungKopf belegungKopf) {
 		getHibernateTemplate().saveOrUpdate(belegungKopf);
@@ -47,14 +53,21 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 
 	/**
 	 * Deletes the specified {@link BelegungKopf} object from the database.
-	 * @param belegungKopf the {@link BelegungKopf} to be deleted.
+	 * 
+	 * @param belegungKopf
+	 *            the {@link BelegungKopf} to be deleted.
 	 */
 	public void delete(BelegungKopf belegungKopf) {
 		getHibernateTemplate().delete(belegungKopf);
+		getHibernateTemplate().flush();
+		getHibernateTemplate().clear();
+		getHibernateTemplate().refresh(belegungKopf.getGast());
+		getHibernateTemplate().refresh(belegungKopf.getZimmer());
 	}
 
 	/**
 	 * Returns all BelegungKopf from the database.
+	 * 
 	 * @return a list of {@link BelegungKopf}
 	 * @see BelegungKopf
 	 */
@@ -62,23 +75,48 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 	public List<BelegungKopf> getAll() {
 		return getHibernateTemplate().find("FROM BelegungKopf");
 	}
-	
+
 	/**
 	 * Creates a BelegungKopf to the database.
-	 * @param art the type of a Belegung
+	 * 
+	 * @param art
+	 *            the type of a Belegung
 	 * @see Zimmer
 	 */
-	public void create(BelegungArt art, LocalDate datumVon, LocalDate datumBis, Zimmer zimmer, Gast gast) {
+	public void create(BelegungArt art, LocalDate datumVon, LocalDate datumBis,
+			Zimmer zimmer, Gast gast) {
 		BelegungKopf belegungKopf = new BelegungKopf(gast);
 		List<Belegung> belegungen = new ArrayList<Belegung>();
 		for (LocalDate datumTmp = datumVon; datumTmp.isBefore(datumBis)
-				|| datumTmp.equals(datumBis); datumTmp = datumTmp
-				.plusDays(1)) {
-			Belegung belegung = new Belegung(art, datumTmp, zimmer, gast, belegungKopf);
+				|| datumTmp.equals(datumBis); datumTmp = datumTmp.plusDays(1)) {
+			Belegung belegung = new Belegung(art, datumTmp, zimmer, gast,
+					belegungKopf);
 			belegungen.add(belegung);
 		}
 		belegungKopf.setBelegungen(belegungen);
-		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.saveOrUpdate(belegungKopf);
+//		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		this.saveOrUpdate(belegungKopf);
 	}
+
+	public void setArt(BelegungKopf belegungKopf, BelegungArt belegungArt)
+			throws Exception {
+		List<Belegung> belegungen = belegungKopf.getBelegungen();
+		for (Belegung belegung : belegungen) {
+			belegung.setArt(belegungArt);
+		}
+		this.saveOrUpdate(belegungKopf);
+	}
+
+	public void storno(BelegungKopf belegungKopf) throws Exception {
+		List<Belegung> belegungen = belegungKopf.getBelegungen();
+		BelegungDao belegungDao = ServiceLocator.getBelegungDao();
+		for (Belegung belegung : belegungen) {
+			belegungDao.delete(belegung);
+		}
+		System.out.println(belegungen);
+		this.delete(belegungKopf);
+	}
+	
+	
+
 }

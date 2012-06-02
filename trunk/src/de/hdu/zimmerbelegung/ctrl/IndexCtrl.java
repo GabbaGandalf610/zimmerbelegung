@@ -75,51 +75,58 @@ public class IndexCtrl {
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
-	public void doBuchen() {
-		if (!isZusammenfassungAnzeigen())
+	public void doBuchen() throws Exception {
+		if (!isZusammenfassungAnzeigen() && gastZimmerZeitSelected == null)
 			return;
+
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.create(BelegungArt.BUCHUNG, datumVon, datumBis,
-				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
-		GastDao gastDao = ServiceLocator.getGastDao();
-		gastDao.saveOrUpdate(gastSelected);
-		zimmerZeitraumBelegungSelected = null;
+
+		if (gastZimmerZeitSelected != null && !isZusammenfassungAnzeigen()) {
+			belegungKopfDao.setArt(gastZimmerZeitSelected, BelegungArt.BUCHUNG);
+			zimmerZeitraumBelegungSelected = null;
+		} else {
+			belegungKopfDao.create(BelegungArt.BUCHUNG, datumVon, datumBis,
+					zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+			GastDao gastDao = ServiceLocator.getGastDao();
+			gastDao.saveOrUpdate(gastSelected);
+			zimmerZeitraumBelegungSelected = null;
+		}
+
 	}
-	
+
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
-	public void doReservieren() {
-		if (!isZusammenfassungAnzeigen())
+	public void doReservieren() throws Exception {
+		System.out.println(gastZimmerZeitSelected);
+		if (!isZusammenfassungAnzeigen() && gastZimmerZeitSelected == null)
 			return;
+
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
-				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
-		GastDao gastDao = ServiceLocator.getGastDao();
-		gastDao.saveOrUpdate(gastSelected);
-		zimmerZeitraumBelegungSelected = null;
+
+		if (gastZimmerZeitSelected != null && !isZusammenfassungAnzeigen()) {
+			belegungKopfDao.setArt(gastZimmerZeitSelected,
+					BelegungArt.RESERVIERUNG);
+			zimmerZeitraumBelegungSelected = null;
+		} else {
+
+			belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon,
+					datumBis, zimmerZeitraumBelegungSelected.getZimmer(),
+					gastSelected);
+			GastDao gastDao = ServiceLocator.getGastDao();
+			gastDao.saveOrUpdate(gastSelected);
+			zimmerZeitraumBelegungSelected = null;
+		}
 	}
 
-//	@NotifyChange({ "gastSelected", "gastList", "gastZimmerZeitSelected",
-//			"zimmerZeitraumBelegungSelected", "belegungKopfList",
-//			"belegungList", "zimmerZeitraumBelegungList" })
-//	@Command
-//	public void doReservieren() {
-//		if (!isZusammenfassungAnzeigen())
-//			return;
-//		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-//		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
-//				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
-//		zimmerZeitraumBelegungSelected = null;
-//	}
-
-	@NotifyChange({ "gastSelected", "gastList", "gastZimmerZeitSelected" })
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
-	public void doStorno() {
+	public void doStorno() throws Exception {
 		if (gastZimmerZeitSelected != null) {
-			System.out.println(gastZimmerZeitSelected);
-			System.out.println(gastZimmerZeitSelected.getId());
-			System.out.println(gastZimmerZeitSelected.getGast());
-			gastZimmerZeitSelected = null;
+			BelegungKopfDao belegungKopfDao = ServiceLocator
+					.getBelegungKopfDao();
+			belegungKopfDao.storno(gastZimmerZeitSelected);
+			// belegungKopfList.remove(gastZimmerZeitSelected);
+			this.getBelegungKopfList();
 
 		} else {
 			throw new UiException("Keine Belegung ausgewählt!");
