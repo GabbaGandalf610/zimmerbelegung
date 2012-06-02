@@ -56,7 +56,7 @@ public class AdminBelegungCtrl {
 
 	/**
 	 * Puts the data of a {@link BelegungKopf} object in the corresponding fields in the GUI.
-	 * @param selected a {@link Belegung} object that represents the future field values.
+	 * @param belegungKopfSelected a {@link Belegung} object that represents the future field values.
 	 */
 	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
 		;
