@@ -1,10 +1,11 @@
-<!--  ******************************************************************************* -->
-<!--  * Copyright (c) 2012 Stefan Feilmeier, Roland Kühnel, Franz Wagner. -->
-<!--  * All rights reserved. This program and the accompanying materials -->
-<!--  * are made available under the terms of the GNU Public License v3.0 -->
-<!--  * which accompanies this distribution, and is available at -->
-<!--  * http://www.gnu.org/licenses/gpl.html -->
-<!--  ******************************************************************************  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************************* -->
+<!-- * Copyright (c) 2012 Stefan Feilmeier, Roland Kühnel, Franz Wagner. -->
+<!-- * All rights reserved. This program and the accompanying materials -->
+<!-- * are made available under the terms of the GNU Public License v3.0 -->
+<!-- * which accompanies this distribution, and is available at -->
+<!-- * http://www.gnu.org/licenses/gpl.html -->
+<!-- ****************************************************************************** -->
 <zk>
 	<tabbox width="100%" height="100%">
 		<tabs>
@@ -13,65 +14,57 @@
 			<tab id="adminTab" label="Administration" />
 		</tabs>
 		<tabpanels>
-			<tabpanel id="verwaltungTab"
-				apply="org.zkoss.bind.BindComposer"
+			<tabpanel id="verwaltungTab" apply="org.zkoss.bind.BindComposer"
 				viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.IndexCtrl')">
 				<borderlayout width="100%" height="100%">
 					<north flex="true">
 						<grid>
 							<columns>
-								<column></column>
-								<column></column>
+								<column />
+								<column />
 							</columns>
 							<rows>
 								<row>
 									<cell>
 										<label value="Datum von: " />
-										<datebox id="von" cols="12"
-											format="medium"
+										<datebox id="von" cols="12" format="medium"
 											value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 											mold="rounded" constraint="no past,no empty" />
 
 										<label value=" bis: " />
-										<datebox id="bis " cols="12"
-											format="medium"
+										<datebox id="bis " cols="12" format="medium"
 											value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 											mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
 									</cell>
 									<cell align="right">
 										<label value="Suche: " />
-										<textbox
-											tooltiptext="Gast Suche" value="@bind(vm.gastSuche)"
+										<textbox tooltiptext="Gast Suche" value="@bind(vm.gastSuche)"
 											onChange="@command('doGuestSearch')" instant="true" />
 									</cell>
 								</row>
 							</rows>
 						</grid>
 					</north>
-					<west flex="true" splittable="true" width="23%"
-						collapsible="true">
+					<west flex="true" splittable="true" width="23%" collapsible="true">
 						<borderlayout>
 							<center>
-								<listbox
-									model="@load(vm.zimmerZeitraumBelegungList)"
-									selectedItem="@bind(vm.zimmerZeitraumBelegungSelected)"
-									vflex="true" hflex="true">
+								<listbox model="@load(vm.zimmerZeitraumBelegungList)"
+									selectedItem="@bind(vm.zimmerZeitraumBelegungSelected)" vflex="true"
+									hflex="true">
 									<listhead>
 										<listheader label="Zimmer" />
 										<listheader label="Status" />
 									</listhead>
 									<template name="model" var="item">
 										<listitem>
-											<listcell
-												label="@bind(item.zimmer)" />
-											<listcell
-												label="@bind(item.status.name)" />
+											<listcell label="@bind(item.zimmer)" />
+											<listcell label="@bind(item.status.name)" />
 										</listitem>
 									</template>
 								</listbox>
 							</center>
-							<south flex="true" splittable="true"
-								collapsible="true" height="60%"
+							<south flex="true" splittable="true" collapsible="true"
+								height="60%"
 								open="@load((not empty vm.zimmerZeitraumBelegungSelected) and (vm.zimmerZeitraumBelegungSelected.status != 'FREI'))">
 
 								<listbox
@@ -85,8 +78,7 @@
 										<listitem>
 											<listcell
 												label="@bind(item.datum) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
-											<listcell
-												label="@bind(item.status.name)" />
+											<listcell label="@bind(item)" />
 										</listitem>
 									</template>
 								</listbox>
@@ -96,12 +88,11 @@
 
 					<center>
 						<borderlayout>
-							<north flex="true" splittable="true"
-								collapsible="true" height="30%">
+							<north flex="true" splittable="true" collapsible="true"
+								height="30%">
 
-								<listbox model="@load(vm.items)"
-									selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
-									emptyMessage="Keine Gäste vorhanden.">
+								<listbox model="@load(vm.items)" selectedItem="@bind(vm.gastSelected)"
+									vflex="true" hflex="true" emptyMessage="Keine Gäste vorhanden.">
 									<listhead>
 										<listheader label="Name" />
 										<listheader label="Vorname" />
@@ -111,16 +102,11 @@
 									</listhead>
 									<template name="model" var="item">
 										<listitem>
-											<listcell
-												label="@bind(item.name)" />
-											<listcell
-												label="@bind(item.vorname)" />
-											<listcell
-												label="@bind(item.firma)" />
-											<listcell
-												label="@bind(item.ort)" />
-											<listcell
-												label="@bind(item.land)" />
+											<listcell label="@bind(item.name)" />
+											<listcell label="@bind(item.vorname)" />
+											<listcell label="@bind(item.firma)" />
+											<listcell label="@bind(item.ort)" />
+											<listcell label="@bind(item.land)" />
 										</listitem>
 									</template>
 								</listbox>
@@ -135,107 +121,80 @@
 									<rows>
 										<row>
 											<label value="Gastnr" />
-											<label
-												value="@bind(vm.gastSelected.id)" />
+											<label value="@bind(vm.gastSelected.id)" />
 										</row>
 										<row>
 											<cell>
-												<label
-													value="Name / Vorname / Firma" width="140px" />
+												<label value="Name / Vorname / Firma" width="140px" />
 											</cell>
 											<cell>
-												<textbox
-													value="@bind(vm.gastSelected.name)"
+												<textbox value="@bind(vm.gastSelected.name)"
 													disabled="@load(empty vm.gastSelected)" tooltiptext="Name" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.vorname)"
-													disabled="@load(empty vm.gastSelected)"
-													tooltiptext="Vorname" />
+												<textbox value="@bind(vm.gastSelected.vorname)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Vorname" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.firma)"
-													disabled="@load(empty vm.gastSelected)"
-													tooltiptext="Firma" />
+												<textbox value="@bind(vm.gastSelected.firma)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Firma" />
 											</cell>
 										</row>
 										<row>
-											<label width="100%"
-												value="Strasse" />
-											<textbox
-												value="@bind(vm.gastSelected.strasse)"
-												disabled="@load(empty vm.gastSelected)"
-												tooltiptext="Strasse" />
+											<label width="100%" value="Strasse" />
+											<textbox value="@bind(vm.gastSelected.strasse)"
+												disabled="@load(empty vm.gastSelected)" tooltiptext="Strasse" />
 										</row>
 										<row>
 											<cell>
-												<label
-													value="PLZ / Ort / Land" width="60px" />
+												<label value="PLZ / Ort / Land" width="60px" />
 											</cell>
 											<cell>
-												<textbox
-													value="@bind(vm.gastSelected.plz)"
+												<textbox value="@bind(vm.gastSelected.plz)"
 													disabled="@load(empty vm.gastSelected)" width="60px"
 													tooltiptext="PLZ" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.ort)"
+												<textbox value="@bind(vm.gastSelected.ort)"
 													disabled="@load(empty vm.gastSelected)" width="140px"
 													tooltiptext="Ort" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.land)"
+												<textbox value="@bind(vm.gastSelected.land)"
 													disabled="@load(empty vm.gastSelected)" tooltiptext="Land" />
 											</cell>
 										</row>
 										<row>
 											<cell>
-												<label
-													value="Telefon / Mobiltel / Fax" />
+												<label value="Telefon / Mobiltel / Fax" />
 											</cell>
 											<cell>
-												<textbox
-													value="@bind(vm.gastSelected.telefon)"
-													disabled="@load(empty vm.gastSelected)"
-													tooltiptext="Telefon" />
+												<textbox value="@bind(vm.gastSelected.telefon)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Telefon" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.mobil)"
-													disabled="@load(empty vm.gastSelected)"
-													tooltiptext="Mobiltelefon" />
+												<textbox value="@bind(vm.gastSelected.mobil)"
+													disabled="@load(empty vm.gastSelected)" tooltiptext="Mobiltelefon" />
 												<space />
-												<textbox
-													value="@bind(vm.gastSelected.fax)"
+												<textbox value="@bind(vm.gastSelected.fax)"
 													disabled="@load(empty vm.gastSelected)" tooltiptext="Fax" />
 											</cell>
 										</row>
 										<row>
 											<label value="E-Mail" />
-											<textbox
-												value="@bind(vm.gastSelected.email)"
-												disabled="@load(empty vm.gastSelected)"
-												constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
+											<textbox value="@bind(vm.gastSelected.email)"
+												disabled="@load(empty vm.gastSelected)" constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
 												tooltiptext="E-Mail" />
 										</row>
 										<row>
 											<label value="Kommentar" />
-											<textbox
-												value="@bind(vm.gastSelected.kommentar)"
+											<textbox value="@bind(vm.gastSelected.kommentar)"
 												disabled="@load(empty vm.gastSelected)" rows="3" width="30%"
 												tooltiptext="Kommentar" />
 										</row>
 
 										<row>
 											<cell colspan="2">
-												<button id="newButton"
-													label="Neu" onClick="@command('doNew')" />
-												<button id="saveButton"
-													label="Speichern" onClick="@command('doSave')"
+												<button id="newButton" label="Neu" onClick="@command('doNew')" />
+												<button id="saveButton" label="Speichern" onClick="@command('doSave')"
 													disabled="@bind(empty vm.gastSelected)" />
-												<button
-													id="deleteButton" label="Löschen"
-													onClick="@command('doDelete')"
-													disabled="@bind(empty vm.gastSelected)" />
+												<button id="deleteButton" label="Löschen"
+													onClick="@command('doDelete')" disabled="@bind(empty vm.gastSelected)" />
 											</cell>
 										</row>
 									</rows>
@@ -243,56 +202,39 @@
 							</center>
 							<south height="20%">
 
-								<listbox
-									model="@bind(vm.belegungKopfList)"
-									selectedItem="@save(vm.gastZimmerZeitSelected)" vflex="true"
+								<listbox model="@bind(vm.belegungKopfList)"
+									selectedItem="@save(vm.belegungKopfSelected)" vflex="true"
 									hflex="true" emptyMessage="Keine Buchungen vorhanden.">
 									<listhead>
-										<listheader label="Id"
-											width="10%" />
-										<listheader label="Gast"
-											width="20%" />
-										<listheader label="Zimmer"
-											width="20%" />
-										<listheader label="Von"
-											width="75px" />
-										<listheader label="Bis"
-											width="75px" />
-										<listheader label="Art"
-											width="110px" />
-										<listheader label="Aktion"
-											width="100px" visible="true" />
+										<listheader label="Id" width="40px" />
+										<listheader label="Gast" />
+										<listheader label="Zimmer" width="100px" />
+										<listheader label="Von" width="150px" />
+										<listheader label="Bis" width="150px" />
+										<listheader label="Art" width="120px" />
+										<listheader label="Aktion" width="175px" visible="true" />
 									</listhead>
 									<template name="model" var="item">
 										<listitem
-											disabled="@load((empty vm.belegungKopfList) or ( vm.datumVon > item.datumVon))">
-											<listcell
-												label="@bind(item.id)" />
-											<listcell
-												label="@bind(item.gast)" />
-											<listcell
-												label="@bind(item.zimmer)" />
-											<listcell
-												label="@bind(item.datumVon)" />
-											<listcell
-												label="@bind(item.datumBis)" />
-											<listcell
-												label="@bind(item.art)" />
+											disabled="@load((empty vm.belegungKopfList) or ( vm.datumVon &gt; item.datumVon))">
+											<listcell label="@bind(item.id)" />
+											<listcell label="@bind(item.gast)" />
+											<listcell label="@bind(item.zimmer)" />
+											<listcell label="@bind(item.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
+											<listcell label="@bind(item.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')" />
+											<listcell label="@bind(item.art)" />
 											<listcell>
-												<button width="80px"
-													label="reservieren"
-													disabled="@load(empty vm.gastZimmerZeitSelected)"
-													onClick="@command('doReservieren')"
-													visible="@load((not empty vm.belegungKopfList) and (item.art != 'RESERVIERUNG'))" />
-												<button width="80px"
-													label="buchen"
-													disabled="@load(empty vm.gastZimmerZeitSelected)"
-													onClick="@command('doBuchen')"
-													visible="@load((not empty vm.belegungKopfList) and (item.art != 'BUCHUNG'))" />
-												<button width="80px"
-													label="stornieren"
-													disabled="@load(empty vm.gastZimmerZeitSelected)"
-													onClick="@command('doStorno')" visible="true" />
+												<hbox>
+													<button width="80px" label="reservieren"
+														onClick="@command('doChangeToReservierung', belegungKopf=item)"
+														visible="@load((not empty vm.belegungKopfList) and (item.art != 'RESERVIERUNG'))" />
+													<button width="80px" label="buchen"
+														onClick="@command('doChangeToBuchung', belegungKopf=item)"
+														visible="@load((not empty vm.belegungKopfList) and (item.art != 'BUCHUNG'))" />
+													<button width="80px" label="stornieren"
+														onClick="@command('doStorno', belegungKopf=item)"
+														visible="true" />
+												</hbox>
 											</listcell>
 										</listitem>
 									</template>
@@ -304,13 +246,11 @@
 						</borderlayout>
 					</center>
 					<south height="6%" flex="true" splittable="true"
-						style="background-color: orange;"
-						visible="@bind(vm.zusammenfassungAnzeigen)">
+						style="background-color: orange;" visible="@bind(vm.zusammenfassungAnzeigen)">
 						<div align="left"
 							style="text-align:center; margin-right:20px; color:green;">
 							Zimmer
-							<label
-								value="@bind(vm.zimmerZeitraumBelegungSelected.zimmer)"
+							<label value="@bind(vm.zimmerZeitraumBelegungSelected.zimmer)"
 								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
 							im Zeitraum von
 							<label
@@ -325,8 +265,7 @@
 								style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
 							<button label="reservieren" width="80px"
 								onClick="@command('doReservieren')" />
-							<button label="buchen" width="80px"
-								onClick="@command('doBuchen')" />
+							<button label="buchen" width="80px" onClick="@command('doBuchen')" />
 						</div>
 					</south>
 
@@ -334,8 +273,7 @@
 			</tabpanel>
 
 			<tabpanel>Drucken</tabpanel>
-			<tabpanel style="color:#333399;"
-				fulfill="adminTab.onSelect">
+			<tabpanel style="color:#333399;" fulfill="adminTab.onSelect">
 				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
 						<tab id="adminGastTab" label="Gäste" />

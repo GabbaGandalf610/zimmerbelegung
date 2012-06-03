@@ -47,10 +47,10 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 				if (belegung.getZimmer().equals(zimmer)) {
 					if (belegung.getArt() == BelegungArt.RESERVIERUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
-								belegung.getDatum(), Status.RESERVIERT));
+								belegung.getDatum(), Status.RESERVIERT, belegung.getGast()));
 					} else if (belegung.getArt() == BelegungArt.BUCHUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
-								belegung.getDatum(), Status.GEBUCHT));
+								belegung.getDatum(), Status.GEBUCHT, belegung.getGast()));
 					}
 				}
 			}

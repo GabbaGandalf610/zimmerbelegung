@@ -9,9 +9,18 @@ package de.hdu.zimmerbelegung.helper;
 
 import org.joda.time.LocalDate;
 
+import de.hdu.zimmerbelegung.model.Gast;
+
 public class DatumStatus implements Comparable<DatumStatus> {
 	private LocalDate datum;
 	private Status status;
+	private Gast gast;
+	public Gast getGast() {
+		return gast;
+	}
+	public void setGast(Gast gast) {
+		this.gast = gast;
+	}
 	public LocalDate getDatum() {
 		return datum;
 	}
@@ -25,12 +34,23 @@ public class DatumStatus implements Comparable<DatumStatus> {
 		this.status = status;
 	}
 	public DatumStatus(LocalDate datum, Status status) {
+		this(datum, status, null);
+	}
+	public DatumStatus(LocalDate datum, Status status, Gast gast) {
 		super();
 		this.datum = datum;
 		this.status = status;
+		this.gast = gast;
 	}
 	@Override
 	public int compareTo(DatumStatus andererDatumStatus) {
 		return this.datum.compareTo(andererDatumStatus.getDatum());
+	}
+	@Override
+	public String toString() {
+		if (this.gast != null) 
+			return status.name() + " durch " + gast;
+		else
+			return status.name();
 	}
 }
