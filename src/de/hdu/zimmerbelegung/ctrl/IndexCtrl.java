@@ -9,10 +9,10 @@
 package de.hdu.zimmerbelegung.ctrl;
 
 import org.joda.time.LocalDate;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.UiException;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.SimpleDateConstraint;
@@ -36,14 +36,14 @@ public class IndexCtrl {
 	String gastSuche;
 	ListModelList<Belegung> belegungList;
 	ListModelList<BelegungKopf> belegungKopfList;
-	BelegungKopf gastZimmerZeitSelected;
+	BelegungKopf belegungKopfSelected;
 
-	public BelegungKopf getGastZimmerZeitSelected() {
-		return gastZimmerZeitSelected;
+	public BelegungKopf getBelegungKopfSelected() {
+		return belegungKopfSelected;
 	}
 
-	public void setGastZimmerZeitSelected(BelegungKopf gastZimmerZeitSelected) {
-		this.gastZimmerZeitSelected = gastZimmerZeitSelected;
+	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
+		this.belegungKopfSelected = belegungKopfSelected;
 	}
 
 	public BelegungArt[] getAllBelegungArt() {
@@ -67,7 +67,7 @@ public class IndexCtrl {
 			belegungKopfList = new ListModelList<BelegungKopf>();
 			for (BelegungKopf belegungsKopf : this.gastSelected
 					.getBelegungKopf()) {
-				belegungKopfList.add((BelegungKopf) belegungsKopf);
+				belegungKopfList.add(belegungsKopf);
 			}
 		}
 		return belegungKopfList;
@@ -76,13 +76,13 @@ public class IndexCtrl {
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
 	public void doBuchen() throws Exception {
-		if (!isZusammenfassungAnzeigen() && gastZimmerZeitSelected == null)
+		if (!isZusammenfassungAnzeigen() && belegungKopfSelected == null)
 			return;
 
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 
-		if (gastZimmerZeitSelected != null && !isZusammenfassungAnzeigen()) {
-			belegungKopfDao.setArt(gastZimmerZeitSelected, BelegungArt.BUCHUNG);
+		if (belegungKopfSelected != null && !isZusammenfassungAnzeigen()) {
+			belegungKopfDao.setArt(belegungKopfSelected, BelegungArt.BUCHUNG);
 			zimmerZeitraumBelegungSelected = null;
 		} else {
 			belegungKopfDao.create(BelegungArt.BUCHUNG, datumVon, datumBis,
@@ -94,43 +94,41 @@ public class IndexCtrl {
 
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
 	@Command
 	public void doReservieren() throws Exception {
-		System.out.println(gastZimmerZeitSelected);
-		if (!isZusammenfassungAnzeigen() && gastZimmerZeitSelected == null)
+		System.out.println(belegungKopfSelected);
+		if (!isZusammenfassungAnzeigen())
 			return;
 
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 
-		if (gastZimmerZeitSelected != null && !isZusammenfassungAnzeigen()) {
-			belegungKopfDao.setArt(gastZimmerZeitSelected,
-					BelegungArt.RESERVIERUNG);
-			zimmerZeitraumBelegungSelected = null;
-		} else {
+		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
+				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.saveOrUpdate(gastSelected);
+		zimmerZeitraumBelegungSelected = null;
+	}
 
-			belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon,
-					datumBis, zimmerZeitraumBelegungSelected.getZimmer(),
-					gastSelected);
-			GastDao gastDao = ServiceLocator.getGastDao();
-			gastDao.saveOrUpdate(gastSelected);
-			zimmerZeitraumBelegungSelected = null;
-		}
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	@Command
+	public void doChangeToReservierung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.setArt(belegungKopf, BelegungArt.RESERVIERUNG);
+	}
+
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	@Command
+	public void doChangeToBuchung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.setArt(belegungKopf, BelegungArt.BUCHUNG);
 	}
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
-	public void doStorno() throws Exception {
-		if (gastZimmerZeitSelected != null) {
-			BelegungKopfDao belegungKopfDao = ServiceLocator
-					.getBelegungKopfDao();
-			belegungKopfDao.storno(gastZimmerZeitSelected);
-			// belegungKopfList.remove(gastZimmerZeitSelected);
-			this.getBelegungKopfList();
-
-		} else {
-			throw new UiException("Keine Belegung ausgewählt!");
-		}
+	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.storno(belegungKopf);
 	}
 
 	@Command
