@@ -10,7 +10,7 @@
 	<tabbox width="100%" height="100%">
 		<tabs>
 			<tab label="Verwaltung" />
-			<tab label="Drucken" />
+			<tab id="statusTab" label="Zimmer Status" />
 			<tab id="adminTab" label="Administration" />
 		</tabs>
 		<tabpanels>
@@ -272,7 +272,9 @@
 				</borderlayout>
 			</tabpanel>
 
-			<tabpanel>Drucken</tabpanel>
+			<tabpanel fulfill="statusTab.onSelect">
+				<include src="adminZimmerStatus.zul" />
+			</tabpanel>
 			<tabpanel style="color:#333399;" fulfill="adminTab.onSelect">
 				<tabbox id="tb2" orient="vertical" height="100%">
 					<tabs id="tabs" width="150px">
