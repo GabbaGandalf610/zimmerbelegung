@@ -10,29 +10,40 @@ package de.hdu.zimmerbelegung.ctrl;
 
 import org.joda.time.LocalDate;
 import org.zkoss.bind.annotation.DependsOn;
+import org.zkoss.zul.ListModel;
+import org.zkoss.zul.ListModelList;
 
-public class AdminZimmerStatusCtrl {
+import de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDto;
+import de.hdu.zimmerbelegung.helper.ZimmerZeitraumBelegung;
+import de.hdu.zimmerbelegung.service.ServiceLocator;
+
+public class ZimmerStatusCtrl {
 	LocalDate datumBis = new LocalDate().plusDays(10);
 	LocalDate datumVon = new LocalDate();
+	ListModelList<ZimmerZeitraumBelegung> zimmerZeitraumBelegungList;
 
 	@DependsOn("datumVon")
 	public LocalDate getDatumBis() {
 		datumBis = datumVon.plusDays(10);
 		return datumBis;
 	}
-
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
-
-	public void setDatumBis(LocalDate datumBis) {
-		this.datumBis = datumVon.plusDays(10);
-	}
-
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
-
-
-
+	@DependsOn({ "datumVon", "datumBis" })
+	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
+		if (zimmerZeitraumBelegungList == null) {
+			zimmerZeitraumBelegungList = new ListModelList<ZimmerZeitraumBelegung>();
+		} else {
+			zimmerZeitraumBelegungList.clear();
+		}
+		ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
+				.getZimmerZeitraumBelegungDto();
+		zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
+				datumVon, datumBis));
+		return zimmerZeitraumBelegungList;
+	}
 }
