@@ -24,6 +24,24 @@ public class GastDaoTest extends AbstractDataAccessTest{
 	public void setGastDao(GastDao gastDao) {
 		this.gastDao = gastDao;
 	}
+	
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testFindAll() {
+		// already tested by testFindById()
+		testFindById();
+	}
+
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testCreate() {
+		// already tested by testFindById()
+		testFindById();
+	}
 
 	/**
 	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
@@ -46,24 +64,6 @@ public class GastDaoTest extends AbstractDataAccessTest{
 		}
 		// delete all rows from db table
 		deleteFromTables(tables);
-	}
-	
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testFindAll() {
-		// already tested by testFindById()
-		testFindById();
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testCreate() {
-		// already tested by testFindById()
-		testFindById();
 	}
 	
 	/**
