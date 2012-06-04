@@ -20,10 +20,14 @@ public class Zimmer {
 	@Id
 	@GeneratedValue
 	private int id;
-	private int zimmernummer;
 	private String zimmerbeschreibung;
+	private int zimmernummer;
 	private float zimmerpreis;
 
+	public Zimmer() {
+
+	}
+	
 	public Zimmer(int id, int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
 		super();
 		this.id = id;
@@ -32,6 +36,8 @@ public class Zimmer {
 		this.zimmerpreis = zimmerpreis;
 	}
 	
+	
+
 	public Zimmer(int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
 		super();
 		this.zimmernummer = zimmernummer;
@@ -39,47 +45,6 @@ public class Zimmer {
 		this.zimmerpreis = zimmerpreis;
 	}
 	
-	
-
-	public Zimmer() {
-
-	}
-	
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
-	
-	public int getZimmernummer() {
-		return zimmernummer;
-	}
-
-	public void setZimmernummer(int zimmernummer) {
-		this.zimmernummer = zimmernummer;
-	}
-	
-	public String getZimmerbeschreibung() {
-		return zimmerbeschreibung;
-	}
-
-	public void setZimmerbeschreibung(String zimmerbeschreibung) {
-		this.zimmerbeschreibung = zimmerbeschreibung;
-	}
-
-	public float getZimmerpreis() {
-		return zimmerpreis;
-	}
-
-	public void setZimmerpreis(float zimmerpreis) {
-		this.zimmerpreis = zimmerpreis;
-	}
-
-	public String toString() {
-		return  this.zimmernummer + " (" + this.zimmerbeschreibung + ") " + this.zimmerpreis;
-	}
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Zimmer) {
@@ -87,5 +52,41 @@ public class Zimmer {
 		} else {
 			return super.equals(obj);
 		}
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	public String getZimmerbeschreibung() {
+		return zimmerbeschreibung;
+	}
+
+	public int getZimmernummer() {
+		return zimmernummer;
+	}
+	
+	public float getZimmerpreis() {
+		return zimmerpreis;
+	}
+
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public void setZimmerbeschreibung(String zimmerbeschreibung) {
+		this.zimmerbeschreibung = zimmerbeschreibung;
+	}
+
+	public void setZimmernummer(int zimmernummer) {
+		this.zimmernummer = zimmernummer;
+	}
+
+	public void setZimmerpreis(float zimmerpreis) {
+		this.zimmerpreis = zimmerpreis;
+	}
+	@Override
+	public String toString() {
+		return  this.zimmernummer + " (" + this.zimmerbeschreibung + ") " + this.zimmerpreis;
 	}
 }

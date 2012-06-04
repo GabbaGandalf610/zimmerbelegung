@@ -21,6 +21,7 @@ public class AbstractDataAccessTest extends
 	/**
 	 * Reference the Spring configuration file for the test case.
 	 */
+	@Override
 	protected String[] getConfigLocations() {
 		return new String[] { "datenbank-test.xml" };
 	}

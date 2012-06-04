@@ -14,12 +14,12 @@ import java.sql.Statement;
 //import org.apache.log4j.Logger;
 
 public class Startup {
-//	private static Logger log = Logger.getLogger(Startup.class);
+private String defaultDBurl;
+	//	private static Logger log = Logger.getLogger(Startup.class);
 	private String driverClass;
-	private String user;
-	private String password;
-	private String defaultDBurl;
 	private String newDB;
+	private String password;
+	private String user;
 
 	public void initDB() {
 		// attempt to create the user specified database
@@ -43,23 +43,23 @@ public class Startup {
 		}
 	}
 
+	public void setDefaultDBurl(String defaultDBurl) {
+		this.defaultDBurl = defaultDBurl;
+	}
+
 	public void setDriverClass(String driverClass) {
 		this.driverClass = driverClass;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setNewDB(String newDB) {
+		this.newDB = newDB;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public void setDefaultDBurl(String defaultDBurl) {
-		this.defaultDBurl = defaultDBurl;
-	}
-
-	public void setNewDB(String newDB) {
-		this.newDB = newDB;
+	public void setUser(String user) {
+		this.user = user;
 	}
 }

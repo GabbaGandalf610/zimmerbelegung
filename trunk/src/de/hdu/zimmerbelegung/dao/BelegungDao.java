@@ -20,6 +20,22 @@ import de.hdu.zimmerbelegung.model.Belegung;
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class BelegungDao extends HibernateDaoSupport {
+	public void delete(Belegung belegung) {
+		getHibernateTemplate().delete(belegung);
+		getHibernateTemplate().flush();
+		getHibernateTemplate().clear();
+	}
+
+	/**
+	 * Deletes all {@link Blegung} objects from the database.
+	 */
+	public void deleteAll() {
+		List<Belegung> myBelegungList = this.getAll();
+		for (Belegung tempBelegung : myBelegungList) {
+			getHibernateTemplate().delete(tempBelegung);	
+		}
+	}
+
 	/**
 	 * Returns a single Belegung by its primary db key
 	 * @param id the primary key of a {@link Belegung}
@@ -27,16 +43,6 @@ public class BelegungDao extends HibernateDaoSupport {
 	 */
 	public Belegung get(int id) {
 		return getHibernateTemplate().load(Belegung.class, id);
-	}
-
-	/**
-	 * Saves the {@link Belegung} specified by the parameter in the database.
-	 * @param belegung a {@link Belegung} object that should be saved in the db.
-	 */
-	public void save(Belegung belegung) {
-		getHibernateTemplate().saveOrUpdate(belegung);
-//		getHibernateTemplate().flush();
-//		getHibernateTemplate().refresh(belegung);
 	}
 
 	/**
@@ -48,7 +54,7 @@ public class BelegungDao extends HibernateDaoSupport {
 	public List<Belegung> getAll() {
 		return getHibernateTemplate().find("FROM Belegung");
 	}
-
+	
 	/**
 	 * Returns all Belegung from the database in a specified timeline.
 	 * @return a list of {@link Belegung}
@@ -64,19 +70,13 @@ public class BelegungDao extends HibernateDaoSupport {
 	}
 	
 	/**
-	 * Deletes all {@link Blegung} objects from the database.
+	 * Saves the {@link Belegung} specified by the parameter in the database.
+	 * @param belegung a {@link Belegung} object that should be saved in the db.
 	 */
-	public void deleteAll() {
-		List<Belegung> myBelegungList = this.getAll();
-		for (Belegung tempBelegung : myBelegungList) {
-			getHibernateTemplate().delete(tempBelegung);	
-		}
-	}
-	
-	public void delete(Belegung belegung) {
-		getHibernateTemplate().delete(belegung);
-		getHibernateTemplate().flush();
-		getHibernateTemplate().clear();
+	public void save(Belegung belegung) {
+		getHibernateTemplate().saveOrUpdate(belegung);
+//		getHibernateTemplate().flush();
+//		getHibernateTemplate().refresh(belegung);
 	}
 	
 	

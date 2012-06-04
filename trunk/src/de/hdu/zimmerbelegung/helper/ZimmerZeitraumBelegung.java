@@ -14,17 +14,18 @@ import java.util.List;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class ZimmerZeitraumBelegung {
-	private Zimmer zimmer;
 	private List<DatumStatus> datumStatusList = new ArrayList<DatumStatus>();
+	private Zimmer zimmer;
 	public ZimmerZeitraumBelegung(Zimmer zimmer) {
 		super();
 		this.zimmer = zimmer;
 	}
-	public Zimmer getZimmer() {
-		return zimmer;
+	public void addDatumStatus(DatumStatus datumStatus) {
+		this.datumStatusList.add(datumStatus);
+		Collections.sort(datumStatusList);
 	}
-	public void setZimmer(Zimmer zimmer) {
-		this.zimmer = zimmer;
+	public List<DatumStatus> getDatumStatusList() {
+		return datumStatusList;
 	}
 	public Status getStatus() {
 		int anzahlFrei = 0;
@@ -59,14 +60,13 @@ public class ZimmerZeitraumBelegung {
 		}
 		return Status.TEILWEISE_BELEGT;
 	}
-	public List<DatumStatus> getDatumStatusList() {
-		return datumStatusList;
+	public Zimmer getZimmer() {
+		return zimmer;
 	}
 	public void setDatumStatusList(List<DatumStatus> datumStatusList) {
 		this.datumStatusList = datumStatusList;
 	}
-	public void addDatumStatus(DatumStatus datumStatus) {
-		this.datumStatusList.add(datumStatus);
-		Collections.sort(datumStatusList);
+	public void setZimmer(Zimmer zimmer) {
+		this.zimmer = zimmer;
 	}
 }

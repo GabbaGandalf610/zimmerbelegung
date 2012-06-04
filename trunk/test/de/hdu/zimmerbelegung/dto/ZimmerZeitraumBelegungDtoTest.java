@@ -20,10 +20,10 @@ import de.hdu.zimmerbelegung.model.Zimmer;
 public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 
 	private BelegungDao belegungDao;
-	private GastDao gastDao;
-	private ZimmerDao zimmerDao;
 	private BelegungKopfDao belegungKopfDao;
+	private GastDao gastDao;
 	private String tableName = "Belegung";
+	private ZimmerDao zimmerDao;
 	
 	/**
 	 * Gets the {@link BelegungDao} object injected form the bean belegungDaoTest.
@@ -31,6 +31,14 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 	 */
 	public void setBelegungDao(BelegungDao belegungDao) {
 		this.belegungDao = belegungDao;
+	}
+
+	/**
+	 * Gets the {@link BelegungKopfDao} object injected form the bean belegungDaoTest.
+	 * @param belegungDao a {@link BelegungKopfDao} object that injects the corresponding bean.
+	 */
+	public void setBelegungKopfDao(BelegungKopfDao belegungKopfDao) {
+		this.belegungKopfDao = belegungKopfDao;
 	}
 
 	/**
@@ -48,15 +56,25 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
 	}
-
+	
 	/**
-	 * Gets the {@link BelegungKopfDao} object injected form the bean belegungDaoTest.
-	 * @param belegungDao a {@link BelegungKopfDao} object that injects the corresponding bean.
+	 * testFindAll is already included in testFindById
 	 */
-	public void setBelegungKopfDao(BelegungKopfDao belegungKopfDao) {
-		this.belegungKopfDao = belegungKopfDao;
+	@Test
+	public void testCreate() {
+		// already tested by testFindById()
+		testFindById();
 	}
 	
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testFindAll() {
+		// already tested by testFindById()
+		testFindById();
+	}
+
 	/**
 	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
 	 */
@@ -119,24 +137,6 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 //		}
 		// delete all rows from db table
 		deleteFromTables(tables);
-	}
-	
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testFindAll() {
-		// already tested by testFindById()
-		testFindById();
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testCreate() {
-		// already tested by testFindById()
-		testFindById();
 	}
 
 	

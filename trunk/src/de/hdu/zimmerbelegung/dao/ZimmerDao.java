@@ -21,29 +21,21 @@ import de.hdu.zimmerbelegung.model.Zimmer;
 public class ZimmerDao extends HibernateDaoSupport {
 
 	/**
-	 * Returns a single room by its primary db key
-	 * @param id the primary key of a {@link Zimmer}
-	 * @return a single Zimmer
-	 */
-	public Zimmer getbyId(int id) {
-		return getHibernateTemplate().load(Zimmer.class, id);
-	}
-
-	/**
-	 * Saves the {@link Zimmer} specified by the parameter in the database.
-	 * @param zimmer a {@link Zimmer} object that should be saved in the db.
-	 */
-	public void saveOrUpdate(Zimmer zimmer) {
-		getHibernateTemplate().saveOrUpdate(zimmer);
-		getHibernateTemplate().refresh(zimmer);
-	}
-
-	/**
 	 * Deletes the specified {@link Zimmer} object from the database.
 	 * @param zimmer the {@link Zimmer} to be deleted.
 	 */
 	public void delete(Zimmer zimmer) {
 		getHibernateTemplate().delete(zimmer);
+	}
+
+	/**
+	 * Deletes all {@link Zimmer} objects from the database.
+	 */
+	public void deleteAll() {
+		List<Zimmer> myZimmerList = this.getAll();
+		for (Zimmer tempZimmer : myZimmerList) {
+			getHibernateTemplate().delete(tempZimmer);	
+		}
 	}
 
 	/**
@@ -55,14 +47,22 @@ public class ZimmerDao extends HibernateDaoSupport {
 	public List<Zimmer> getAll() {
 		return getHibernateTemplate().find("from Zimmer order by zimmernummer");
 	}
+
+	/**
+	 * Returns a single room by its primary db key
+	 * @param id the primary key of a {@link Zimmer}
+	 * @return a single Zimmer
+	 */
+	public Zimmer getbyId(int id) {
+		return getHibernateTemplate().load(Zimmer.class, id);
+	}
 	
 	/**
-	 * Deletes all {@link Zimmer} objects from the database.
+	 * Saves the {@link Zimmer} specified by the parameter in the database.
+	 * @param zimmer a {@link Zimmer} object that should be saved in the db.
 	 */
-	public void deleteAll() {
-		List<Zimmer> myZimmerList = this.getAll();
-		for (Zimmer tempZimmer : myZimmerList) {
-			getHibernateTemplate().delete(tempZimmer);	
-		}
+	public void saveOrUpdate(Zimmer zimmer) {
+		getHibernateTemplate().saveOrUpdate(zimmer);
+		getHibernateTemplate().refresh(zimmer);
 	}
 }

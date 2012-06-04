@@ -14,8 +14,8 @@ import org.junit.Test;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class ZimmerDaoTest extends AbstractDataAccessTest {
-	private ZimmerDao zimmerDao;
 	private String tableName = "Zimmer";
+	private ZimmerDao zimmerDao;
 
 	/**
 	 * Gets the {@link ZimmerDao} object injected form the bean belegungDaoTest.
@@ -23,6 +23,24 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 	 */
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
+	}
+
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testCreate() {
+		// already tested by testFindById()
+		testFindById();
+	}
+
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testFindAll() {
+		// already tested by testFindById()
+		testFindById();
 	}
 
 	/**
@@ -46,24 +64,6 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 		}
 		// delete all rows from db table
 		deleteFromTables(tables);
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testFindAll() {
-		// already tested by testFindById()
-		testFindById();
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testCreate() {
-		// already tested by testFindById()
-		testFindById();
 	}
 
 }

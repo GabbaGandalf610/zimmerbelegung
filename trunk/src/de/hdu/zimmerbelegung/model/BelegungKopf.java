@@ -31,54 +31,42 @@ import de.hdu.zimmerbelegung.helper.BelegungArt;
  */
 @Entity
 public class BelegungKopf {
-	@Id
-	@GeneratedValue
-	private int id;
-
 	@OneToMany(targetEntity = Belegung.class, mappedBy = "belegungKopf", fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@OrderBy("datum")
 	private List<Belegung> belegungen = new ArrayList<Belegung>();
-	
+
 	@ManyToOne(targetEntity=Gast.class,optional=false)
 	@NotNull
 	private Gast gastid;
 	
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	public BelegungKopf() {
+		super();
+	}
+
+	public BelegungKopf(Gast gast) {
+		gastid = gast;
+	}
+	public BelegungArt getArt() {
+		if (belegungen.size() > 0) {
+			return belegungen.get(0).getArt();
+		} else {
+			return BelegungArt.RESERVIERUNG;
+		}
+	}
+
 	public List<Belegung> getBelegungen() throws Exception {
 		pruefeKonsistenz();
 		return belegungen;
 	}
 
-	public BelegungKopf() {
-		super();
-	}
-	public BelegungKopf(Gast gast) {
-		gastid = gast;
-	}
-
-	public void setBelegungen(List<Belegung> belegungen) {
-		this.belegungen = belegungen;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public Gast getGast() {
-		// Gibt den Gast der ersten Belegung zurück (Sollte für jede Belegung
-		// der gleiche sein)
+	public LocalDate getDatumBis() {
 		if (belegungen.size() > 0) {
-			return belegungen.get(0).getGast();
-		} else {
-			return null;
-		}
-	}
-
-	public Zimmer getZimmer() {
-		// Gibt das Zimmer der ersten Belegung zurück (Sollte für jede Belegung
-		// der gleiche sein)
-		if (belegungen.size() > 0) {
-			return belegungen.get(0).getZimmer();
+			return belegungen.get(belegungen.size() - 1).getDatum();
 		} else {
 			return null;
 		}
@@ -92,12 +80,22 @@ public class BelegungKopf {
 		}
 	}
 
-	public LocalDate getDatumBis() {
+	public Gast getGast() {
+		// Gibt den Gast der ersten Belegung zurück (Sollte für jede Belegung
+		// der gleiche sein)
 		if (belegungen.size() > 0) {
-			return belegungen.get(belegungen.size() - 1).getDatum();
+			return belegungen.get(0).getGast();
 		} else {
 			return null;
 		}
+	}
+
+	public Gast getGastid() {
+		return gastid;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 //	public void setDatumBis(LocalDate datumBis) {
@@ -119,11 +117,13 @@ public class BelegungKopf {
 ////		}
 //	}
 
-	public BelegungArt getArt() {
+	public Zimmer getZimmer() {
+		// Gibt das Zimmer der ersten Belegung zurück (Sollte für jede Belegung
+		// der gleiche sein)
 		if (belegungen.size() > 0) {
-			return belegungen.get(0).getArt();
+			return belegungen.get(0).getZimmer();
 		} else {
-			return BelegungArt.RESERVIERUNG;
+			return null;
 		}
 	}
 
@@ -159,8 +159,8 @@ public class BelegungKopf {
 		}
 	}
 
-	public Gast getGastid() {
-		return gastid;
+	public void setBelegungen(List<Belegung> belegungen) {
+		this.belegungen = belegungen;
 	}
 
 	public void setGastid(Gast gastid) {

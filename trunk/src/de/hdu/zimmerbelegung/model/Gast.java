@@ -21,106 +21,26 @@ import javax.persistence.OrderBy;
  */
 @Entity
 public class Gast {
-	@Id
-	@GeneratedValue
-	private int id;
-	private String vorname;
-	private String name;
-	private String firma;
-	private String strasse;
-	private String plz;
-	private String ort;
-	private String land;
-	private String telefon;
-	private String mobil;
-	private String fax;
-	private String email;
-	private String kommentar;
+	@OneToMany(targetEntity = Belegung.class, mappedBy = "gast", fetch = FetchType.EAGER)
+	private Set<Belegung> belegung;
 	@OneToMany(targetEntity = BelegungKopf.class, mappedBy = "gastid", fetch = FetchType.EAGER)
 	@OrderBy("id DESC")
 	private Set<BelegungKopf> belegungKopf;
-	@OneToMany(targetEntity = Belegung.class, mappedBy = "gast", fetch = FetchType.EAGER)
-	private Set<Belegung> belegung;
-
-	public Set<BelegungKopf> getBelegungKopf() {
-		return belegungKopf;
-	}
-
-	public void setBelegungKopf(Set<BelegungKopf> belegungKopf) {
-		this.belegungKopf = belegungKopf;
-	}
-
-	public String getStrasse() {
-		return strasse;
-	}
-
-	public void setStrasse(String strasse) {
-		this.strasse = strasse;
-	}
-
-	public String getPlz() {
-		return plz;
-	}
-
-	public void setPlz(String plz) {
-		this.plz = plz;
-	}
-
-	public String getOrt() {
-		return ort;
-	}
-
-	public void setOrt(String ort) {
-		this.ort = ort;
-	}
-
-	public String getLand() {
-		return land;
-	}
-
-	public void setLand(String land) {
-		this.land = land;
-	}
-
-	public String getTelefon() {
-		return telefon;
-	}
-
-	public void setTelefon(String telefon) {
-		this.telefon = telefon;
-	}
-
-	public String getMobil() {
-		return mobil;
-	}
-
-	public void setMobil(String mobil) {
-		this.mobil = mobil;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getKommentar() {
-		return kommentar;
-	}
+	private String email;
+	private String fax;
+	private String firma;
+	@Id
+	@GeneratedValue
+	private int id;
+	private String kommentar;
+	private String land;
+	private String mobil;
+	private String name;
+	private String ort;
+	private String plz;
+	private String strasse;
+	private String telefon;
+	private String vorname;
 
 	public Gast() {
 
@@ -161,48 +81,129 @@ public class Gast {
 		this.kommentar = kommentar;
 	}
 
-	public void setKommentar(String kommentar) {
-		this.kommentar = kommentar;
+	public Set<Belegung> getBelegung() {
+		return belegung;
 	}
 
-	public String getVorname() {
-		return vorname;
+	public Set<BelegungKopf> getBelegungKopf() {
+		return belegungKopf;
 	}
 
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getId() {
-		return id;
+	public String getFax() {
+		return fax;
 	}
 
 	public String getFirma() {
 		return firma;
 	}
 
-	public void setFirma(String firma) {
-		this.firma = firma;
+	public int getId() {
+		return id;
 	}
 
-	public String toString() {
-		return this.vorname + " " + this.name;
+	public String getKommentar() {
+		return kommentar;
 	}
 
-	public Set<Belegung> getBelegung() {
-		return belegung;
+	public String getLand() {
+		return land;
+	}
+
+	public String getMobil() {
+		return mobil;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getOrt() {
+		return ort;
+	}
+
+	public String getPlz() {
+		return plz;
+	}
+
+	public String getStrasse() {
+		return strasse;
+	}
+
+	public String getTelefon() {
+		return telefon;
+	}
+
+	public String getVorname() {
+		return vorname;
 	}
 
 	public void setBelegung(Set<Belegung> belegung) {
 		this.belegung = belegung;
+	}
+
+	public void setBelegungKopf(Set<BelegungKopf> belegungKopf) {
+		this.belegungKopf = belegungKopf;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public void setFirma(String firma) {
+		this.firma = firma;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setKommentar(String kommentar) {
+		this.kommentar = kommentar;
+	}
+
+	public void setLand(String land) {
+		this.land = land;
+	}
+
+	public void setMobil(String mobil) {
+		this.mobil = mobil;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
+
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	@Override
+	public String toString() {
+		return this.vorname + " " + this.name;
 	}
 
 }

@@ -34,30 +34,30 @@ public class ServiceLocator {
 		}
 	}
 
-	private ServiceLocator() {
-	}
-
-	public static SessionFactory getSessionFactory() {
-		return (SessionFactory) ctx.getBean("factory", SessionFactory.class);
-	}
-
 	public static BelegungDao getBelegungDao() {
-		return (BelegungDao) ctx.getBean("belegungDao", BelegungDao.class);
+		return ctx.getBean("belegungDao", BelegungDao.class);
 	}
 
 	public static BelegungKopfDao getBelegungKopfDao() {
-		return (BelegungKopfDao) ctx.getBean("belegungKopfDao", BelegungKopfDao.class);
-	}
-	
-	public static GastDao getGastDao() {
-		return (GastDao) ctx.getBean("gastDao", GastDao.class);
+		return ctx.getBean("belegungKopfDao", BelegungKopfDao.class);
 	}
 
-	public static ZimmerDao getZimmerDao() {
-		return (ZimmerDao) ctx.getBean("zimmerDao", ZimmerDao.class);
+	public static GastDao getGastDao() {
+		return ctx.getBean("gastDao", GastDao.class);
 	}
+
+	public static SessionFactory getSessionFactory() {
+		return ctx.getBean("factory", SessionFactory.class);
+	}
+	
+	public static ZimmerDao getZimmerDao() {
+		return ctx.getBean("zimmerDao", ZimmerDao.class);
+	}
+
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
-		return (ZimmerZeitraumBelegungDto) ctx.getBean(
+		return ctx.getBean(
 				"zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
+	}
+	private ServiceLocator() {
 	}
 }

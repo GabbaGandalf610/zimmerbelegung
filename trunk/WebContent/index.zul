@@ -216,7 +216,7 @@
 									</listhead>
 									<template name="model" var="item">
 										<listitem
-											disabled="@load((empty vm.belegungKopfList) or ( vm.datumVon &gt; item.datumVon))">
+											disabled="@load((empty vm.belegungKopfList) or ( vm.heute &gt; item.datumBis))">
 											<listcell label="@bind(item.id)" />
 											<listcell label="@bind(item.gast)" />
 											<listcell label="@bind(item.zimmer)" />

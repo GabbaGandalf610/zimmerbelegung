@@ -29,32 +29,28 @@ import de.hdu.zimmerbelegung.helper.BelegungArt;
 @Entity
 @Table(name = "Belegung", uniqueConstraints = { @UniqueConstraint(columnNames = {"datum", "zimmer_id"}) })
 public class Belegung {
-	@Id
-	@GeneratedValue
-	private int id;
-	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
-	@NotNull
-	private LocalDate datum;
-	@ManyToOne(targetEntity=Zimmer.class)
-	@NotNull
-	private Zimmer zimmer;
-	@ManyToOne(targetEntity=Gast.class, optional=false)
-	@NotNull
-	private Gast gast;
-	@ManyToOne(targetEntity=BelegungKopf.class, optional=false)
-	@NotNull
-	private BelegungKopf belegungKopf;
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private BelegungArt art;
-
-	public BelegungKopf getBelegungKopf() {
-		return belegungKopf;
-	}
+	@ManyToOne(targetEntity=BelegungKopf.class, optional=false)
+	@NotNull
+	private BelegungKopf belegungKopf;
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+	@NotNull
+	private LocalDate datum;
+	@ManyToOne(targetEntity=Gast.class, optional=false)
+	@NotNull
+	private Gast gast;
+	@Id
+	@GeneratedValue
+	private int id;
+	@ManyToOne(targetEntity=Zimmer.class)
+	@NotNull
+	private Zimmer zimmer;
 
 	public Belegung() {
 	}
-	
+
 	public Belegung(BelegungArt art, LocalDate datum, Zimmer zimmer, Gast gast, BelegungKopf belegungKopf) {
 		this.art = art;
 		this.datum = datum;
@@ -62,40 +58,44 @@ public class Belegung {
 		this.gast = gast;
 		this.belegungKopf = belegungKopf;
 	}
+	
+	public BelegungArt getArt() {
+		return art;
+	}
+
+	public BelegungKopf getBelegungKopf() {
+		return belegungKopf;
+	}
 
 	public LocalDate getDatum() {
 		return datum;
-	}
-
-	public void setDatum(LocalDate datum) {
-		this.datum = datum;
-	}
-
-	public Zimmer getZimmer() {
-		return zimmer;
-	}
-
-	public void setZimmer(Zimmer zimmer) {
-		this.zimmer = zimmer;
 	}
 
 	public Gast getGast() {
 		return gast;
 	}
 
-	public void setGast(Gast gast) {
-		this.gast = gast;
-	}
-
 	public int getId() {
 		return id;
 	}
-	
-	public BelegungArt getArt() {
-		return art;
+
+	public Zimmer getZimmer() {
+		return zimmer;
 	}
-	
+
 	public void setArt(BelegungArt art) {
 		this.art = art;
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+	
+	public void setGast(Gast gast) {
+		this.gast = gast;
+	}
+	
+	public void setZimmer(Zimmer zimmer) {
+		this.zimmer = zimmer;
 	}
 }

@@ -27,14 +27,51 @@ public class AdminGastCtrl {
 	String gastSuche;
 
 	/**
-	 * Puts the data of a {@link Gast} object in the corresponding fields in the GUI.
-	 * @param gastSelected a {@link Gast} object that represents the future field values.
-	 */
-	public void setGastSelected(Gast gastSelected) {
-		this.gastSelected = gastSelected;
+     * <p>Deletes the selected Gast</p>
+     */
+	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
+	public void doDelete() {
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.delete(gastSelected);
+		gastList.remove(gastSelected);
+		gastSelected = null;
 	}
 
 	/**
+     * <p>Updates the gastList with the specified Gast-Filter represented by the variable gastSuche</p>
+     */
+	@Command
+	public void doGuestSearch() {
+		gastList.clear();
+		GastDao gastDao = ServiceLocator.getGastDao();
+		System.out.println(gastSuche);
+		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
+		gastSelected = null;
+	}
+
+	/**
+     * <p>Creates a new Gast</p>
+     */
+	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
+	public void doNew() {
+		gastSelected = new Gast();
+	}
+
+	 /**
+     * <p>Saves the Gast</p>
+     */
+	@Command
+	@NotifyChange({ "gastSelected", "gastList" })
+	public void doSave() {
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.saveOrUpdate(gastSelected);
+		if (!gastList.contains(gastSelected))
+			gastList.add(gastSelected);
+	}
+
+    /**
 	 * Returns the {@link Gast} object which is selected in the GUI 
 	 * @return a Gast object which contains the GUI inpunts
 	 */
@@ -42,7 +79,14 @@ public class AdminGastCtrl {
 		return gastSelected;
 	}
 
-	/**
+    /**
+     * <p>Returns the variable gastSuche which contains the value of the Gast-Suche</p>
+     */
+	public String getGastSuche() {
+		return gastSuche;
+	}
+	
+    /**
 	 * Returns a list of all {@link Gast}
 	 * @return a list of all Gast
 	 */
@@ -56,49 +100,12 @@ public class AdminGastCtrl {
 		return gastList;
 	}
 
-	 /**
-     * <p>Creates a new Gast</p>
-     */
-	@Command
-	@NotifyChange({ "gastSelected", "gastList" })
-	public void doNew() {
-		gastSelected = new Gast();
-	}
-
     /**
-     * <p>Saves the Gast</p>
-     */
-	@Command
-	@NotifyChange({ "gastSelected", "gastList" })
-	public void doSave() {
-		GastDao gastDao = ServiceLocator.getGastDao();
-		gastDao.saveOrUpdate(gastSelected);
-		if (!gastList.contains(gastSelected))
-			gastList.add(gastSelected);
-	}
-
-    /**
-     * <p>Deletes the selected Gast</p>
-     */
-	@Command
-	@NotifyChange({ "gastSelected", "gastList" })
-	public void doDelete() {
-		GastDao gastDao = ServiceLocator.getGastDao();
-		gastDao.delete(gastSelected);
-		gastList.remove(gastSelected);
-		gastSelected = null;
-	}
-	
-    /**
-     * <p>Updates the gastList with the specified Gast-Filter represented by the variable gastSuche</p>
-     */
-	@Command
-	public void doGuestSearch() {
-		gastList.clear();
-		GastDao gastDao = ServiceLocator.getGastDao();
-		System.out.println(gastSuche);
-		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
-		gastSelected = null;
+	 * Puts the data of a {@link Gast} object in the corresponding fields in the GUI.
+	 * @param gastSelected a {@link Gast} object that represents the future field values.
+	 */
+	public void setGastSelected(Gast gastSelected) {
+		this.gastSelected = gastSelected;
 	}
 
     /**
@@ -106,12 +113,5 @@ public class AdminGastCtrl {
      */
 	public void setGastSuche(String gastSuche) {
 		this.gastSuche = gastSuche;
-	}
-
-    /**
-     * <p>Returns the variable gastSuche which contains the value of the Gast-Suche</p>
-     */
-	public String getGastSuche() {
-		return gastSuche;
 	}
 }

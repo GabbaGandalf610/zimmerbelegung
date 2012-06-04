@@ -13,6 +13,8 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import de.hdu.zimmerbelegung.dao.BelegungKopfDao;
 import de.hdu.zimmerbelegung.dao.GastDao;
 import de.hdu.zimmerbelegung.dao.ZimmerDao;
@@ -30,14 +32,35 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class AdminBelegungCtrl {
+	BelegungKopfDummy belegungKopfDummy;
 	ListModelList<BelegungKopf> belegungKopfList;
+	BelegungKopf belegungKopfSelected;
 	ListModelList<Belegung> belegungList;
+	Belegung belegungSelected;
 	ListModelList<Gast> gastList;
 	ListModelList<Zimmer> zimmerList;
-	BelegungKopf belegungKopfSelected;
-	BelegungKopfDummy belegungKopfDummy;
-	Belegung belegungSelected;
 	
+	/**
+	 * Creates a new BelegungKopfDummy object
+	 */
+	@Command
+	@NotifyChange({ "belegungKopfDummy" })
+	public void doNew() {
+		this.belegungKopfDummy = new BelegungKopfDummy();
+	}
+
+	/**
+     * <p>Saves the BelegungKopf</p>
+     */
+	@Command
+	public void doSave() {
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.create(belegungKopfDummy.getArt(),
+				belegungKopfDummy.getDatumVon(),
+				belegungKopfDummy.getDatumBis(), belegungKopfDummy.getZimmer(),
+				belegungKopfDummy.getGast());
+	}
+
 	/**
 	 * Returns a enum of all choosable {@link BelegungArt}
 	 * @return a enum of type BelegungArt
@@ -46,38 +69,13 @@ public class AdminBelegungCtrl {
 		return BelegungArt.getAll();
 	}
 
-	/**
-	 * Returns the {@link BelegungKof} to the selected Belegung
-	 * @return BelegungKof Object
-	 */
-	public BelegungKopf getBelegungKopfSelected() {
-		return belegungKopfSelected;
-	}
 
 	/**
-	 * Puts the data of a {@link BelegungKopf} object in the corresponding fields in the GUI.
-	 * @param belegungKopfSelected a {@link Belegung} object that represents the future field values.
+	 * Returns a belegungKopfDummy object
+	 * @return a belegungKopfDummy object
 	 */
-	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
-		;
-		this.belegungKopfSelected = belegungKopfSelected;
-	}
-
-
-	/**
-	 * Puts the data of a {@link Belegung} object in the corresponding fields in the GUI.
-	 * @param selected a {@link Belegung} object that represents the future field values.
-	 */
-	public void setBelegungSelected(Belegung selected) {
-		this.belegungSelected = selected;
-	}
-
-	/**
-	 * Returns the {@link Belegung} object which is selected in the GUI 
-	 * @return a Belegung object which contains the GUI inputs
-	 */
-	public Belegung getBelegungSelected() {
-		return belegungSelected;
+	public BelegungKopfDummy getBelegungKopfDummy() {
+		return belegungKopfDummy;
 	}
 
 	/**
@@ -96,6 +94,14 @@ public class AdminBelegungCtrl {
 	}
 
 	/**
+	 * Returns the {@link BelegungKof} to the selected Belegung
+	 * @return BelegungKof Object
+	 */
+	public BelegungKopf getBelegungKopfSelected() {
+		return belegungKopfSelected;
+	}
+
+	/**
 	 * Returns a list of Belegung objects to the specified {@link BelegungKopf} object.
 	 * @throws TODO
 	 */
@@ -106,9 +112,17 @@ public class AdminBelegungCtrl {
 			return null;
 		belegungList = new ListModelList<Belegung>();
 		for (Belegung belegung : this.belegungKopfSelected.getBelegungen()) {
-			belegungList.add((Belegung) belegung);
+			belegungList.add(belegung);
 		}
 		return belegungList;
+	}
+
+	/**
+	 * Returns the {@link Belegung} object which is selected in the GUI 
+	 * @return a Belegung object which contains the GUI inputs
+	 */
+	public Belegung getBelegungSelected() {
+		return belegungSelected;
 	}
 
 	/**
@@ -140,14 +154,6 @@ public class AdminBelegungCtrl {
 	}
 
 	/**
-	 * Returns a belegungKopfDummy object
-	 * @return a belegungKopfDummy object
-	 */
-	public BelegungKopfDummy getBelegungKopfDummy() {
-		return belegungKopfDummy;
-	}
-
-	/**
 	 * Sets the data of a BelegungKopfDummy object.
 	 * @param selected a {@link Belegung} object that represents the future field values.
 	 */
@@ -156,23 +162,19 @@ public class AdminBelegungCtrl {
 	}
 
 	/**
-	 * Creates a new BelegungKopfDummy object
+	 * Puts the data of a {@link BelegungKopf} object in the corresponding fields in the GUI.
+	 * @param belegungKopfSelected a {@link Belegung} object that represents the future field values.
 	 */
-	@Command
-	@NotifyChange({ "belegungKopfDummy" })
-	public void doNew() {
-		this.belegungKopfDummy = new BelegungKopfDummy();
+	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
+		;
+		this.belegungKopfSelected = belegungKopfSelected;
 	}
 
     /**
-     * <p>Saves the BelegungKopf</p>
-     */
-	@Command
-	public void doSave() {
-		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.create(belegungKopfDummy.getArt(),
-				belegungKopfDummy.getDatumVon(),
-				belegungKopfDummy.getDatumBis(), belegungKopfDummy.getZimmer(),
-				belegungKopfDummy.getGast());
+	 * Puts the data of a {@link Belegung} object in the corresponding fields in the GUI.
+	 * @param selected a {@link Belegung} object that represents the future field values.
+	 */
+	public void setBelegungSelected(Belegung selected) {
+		this.belegungSelected = selected;
 	}
 }

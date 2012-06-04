@@ -13,26 +13,8 @@ import de.hdu.zimmerbelegung.model.Gast;
 
 public class DatumStatus implements Comparable<DatumStatus> {
 	private LocalDate datum;
-	private Status status;
 	private Gast gast;
-	public Gast getGast() {
-		return gast;
-	}
-	public void setGast(Gast gast) {
-		this.gast = gast;
-	}
-	public LocalDate getDatum() {
-		return datum;
-	}
-	public void setDatum(LocalDate datum) {
-		this.datum = datum;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+	private Status status;
 	public DatumStatus(LocalDate datum, Status status) {
 		this(datum, status, null);
 	}
@@ -45,6 +27,24 @@ public class DatumStatus implements Comparable<DatumStatus> {
 	@Override
 	public int compareTo(DatumStatus andererDatumStatus) {
 		return this.datum.compareTo(andererDatumStatus.getDatum());
+	}
+	public LocalDate getDatum() {
+		return datum;
+	}
+	public Gast getGast() {
+		return gast;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+	public void setGast(Gast gast) {
+		this.gast = gast;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	@Override
 	public String toString() {
