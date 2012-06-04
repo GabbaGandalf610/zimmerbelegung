@@ -13,39 +13,39 @@ import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class BelegungKopfDummy {
+	private BelegungArt art = BelegungArt.BUCHUNG;
+	private LocalDate datumBis = new LocalDate();
+	private LocalDate datumVon = new LocalDate();
 	private Gast gast;
 	private Zimmer zimmer;
-	private LocalDate datumVon = new LocalDate();
-	private LocalDate datumBis = new LocalDate();
-	private BelegungArt art = BelegungArt.BUCHUNG;
-	public Gast getGast() {
-		return gast;
-	}
-	public void setGast(Gast gast) {
-		this.gast = gast;
-	}
-	public Zimmer getZimmer() {
-		return zimmer;
-	}
-	public void setZimmer(Zimmer zimmer) {
-		this.zimmer = zimmer;
-	}
-	public LocalDate getDatumVon() {
-		return datumVon;
-	}
-	public void setDatumVon(LocalDate datumVon) {
-		this.datumVon = datumVon;
+	public BelegungArt getArt() {
+		return art;
 	}
 	public LocalDate getDatumBis() {
 		return datumBis;
 	}
-	public void setDatumBis(LocalDate datumBis) {
-		this.datumBis = datumBis;
+	public LocalDate getDatumVon() {
+		return datumVon;
 	}
-	public BelegungArt getArt() {
-		return art;
+	public Gast getGast() {
+		return gast;
+	}
+	public Zimmer getZimmer() {
+		return zimmer;
 	}
 	public void setArt(BelegungArt art) {
 		this.art = art;
+	}
+	public void setDatumBis(LocalDate datumBis) {
+		this.datumBis = datumBis;
+	}
+	public void setDatumVon(LocalDate datumVon) {
+		this.datumVon = datumVon;
+	}
+	public void setGast(Gast gast) {
+		this.gast = gast;
+	}
+	public void setZimmer(Zimmer zimmer) {
+		this.zimmer = zimmer;
 	}
 }

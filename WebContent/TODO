@@ -7,8 +7,6 @@
 <!--  ******************************************************************************  -->
 TODO bis zum Abschluss des Projektes am 15. Juni
 - JUnit-Tests für DAOs und DTOs
-	//TODO: Umstellung auf "TestContext":
-	// http://static.springsource.org/spring/docs/3.0.0.RC1/reference/html/ch09s03.html#testcontext-framework
 - javadoc Dokumentation
 - Temporäre Variablen in Formularen: http://books.zkoss.org/wiki/Small_Talks/2012/February/MVVM_in_ZK6:_Form_Binding
 - Projektpräsentation vorbereiten (Live!)

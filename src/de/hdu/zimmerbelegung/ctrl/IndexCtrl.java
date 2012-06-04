@@ -29,49 +29,21 @@ import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 public class IndexCtrl {
+	ListModelList<BelegungKopf> belegungKopfList;
+	BelegungKopf belegungKopfSelected;
+
+	ListModelList<Belegung> belegungList;
 	LocalDate datumBis = new LocalDate();
 	LocalDate datumVon = new LocalDate();
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
 	String gastSuche;
-	ListModelList<Belegung> belegungList;
-	ListModelList<BelegungKopf> belegungKopfList;
-	BelegungKopf belegungKopfSelected;
-
-	public BelegungKopf getBelegungKopfSelected() {
-		return belegungKopfSelected;
-	}
-
-	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
-		this.belegungKopfSelected = belegungKopfSelected;
-	}
-
-	public BelegungArt[] getAllBelegungArt() {
-		return BelegungArt.getAll();
-	}
-
+	LocalDate heute = new LocalDate();
 	private final int MAX_BUCHUNGSLAENGE = 1;
 
 	ListModelList<ZimmerZeitraumBelegung> zimmerZeitraumBelegungList;
 
 	ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected;
-
-	@DependsOn({ "gastSelected", "datumVon" })
-	@NotifyChange({ "zimmerZeitraumBelegungSelected" })
-	public ListModel<BelegungKopf> getBelegungKopfList() {
-		if ((gastSelected == null) || (gastSelected.getId() == 0)) {
-			return null;
-		}
-		{
-			// Liste initialisieren
-			belegungKopfList = new ListModelList<BelegungKopf>();
-			for (BelegungKopf belegungsKopf : this.gastSelected
-					.getBelegungKopf()) {
-				belegungKopfList.add(belegungsKopf);
-			}
-		}
-		return belegungKopfList;
-	}
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
@@ -96,18 +68,9 @@ public class IndexCtrl {
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
 	@Command
-	public void doReservieren() throws Exception {
-		System.out.println(belegungKopfSelected);
-		if (!isZusammenfassungAnzeigen())
-			return;
-
+	public void doChangeToBuchung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-
-		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
-				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
-		GastDao gastDao = ServiceLocator.getGastDao();
-		gastDao.saveOrUpdate(gastSelected);
-		zimmerZeitraumBelegungSelected = null;
+		belegungKopfDao.setArt(belegungKopf, BelegungArt.BUCHUNG);
 	}
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
@@ -115,20 +78,6 @@ public class IndexCtrl {
 	public void doChangeToReservierung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.setArt(belegungKopf, BelegungArt.RESERVIERUNG);
-	}
-
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
-	@Command
-	public void doChangeToBuchung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
-		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.setArt(belegungKopf, BelegungArt.BUCHUNG);
-	}
-
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
-	@Command
-	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
-		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
-		belegungKopfDao.storno(belegungKopf);
 	}
 
 	@Command
@@ -156,6 +105,22 @@ public class IndexCtrl {
 		System.out.println(gastSelected.getId());
 	}
 
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	@Command
+	public void doReservieren() throws Exception {
+		System.out.println(belegungKopfSelected);
+		if (!isZusammenfassungAnzeigen())
+			return;
+
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+
+		belegungKopfDao.create(BelegungArt.RESERVIERUNG, datumVon, datumBis,
+				zimmerZeitraumBelegungSelected.getZimmer(), gastSelected);
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.saveOrUpdate(gastSelected);
+		zimmerZeitraumBelegungSelected = null;
+	}
+
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
@@ -164,6 +129,38 @@ public class IndexCtrl {
 		GastDao gastDao = ServiceLocator.getGastDao();
 		gastDao.saveOrUpdate(gastSelected);
 
+	}
+
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
+	@Command
+	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		belegungKopfDao.storno(belegungKopf);
+	}
+
+	public BelegungArt[] getAllBelegungArt() {
+		return BelegungArt.getAll();
+	}
+
+	@DependsOn({ "gastSelected", "datumVon" })
+	@NotifyChange({ "zimmerZeitraumBelegungSelected" })
+	public ListModel<BelegungKopf> getBelegungKopfList() {
+		if ((gastSelected == null) || (gastSelected.getId() == 0)) {
+			return null;
+		}
+		{
+			// Liste initialisieren
+			belegungKopfList = new ListModelList<BelegungKopf>();
+			for (BelegungKopf belegungsKopf : this.gastSelected
+					.getBelegungKopf()) {
+				belegungKopfList.add(belegungsKopf);
+			}
+		}
+		return belegungKopfList;
+	}
+
+	public BelegungKopf getBelegungKopfSelected() {
+		return belegungKopfSelected;
 	}
 
 	@DependsOn("datumVon")
@@ -180,6 +177,31 @@ public class IndexCtrl {
 		return new SimpleDateConstraint("between "
 				+ datumVon.toString("yyyMMdd") + " and "
 				+ datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
+	}
+
+	public LocalDate getDatumVon() {
+		return datumVon;
+	}
+
+	public Gast getGastSelected() {
+		return gastSelected;
+	}
+
+	public String getGastSuche() {
+		return gastSuche;
+	}
+
+	public LocalDate getHeute() {
+		return heute;
+	}
+
+	public ListModel<Gast> getItems() {
+		if (gastList == null) {
+			gastList = new ListModelList<Gast>();
+			GastDao gastDao = ServiceLocator.getGastDao();
+			gastList.addAll(gastDao.getAll());
+		}
+		return gastList;
 	}
 
 	@DependsOn({ "datumVon", "datumBis" })
@@ -216,13 +238,8 @@ public class IndexCtrl {
 		return true;
 	}
 
-	public ListModel<Gast> getItems() {
-		if (gastList == null) {
-			gastList = new ListModelList<Gast>();
-			GastDao gastDao = ServiceLocator.getGastDao();
-			gastList.addAll(gastDao.getAll());
-		}
-		return gastList;
+	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
+		this.belegungKopfSelected = belegungKopfSelected;
 	}
 
 	public void setDatumBis(LocalDate datumBis) {
@@ -235,18 +252,6 @@ public class IndexCtrl {
 
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
-	}
-
-	public Gast getGastSelected() {
-		return gastSelected;
-	}
-
-	public LocalDate getDatumVon() {
-		return datumVon;
-	}
-
-	public String getGastSuche() {
-		return gastSuche;
 	}
 
 	public void setGastSuche(String gastSuche) {

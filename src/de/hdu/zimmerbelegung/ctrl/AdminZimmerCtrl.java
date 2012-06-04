@@ -26,35 +26,18 @@ public class AdminZimmerCtrl {
 	Zimmer zimmerSelected;
 	
 	/**
-	 * Puts the data of a {@link Zimmer} object in the corresponding fields in the GUI.
-	 * @param zimmerSelected a {@link Zimmer} object that represents the future field values.
-	 */
-	public void setZimmerSelected(Zimmer  zimmerSelected){
-		this.zimmerSelected = zimmerSelected;
+     * <p>Deletes the selected Zimmer</p>
+     */
+	@Command
+	@NotifyChange({ "zimmerSelected", "zimmerList" })
+	public void doDelete(){
+		ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
+		zimmerDao.delete(zimmerSelected);
+		zimmerList.remove(zimmerSelected);
+		zimmerSelected = null;
 	}
 	
 	/**
-	 * Returns the {@link Zimmer} object which is selected in the GUI 
-	 * @return a Zimmer object
-	 */
-	public Zimmer getZimmerSelected(){
-		return zimmerSelected;
-	}
-	
-	/**
-	 * Returns a list of all {@link Zimmer}
-	 * @return a list of all Zimmer
-	 */
-	public ListModel<Zimmer> getItems(){
-		if(zimmerList == null){
-			zimmerList = new ListModelList<Zimmer>();
-			ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
-			zimmerList.addAll(zimmerDao.getAll());
-		}
-		return zimmerList;
-	}
-
-    /**
      * <p>Creates a new Zimmer</p>
      */
 	@Command
@@ -63,7 +46,7 @@ public class AdminZimmerCtrl {
 		zimmerSelected = new Zimmer();
 	}
 	
-    /**
+	/**
      * <p>Saves the Zimmer</p>
      */
 	@Command
@@ -75,16 +58,33 @@ public class AdminZimmerCtrl {
 			zimmerList.add(zimmerSelected);
 		}
 	}
+
+    /**
+	 * Returns a list of all {@link Zimmer}
+	 * @return a list of all Zimmer
+	 */
+	public ListModel<Zimmer> getItems(){
+		if(zimmerList == null){
+			zimmerList = new ListModelList<Zimmer>();
+			ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
+			zimmerList.addAll(zimmerDao.getAll());
+		}
+		return zimmerList;
+	}
 	
     /**
-     * <p>Deletes the selected Zimmer</p>
-     */
-	@Command
-	@NotifyChange({ "zimmerSelected", "zimmerList" })
-	public void doDelete(){
-		ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
-		zimmerDao.delete(zimmerSelected);
-		zimmerList.remove(zimmerSelected);
-		zimmerSelected = null;
+	 * Returns the {@link Zimmer} object which is selected in the GUI 
+	 * @return a Zimmer object
+	 */
+	public Zimmer getZimmerSelected(){
+		return zimmerSelected;
+	}
+	
+    /**
+	 * Puts the data of a {@link Zimmer} object in the corresponding fields in the GUI.
+	 * @param zimmerSelected a {@link Zimmer} object that represents the future field values.
+	 */
+	public void setZimmerSelected(Zimmer  zimmerSelected){
+		this.zimmerSelected = zimmerSelected;
 	}
 }

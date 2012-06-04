@@ -12,25 +12,25 @@ import org.joda.time.LocalDate;
 import org.zkoss.bind.annotation.DependsOn;
 
 public class AdminZimmerStatusCtrl {
-	LocalDate datumVon = new LocalDate();
 	LocalDate datumBis = new LocalDate().plusDays(10);
+	LocalDate datumVon = new LocalDate();
 
-	public void setDatumBis(LocalDate datumBis) {
-		this.datumBis = datumVon.plusDays(10);
+	@DependsOn("datumVon")
+	public LocalDate getDatumBis() {
+		datumBis = datumVon.plusDays(10);
+		return datumBis;
 	}
 
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
 
-	public void setDatumVon(LocalDate datumVon) {
-		this.datumVon = datumVon;
+	public void setDatumBis(LocalDate datumBis) {
+		this.datumBis = datumVon.plusDays(10);
 	}
 
-	@DependsOn("datumVon")
-	public LocalDate getDatumBis() {
-		datumBis = datumVon.plusDays(10);
-		return datumBis;
+	public void setDatumVon(LocalDate datumVon) {
+		this.datumVon = datumVon;
 	}
 
 

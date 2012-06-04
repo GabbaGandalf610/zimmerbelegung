@@ -1,13 +1,13 @@
 
 package de.hdu.zimmerbelegung.helper;
 
+import java.util.Date;
+
 import org.joda.time.LocalDate;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.Converter;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.UiException;
-
-import java.util.Date;
 
 
 public class JodaTimeZkConverter implements Converter {
@@ -23,7 +23,7 @@ public class JodaTimeZkConverter implements Converter {
 		if (val == null)
 			return val;
 		if (val instanceof Date) {
-			return new LocalDate((Date)val);
+			return new LocalDate(val);
 		}
 		throw new UiException("Converter expects a Date object");
 	}

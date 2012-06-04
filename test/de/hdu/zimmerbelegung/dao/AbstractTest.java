@@ -18,23 +18,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class AbstractTest {
 
 	@Autowired
-	private GastDao gastDao;
-	@Autowired
 	private BelegungDao belegungDao;
 	@Autowired
-	private ZimmerDao zimmerDao;
-	
+	private GastDao gastDao;
 	protected SessionFactory sessionFactory;
 	
-	public void setSessionFactory(SessionFactory factory) {
-		this.sessionFactory = factory;
-	}
-	
+	@Autowired
+	private ZimmerDao zimmerDao;
 	
 	public void deleteAll(){
 		belegungDao.deleteAll();
 		zimmerDao.deleteAll();
 		gastDao.deleteAll();
+	}
+	
+	
+	public void setSessionFactory(SessionFactory factory) {
+		this.sessionFactory = factory;
 	}
 	
 	

@@ -29,54 +29,6 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 public class BelegungKopfDao extends HibernateDaoSupport {
 
 	/**
-	 * Returns a single BelegungKopf by its primary db key
-	 * 
-	 * @param id
-	 *            the primary key of a {@link BelegungKopf}
-	 * @return a single BelegungKopf
-	 */
-	public BelegungKopf get(int id) {
-		return getHibernateTemplate().load(BelegungKopf.class, id);
-	}
-
-	/**
-	 * Saves the {@link BelegungKopf} specified by the parameter in the
-	 * database.
-	 * 
-	 * @param zimmer
-	 *            a {@link BelegungKopf} object that should be saved in the db.
-	 */
-	public void saveOrUpdate(BelegungKopf belegungKopf) {
-		getHibernateTemplate().saveOrUpdate(belegungKopf);
-		getHibernateTemplate().refresh(belegungKopf);
-	}
-
-	/**
-	 * Deletes the specified {@link BelegungKopf} object from the database.
-	 * 
-	 * @param belegungKopf
-	 *            the {@link BelegungKopf} to be deleted.
-	 */
-	public void delete(BelegungKopf belegungKopf) {
-		getHibernateTemplate().delete(belegungKopf);
-		getHibernateTemplate().flush();
-		getHibernateTemplate().clear();
-		getHibernateTemplate().refresh(belegungKopf.getGast());
-		getHibernateTemplate().refresh(belegungKopf.getZimmer());
-	}
-
-	/**
-	 * Returns all BelegungKopf from the database.
-	 * 
-	 * @return a list of {@link BelegungKopf}
-	 * @see BelegungKopf
-	 */
-	@SuppressWarnings("unchecked")
-	public List<BelegungKopf> getAll() {
-		return getHibernateTemplate().find("FROM BelegungKopf");
-	}
-
-	/**
 	 * Creates a BelegungKopf to the database.
 	 * 
 	 * @param art
@@ -96,6 +48,54 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 		belegungKopf.setBelegungen(belegungen);
 //		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		this.saveOrUpdate(belegungKopf);
+	}
+
+	/**
+	 * Deletes the specified {@link BelegungKopf} object from the database.
+	 * 
+	 * @param belegungKopf
+	 *            the {@link BelegungKopf} to be deleted.
+	 */
+	public void delete(BelegungKopf belegungKopf) {
+		getHibernateTemplate().delete(belegungKopf);
+		getHibernateTemplate().flush();
+		getHibernateTemplate().clear();
+		getHibernateTemplate().refresh(belegungKopf.getGast());
+		getHibernateTemplate().refresh(belegungKopf.getZimmer());
+	}
+
+	/**
+	 * Returns a single BelegungKopf by its primary db key
+	 * 
+	 * @param id
+	 *            the primary key of a {@link BelegungKopf}
+	 * @return a single BelegungKopf
+	 */
+	public BelegungKopf get(int id) {
+		return getHibernateTemplate().load(BelegungKopf.class, id);
+	}
+
+	/**
+	 * Returns all BelegungKopf from the database.
+	 * 
+	 * @return a list of {@link BelegungKopf}
+	 * @see BelegungKopf
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BelegungKopf> getAll() {
+		return getHibernateTemplate().find("FROM BelegungKopf");
+	}
+
+	/**
+	 * Saves the {@link BelegungKopf} specified by the parameter in the
+	 * database.
+	 * 
+	 * @param zimmer
+	 *            a {@link BelegungKopf} object that should be saved in the db.
+	 */
+	public void saveOrUpdate(BelegungKopf belegungKopf) {
+		getHibernateTemplate().saveOrUpdate(belegungKopf);
+		getHibernateTemplate().refresh(belegungKopf);
 	}
 
 	public void setArt(BelegungKopf belegungKopf, BelegungArt belegungArt)

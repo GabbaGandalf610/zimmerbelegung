@@ -8,11 +8,11 @@
 package de.hdu.zimmerbelegung.helper;
 
 public enum Status {
-	FREI ("frei"),
 	BELEGT ("belegt"),
-	TEILWEISE_BELEGT ("teilweise belegt"),
+	FREI ("frei"),
+	GEBUCHT ("gebucht"),
 	RESERVIERT ("reserviert"),
-	GEBUCHT ("gebucht");
+	TEILWEISE_BELEGT ("teilweise belegt");
 	
 	private final String name;
 	Status(String name) {
@@ -23,6 +23,7 @@ public enum Status {
 		return this.name;
 	}
 	
+	@Override
 	public String toString() {
 		return this.name;
 	}
