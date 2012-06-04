@@ -28,7 +28,7 @@ import de.hdu.zimmerbelegung.model.BelegungKopf;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
-public class IndexCtrl {
+public class VerwaltungCtrl {
 	ListModelList<BelegungKopf> belegungKopfList;
 	BelegungKopf belegungKopfSelected;
 
