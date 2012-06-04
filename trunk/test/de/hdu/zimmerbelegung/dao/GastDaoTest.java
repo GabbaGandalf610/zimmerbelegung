@@ -26,24 +26,6 @@ public class GastDaoTest extends AbstractDataAccessTest{
 	}
 
 	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testCreate() {
-		// already tested by testFindById()
-		testFindById();
-	}
-	
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testFindAll() {
-		// already tested by testFindById()
-		testFindById();
-	}
-
-	/**
 	 * testFindById is a test case that tests all the basic functions of the Dao, new object, update, get and delete
 	 */
 	@SuppressWarnings("deprecation")
@@ -64,6 +46,64 @@ public class GastDaoTest extends AbstractDataAccessTest{
 		}
 		// delete all rows from db table
 		deleteFromTables(tables);
+	}
+	
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testFindAll() {
+		// already tested by testFindById()
+		testFindById();
+	}
+
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testCreate() {
+		// already tested by testFindById()
+		testFindById();
+	}
+	
+	/**
+	 * testDelete Test, if a object can be deleted
+	 */
+	@Test
+	public void testDelete(){
+		gastDao.saveOrUpdate(new Gast("Katharina", "Deckel", "Musterstraße", "98588", "Bayern", "Deutschland", "088834", "0160", "08888", "f.g@h.ij", "etwas längerer Kommentar"));
+		List<Gast> alleGast = gastDao.getAll();
+		for (Gast z : alleGast) {
+			gastDao.delete(gastDao.getbyId(z.getId()));
+		}
+		alleGast = gastDao.getAll();
+		assertEquals("Die Tabelle darf keine Zeile enthalten", 0, alleGast.size());
+	}
+	
+	/**
+	 * testDeleteAll Test, if all objects can be deleted
+	 */
+	@Test
+	public void testDeleteAll(){
+		gastDao.saveOrUpdate(new Gast("Katharina", "Deckel", "Musterstraße", "98588", "Bayern", "Deutschland", "088834", "0160", "08888", "f.g@h.ij", "etwas längerer Kommentar"));
+		gastDao.saveOrUpdate(new Gast("Katharina", "Deckel", "Musterstraße", "98588", "Bayern", "Deutschland", "088834", "0160", "08888", "f.g@h.ij", "etwas längerer Kommentar"));
+		List<Gast> alleGast = gastDao.getAll();
+		gastDao.deleteAll();
+		alleGast = gastDao.getAll();
+		assertEquals("Die Tabelle darf keine Zeile enthalten", 0, alleGast.size());
+	}
+	
+	/**
+	 * testGastFilter Test, if a object can be found
+	 */
+	@Test
+	public void testGastFilter(){
+		gastDao.saveOrUpdate(new Gast("Katharina", "Deckel", "Musterstraße", "98588", "Bayern", "Deutschland", "088834", "0160", "08888", "f.g@h.ij", "etwas längerer Kommentar"));
+		List<Gast> alleGast = gastDao.getAllFilteredUser("Deck");
+		for (Gast z : alleGast) {
+			z.toString();
+			assertEquals("Das Ergebnis darf genau ein Datensatz sein: Gast mit dem Nachnamen _Deckel_ ",z.getName(), "Deckel");
+		}
 	}
 
 }

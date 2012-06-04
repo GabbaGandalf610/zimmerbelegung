@@ -120,11 +120,14 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 		
 		List<Belegung> bel = belegungDao.getAllInZeitraum(LocalDate.now(), datumBis.plusDays(3));
 		
+		for (Belegung belegung : bel) {
+			System.out.println(belegung.getZimmer().toString() + " " + belegung.getArt().toString() + " " + belegung.getDatum());
+		}
 		System.out.println(bel.size());
 		
 		
 		for (ZimmerZeitraumBelegung b : zimmerZeitraumList) {
-			System.out.println(b.getStatus());
+			System.out.println(b.getStatus() + " " );
 		}
 		
 		System.out.println(zimmerZeitraumList.size());

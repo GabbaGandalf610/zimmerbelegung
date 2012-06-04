@@ -14,8 +14,8 @@ import org.junit.Test;
 import de.hdu.zimmerbelegung.model.Zimmer;
 
 public class ZimmerDaoTest extends AbstractDataAccessTest {
-	private String tableName = "Zimmer";
 	private ZimmerDao zimmerDao;
+	private String tableName = "Zimmer";
 
 	/**
 	 * Gets the {@link ZimmerDao} object injected form the bean belegungDaoTest.
@@ -23,24 +23,6 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 	 */
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testCreate() {
-		// already tested by testFindById()
-		testFindById();
-	}
-
-	/**
-	 * testFindAll is already included in testFindById
-	 */
-	@Test
-	public void testFindAll() {
-		// already tested by testFindById()
-		testFindById();
 	}
 
 	/**
@@ -66,4 +48,48 @@ public class ZimmerDaoTest extends AbstractDataAccessTest {
 		deleteFromTables(tables);
 	}
 
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testFindAll() {
+		// already tested by testFindById()
+		testFindById();
+	}
+
+	/**
+	 * testFindAll is already included in testFindById
+	 */
+	@Test
+	public void testCreate() {
+		// already tested by testFindById()
+		testFindById();
+	}
+	
+	/**
+	 * testDeleteAll Test, if a object can be deleted
+	 */
+	@Test
+	public void testDelete(){
+		zimmerDao.saveOrUpdate(new Zimmer(2, "Beschreibung2", 23.34f));
+		List<Zimmer> alleZimmer = zimmerDao.getAll();
+		for (Zimmer z : alleZimmer) {
+			zimmerDao.delete(zimmerDao.getbyId(z.getId()));
+		}
+		alleZimmer = zimmerDao.getAll();
+		assertEquals("Die Tabelle darf keine Zeile enthalten", 0, alleZimmer.size());
+	}
+
+	/**
+	 * testDeleteAll Test, if all objects can be deleted
+	 */
+	@Test
+	public void testDeleteAll(){
+		zimmerDao.saveOrUpdate(new Zimmer(2, "Beschreibung2", 23.34f));
+		List<Zimmer> alleZimmer = zimmerDao.getAll();
+		zimmerDao.deleteAll();
+		alleZimmer = zimmerDao.getAll();
+		assertEquals("Die Tabelle darf keine Zeile enthalten", 0, alleZimmer.size());
+	}
+	
 }
