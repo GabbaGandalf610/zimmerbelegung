@@ -44,13 +44,25 @@ public class BelegungKopf {
 	@GeneratedValue
 	private int id;
 	
+	
+	/**
+	 * (default-) constructor for class BelegungKopf 
+	 */
 	public BelegungKopf() {
 		super();
 	}
-
+	/**
+	 * constructor for class BelegungKopf
+	 * @param gast creates a new BelegungKopf object with given Gast object 
+	 */
 	public BelegungKopf(Gast gast) {
 		gastid = gast;
 	}
+	
+	/**
+	 * getArt
+	 * @return returns a object of type BelegungArt, for example "frei" or "reserviert" 
+	 */
 	public BelegungArt getArt() {
 		if (belegungen.size() > 0) {
 			return belegungen.get(0).getArt();
@@ -59,11 +71,19 @@ public class BelegungKopf {
 		}
 	}
 
+	/**
+	 * getBelegungen
+	 * @return returns a List of type Belegung 
+	 */
 	public List<Belegung> getBelegungen() throws Exception {
 		pruefeKonsistenz();
 		return belegungen;
 	}
 
+	/**
+	 * getDatumBis
+	 * @return returns the date of the last booking or reservation
+	 */
 	public LocalDate getDatumBis() {
 		if (belegungen.size() > 0) {
 			return belegungen.get(belegungen.size() - 1).getDatum();
@@ -72,6 +92,10 @@ public class BelegungKopf {
 		}
 	}
 
+	/**
+	 * getDatumVon
+	 * @return returns the date of the first booking or reservation
+	 */
 	public LocalDate getDatumVon() {
 		if (belegungen.size() > 0) {
 			return belegungen.get(0).getDatum();
@@ -80,9 +104,11 @@ public class BelegungKopf {
 		}
 	}
 
+	/**
+	 * getGast
+	 * @return returns the Gast of the first booking or reservation, should be the same for all
+	 */
 	public Gast getGast() {
-		// Gibt den Gast der ersten Belegung zurück (Sollte für jede Belegung
-		// der gleiche sein)
 		if (belegungen.size() > 0) {
 			return belegungen.get(0).getGast();
 		} else {
@@ -98,28 +124,11 @@ public class BelegungKopf {
 		return id;
 	}
 	
-//	public void setDatumBis(LocalDate datumBis) {
-////		if (getDatumBis().isBefore(datumBis)) {
-////			// Überschüssige Buchungen löschen
-////			for (Belegung belegung : belegungen) {
-////				if (belegung.getDatum().isAfter(datumBis)) {
-////					belegungen.remove(belegung);
-////				}
-////			}
-////		} else if (getDatumBis().isAfter(datumBis)) {
-////			// Zusätzliche Buchungen erstellen
-////			for (LocalDate datumTmp = getDatumBis().plusDays(1); datumTmp.isBefore(datumBis)
-////					|| datumTmp.equals(datumBis); datumTmp = datumTmp
-////					.plusDays(1)) {
-////				Belegung belegung = new Belegung(getArt(), datumTmp, getZimmer(), getGast(), this);
-////				belegungen.add(belegung);
-////			}
-////		}
-//	}
-
+	/**
+	 * getZimmer
+	 * @return returns the Zimmer of the first booking or reservation, should be the same for all
+	 */
 	public Zimmer getZimmer() {
-		// Gibt das Zimmer der ersten Belegung zurück (Sollte für jede Belegung
-		// der gleiche sein)
 		if (belegungen.size() > 0) {
 			return belegungen.get(0).getZimmer();
 		} else {
@@ -127,12 +136,10 @@ public class BelegungKopf {
 		}
 	}
 
-//	public void setArt(BelegungArt art) throws Exception {
-//		for (Belegung belegung : belegungen) {
-//			belegung.setArt(art);
-//		}
-//	}
-
+	/**
+	 * pruefeKonsistenz
+	 * checks, if all guests, rooms, type of booking and timespan is not interrupted 
+	 */
 	private void pruefeKonsistenz() throws Exception {
 		Gast gast = getGast();
 		Zimmer zimmer = getZimmer();

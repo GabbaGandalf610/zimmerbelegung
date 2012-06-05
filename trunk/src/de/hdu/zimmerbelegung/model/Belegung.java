@@ -48,9 +48,20 @@ public class Belegung {
 	@NotNull
 	private Zimmer zimmer;
 
+	/**
+	 * (default-) constructor for class Belegung 
+	 */
 	public Belegung() {
 	}
 
+	/**
+	 * constructor for class Belegung
+	 * @param art
+	 * @param datum
+	 * @param zimmer
+	 * @param gast
+	 * @param belegungKopf 
+	 */
 	public Belegung(BelegungArt art, LocalDate datum, Zimmer zimmer, Gast gast, BelegungKopf belegungKopf) {
 		this.art = art;
 		this.datum = datum;

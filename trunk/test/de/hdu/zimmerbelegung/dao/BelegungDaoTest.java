@@ -225,6 +225,7 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 		
 		alleBelegung = belegungDao.getAll();
 		assertEquals("Die Tabelle darf keine Zeile enthalten", 0, alleBelegung.size());
+		
 	}
 
 	/**
@@ -246,4 +247,41 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 		
 		assertEquals("Es soll 1 BelegungKopf vorhanden sein" , 1, alleBelegungKopf.size());
 	}
+	
+	/**
+	 * testDeleteAll Test, bulk-delete
+	 * @throws Exception 
+	 */
+	@Test
+	public void testAlleBelegungenVorhanden() throws Exception{
+		LocalDate datumBis = LocalDate.now();
+		Gast gastTest = new Gast("Hans", "Dampf", "Musterstraße", "94555",
+				"Musterstadt", "Deutschland", "08541", "0160", "08541", "f.g@h.ij",
+				"etwas längerer Kommentar");
+		gastDao.saveOrUpdate(gastTest);
+		Zimmer zimmerTest = new Zimmer(1, "Beschreibung", 12.23f);
+		zimmerDao.saveOrUpdate(zimmerTest);
+		BelegungKopf belegungKopfTest = new BelegungKopf(gastTest);
+		belegungKopfDao.saveOrUpdate(belegungKopfTest);
+		Belegung belegungTest = new Belegung(BelegungArt.BUCHUNG,
+				LocalDate.now(), zimmerTest, gastTest, belegungKopfTest);
+		belegungDao.save(belegungTest);
+		belegungTest = new Belegung(BelegungArt.BUCHUNG,
+				datumBis.plusDays(1), zimmerTest, gastTest, belegungKopfTest);
+		belegungDao.save(belegungTest);
+		belegungTest = new Belegung(BelegungArt.BUCHUNG,
+				datumBis.plusDays(2), zimmerTest, gastTest, belegungKopfTest);
+		belegungDao.save(belegungTest);
+		belegungTest = new Belegung(BelegungArt.BUCHUNG,
+				datumBis.plusDays(3), zimmerTest, gastTest, belegungKopfTest);
+		belegungDao.save(belegungTest);
+		
+			List<Belegung> alleBelegungenZuKopf = belegungKopfTest.getBelegungen();
+			assertEquals("Die erste Belegung muss heutiges Datum haben: ", alleBelegungenZuKopf.get(0).getDatum(), LocalDate.now());
+			assertEquals("Die zweite Belegung muss heutiges Datum + 1 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(1));
+			assertEquals("Die dritte Belegung muss heutiges Datum + 2 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(2));
+			assertEquals("Die vierte Belegung muss heutiges Datum + 3 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(3));
+
+	}
+	
 }
