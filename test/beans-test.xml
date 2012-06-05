@@ -42,6 +42,7 @@
 		<property name="belegungDao" ref="belegungDao" />
 		<property name="zimmerDao" ref="zimmerDao" />
 		<property name="belegungKopfDao" ref="belegungKopfDao" />
+		<property name="ZimmerZeitraumBelegungDto" ref="zimmerZeitraumBelegungDto" />
 	</bean>
 
 	<bean id="transactionManager"
