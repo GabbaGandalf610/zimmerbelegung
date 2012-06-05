@@ -10,34 +10,24 @@
 	<borderlayout width="100%" height="100%" sclass="mainLayout"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.ZimmerStatusCtrl')">
-		<north flex="false" height="37px">
-			<grid>
-				<columns>
-					<column />
-					<column />
-				</columns>
-				<rows>
-					<row>
-						<cell>
-							<label value="Datum von: " />
-							<datebox id="von" cols="18" format="full"
-								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" constraint="no past,no empty" />
-							<label value=" bis: " />
-							<datebox id="bis " cols="18" format="full"
-								disabled="true"
-								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
-								mold="rounded" />
-						</cell>
-					</row>
-				</rows>
-			</grid>
+		<north flex="false">
+			<div height="40px" align="justify">
+				<label value="Datum von: " />
+				<datebox id="von" cols="18" format="full"
+					value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+					mold="rounded" />
+				<label value=" bis: " />
+				<datebox id="bis " cols="18" format="full"
+					disabled="true"
+					value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
+					mold="rounded" />
+			</div>
 		</north>
 		<center>
 			<listbox model="@load(vm.zimmerZeitraumBelegungList)"
 				vflex="true" hflex="true">
 				<listhead>
-					<listheader label="Zimmer" />
+					<listheader label="Zimmernummer" />
 					<listheader
 						label="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
 					<listheader
@@ -61,26 +51,37 @@
 				</listhead>
 				<template name="model" var="item">
 					<listitem>
-						<listcell label="@bind(item.zimmer)" />
 						<listcell
+							label="@bind(item.zimmer.zimmernummer)" />
+						<listcell
+							style="@load(item.datumStatusList[0].status eq 'FREI' ? 'color:green' : (item.datumStatusList[0].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[0])" />
 						<listcell
+							style="@load(item.datumStatusList[1].status eq 'FREI' ? 'color:green' : (item.datumStatusList[1].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[1])" />
 						<listcell
+							style="@load(item.datumStatusList[2].status eq 'FREI' ? 'color:green' : (item.datumStatusList[2].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[2])" />
 						<listcell
+							style="@load(item.datumStatusList[3].status eq 'FREI' ? 'color:green' : (item.datumStatusList[3].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[3])" />
 						<listcell
+							style="@load(item.datumStatusList[4].status eq 'FREI' ? 'color:green' : (item.datumStatusList[4].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[4])" />
 						<listcell
+							style="@load(item.datumStatusList[5].status eq 'FREI' ? 'color:green' : (item.datumStatusList[5].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[5])" />
 						<listcell
+							style="@load(item.datumStatusList[6].status eq 'FREI' ? 'color:green' : (item.datumStatusList[6].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[6])" />
 						<listcell
+							style="@load(item.datumStatusList[7].status eq 'FREI' ? 'color:green' : (item.datumStatusList[7].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[7])" />
 						<listcell
+							style="@load(item.datumStatusList[8].status eq 'FREI' ? 'color:green' : (item.datumStatusList[8].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[8])" />
 						<listcell
+							style="@load(item.datumStatusList[9].status eq 'FREI' ? 'color:green' : (item.datumStatusList[9].status eq 'GEBUCHT' ?  'color:red;font-weight:bold' : 'color:orange;font-weight:bold'))"
 							label="@bind(item.datumStatusList[9])" />
 					</listitem>
 				</template>

@@ -131,7 +131,7 @@ public class VerwaltungCtrl {
 
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
 	@Command
 	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
