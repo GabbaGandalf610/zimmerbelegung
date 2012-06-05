@@ -90,6 +90,7 @@ public class VerwaltungCtrl {
 	}
 
 	@Command
+	@NotifyChange({ "gastSelected" })
 	public void doGuestSearch() {
 		gastList.clear();
 		GastDao gastDao = ServiceLocator.getGastDao();
@@ -131,7 +132,7 @@ public class VerwaltungCtrl {
 
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected", "belegungKopfList" })
 	@Command
 	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
