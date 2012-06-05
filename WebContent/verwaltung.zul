@@ -84,8 +84,8 @@
 
 		<center>
 			<borderlayout>
-				<north flex="true" splittable="true" collapsible="true"
-					height="30%">
+				<north flex="true" splittable="true" collapsible="true" open="@load(empty vm.gastSelected)"
+					height="45%">
 
 					<listbox model="@load(vm.items)"
 						selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
@@ -196,11 +196,13 @@
 									tooltiptext="E-Mail" />
 							</row>
 							<row>
-								<label value="Kommentar" />
-								<textbox
-									value="@bind(vm.gastSelected.kommentar)"
-									disabled="@load(empty vm.gastSelected)" rows="3" width="30%"
-									tooltiptext="Kommentar" />
+<!-- 								<cell colspan="2"> -->
+									<label value="Kommentar" />
+									<textbox
+										value="@bind(vm.gastSelected.kommentar)"
+										disabled="@load(empty vm.gastSelected)" rows="3" width="40%"
+										tooltiptext="Kommentar" />
+<!-- 								</cell> -->
 							</row>
 
 							<row>
@@ -218,7 +220,8 @@
 						</rows>
 					</grid>
 				</center>
-				<south height="20%">
+				<south height="42%" flex="true" collapsible="true"
+					splittable="true" open="@load(not empty vm.gastSelected)">
 
 					<listbox model="@bind(vm.belegungKopfList)"
 						selectedItem="@save(vm.belegungKopfSelected)" vflex="true"
@@ -269,7 +272,7 @@
 				</south>
 			</borderlayout>
 		</center>
-		<south height="6%" flex="true" splittable="true"
+		<south height="8%" flex="true" splittable="true"
 			style="background-color:#02946f;"
 			visible="@bind(vm.zusammenfassungAnzeigen)">
 			<div align="left"
