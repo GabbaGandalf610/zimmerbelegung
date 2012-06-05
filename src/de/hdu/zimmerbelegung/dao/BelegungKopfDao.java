@@ -113,10 +113,6 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 		for (Belegung belegung : belegungen) {
 			belegungDao.delete(belegung);
 		}
-		System.out.println(belegungen);
 		this.delete(belegungKopf);
 	}
-	
-	
-
 }
