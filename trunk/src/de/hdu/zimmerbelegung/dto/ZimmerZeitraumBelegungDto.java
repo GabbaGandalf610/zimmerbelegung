@@ -23,7 +23,26 @@ import de.hdu.zimmerbelegung.model.Belegung;
 import de.hdu.zimmerbelegung.model.Zimmer;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
+/**
+ * Data Transfer Object to manage a complete list of booking states for each
+ * room in the hotel.
+ * 
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ * 
+ */
 public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
+	/**
+	 * Receive a complete list of booking states for each room in the hotel
+	 * within a given timespan.
+	 * 
+	 * This class reads a list of all "Belegungen" (RESERVIERUNG, BUCHUNG) from
+	 * the database and completes it with "FREI"-values for non existing records
+	 * in the database. This way it is able to generate a complete list.
+	 * 
+	 * @param datumVon Beginning of the timespan
+	 * @param datumBis Ending of the timespan
+	 * @return List of booking states
+	 */
 	public List<ZimmerZeitraumBelegung> getAll(LocalDate datumVon,
 			LocalDate datumBis) {
 		// Belegungen im Zeitraum holen
@@ -47,10 +66,12 @@ public class ZimmerZeitraumBelegungDto extends HibernateDaoSupport {
 				if (belegung.getZimmer().equals(zimmer)) {
 					if (belegung.getArt() == BelegungArt.RESERVIERUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
-								belegung.getDatum(), Status.RESERVIERT, belegung.getGast()));
+								belegung.getDatum(), Status.RESERVIERT,
+								belegung.getGast()));
 					} else if (belegung.getArt() == BelegungArt.BUCHUNG) {
 						zimmerZeitraumBelegung.addDatumStatus(new DatumStatus(
-								belegung.getDatum(), Status.GEBUCHT, belegung.getGast()));
+								belegung.getDatum(), Status.GEBUCHT, belegung
+										.getGast()));
 					}
 				}
 			}

@@ -46,7 +46,8 @@ public class BelegungKopfDao extends HibernateDaoSupport {
 			belegungen.add(belegung);
 		}
 		belegungKopf.setBelegungen(belegungen);
-//		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
+		// BelegungKopfDao belegungKopfDao =
+		// ServiceLocator.getBelegungKopfDao();
 		this.saveOrUpdate(belegungKopf);
 	}
 

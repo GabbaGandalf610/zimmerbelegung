@@ -28,6 +28,14 @@ import de.hdu.zimmerbelegung.model.BelegungKopf;
 import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
+/**
+ * Controller for "verwaltung.zul" which is the main application view. This
+ * class manages the whole process of selecting the timespan (datumVon,
+ * datumBis), the room (Zimmer) and the guest (Gast) to place a booking
+ * (Buchung) or reservation (Reservierung)
+ * 
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ */
 public class VerwaltungCtrl {
 	ListModelList<BelegungKopf> belegungKopfList;
 	BelegungKopf belegungKopfSelected;
@@ -38,13 +46,15 @@ public class VerwaltungCtrl {
 	ListModelList<Gast> gastList;
 	Gast gastSelected;
 	String gastSuche;
-	LocalDate heute = new LocalDate();
 	private final int MAX_BUCHUNGSLAENGE = 1;
 
 	ListModelList<ZimmerZeitraumBelegung> zimmerZeitraumBelegungList;
 
 	ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected;
 
+	/**
+	 * Use the current Zimmer, Gast and timespan to create a "Buchung"
+	 */
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList" })
 	@Command
 	public void doBuchen() throws Exception {
@@ -66,20 +76,43 @@ public class VerwaltungCtrl {
 
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	/**
+	 * Turn the selected "Reservierung" into a "Buchung"
+	 * 
+	 * @param belegungKopf
+	 *            The Belegung which is supposed to be changed
+	 * @throws Exception
+	 */
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected" })
 	@Command
-	public void doChangeToBuchung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+	public void doChangeToBuchung(
+			@BindingParam("belegungKopf") BelegungKopf belegungKopf)
+			throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.setArt(belegungKopf, BelegungArt.BUCHUNG);
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	/**
+	 * Turn the selected "Buchung" into a "Reservierung"
+	 * 
+	 * @param belegungKopf
+	 *            The Belegung which is supposed to be changed
+	 * @throws Exception
+	 */
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected" })
 	@Command
-	public void doChangeToReservierung(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+	public void doChangeToReservierung(
+			@BindingParam("belegungKopf") BelegungKopf belegungKopf)
+			throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.setArt(belegungKopf, BelegungArt.RESERVIERUNG);
 	}
 
+	/**
+	 * Delete selected "Gast"
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
@@ -89,6 +122,9 @@ public class VerwaltungCtrl {
 		gastSelected = null;
 	}
 
+	/**
+	 * Apply a filter on the "Gast"-list
+	 */
 	@Command
 	@NotifyChange({ "gastSelected" })
 	public void doGuestSearch() {
@@ -98,13 +134,20 @@ public class VerwaltungCtrl {
 		gastSelected = null;
 	}
 
+	/**
+	 * Create new "Gast"
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
+	/**
+	 * Use the current Zimmer, Gast and timespan to create a "Reservierung"
+	 */
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected" })
 	@Command
 	public void doReservieren() throws Exception {
 		if (!isZusammenfassungAnzeigen())
@@ -119,6 +162,9 @@ public class VerwaltungCtrl {
 		zimmerZeitraumBelegungSelected = null;
 	}
 
+	/**
+	 * Save selected "Gast"
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
@@ -129,9 +175,18 @@ public class VerwaltungCtrl {
 
 	}
 
-	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected", "belegungKopfList" })
+	/**
+	 * Delete the selected "Belegung"
+	 * 
+	 * @param belegungKopf
+	 *            The Belegung which is supposed to be deleted
+	 * @throws Exception
+	 */
+	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
+			"zimmerZeitraumBelegungSelected", "belegungKopfList" })
 	@Command
-	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf) throws Exception {
+	public void doStorno(@BindingParam("belegungKopf") BelegungKopf belegungKopf)
+			throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.storno(belegungKopf);
 	}
@@ -140,27 +195,40 @@ public class VerwaltungCtrl {
 		return BelegungArt.getAll();
 	}
 
+	/**
+	 * Get the history of "Belegungen" for the selected "Gast"
+	 * 
+	 * @return list of "Belegungen"
+	 */
 	@DependsOn({ "gastSelected", "datumVon" })
 	@NotifyChange({ "zimmerZeitraumBelegungSelected" })
 	public ListModel<BelegungKopf> getBelegungKopfList() {
 		if ((gastSelected == null) || (gastSelected.getId() == 0)) {
 			return null;
 		}
-		{
-			// Liste initialisieren
-			belegungKopfList = new ListModelList<BelegungKopf>();
-			for (BelegungKopf belegungsKopf : this.gastSelected
-					.getBelegungKopf()) {
-				belegungKopfList.add(belegungsKopf);
-			}
+
+		// Liste initialisieren
+		belegungKopfList = new ListModelList<BelegungKopf>();
+		for (BelegungKopf belegungsKopf : this.gastSelected.getBelegungKopf()) {
+			belegungKopfList.add(belegungsKopf);
 		}
 		return belegungKopfList;
 	}
 
+	/**
+	 * Get the currently selected "Belegung" in the "Gast"s history
+	 * 
+	 * @return Belegung
+	 */
 	public BelegungKopf getBelegungKopfSelected() {
 		return belegungKopfSelected;
 	}
 
+	/**
+	 * Get the end of the timespan
+	 * 
+	 * @return DatumBis
+	 */
 	@DependsOn("datumVon")
 	public LocalDate getDatumBis() {
 		if (datumBis.isBefore(datumVon)
@@ -170,6 +238,12 @@ public class VerwaltungCtrl {
 		return datumBis;
 	}
 
+	/**
+	 * Apply a constraint to limit the end of the timespan to be within one
+	 * month.
+	 * 
+	 * @return
+	 */
 	@DependsOn("datumVon")
 	public SimpleDateConstraint getDatumBisConstraint() {
 		return new SimpleDateConstraint("between "
@@ -177,22 +251,47 @@ public class VerwaltungCtrl {
 				+ datumVon.plusMonths(MAX_BUCHUNGSLAENGE).toString("yyyMMdd"));
 	}
 
+	/**
+	 * Get the beginning of the timespan
+	 * 
+	 * @return DatumVon
+	 */
 	public LocalDate getDatumVon() {
 		return datumVon;
 	}
 
+	/**
+	 * Get the currently selected "Gast"
+	 * 
+	 * @return
+	 */
 	public Gast getGastSelected() {
 		return gastSelected;
 	}
 
+	/**
+	 * Get filter for "Gast" search
+	 * 
+	 * @return
+	 */
 	public String getGastSuche() {
 		return gastSuche;
 	}
 
+	/**
+	 * Get todays date
+	 * 
+	 * @return
+	 */
 	public LocalDate getHeute() {
-		return heute;
+		return new LocalDate();
 	}
 
+	/**
+	 * Get complete "Gast" list
+	 * 
+	 * @return
+	 */
 	public ListModel<Gast> getItems() {
 		if (gastList == null) {
 			gastList = new ListModelList<Gast>();
@@ -202,6 +301,11 @@ public class VerwaltungCtrl {
 		return gastList;
 	}
 
+	/**
+	 * Get list of "Belegungen" for the selected timespan
+	 * 
+	 * @return
+	 */
 	@DependsOn({ "datumVon", "datumBis" })
 	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
 		zimmerZeitraumBelegungSelected = null;
@@ -217,11 +321,23 @@ public class VerwaltungCtrl {
 		return zimmerZeitraumBelegungList;
 	}
 
+	/**
+	 * Get currently selected "ZimmerZeitraumBelegung". This is an entry of the
+	 * list on top left, showing room and status.
+	 * 
+	 * @return
+	 */
 	@DependsOn({ "datumVon", "datumBis" })
 	public ZimmerZeitraumBelegung getZimmerZeitraumBelegungSelected() {
 		return zimmerZeitraumBelegungSelected;
 	}
 
+	/**
+	 * Decides if the summary shall be shown on the bottom. This will return
+	 * true if timespan, "Zimmer" and "Gast" are valid
+	 * 
+	 * @return
+	 */
 	@DependsOn({ "datumVon", "datumBis", "zimmerZeitraumBelegungSelected",
 			"gastSelected" })
 	public boolean isZusammenfassungAnzeigen() {
@@ -236,26 +352,56 @@ public class VerwaltungCtrl {
 		return true;
 	}
 
+	/**
+	 * Set currently selected "Buchung" in the "Gast"s history
+	 * 
+	 * @param belegungKopfSelected
+	 */
 	public void setBelegungKopfSelected(BelegungKopf belegungKopfSelected) {
 		this.belegungKopfSelected = belegungKopfSelected;
 	}
 
+	/**
+	 * Set the timespan's beginning date
+	 * 
+	 * @param datumBis
+	 */
 	public void setDatumBis(LocalDate datumBis) {
 		this.datumBis = datumBis;
 	}
 
+	/**
+	 * Set the timespan's ending date
+	 * 
+	 * @param datumVon
+	 */
 	public void setDatumVon(LocalDate datumVon) {
 		this.datumVon = datumVon;
 	}
 
+	/**
+	 * Set currently selected "Gast"
+	 * 
+	 * @param gastSelected
+	 */
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
 	}
 
+	/**
+	 * Set filter on "Gast" search
+	 * 
+	 * @param gastSuche
+	 */
 	public void setGastSuche(String gastSuche) {
 		this.gastSuche = gastSuche;
 	}
 
+	/**
+	 * Set currently selected "ZimmerZeitraumBelegung" (list on left top)
+	 * 
+	 * @param zimmerZeitraumBelegungSelected
+	 */
 	public void setZimmerZeitraumBelegungSelected(
 			ZimmerZeitraumBelegung zimmerZeitraumBelegungSelected) {
 		this.zimmerZeitraumBelegungSelected = zimmerZeitraumBelegungSelected;

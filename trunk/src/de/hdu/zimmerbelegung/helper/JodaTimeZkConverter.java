@@ -1,4 +1,3 @@
-
 package de.hdu.zimmerbelegung.helper;
 
 import java.util.Date;
@@ -9,15 +8,25 @@ import org.zkoss.bind.Converter;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.UiException;
 
-
+/**
+ * This class converts JodaTime-Date to java-util-date for usage in ZK views
+ * 
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ * 
+ */
 public class JodaTimeZkConverter implements Converter {
-    /**
-     * Convert Date to LocalDate.
-     * @param val date to be converted
-     * @param comp associated component
-     * @param ctx bind context for associate Binding and extra parameter (e.g. format)
-     * @return the converted LocalDate
-     */
+	/**
+	 * Convert Date to LocalDate.
+	 * 
+	 * @param val
+	 *            date to be converted
+	 * @param comp
+	 *            associated component
+	 * @param ctx
+	 *            bind context for associate Binding and extra parameter (e.g.
+	 *            format)
+	 * @return the converted LocalDate
+	 */
 	@Override
 	public Object coerceToBean(Object val, Component comp, BindContext ctx) {
 		if (val == null)
@@ -27,17 +36,22 @@ public class JodaTimeZkConverter implements Converter {
 		}
 		throw new UiException("Converter expects a Date object");
 	}
-	
-    /**
-     * Convert LocalDate to Date.
-     * @param val LocalDate to be converted
-     * @param comp associated component
-     * @param ctx bind context for associate Binding and extra parameter (e.g. format)
-     * @return the converted Date
-     */	
+
+	/**
+	 * Convert LocalDate to Date.
+	 * 
+	 * @param val
+	 *            LocalDate to be converted
+	 * @param comp
+	 *            associated component
+	 * @param ctx
+	 *            bind context for associate Binding and extra parameter (e.g.
+	 *            format)
+	 * @return the converted Date
+	 */
 	@Override
 	public Object coerceToUi(Object val, Component comp, BindContext ctx) {
-		//TODO: Hier muss noch das Datum angemessen formatiert werden
+		// TODO: Hier muss noch das Datum angemessen formatiert werden
 		if (val == null)
 			return null;
 		if (val instanceof LocalDate) {
