@@ -45,7 +45,6 @@ public class AdminGastCtrl {
 	public void doGuestSearch() {
 		gastList.clear();
 		GastDao gastDao = ServiceLocator.getGastDao();
-		System.out.println(gastSuche);
 		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
 		gastSelected = null;
 	}

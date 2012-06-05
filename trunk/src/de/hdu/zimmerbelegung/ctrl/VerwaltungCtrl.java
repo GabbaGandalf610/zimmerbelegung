@@ -94,7 +94,6 @@ public class VerwaltungCtrl {
 	public void doGuestSearch() {
 		gastList.clear();
 		GastDao gastDao = ServiceLocator.getGastDao();
-		System.out.println(gastSuche);
 		gastList.addAll(gastDao.getAllFilteredUser(gastSuche));
 		gastSelected = null;
 	}
@@ -103,13 +102,11 @@ public class VerwaltungCtrl {
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
-		System.out.println(gastSelected.getId());
 	}
 
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList", "zimmerZeitraumBelegungSelected" })
 	@Command
 	public void doReservieren() throws Exception {
-		System.out.println(belegungKopfSelected);
 		if (!isZusammenfassungAnzeigen())
 			return;
 
