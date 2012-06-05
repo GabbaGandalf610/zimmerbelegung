@@ -24,10 +24,20 @@ public class Zimmer {
 	private int zimmernummer;
 	private float zimmerpreis;
 
+	/**
+	 * (default-) constructor for class Zimmer 
+	 */
 	public Zimmer() {
 
 	}
 	
+	/**
+	 * constructor for class Zimmer
+	 * @param id
+	 * @param zimmernummer
+	 * @param zimmerbeschreibung
+	 * @param zimmerpreis
+	 */
 	public Zimmer(int id, int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
 		super();
 		this.id = id;
@@ -37,7 +47,12 @@ public class Zimmer {
 	}
 	
 	
-
+	/**
+	 * constructor for class Zimmer
+	 * @param zimmernummer
+	 * @param zimmerbeschreibung
+	 * @param zimmerpreis
+	 */
 	public Zimmer(int zimmernummer, String zimmerbeschreibung, float zimmerpreis) {
 		super();
 		this.zimmernummer = zimmernummer;
@@ -45,6 +60,10 @@ public class Zimmer {
 		this.zimmerpreis = zimmerpreis;
 	}
 	
+	/**
+	 * equals to test if a variable is a Zimmer-object
+	 * @param obj
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Zimmer) {
@@ -85,6 +104,11 @@ public class Zimmer {
 	public void setZimmerpreis(float zimmerpreis) {
 		this.zimmerpreis = zimmerpreis;
 	}
+	
+	/**
+	 * toString overrides the toString-method with custom description
+	 * @return custom description of a Zimmer
+	 */
 	@Override
 	public String toString() {
 		return  this.zimmernummer + " (" + this.zimmerbeschreibung + ") " + this.zimmerpreis;

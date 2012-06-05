@@ -42,10 +42,28 @@ public class Gast {
 	private String telefon;
 	private String vorname;
 
+	/**
+	 * (default-) constructor for class Gast 
+	 */
 	public Gast() {
 
 	}
 
+	/**
+	 * constructor for class Gast
+	 * @param id
+	 * @param vorname
+	 * @param name nachname
+	 * @param strasse
+	 * @param plz
+	 * @param ort
+	 * @param land
+	 * @param telefon
+	 * @param mobil
+	 * @param fax
+	 * @param email
+	 * @param kommentar 
+	 */
 	public Gast(int id, String vorname, String name, String strasse,
 			String plz, String ort, String land, String telefon, String mobil,
 			String fax, String email, String kommentar) {
@@ -64,6 +82,20 @@ public class Gast {
 		this.kommentar = kommentar;
 	}
 
+	/**
+	 * constructor for class Gast
+	 * @param vorname
+	 * @param name nachname
+	 * @param strasse
+	 * @param plz
+	 * @param ort
+	 * @param land
+	 * @param telefon
+	 * @param mobil
+	 * @param fax
+	 * @param email
+	 * @param kommentar 
+	 */
 	public Gast(String vorname, String name, String strasse, String plz,
 			String ort, String land, String telefon, String mobil, String fax,
 			String email, String kommentar) {
@@ -201,6 +233,10 @@ public class Gast {
 		this.vorname = vorname;
 	}
 
+	/**
+	 * toString overrides the toString-method with custom description
+	 * @return custom description of a Gast
+	 */
 	@Override
 	public String toString() {
 		return this.vorname + " " + this.name;
