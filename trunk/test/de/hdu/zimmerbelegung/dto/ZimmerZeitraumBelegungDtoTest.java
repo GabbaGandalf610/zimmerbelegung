@@ -24,6 +24,7 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 	private GastDao gastDao;
 	private String tableName = "Belegung";
 	private ZimmerDao zimmerDao;
+	private ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto;
 	
 	/**
 	 * Gets the {@link BelegungDao} object injected form the bean belegungDaoTest.
@@ -55,6 +56,11 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 	 */
 	public void setZimmerDao(ZimmerDao zimmerDao) {
 		this.zimmerDao = zimmerDao;
+	}
+	
+	public void setZimmerZeitraumBelegungDto(
+			ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto) {
+		this.zimmerZeitraumBelegungDto = zimmerZeitraumBelegungDto;
 	}
 	
 	/**
@@ -90,7 +96,7 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 				"Musterstadt", "Deutschland", "08555", "0160", "08555", "f.g@h.ij",
 				"etwas längerer Kommentar");
 		gastDao.saveOrUpdate(gastTest);
-		Zimmer zimmerTest = new Zimmer(1, "Beschreibung", 12.23f);
+		Zimmer zimmerTest = new Zimmer(1, "Zimmer1", 12.23f);
 		zimmerDao.saveOrUpdate(zimmerTest);
 		BelegungKopf belegungKopfTest = new BelegungKopf(gastTest);
 		belegungKopfDao.saveOrUpdate(belegungKopfTest);
@@ -113,24 +119,28 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 				datumBis.plusDays(5), zimmerTest, gastTest, belegungKopfTest);
 		belegungDao.save(belegungTest);
 
-		List<ZimmerZeitraumBelegung> zimmerZeitraumList = new ZimmerZeitraumBelegungDto().getAll(LocalDate.now(), datumBis.plusDays(3));
+		//1. Test heute
+		List<ZimmerZeitraumBelegung> zimmerZeitraumList = zimmerZeitraumBelegungDto.getAll(LocalDate.now(), LocalDate.now());
+//		assertEquals(zimmerZeitraumList.get(0).getStatus(), BelegungArt.BUCHUNG);
+		System.out.println(zimmerZeitraumList.get(0).getZimmer().getId() + " " + zimmerZeitraumList.get(0).getZimmer().toString());
 		
-		System.out.println(LocalDate.now());
-		System.out.println(datumBis.plusDays(3));
 		
+//		System.out.println(LocalDate.now());
+//		System.out.println(datumBis.plusDays(3));
+//		
 		List<Belegung> bel = belegungDao.getAllInZeitraum(LocalDate.now(), datumBis.plusDays(3));
-		
+//		
 		for (Belegung belegung : bel) {
-			System.out.println(belegung.getZimmer().toString() + " " + belegung.getArt().toString() + " " + belegung.getDatum());
+			System.out.println(belegung.getZimmer().toString() + " " + belegung.getArt().toString() + " " + belegung.getDatum() + " " + belegung.getGast().toString());
 		}
-		System.out.println(bel.size());
-		
-		
+//		System.out.println(bel.size());
+//		
+//		
 		for (ZimmerZeitraumBelegung b : zimmerZeitraumList) {
 			System.out.println(b.getStatus() + " " );
 		}
-		
-		System.out.println(zimmerZeitraumList.size());
+//		
+//		System.out.println(zimmerZeitraumList.size());
 		
 //		List<Belegung> alleBelegung = belegungDao.getAll();
 //		for (Belegung z : alleBelegung) {

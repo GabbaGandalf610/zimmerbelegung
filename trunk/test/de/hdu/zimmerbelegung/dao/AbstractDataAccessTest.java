@@ -17,7 +17,7 @@ public class AbstractDataAccessTest extends
 	//TODO: Umstellung auf "TestContext":
 	// http://static.springsource.org/spring/docs/3.0.0.RC1/reference/html/ch09s03.html#testcontext-framework
 	protected SessionFactory sessionFactory;
-
+	
 	/**
 	 * Reference the Spring configuration file for the test case.
 	 */

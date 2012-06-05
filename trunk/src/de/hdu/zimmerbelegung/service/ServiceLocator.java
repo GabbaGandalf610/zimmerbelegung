@@ -22,15 +22,15 @@ public class ServiceLocator {
 	private static ApplicationContext ctx;
 
 	static {
+
 		try {
 			// Versuche Verbindung zur MySQL-Datenbank
 			ctx = new ClassPathXmlApplicationContext(
 					"datenbank-entwicklung.xml");
-		} catch (BeanCreationException e)  {
-				// Verbindung konnte nicht hergestellt werden
-				// => Versuche produktiven MSSQL-Server
-				ctx = new ClassPathXmlApplicationContext(
-						"datenbank-produktiv.xml");
+		} catch (BeanCreationException e) {
+			// Verbindung konnte nicht hergestellt werden
+			// => Versuche produktiven MSSQL-Server
+			ctx = new ClassPathXmlApplicationContext("datenbank-produktiv.xml");
 		}
 	}
 
@@ -49,15 +49,16 @@ public class ServiceLocator {
 	public static SessionFactory getSessionFactory() {
 		return ctx.getBean("factory", SessionFactory.class);
 	}
-	
+
 	public static ZimmerDao getZimmerDao() {
 		return ctx.getBean("zimmerDao", ZimmerDao.class);
 	}
 
 	public static ZimmerZeitraumBelegungDto getZimmerZeitraumBelegungDto() {
-		return ctx.getBean(
-				"zimmerZeitraumBelegungDto", ZimmerZeitraumBelegungDto.class);
+		return ctx.getBean("zimmerZeitraumBelegungDto",
+				ZimmerZeitraumBelegungDto.class);
 	}
+
 	private ServiceLocator() {
 	}
 }
