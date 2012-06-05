@@ -6,7 +6,8 @@
 <!-- * which accompanies this distribution, and is available at -->
 <!-- * http://www.gnu.org/licenses/gpl.html -->
 <!-- ****************************************************************************** -->
-<zk>
+<zk xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:zk="http://www.zkoss.org/2005/zk">
 	<borderlayout width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.VerwaltungCtrl')">
@@ -84,8 +85,8 @@
 
 		<center>
 			<borderlayout>
-				<north flex="true" splittable="true" collapsible="true" open="@load(empty vm.gastSelected)"
-					height="45%">
+				<north flex="true" splittable="true" collapsible="true"
+					open="@load(empty vm.gastSelected)" height="45%">
 
 					<listbox model="@load(vm.items)"
 						selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
@@ -196,13 +197,13 @@
 									tooltiptext="E-Mail" />
 							</row>
 							<row>
-<!-- 								<cell colspan="2"> -->
-									<label value="Kommentar" />
-									<textbox
-										value="@bind(vm.gastSelected.kommentar)"
-										disabled="@load(empty vm.gastSelected)" rows="3" width="40%"
-										tooltiptext="Kommentar" />
-<!-- 								</cell> -->
+								<!-- 								<cell colspan="2"> -->
+								<label value="Kommentar" />
+								<textbox
+									value="@bind(vm.gastSelected.kommentar)"
+									disabled="@load(empty vm.gastSelected)" rows="3" width="40%"
+									tooltiptext="Kommentar" />
+								<!-- 								</cell> -->
 							</row>
 
 							<row>
@@ -272,7 +273,7 @@
 				</south>
 			</borderlayout>
 		</center>
-		<south height="8%" flex="true" splittable="true"
+		<south height="10%" flex="true" splittable="true"
 			style="background-color:#02946f;"
 			visible="@bind(vm.zusammenfassungAnzeigen)">
 			<div align="left"
@@ -292,10 +293,13 @@
 				für
 				<label value="@bind(vm.gastSelected)"
 					style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
-				<button label="reservieren" width="80px"
-					onClick="@command('doReservieren')" />
-				<button label="buchen" width="80px"
-					onClick="@command('doBuchen')" />
+				<h:p>
+					<h:p />
+					<button label="reservieren" width="80px"
+						onClick="@command('doReservieren')" />
+					<button label="buchen" width="80px"
+						onClick="@command('doBuchen')" />
+				</h:p>
 			</div>
 		</south>
 
