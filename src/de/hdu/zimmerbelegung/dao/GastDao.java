@@ -13,17 +13,19 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import de.hdu.zimmerbelegung.model.Gast;
 
-
 /**
- * The Data access class for guests. All Interaction with the database
- * regarding the entity bean Gast should be handled by this class!
+ * The Data access class for guests. All Interaction with the database regarding
+ * the entity bean Gast should be handled by this class!
+ * 
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class GastDao extends HibernateDaoSupport {
-	
+
 	/**
 	 * Deletes the specified {@link Gast} object from the database.
-	 * @param boot the {@link Gast} to be deleted.
+	 * 
+	 * @param boot
+	 *            the {@link Gast} to be deleted.
 	 */
 	public void delete(Gast gast) {
 		getHibernateTemplate().delete(gast);
@@ -35,12 +37,13 @@ public class GastDao extends HibernateDaoSupport {
 	public void deleteAll() {
 		List<Gast> myGastList = this.getAll();
 		for (Gast tempGast : myGastList) {
-			getHibernateTemplate().delete(tempGast);	
+			getHibernateTemplate().delete(tempGast);
 		}
 	}
 
 	/**
 	 * Returns a list of all {@link Gast}
+	 * 
 	 * @return a list of all Gast
 	 */
 	@SuppressWarnings("unchecked")
@@ -49,8 +52,12 @@ public class GastDao extends HibernateDaoSupport {
 	}
 
 	/**
-	 * Returns a list of Gast where name, vorname, firma, ort or land matches the search string
-	 * @param search string which is compared with name, vorname, firma, ort or land
+	 * Returns a list of Gast where name, vorname, firma, ort or land matches
+	 * the search string
+	 * 
+	 * @param search
+	 *            string which is compared with name, vorname, firma, ort or
+	 *            land
 	 * @return a list of Gast
 	 */
 	@SuppressWarnings("unchecked")
@@ -61,41 +68,49 @@ public class GastDao extends HibernateDaoSupport {
 		} else {
 			return getHibernateTemplate()
 					.find("select g from Gast g where g.name like ? or g.vorname like ? or g.firma like ? or g.ort like ? or g.land like ?",
-							gastSuche + "%", gastSuche + "%", "%" + gastSuche + "%",
-							gastSuche + "%", gastSuche + "%");
+							gastSuche + "%", gastSuche + "%",
+							"%" + gastSuche + "%", gastSuche + "%",
+							gastSuche + "%");
 		}
 	}
 
-	
 	/**
 	 * Returns a single Gast by its primary db key
-	 * @param id the primary key of a {@link Gast}
+	 * 
+	 * @param id
+	 *            the primary key of a {@link Gast}
 	 * @return a single Gast
 	 */
 	public Gast getbyId(int id) {
 		return getHibernateTemplate().load(Gast.class, id);
 	}
-	
+
 	/**
 	 * Saves a single guest in the db
-	 * @param object of type {@link Gast}
+	 * 
+	 * @param object
+	 *            of type {@link Gast}
 	 */
 	public void save(Gast gast) {
 		getHibernateTemplate().save(gast);
 	}
-	
+
 	/**
 	 * Saves the {@link Gast} specified by the parameter in the database.
-	 * @param gast a {@link Gast} object that should be saved in the db.
+	 * 
+	 * @param gast
+	 *            a {@link Gast} object that should be saved in the db.
 	 */
 	public void saveOrUpdate(Gast gast) {
 		getHibernateTemplate().saveOrUpdate(gast);
 		getHibernateTemplate().refresh(gast);
-	} 
-	
+	}
+
 	/**
 	 * Updates a specified object of type {@link Gast} in the database
-	 * @param object of type {@link Gast}
+	 * 
+	 * @param object
+	 *            of type {@link Gast}
 	 * @return a single Gast
 	 */
 	public void update(Gast gast) {

@@ -17,8 +17,9 @@ import de.hdu.zimmerbelegung.model.Gast;
 import de.hdu.zimmerbelegung.service.ServiceLocator;
 
 /**
- * The Data binding class for Gast. All Interaction with the frontend
- * regarding the business logic Gast should be handled by this class!
+ * The Data binding class for Gast. All Interaction with the frontend regarding
+ * the business logic Gast should be handled by this class!
+ * 
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class AdminGastCtrl {
@@ -27,8 +28,8 @@ public class AdminGastCtrl {
 	String gastSuche;
 
 	/**
-     * <p>Deletes the selected Gast</p>
-     */
+	 * Deletes the selected Gast
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doDelete() {
@@ -39,8 +40,9 @@ public class AdminGastCtrl {
 	}
 
 	/**
-     * <p>Updates the gastList with the specified Gast-Filter represented by the variable gastSuche</p>
-     */
+	 * Updates the gastList with the specified Gast-Filter represented by the
+	 * variable gastSuche
+	 */
 	@Command
 	public void doGuestSearch() {
 		gastList.clear();
@@ -50,17 +52,17 @@ public class AdminGastCtrl {
 	}
 
 	/**
-     * <p>Creates a new Gast</p>
-     */
+	 * Creates a new Gast
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doNew() {
 		gastSelected = new Gast();
 	}
 
-	 /**
-     * <p>Saves the Gast</p>
-     */
+	/**
+	 * Saves the Gast
+	 */
 	@Command
 	@NotifyChange({ "gastSelected", "gastList" })
 	public void doSave() {
@@ -70,23 +72,25 @@ public class AdminGastCtrl {
 			gastList.add(gastSelected);
 	}
 
-    /**
-	 * Returns the {@link Gast} object which is selected in the GUI 
+	/**
+	 * Returns the {@link Gast} object which is selected in the GUI
+	 * 
 	 * @return a Gast object which contains the GUI inpunts
 	 */
 	public Gast getGastSelected() {
 		return gastSelected;
 	}
 
-    /**
-     * <p>Returns the variable gastSuche which contains the value of the Gast-Suche</p>
-     */
+	/**
+	 * Returns the variable gastSuche which contains the value of the Gast-Suche
+	 */
 	public String getGastSuche() {
 		return gastSuche;
 	}
-	
-    /**
+
+	/**
 	 * Returns a list of all {@link Gast}
+	 * 
 	 * @return a list of all Gast
 	 */
 	public ListModel<Gast> getItems() {
@@ -99,17 +103,20 @@ public class AdminGastCtrl {
 		return gastList;
 	}
 
-    /**
-	 * Puts the data of a {@link Gast} object in the corresponding fields in the GUI.
-	 * @param gastSelected a {@link Gast} object that represents the future field values.
+	/**
+	 * Puts the data of a {@link Gast} object in the corresponding fields in the
+	 * GUI.
+	 * 
+	 * @param gastSelected
+	 *            a {@link Gast} object that represents the future field values.
 	 */
 	public void setGastSelected(Gast gastSelected) {
 		this.gastSelected = gastSelected;
 	}
 
-    /**
-     * <p>Fills the variable gastSuche with the search string entered in the GUI</p>
-     */
+	/**
+	 * Fills the variable gastSuche with the search string entered in the GUI
+	 */
 	public void setGastSuche(String gastSuche) {
 		this.gastSuche = gastSuche;
 	}

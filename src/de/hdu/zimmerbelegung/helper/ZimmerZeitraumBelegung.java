@@ -13,6 +13,12 @@ import java.util.List;
 
 import de.hdu.zimmerbelegung.model.Zimmer;
 
+/**
+ * Helper class to store a list of states for given room (ZIMMER).
+ * 
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ *
+ */
 public class ZimmerZeitraumBelegung {
 	private List<DatumStatus> datumStatusList = new ArrayList<DatumStatus>();
 	private Zimmer zimmer;
@@ -27,6 +33,11 @@ public class ZimmerZeitraumBelegung {
 	public List<DatumStatus> getDatumStatusList() {
 		return datumStatusList;
 	}
+	/**
+	 * Receive the overall status of the "Zimmer" for the whole timespan.
+	 * 
+	 * @return
+	 */
 	public Status getStatus() {
 		int anzahlFrei = 0;
 		int anzahlGebucht = 0;

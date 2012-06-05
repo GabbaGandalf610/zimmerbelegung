@@ -7,22 +7,30 @@
  ******************************************************************************/
 package de.hdu.zimmerbelegung.helper;
 
-
+/**
+ * This type helps distinguishing bookings (BUCHUNG) and reservations
+ * (RESERVIERUNG)
+ * 
+ * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
+ * 
+ */
 public enum BelegungArt {
-	BUCHUNG ("buchung"),
-	RESERVIERUNG ("reservierung");
-	
+	BUCHUNG("buchung"), RESERVIERUNG("reservierung");
+
 	public static BelegungArt[] getAll() {
 		return new BelegungArt[] { BUCHUNG, RESERVIERUNG };
 	}
-	
+
 	private final String name;
+
 	BelegungArt(String name) {
 		this.name = name;
 	}
+
 	public String getName() {
 		return this.name;
 	}
+
 	@Override
 	public String toString() {
 		return this.name;

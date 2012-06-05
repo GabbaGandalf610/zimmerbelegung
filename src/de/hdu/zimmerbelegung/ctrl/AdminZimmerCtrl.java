@@ -19,72 +19,79 @@ import de.hdu.zimmerbelegung.service.ServiceLocator;
 /**
  * The Data binding class for Zimmer. All Interaction with the frontend
  * regarding the business logic Zimmer should be handled by this class!
+ * 
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  */
 public class AdminZimmerCtrl {
 	ListModelList<Zimmer> zimmerList;
 	Zimmer zimmerSelected;
-	
+
 	/**
-     * <p>Deletes the selected Zimmer</p>
-     */
+	 * Deletes the selected Zimmer
+	 */
 	@Command
 	@NotifyChange({ "zimmerSelected", "zimmerList" })
-	public void doDelete(){
+	public void doDelete() {
 		ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
 		zimmerDao.delete(zimmerSelected);
 		zimmerList.remove(zimmerSelected);
 		zimmerSelected = null;
 	}
-	
+
 	/**
-     * <p>Creates a new Zimmer</p>
-     */
+	 * Creates a new Zimmer
+	 */
 	@Command
 	@NotifyChange({ "zimmerSelected", "zimmerList" })
-	public void doNew(){
+	public void doNew() {
 		zimmerSelected = new Zimmer();
 	}
-	
+
 	/**
-     * <p>Saves the Zimmer</p>
-     */
+	 * Saves the Zimmer
+	 */
 	@Command
 	@NotifyChange({ "zimmerSelected", "zimmerList" })
-	public void doSave(){
+	public void doSave() {
 		ZimmerDao zimmerdao = ServiceLocator.getZimmerDao();
 		zimmerdao.saveOrUpdate(zimmerSelected);
-		if (!zimmerList.contains(zimmerSelected)){
+		if (!zimmerList.contains(zimmerSelected)) {
 			zimmerList.add(zimmerSelected);
 		}
 	}
 
-    /**
+	/**
 	 * Returns a list of all {@link Zimmer}
+	 * 
 	 * @return a list of all Zimmer
 	 */
-	public ListModel<Zimmer> getItems(){
-		if(zimmerList == null){
+	public ListModel<Zimmer> getItems() {
+		if (zimmerList == null) {
 			zimmerList = new ListModelList<Zimmer>();
 			ZimmerDao zimmerDao = ServiceLocator.getZimmerDao();
 			zimmerList.addAll(zimmerDao.getAll());
 		}
 		return zimmerList;
 	}
-	
-    /**
-	 * Returns the {@link Zimmer} object which is selected in the GUI 
+
+	/**
+	 * Returns the {@link Zimmer} object which is selected in the GUI
+	 * 
 	 * @return a Zimmer object
 	 */
-	public Zimmer getZimmerSelected(){
+	public Zimmer getZimmerSelected() {
 		return zimmerSelected;
 	}
-	
-    /**
-	 * Puts the data of a {@link Zimmer} object in the corresponding fields in the GUI.
-	 * @param zimmerSelected a {@link Zimmer} object that represents the future field values.
+
+	/**
+	 * Puts the data of a {@link Zimmer} object in the corresponding fields in
+	 * the GUI.
+	 * 
+	 * @param zimmerSelected
+	 *            a {@link Zimmer} object that represents the future field
+	 *            values.
 	 */
-	public void setZimmerSelected(Zimmer  zimmerSelected){
+	public void setZimmerSelected(Zimmer zimmerSelected) {
 		this.zimmerSelected = zimmerSelected;
 	}
 }
