@@ -16,18 +16,19 @@
 				<columns>
 					<column />
 					<column />
+					<column />
 				</columns>
 				<rows>
 					<row>
-						<cell>
+						<cell colspan="2">
 							<label value="Datum von: " />
 							<datebox id="von" cols="18" format="full"
-								width="175px"
+								width="210px"
 								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="no past,no empty" />
 							<label value=" bis: " />
 							<datebox id="bis " cols="18" format="full"
-								width="175px"
+								width="210px"
 								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
 						</cell>
