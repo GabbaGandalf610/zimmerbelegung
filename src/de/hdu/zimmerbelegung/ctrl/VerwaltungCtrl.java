@@ -409,4 +409,14 @@ public class VerwaltungCtrl {
 		this.zimmerZeitraumBelegungSelected = zimmerZeitraumBelegungSelected;
 	}
 
+	/**
+	 *Reset filter on the "Gast"-list
+	 */
+	@Command
+	@NotifyChange({"gastSelected", "gastSuche"})
+	public void showAllGuests(){
+		gastSelected = null;
+		gastSuche = "";
+		this.doGuestSearch();
+	}
 }

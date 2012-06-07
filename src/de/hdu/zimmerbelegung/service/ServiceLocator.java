@@ -28,12 +28,12 @@ public class ServiceLocator {
 	 */
 	static {
 		try {
-			// Versuche Verbindung zur MySQL-Datenbank
+			// Versuche Verbindung zum MSSQL-Server
 			ctx = new ClassPathXmlApplicationContext(
 					"datenbank-produktiv.xml");
 		} catch (BeanCreationException e) {
 			// Verbindung konnte nicht hergestellt werden
-			// => Versuche produktiven MSSQL-Server
+			// => Versuche Entwicklungssystem MySQL-Datenbank
 			ctx = new ClassPathXmlApplicationContext("datenbank-entwicklung.xml");
 		}
 	}

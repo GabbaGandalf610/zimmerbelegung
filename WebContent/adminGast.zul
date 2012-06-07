@@ -16,6 +16,8 @@
 				<textbox tooltiptext="Gast Suche"
 					value="@bind(vm.gastSuche)" onChange="@command('doGuestSearch')"
 					instant="true" />
+				<button label="Gästeliste" width="80px"
+					onClick="@command('showAllGuests')" />
 			</div>
 		</north>
 		<center title="Übersicht" border="normal">
