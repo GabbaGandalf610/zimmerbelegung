@@ -84,7 +84,7 @@ public class VerwaltungCtrl {
 	 * @throws Exception
 	 */
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
-			"zimmerZeitraumBelegungSelected" })
+			"zimmerZeitraumBelegungSelected", "belegungKopfList" })
 	@Command
 	public void doChangeToBuchung(
 			@BindingParam("belegungKopf") BelegungKopf belegungKopf)
@@ -101,7 +101,7 @@ public class VerwaltungCtrl {
 	 * @throws Exception
 	 */
 	@NotifyChange({ "gastSelected", "zimmerZeitraumBelegungList",
-			"zimmerZeitraumBelegungSelected" })
+			"zimmerZeitraumBelegungSelected", "belegungKopfList" })
 	@Command
 	public void doChangeToReservierung(
 			@BindingParam("belegungKopf") BelegungKopf belegungKopf)
@@ -189,6 +189,8 @@ public class VerwaltungCtrl {
 			throws Exception {
 		BelegungKopfDao belegungKopfDao = ServiceLocator.getBelegungKopfDao();
 		belegungKopfDao.storno(belegungKopf);
+		GastDao gastDao = ServiceLocator.getGastDao();
+		gastDao.refresh(gastSelected);
 	}
 
 	public BelegungArt[] getAllBelegungArt() {

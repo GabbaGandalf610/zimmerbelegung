@@ -22,10 +22,12 @@
 						<cell>
 							<label value="Datum von: " />
 							<datebox id="von" cols="18" format="full"
+								width="170px"
 								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="no past,no empty" />
 							<label value=" bis: " />
 							<datebox id="bis " cols="18" format="full"
+								width="170px"
 								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
 						</cell>
@@ -261,7 +263,7 @@
 										<button width="80px"
 											label="stornieren"
 											onClick="@command('doStorno', belegungKopf=item)"
-											visible="true" />
+											visible="@load(not empty vm.belegungKopfList)" />
 									</hbox>
 								</listcell>
 							</listitem>

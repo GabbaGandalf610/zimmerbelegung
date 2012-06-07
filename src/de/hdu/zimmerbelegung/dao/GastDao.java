@@ -67,7 +67,7 @@ public class GastDao extends HibernateDaoSupport {
 			return getHibernateTemplate().find("FROM Gast ORDER BY NAME");
 		} else {
 			return getHibernateTemplate()
-					.find("select g from Gast g where g.name like ? or g.vorname like ? or g.firma like ? or g.ort like ? or g.land like ?",
+					.find("select g from Gast g where g.name like ? or g.vorname like ? or g.firma like ? or g.ort like ? or g.land like ? ORDER BY NAME",
 							gastSuche + "%", gastSuche + "%",
 							"%" + gastSuche + "%", gastSuche + "%",
 							gastSuche + "%");
@@ -115,6 +115,18 @@ public class GastDao extends HibernateDaoSupport {
 	 */
 	public void update(Gast gast) {
 		getHibernateTemplate().update(gast);
+	}
+
+	/**
+	 * Refresh a specified object of type {@link Gast} in the database
+	 * 
+	 * @param object
+	 *            of type {@link Gast}
+	 * @return a single Gast
+	 */
+
+	public void refresh(Gast gast) {
+		getHibernateTemplate().refresh(gast);
 	}
 
 }

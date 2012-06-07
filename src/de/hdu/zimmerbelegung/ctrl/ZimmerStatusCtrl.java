@@ -9,7 +9,9 @@
 package de.hdu.zimmerbelegung.ctrl;
 
 import org.joda.time.LocalDate;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.DependsOn;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 
@@ -77,4 +79,26 @@ public class ZimmerStatusCtrl {
 				datumVon, datumBis));
 		return zimmerZeitraumBelegungList;
 	}
+
+	/**
+	 * Get todays date
+	 * 
+	 * @return
+	 */
+	@Command
+	@NotifyChange({ "datumVon" })
+	public void gotoHeute() {
+		this.datumVon = new LocalDate();
+		;
+	}
+
+	/**
+	 * Get todays date
+	 * 
+	 * @return
+	 */
+	public LocalDate getHeute() {
+		return new LocalDate();
+	}
+
 }
