@@ -13,7 +13,7 @@
 		<north flex="false">
 			<div height="40px" align="justify">
 				<label value="Datum von: " />
-				<datebox id="von" cols="18" format="full" width="175px"
+				<datebox id="von" cols="18" format="full" width="210px"
 					value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 					mold="rounded" />
 				<label value=" bis: " visible="false" />
