@@ -22,12 +22,12 @@
 						<cell>
 							<label value="Datum von: " />
 							<datebox id="von" cols="18" format="full"
-								width="170px"
+								width="175px"
 								value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="no past,no empty" />
 							<label value=" bis: " />
 							<datebox id="bis " cols="18" format="full"
-								width="170px"
+								width="175px"
 								value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 								mold="rounded" constraint="@bind(vm.datumBisConstraint)" />
 						</cell>
@@ -36,6 +36,8 @@
 							<textbox tooltiptext="Gast Suche"
 								value="@bind(vm.gastSuche)" onChange="@command('doGuestSearch')"
 								instant="true" />
+							<button label="Gästeliste" width="80px"
+								onClick="@command('showAllGuests')" />
 						</cell>
 					</row>
 				</rows>

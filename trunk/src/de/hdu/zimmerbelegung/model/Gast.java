@@ -43,7 +43,7 @@ public class Gast {
 	private String vorname;
 
 	/**
-	 * (default-) constructor for class Gast 
+	 * (default-) constructor for class Gast
 	 */
 	public Gast() {
 
@@ -51,9 +51,11 @@ public class Gast {
 
 	/**
 	 * constructor for class Gast
+	 * 
 	 * @param id
 	 * @param vorname
-	 * @param name nachname
+	 * @param name
+	 *            nachname
 	 * @param strasse
 	 * @param plz
 	 * @param ort
@@ -62,7 +64,7 @@ public class Gast {
 	 * @param mobil
 	 * @param fax
 	 * @param email
-	 * @param kommentar 
+	 * @param kommentar
 	 */
 	public Gast(int id, String vorname, String name, String strasse,
 			String plz, String ort, String land, String telefon, String mobil,
@@ -84,8 +86,10 @@ public class Gast {
 
 	/**
 	 * constructor for class Gast
+	 * 
 	 * @param vorname
-	 * @param name nachname
+	 * @param name
+	 *            nachname
 	 * @param strasse
 	 * @param plz
 	 * @param ort
@@ -94,7 +98,7 @@ public class Gast {
 	 * @param mobil
 	 * @param fax
 	 * @param email
-	 * @param kommentar 
+	 * @param kommentar
 	 */
 	public Gast(String vorname, String name, String strasse, String plz,
 			String ort, String land, String telefon, String mobil, String fax,
@@ -235,11 +239,31 @@ public class Gast {
 
 	/**
 	 * toString overrides the toString-method with custom description
+	 * 
 	 * @return custom description of a Gast
 	 */
 	@Override
 	public String toString() {
-		return this.vorname + " " + this.name;
+		if (this.firma != null) {
+			if (this.name != null) {
+				if (this.vorname != null) {
+					return this.firma + ", " + this.vorname + " " + this.name;
+				}
+				return this.firma + ", " + this.name;
+			}
+			return this.firma;
+		}
+		if (this.name != null) {
+			if (this.vorname != null) {
+				return this.vorname + " " + this.name;
+			}
+			return this.name;
+		}
+		if (this.vorname != null){
+			return this.vorname;
+		}
+
+		return this.id + "";
 	}
 
 }

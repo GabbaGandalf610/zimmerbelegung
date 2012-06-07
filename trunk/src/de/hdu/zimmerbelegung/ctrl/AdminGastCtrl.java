@@ -120,4 +120,15 @@ public class AdminGastCtrl {
 	public void setGastSuche(String gastSuche) {
 		this.gastSuche = gastSuche;
 	}
+
+	/**
+	 * Reset filter on the "Gast"-list
+	 */
+	@Command
+	@NotifyChange({ "gastSelected", "gastSuche" })
+	public void showAllGuests() {
+		gastSelected = null;
+		gastSuche = "";
+		this.doGuestSearch();
+	}
 }
