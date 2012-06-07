@@ -72,7 +72,7 @@ public class DatumStatus implements Comparable<DatumStatus> {
 	@Override
 	public String toString() {
 		if (this.gast != null)
-			return status.name() + " durch " + gast;
+			return status.name() + " für " + gast;
 		else
 			return status.name();
 	}

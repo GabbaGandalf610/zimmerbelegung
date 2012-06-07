@@ -13,21 +13,23 @@
 		<north flex="false">
 			<div height="40px" align="justify">
 				<label value="Datum von: " />
-				<datebox id="von" cols="18" format="full"
+				<datebox id="von" cols="18" format="full" width="170px"
 					value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 					mold="rounded" />
-				<label value=" bis: " />
+				<label value=" bis: " visible="false" />
 				<datebox id="bis " cols="18" format="full"
-					disabled="true"
+					visible="false" disabled="true"
 					value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverter')"
 					mold="rounded" />
+				<button label="Heute" width="80px"  visible="@load((vm.datumVon &gt; vm.heute) or (vm.heute &gt; vm.datumVon))"
+					onClick="@command('gotoHeute')" />
 			</div>
 		</north>
 		<center>
 			<listbox model="@load(vm.zimmerZeitraumBelegungList)"
 				vflex="true" hflex="true">
 				<listhead>
-					<listheader label="Zimmernummer" />
+					<listheader label="Zimmer" />
 					<listheader
 						label="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
 					<listheader
