@@ -73,7 +73,7 @@ public class BelegungDao extends HibernateDaoSupport {
 				.find("select b from Belegung b inner join b.zimmer z where b.datum between ? and ? order by z.zimmernummer",
 						params);
 	}
-
+	
 	/**
 	 * Saves the {@link Belegung} specified by the parameter in the database.
 	 * 
