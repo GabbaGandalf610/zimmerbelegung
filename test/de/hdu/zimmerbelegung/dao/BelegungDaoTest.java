@@ -276,11 +276,11 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 				datumBis.plusDays(3), zimmerTest, gastTest, belegungKopfTest);
 		belegungDao.save(belegungTest);
 		
-			List<Belegung> alleBelegungenZuKopf = belegungKopfTest.getBelegungen();
-			assertEquals("Die erste Belegung muss heutiges Datum haben: ", alleBelegungenZuKopf.get(0).getDatum(), LocalDate.now());
-			assertEquals("Die zweite Belegung muss heutiges Datum + 1 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(1));
-			assertEquals("Die dritte Belegung muss heutiges Datum + 2 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(2));
-			assertEquals("Die vierte Belegung muss heutiges Datum + 3 haben: ", alleBelegungenZuKopf.get(0).getDatum(), datumBis.plusDays(3));
+		List<Belegung> alleBelegungen = belegungDao.getAll();
+		assertEquals("Die erste Belegung muss heutiges Datum haben: ", alleBelegungen.get(0).getDatum(), LocalDate.now());
+			assertEquals("Die zweite Belegung muss heutiges Datum + 1 haben: ", alleBelegungen.get(1).getDatum(), datumBis.plusDays(1));
+		assertEquals("Die dritte Belegung muss heutiges Datum + 2 haben: ",	alleBelegungen.get(2).getDatum(), datumBis.plusDays(2));
+		assertEquals("Die vierte Belegung muss heutiges Datum + 3 haben: ", alleBelegungen.get(3).getDatum(), datumBis.plusDays(3));
 
 	}
 	
