@@ -122,7 +122,7 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 		//1. Test heute
 		List<ZimmerZeitraumBelegung> zimmerZeitraumList = zimmerZeitraumBelegungDto.getAll(LocalDate.now(), LocalDate.now());
 //		assertEquals(zimmerZeitraumList.get(0).getStatus(), BelegungArt.BUCHUNG);
-		System.out.println(zimmerZeitraumList.get(0).getZimmer().getId() + " " + zimmerZeitraumList.get(0).getZimmer().toString());
+//		System.out.println(zimmerZeitraumList.get(0).getZimmer().getId() + " " + zimmerZeitraumList.get(0).getZimmer().toString());
 		
 		
 //		System.out.println(LocalDate.now());
@@ -131,13 +131,13 @@ public class ZimmerZeitraumBelegungDtoTest extends AbstractDataAccessTest  {
 		List<Belegung> bel = belegungDao.getAllInZeitraum(LocalDate.now(), datumBis.plusDays(3));
 //		
 		for (Belegung belegung : bel) {
-			System.out.println(belegung.getZimmer().toString() + " " + belegung.getArt().toString() + " " + belegung.getDatum() + " " + belegung.getGast().toString());
+//			System.out.println(belegung.getZimmer().toString() + " " + belegung.getArt().toString() + " " + belegung.getDatum() + " " + belegung.getGast().toString());
 		}
 //		System.out.println(bel.size());
 //		
 //		
 		for (ZimmerZeitraumBelegung b : zimmerZeitraumList) {
-			System.out.println(b.getStatus() + " " );
+//			System.out.println(b.getStatus() + " " );
 		}
 //		
 //		System.out.println(zimmerZeitraumList.size());
