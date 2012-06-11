@@ -194,21 +194,23 @@
 								</cell>
 							</row>
 							<row>
-								<label value="E-Mail" />
-								<textbox
-									value="@bind(vm.gastSelected.email)"
-									disabled="@load(empty vm.gastSelected)"
-									constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
-									tooltiptext="E-Mail" />
+								<cell>
+									<label value="E-Mail" />
+								</cell>
+								<cell>
+									<textbox width="280px"
+										value="@bind(vm.gastSelected.email)"
+										disabled="@load(empty vm.gastSelected)"
+										constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
+										tooltiptext="E-Mail" />
+								</cell>
 							</row>
 							<row>
-								<!-- 								<cell colspan="2"> -->
 								<label value="Kommentar" />
 								<textbox
 									value="@bind(vm.gastSelected.kommentar)"
 									disabled="@load(empty vm.gastSelected)" rows="3" width="40%"
 									tooltiptext="Kommentar" />
-								<!-- 								</cell> -->
 							</row>
 
 							<row>
@@ -278,26 +280,29 @@
 				</south>
 			</borderlayout>
 		</center>
-		<south height="10%" flex="true" splittable="true"
+		<south height="27%" flex="true" splittable="true"
 			style="background-color:#02946f;"
 			visible="@bind(vm.zusammenfassungAnzeigen)">
 			<div align="left"
 				style="text-align:center; margin-right:20px; color:#fbeec2;">
+				<h:p>
+					<h:p />
+				</h:p>
 				Zimmer
 				<label
 					value="@bind(vm.zimmerZeitraumBelegungSelected.zimmer)"
-					style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
+					style="font-weight:bold; font-size:1.1em; margin-left:10px; margin-right:10px;" />
 				im Zeitraum von
 				<label
 					value="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
-					style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
+					style="font-weight:bold; font-size:1.1em; margin-left:10px; margin-right:10px;" />
 				bis
 				<label
 					value="@bind(vm.datumBis) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToString')"
-					style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
+					style="font-weight:bold; font-size:1.1em; margin-left:10px; margin-right:10px;" />
 				für
 				<label value="@bind(vm.gastSelected)"
-					style="font-weight:bold; font-size:1.0em; margin-left:10px; margin-right:10px;" />
+					style="font-weight:bold; font-size:1.1em; margin-left:10px; margin-right:10px;" />
 				<h:p>
 					<h:p />
 					<button label="reservieren" width="80px"

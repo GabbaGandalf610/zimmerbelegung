@@ -32,7 +32,7 @@ public class JodaTimeZkConverterToShortString extends
 			return null;
 		if (val instanceof LocalDate) {
 			return ((LocalDate) val).toString(DateTimeFormat
-					.forPattern("E., dd.MM."));
+					.forPattern("E., dd.MM.yyyy"));
 		}
 		throw new UiException("Converter expects a Date/DateTime object");
 	}

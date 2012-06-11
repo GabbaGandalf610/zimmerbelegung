@@ -11,7 +11,7 @@
 	<tabbox width="100%" height="100%">
 		<tabs>
 			<tab label="Verwaltung" />
-			<tab id="statusTab" label="Zimmer Status" onSelect="String tmp=zimmerStatus.src; zimmerStatus.src=null; zimmerStatus.src=tmp;"/>
+			<tab id="statusTab" label="Zimmer-Status" onSelect="String tmp=zimmerStatus.src; zimmerStatus.src=null; zimmerStatus.src=tmp;"/>
 			<tab id="adminTab" label="Administration" />
 		</tabs>
 		<tabpanels>
