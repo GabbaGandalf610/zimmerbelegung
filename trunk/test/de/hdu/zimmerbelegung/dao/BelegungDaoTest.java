@@ -105,6 +105,8 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 	/**
 	 * testFindById is a test case that tests all the basic functions of the
 	 * Dao, new object, update, get and delete
+	 * After the creation of a new Gast, Zimmer, BelegungKopf and Belegung-object
+	 * the test indicates if the created Belegung-objects exists in the database
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
@@ -137,6 +139,9 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 
 	/**
 	 * testAllInZeitraum tests the Dao method getAllinZeitraum
+	 * After the creation of a new Gast, Zimmer, BelegungKopf and 3 Belegung-objects
+	 * the test indicates if the created Belegung-objects exists in the database
+	 * in the specified timeline
 	 */
 	@Test
 	public void testAllInZeitraum() {
@@ -172,6 +177,10 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 
 	/**
 	 * testDelete Test, if a object can be deleted
+	 * After the creation of a new Gast, Zimmer, BelegungKopf and 3 Belegung-objects
+	 * only the Belegung (and BelegungKopf)-objects is deleted.
+	 * The test indicates if the deleted Belegung-objects do not exist in the database any longer
+	 * The created Gast and Zimmer objects must be in the database.
 	 */
 	@Test
 	public void testDelete() {
@@ -206,6 +215,12 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 		alleBelegung = belegungDao.getAll();
 		assertEquals("Die Tabelle darf keine Zeile enthalten", 0,
 				alleBelegung.size());
+		
+		List<Gast> gastTestList = gastDao.getAll();		
+		for (Gast gast : gastTestList) {
+			assertEquals("Die Tabelle soll einen Gast enthalten", "f.g@h.ij",gast.getEmail());
+		}
+		
 	}
 
 	/**
@@ -270,7 +285,8 @@ public class BelegungDaoTest extends AbstractDataAccessTest {
 
 	/**
 	 * testDeleteAll Test, bulk-delete
-	 * 
+	 * After the creation of the necessary objects the test indicates, if the right
+	 * date values are in the database
 	 * @throws Exception
 	 */
 	@Test
