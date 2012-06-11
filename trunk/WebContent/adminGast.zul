@@ -119,11 +119,16 @@
 						</cell>
 					</row>
 					<row>
-						<label value="E-Mail" />
-						<textbox value="@bind(vm.gastSelected.email)"
-							disabled="@load(empty vm.gastSelected)"
-							constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
-							tooltiptext="E-Mail" />
+						<cell>
+							<label value="E-Mail" />
+						</cell>
+						<cell>
+							<textbox width="280px"
+								value="@bind(vm.gastSelected.email)"
+								disabled="@load(empty vm.gastSelected)"
+								constraint="/.+@.+\.[a-z]+/: Kein gültiges E-Mail Format!"
+								tooltiptext="E-Mail" />
+						</cell>
 					</row>
 					<row>
 						<label value="Kommentar" />
