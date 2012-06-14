@@ -25,30 +25,30 @@
 					onClick="@command('gotoHeute')" />
 			</div>
 		</north>
-		<center>
+		<center >
 			<listbox model="@load(vm.zimmerZeitraumBelegungList)"
 				vflex="true" hflex="true">
-				<listhead>
-					<listheader label="Zimmer" />
-					<listheader
+				<listhead sizable="true">
+					<listheader label="Zimmer" width="70px"/>
+					<listheader width="100px"
 						label="@bind(vm.datumVon) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(1)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(2)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(3)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(4)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(5)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(6)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(7)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(8)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
-					<listheader
+					<listheader width="120px"
 						label="@bind(vm.datumVon.plusDays(9)) @converter('de.hdu.zimmerbelegung.helper.JodaTimeZkConverterToShortString')" />
 				</listhead>
 				<template name="model" var="item">
