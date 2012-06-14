@@ -91,7 +91,7 @@
 		<center>
 			<borderlayout>
 				<north flex="true" splittable="true" collapsible="true"
-					open="@load(empty vm.gastSelected)" height="45%">
+					open="@load(empty vm.gastSelected)" height="43%">
 
 					<listbox model="@load(vm.items)"
 						selectedItem="@bind(vm.gastSelected)" vflex="true" hflex="true"
