@@ -37,13 +37,13 @@
 		<property name="belegungKopfDao" ref="belegungKopfDao" />
 	</bean>
 
-	<bean id="zimmerZeitraumBelegungDtoTest" class="de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDtoTest">
-		<property name="gastDao" ref="gastDao" />
-		<property name="belegungDao" ref="belegungDao" />
-		<property name="zimmerDao" ref="zimmerDao" />
-		<property name="belegungKopfDao" ref="belegungKopfDao" />
-		<property name="ZimmerZeitraumBelegungDto" ref="zimmerZeitraumBelegungDto" />
-	</bean>
+<!-- 	<bean id="zimmerZeitraumBelegungDtoTest" class="de.hdu.zimmerbelegung.dto.ZimmerZeitraumBelegungDtoTest"> -->
+<!-- 		<property name="gastDao" ref="gastDao" /> -->
+<!-- 		<property name="belegungDao" ref="belegungDao" /> -->
+<!-- 		<property name="zimmerDao" ref="zimmerDao" /> -->
+<!-- 		<property name="belegungKopfDao" ref="belegungKopfDao" /> -->
+<!-- 		<property name="ZimmerZeitraumBelegungDto" ref="zimmerZeitraumBelegungDto" /> -->
+<!-- 	</bean> -->
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
