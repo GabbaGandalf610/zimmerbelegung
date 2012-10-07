@@ -37,7 +37,7 @@ public class ZimmerStatusCtrl {
 	 * 
 	 * @return
 	 */
-	@DependsOn("datumVon")
+    @DependsOn("datumVon")
 	public LocalDate getDatumBis() {
 		datumBis = datumVon.plusDays(10);
 		return datumBis;
@@ -76,7 +76,7 @@ public class ZimmerStatusCtrl {
 		ZimmerZeitraumBelegungDto zimmerZeitraumBelegungDto = ServiceLocator
 				.getZimmerZeitraumBelegungDto();
 		zimmerZeitraumBelegungList.addAll(zimmerZeitraumBelegungDto.getAll(
-				datumVon, datumBis));
+				datumVon, datumVon.plusDays(10)));
 		return zimmerZeitraumBelegungList;
 	}
 

@@ -10,7 +10,7 @@
 	<borderlayout width="100%" height="100%" sclass="mainLayout"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.ZimmerStatusCtrl')">
-		<north flex="false">
+		<north>
 			<div height="40px" align="justify">
 				<label value="Datum von: " />
 				<datebox id="von" cols="18" format="full" width="210px"
