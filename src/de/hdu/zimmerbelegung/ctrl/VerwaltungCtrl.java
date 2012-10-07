@@ -308,7 +308,7 @@ public class VerwaltungCtrl {
 	 * 
 	 * @return
 	 */
-	@DependsOn({ "datumVon", "datumBis" })
+	@DependsOn({ "datumBis" })
 	public ListModel<ZimmerZeitraumBelegung> getZimmerZeitraumBelegungList() {
 		zimmerZeitraumBelegungSelected = null;
 		if (zimmerZeitraumBelegungList == null) {
