@@ -11,7 +11,7 @@
 	<borderlayout width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('de.hdu.zimmerbelegung.ctrl.VerwaltungCtrl')">
-		<north flex="true">
+		<north>
 			<grid>
 				<columns>
 					<column />
@@ -44,7 +44,7 @@
 				</rows>
 			</grid>
 		</north>
-		<west flex="true" splittable="true" width="23%"
+		<west splittable="true" width="23%"
 			collapsible="true">
 			<borderlayout>
 				<center>
@@ -65,7 +65,7 @@
 						</template>
 					</listbox>
 				</center>
-				<south flex="true" splittable="true" collapsible="true"
+				<south splittable="true" collapsible="true"
 					height="60%"
 					open="@load((not empty vm.zimmerZeitraumBelegungSelected) and (vm.zimmerZeitraumBelegungSelected.status != 'FREI'))">
 
@@ -90,7 +90,7 @@
 
 		<center>
 			<borderlayout>
-				<north flex="true" splittable="true" collapsible="true"
+				<north splittable="true" collapsible="true"
 					open="@load(empty vm.gastSelected)" height="43%">
 
 					<listbox model="@load(vm.items)"
@@ -115,7 +115,7 @@
 					</listbox>
 
 				</north>
-				<center flex="true">
+				<center>
 					<grid>
 						<columns>
 							<column width="160px" />
@@ -228,7 +228,7 @@
 						</rows>
 					</grid>
 				</center>
-				<south height="42%" flex="true" collapsible="true"
+				<south height="42%" collapsible="true"
 					splittable="true" open="@load(not empty vm.gastSelected)">
 
 					<listbox model="@bind(vm.belegungKopfList)"
@@ -280,7 +280,7 @@
 				</south>
 			</borderlayout>
 		</center>
-		<south height="27%" flex="true" splittable="true"
+		<south height="27%" splittable="true"
 			style="background-color:#02946f;"
 			visible="@bind(vm.zusammenfassungAnzeigen)">
 			<div align="left"

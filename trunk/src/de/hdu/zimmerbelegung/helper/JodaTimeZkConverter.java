@@ -14,6 +14,7 @@ import org.zkoss.zk.ui.UiException;
  * @author Stefan Feilmeier, Roland Kühnel, Franz Wagner
  * 
  */
+@SuppressWarnings("rawtypes")
 public class JodaTimeZkConverter implements Converter {
 	/**
 	 * Convert Date to LocalDate.
